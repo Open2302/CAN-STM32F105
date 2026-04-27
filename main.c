@@ -150,7 +150,7 @@ void CAN_Process_Received(void)
     if (CAN2_RxPending) {
         CAN2_RxPending = 0;
 
-        if (CAN2_RxMessage.ExtId == (CAN_ID_NUMBERS >> 3)) {
+        if (CAN2_RxMessage.ExtId == ((CAN_ID_NUMBERS >> 3) & 0x1FFFFFFF)) {
             Unpack_Numbers_Message(CAN2_RxMessage.Data,
                                   &CAN_Received_Num1,
                                   &CAN_Received_Num2);

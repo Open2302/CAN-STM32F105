@@ -27,7 +27,7 @@ void Unpack_Numbers_Message(uint8_t *buffer, int32_t *num1, int32_t *num2)
 	        ((int32_t)buffer[7] << 24);
 }
 
-uint8_t Command_To_CAN_Op(char *cmd)
+uint8_t Command_To_CAN_Op(const char *cmd)
 {
     if (strcmp(cmd, "add") == 0) return CAN_OP_ADD;
     if (strcmp(cmd, "sub") == 0) return CAN_OP_SUB;
@@ -37,9 +37,9 @@ uint8_t Command_To_CAN_Op(char *cmd)
 }
 
 /* Convert CAN operation code to string */
-const char* CAN_Op_To_String(uint8_t op)
+const char* CAN_Op_To_String(uint8_t code)
 {
-    switch (op) {
+    switch (code) {
         case CAN_OP_ADD: return "add";
         case CAN_OP_SUB: return "sub";
         case CAN_OP_MUL: return "mul";

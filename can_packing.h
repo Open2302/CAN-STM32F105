@@ -11,9 +11,9 @@
 #define CAN_OP_MUL 0x03
 #define CAN_OP_DIV 0x04
 
-void CAN_Pack_Numbers(int32_t n1, int32_t n2, uint8_t *buf);
-void CAN_Unpack_Numbers(uint8_t *buf, int32_t *n1, int32_t *n2);
-uint8_t CAN_StrToOpCode(const char *cmd);
-const char* CAN_OpCodeToStr(uint8_t code);
+void Pack_Numbers_Message(int32_t n1, int32_t n2, uint8_t *buf);
+void Unpack_Numbers_Message(uint8_t *buf, int32_t *n1, int32_t *n2);
+uint8_t Command_To_CAN_Op(const char *cmd);
+const char* CAN_Op_To_String(uint8_t code);
 
 #endif
