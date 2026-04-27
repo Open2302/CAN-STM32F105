@@ -147,20 +147,20 @@ void CAN_Process_Received(void)
     }
 
     // CAN2
-//    if (CAN2_RxPending) {
-//        CAN2_RxPending = 0;
-//
-//        if (CAN2_RxMessage.ExtId == (CAN_ID_NUMBERS >> 3)) {
-//            Unpack_Numbers_Message(CAN2_RxMessage.Data,
-//                                  &CAN_Received_Num1,
-//                                  &CAN_Received_Num2);
-//            CAN_Pending_Numbers = 1;
-//        }
-//        else if (CAN2_RxMessage.ExtId == (CAN_ID_OPERATION >> 3)) {
-//            CAN_Received_Op = CAN2_RxMessage.Data[0];
-//            CAN_Pending_Op = 1;
-//        }
-//    }
+    if (CAN2_RxPending) {
+        CAN2_RxPending = 0;
+
+        if (CAN2_RxMessage.ExtId == (CAN_ID_NUMBERS >> 3)) {
+            Unpack_Numbers_Message(CAN2_RxMessage.Data,
+                                  &CAN_Received_Num1,
+                                  &CAN_Received_Num2);
+            CAN_Pending_Numbers = 1;
+        }
+        else if (CAN2_RxMessage.ExtId == (CAN_ID_OPERATION >> 3)) {
+            CAN_Received_Op = CAN2_RxMessage.Data[0];
+            CAN_Pending_Op = 1;
+        }
+    }
 
     if (CAN_Pending_Numbers && CAN_Pending_Op) {
         CAN_Pending_Numbers = 0;
@@ -630,119 +630,6 @@ uint32_t millis(void)
 }
 
 
-void CAN2_Init(void) {
-    RCC_APB1PeriphClockCmd(RCC_APB1Periph_CAN1 | RCC_APB1Periph_CAN2, ENABLE);
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB | RCC_APB2Periph_AFIO, ENABLE);
-
-    GPIO_InitTypeDef gpio = {0};
-    gpio.GPIO_Pin = GPIO_Pin_12;
-    gpio.GPIO_Mode = GPIO_Mode_IPU;
-    gpio.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_Init(GPIOB, &gpio);
-    gpio.GPIO_Pin = GPIO_Pin_13;
-    gpio.GPIO_Mode = GPIO_Mode_AF_PP;
-    gpio.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_Init(GPIOB, &gpio);
-
-    CAN_InitTypeDef can = {0};
-    CAN_StructInit(&can);
-    can.CAN_TTCM = DISABLE;
-    can.CAN_ABOM = ENABLE;
-    can.CAN_AWUM = DISABLE;
-    can.CAN_NART = ENABLE;
-    can.CAN_RFLM = DISABLE;
-    can.CAN_TXFP = DISABLE;
-    can.CAN_Mode = CAN_Mode_Normal;
-    can.CAN_SJW = CAN_SJW_1tq;
-    can.CAN_BS1 = CAN_BS1_4tq;
-    can.CAN_BS2 = CAN_BS2_4tq;
-    can.CAN_Prescaler = 32;//125кбсек//
-    CAN_Init(CAN2, &can);
-
-    CAN_FilterInitTypeDef filter = {0};
-    filter.CAN_FilterNumber = 14;
-    filter.CAN_FilterMode = CAN_FilterMode_IdMask;
-    filter.CAN_FilterScale = CAN_FilterScale_32bit;
-    filter.CAN_FilterIdHigh = 0;
-    filter.CAN_FilterIdLow = 0;
-    filter.CAN_FilterMaskIdHigh = 0;
-    filter.CAN_FilterMaskIdLow = 0;
-    filter.CAN_FilterFIFOAssignment = CAN_Filter_FIFO0;
-    filter.CAN_FilterActivation = ENABLE;
-    CAN_FilterInit(&filter);
-
-    CAN_ITConfig(CAN2, CAN_IT_FMP0, ENABLE);
-    CAN_ITConfig(CAN2, CAN_IT_TME, ENABLE);
-
-    NVIC_InitTypeDef nvic = {0};
-    nvic.NVIC_IRQChannel = CAN2_RX0_IRQn;
-    nvic.NVIC_IRQChannelPreemptionPriority = 1;
-    nvic.NVIC_IRQChannelSubPriority = 0;
-    nvic.NVIC_IRQChannelCmd = ENABLE;
-    NVIC_Init(&nvic);
-    nvic.NVIC_IRQChannel = CAN2_TX_IRQn;
-    nvic.NVIC_IRQChannelPreemptionPriority = 1;
-    nvic.NVIC_IRQChannelSubPriority = 1;
-    NVIC_Init(&nvic);
-}
-
-void CAN2_RX0_IRQHandler(void) {
-    if (CAN_GetITStatus(CAN2, CAN_IT_FMP0) != RESET) {
-        CAN_Receive(CAN2, CAN_FIFO0, &can2_rx_buf);
-        can2_rx_ready = 1;
-        CAN_ClearITPendingBit(CAN2, CAN_IT_FMP0);
-    }
-}
-
-void CAN2_TX_IRQHandler(void) {
-    if (CAN_GetITStatus(CAN2, CAN_IT_TME) != RESET) {
-        can2_tx_free = 1;
-        CAN_ClearITPendingBit(CAN2, CAN_IT_TME);
-    }
-}
-
-void CAN2_Send(uint32_t id, uint8_t *data, uint8_t len) {
-	if (len > 8)
-		len = 8;
-	if (!can2_tx_free)
-		return;
-
-	CanTxMsg tx = { 0 };
-	tx.StdId = id & 0x7FF;
-	tx.IDE = CAN_ID_STD;
-	tx.RTR = CAN_RTR_DATA;
-	tx.DLC = len;
-	for (uint8_t i = 0; i < len; i++)
-		tx.Data[i] = data[i];
-
-	uint32_t timeout = 100000;
-	uint8_t mb = CAN_Transmit(CAN2, &tx);
-	while (mb == CAN_TxStatus_NoMailBox && --timeout)
-		mb = CAN_Transmit(CAN2, &tx);
-
-	if (timeout == 0) {
-		can2_tx_free = 1;
-		return;
-	}
-
-	timeout = 100000;
-	while (CAN_TransmitStatus(CAN2, mb) == CAN_TxStatus_Pending && --timeout);
-
-	if (timeout == 0 || CAN_TransmitStatus(CAN2, mb) != CAN_TxStatus_Ok) {
-		CAN_CancelTransmit(CAN2, mb);
-		can2_tx_free = 1;
-	}
-}
-
-uint8_t CAN2_GetMessage(CanRxMsg *dst) {
-    if (can2_rx_ready && dst != NULL) {
-        *dst = can2_rx_buf;
-        can2_rx_ready = 0;
-        return 1;
-    }
-    return 0;
-}
-
 int main(void)
 {
     SystemClock_Config(); /* Configure system clock: HSE -> 72 MHz */
@@ -752,6 +639,7 @@ int main(void)
     LED_GPIO_Config();    /* Configure LED on PB15 */
     DIP_Config();       /* Configure EXTI for DIP switch on PC5 */
     CAN1_Config();
+    CAN2_Config();
 
     /* Resetting variables */
     memset((void*)RxBuffer, 0, sizeof(RxBuffer));

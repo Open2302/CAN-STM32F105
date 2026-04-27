@@ -1,50 +1,53 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <history>
-   <processor signature="arm-none-eabi-gcc noversion nomachine -mcpu=cortex-m3 -mthumb -Wall -ffunction-sections -g -O0 -c -DSTM32F105RC -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -D__ASSEMBLY__ -I..\..\..\workspace\DMA1\cmsis_boot -I..\..\..\workspace\DMA1 -I..\..\..\workspace\DMA1\cmsis -I..\..\..\workspace -I..\..\..\workspace\DMA1\stm_lib -I..\..\.. -I..\..\..\workspace\DMA1\stm_lib\inc">
-      <target file="stm32f10x_can.o" lastModified="19dcd228b94">
-         <source file="..\..\..\stm_lib\src\stm32f10x_can.c" lastModified="19daf7e1d8d"/>
+   <processor signature="arm-none-eabi-gcc noversion nomachine -mcpu=cortex-m3 -mthumb -Wall -ffunction-sections -g -O0 -c -DSTM32F105RC -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -D__ASSEMBLY__ -I..\..\..\..\..\Users\simonov\Downloads\CAN-STM32F105-main (1)\CAN-STM32F105-main\cmsis -I..\..\..\..\..\Users\simonov\Downloads\CAN-STM32F105-main (1)\CAN-STM32F105-main\stm_lib -I..\..\..\..\..\Users\simonov\Downloads\CAN-STM32F105-main (1)\CAN-STM32F105-main\stm_lib\inc -I..\..\..\..\..\Users\simonov\Downloads\CAN-STM32F105-main (1)\CAN-STM32F105-main -I..\..\..\..\..\Users\simonov\Downloads -I..\..\..\..\..\Users\simonov\Downloads\CAN-STM32F105-main (1)\CAN-STM32F105-main\cmsis_boot -I..\..\..\..\..\Users\simonov\Downloads\CAN-STM32F105-main (1)">
+      <target file="stm32f10x_can.o" lastModified="19dce94b281">
+         <source file="..\..\..\stm_lib\src\stm32f10x_can.c" lastModified="19dcbff4f00"/>
       </target>
-      <target file="can1.o" lastModified="19dcd66c119">
-         <source file="..\..\..\can1.c" lastModified="19dcd66bdb5"/>
+      <target file="can1.o" lastModified="19dce94b75d">
+         <source file="..\..\..\can1.c" lastModified="19dcbff4f00"/>
       </target>
-      <target file="can_packing.o" lastModified="19dcd66c162">
-         <source file="..\..\..\can_packing.c" lastModified="19dcd66bdc1"/>
+      <target file="can_packing.o" lastModified="19dce94b89a">
+         <source file="..\..\..\can_packing.c" lastModified="19dcbff4f00"/>
       </target>
-      <target file="stm32f10x_tim.o" lastModified="19dcd228aec">
-         <source file="..\..\..\stm_lib\src\stm32f10x_tim.c" lastModified="19da51dc1a0"/>
+      <target file="stm32f10x_tim.o" lastModified="19dce94b1eb">
+         <source file="..\..\..\stm_lib\src\stm32f10x_tim.c" lastModified="19dcbff4f00"/>
       </target>
-      <target file="stm32f10x_exti.o" lastModified="19dcd228eb1">
-         <source file="..\..\..\stm_lib\src\stm32f10x_exti.c" lastModified="19da51d9a90"/>
+      <target file="stm32f10x_exti.o" lastModified="19dce94b716">
+         <source file="..\..\..\stm_lib\src\stm32f10x_exti.c" lastModified="19dcbff4f00"/>
       </target>
-      <target file="startup_stm32f10x_cl.o" lastModified="19dcd228e69">
-         <source file="..\..\..\cmsis_boot\startup\startup_stm32f10x_cl.c" lastModified="19da51d6bb0"/>
+      <target file="can2.o" lastModified="19dce9a2bee">
+         <source file="..\..\..\..\..\..\..\..\CooCox\CoIDE\workspace\DMA1\can2.c" lastModified="19dce9a2887"/>
       </target>
-      <target file="printf.o" lastModified="19dcd228ddb">
-         <source file="..\..\..\stdio\printf.c" lastModified="19da77ac470"/>
+      <target file="startup_stm32f10x_cl.o" lastModified="19dce94b6d4">
+         <source file="..\..\..\cmsis_boot\startup\startup_stm32f10x_cl.c" lastModified="19dcbff4f00"/>
       </target>
-      <target file="system_stm32f10x.o" lastModified="19dcd228b37">
-         <source file="..\..\..\cmsis_boot\system_stm32f10x.c" lastModified="19da51d6bb0"/>
+      <target file="printf.o" lastModified="19dce94b640">
+         <source file="..\..\..\stdio\printf.c" lastModified="19dcbff4f00"/>
       </target>
-      <target file="stm32f10x_flash.o" lastModified="19dcd228fa4">
-         <source file="..\..\..\stm_lib\src\stm32f10x_flash.c" lastModified="19da51e9c60"/>
+      <target file="system_stm32f10x.o" lastModified="19dce94b22d">
+         <source file="..\..\..\cmsis_boot\system_stm32f10x.c" lastModified="19dcbff4f00"/>
       </target>
-      <target file="main.o" lastModified="19dce5adbba">
-         <source file="..\..\..\main.c" lastModified="19dce58bd24"/>
+      <target file="stm32f10x_flash.o" lastModified="19dce94b807">
+         <source file="..\..\..\stm_lib\src\stm32f10x_flash.c" lastModified="19dcbff4f00"/>
       </target>
-      <target file="stm32f10x_usart.o" lastModified="19dcd228f4a">
-         <source file="..\..\..\stm_lib\src\stm32f10x_usart.c" lastModified="19da51de0e0"/>
+      <target file="main.o" lastModified="19dce9a2b96">
+         <source file="..\..\..\main.c" lastModified="19dce9a2887"/>
       </target>
-      <target file="stm32f10x_gpio.o" lastModified="19dcd228be7">
-         <source file="..\..\..\stm_lib\src\stm32f10x_gpio.c" lastModified="19da51d9a90"/>
+      <target file="stm32f10x_usart.o" lastModified="19dce94b7b3">
+         <source file="..\..\..\stm_lib\src\stm32f10x_usart.c" lastModified="19dcbff4f00"/>
       </target>
-      <target file="stm32f10x_rcc.o" lastModified="19dcd228e39">
-         <source file="..\..\..\stm_lib\src\stm32f10x_rcc.c" lastModified="19da51d6bb0"/>
+      <target file="stm32f10x_gpio.o" lastModified="19dce94b2d4">
+         <source file="..\..\..\stm_lib\src\stm32f10x_gpio.c" lastModified="19dcbff4f00"/>
       </target>
-      <target file="misc.o" lastModified="19dcd229034">
-         <source file="..\..\..\stm_lib\src\misc.c" lastModified="19dbe64239c"/>
+      <target file="stm32f10x_rcc.o" lastModified="19dce94b69e">
+         <source file="..\..\..\stm_lib\src\stm32f10x_rcc.c" lastModified="19dcbff4f00"/>
       </target>
-      <target file="stm32f10x_dma.o" lastModified="19dcd228fef">
-         <source file="..\..\..\stm_lib\src\stm32f10x_dma.c" lastModified="19da51e5de0"/>
+      <target file="misc.o" lastModified="19dce94b8dc">
+         <source file="..\..\..\stm_lib\src\misc.c" lastModified="19dcbff4f00"/>
+      </target>
+      <target file="stm32f10x_dma.o" lastModified="19dce94b84c">
+         <source file="..\..\..\stm_lib\src\stm32f10x_dma.c" lastModified="19dcbff4f00"/>
       </target>
    </processor>
 </history>
