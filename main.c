@@ -14,6 +14,7 @@
 
 /* DMA Buffers */
 uint8_t DMA_RxBuffer[64];
+uint8_t DMA_TxBuffer[64];
 
 /* Cmd buffer */
 volatile uint8_t RxBuffer[64];
