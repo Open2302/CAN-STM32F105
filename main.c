@@ -10,6 +10,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include "stm32f10x_can.h"
+#include "can_common.h"
+#include "can_packing.h"
 
 /* DMA Buffers */
 uint8_t DMA_RxBuffer[64];
@@ -30,10 +33,13 @@ uint8_t EXTI1_Interrupt = 0;
 
 /* Functions Prototypes */
 void SystemClock_Config(void);
+void CAN_Send_Calculated_Data(void);
+void CAN_Process_Received(void);
 void USART_DMA_Config(void);
 void LED_GPIO_Config(void);
 void TIM2_Config(void);
-void EXTI1_Config(void);
+void DIP_Config(void);
+uint8_t DIP_Get_CAN_Select(void);
 void DMA_SendNumber(int32_t num);
 void DMA_SendString(const char *str);
 void DMA_CheckRX(void);
@@ -72,6 +78,124 @@ void SystemClock_Config(void)
     else { while(1); }
 
     SystemCoreClock = 72000000UL;
+}
+
+/* Can */
+volatile uint8_t CAN_Pending_Numbers = 0;
+volatile uint8_t CAN_Pending_Op = 0;
+volatile int32_t CAN_Received_Num1 = 0;
+volatile int32_t CAN_Received_Num2 = 0;
+volatile uint8_t CAN_Received_Op = 0;
+
+/* Console Variables (from USART) */
+volatile uint8_t Console_Num1_Ready = 0;
+volatile uint8_t Console_Num2_Ready = 0;
+volatile int32_t Console_Num1 = 0;
+volatile int32_t Console_Num2 = 0;
+volatile uint8_t Console_Op = 0;
+
+void CAN_Send_Calculated_Data(void)
+{
+    uint8_t data[8];
+    uint8_t op_byte;
+
+    // CAN DIP3
+    uint8_t use_can2 = DIP_Get_CAN_Select();
+
+    // Pack Numbers
+    Pack_Numbers_Message(Console_Num1, Console_Num2, data);
+    if (use_can2)
+    {
+		// CAN2_Send_Message(CAN_ID_NUMBERS, data, 8);
+		DMA_SendString("\r\n[ERROR] CAN2 not implemented yet\r\n");
+	} else {
+		CAN1_Send_Message(CAN_ID_NUMBERS, data, 8);
+		DMA_SendString("\r\n CAN1");
+
+	}
+    // Send operation
+    op_byte = Console_Op;
+    if (use_can2)
+    {
+		// CAN2_Send_Message(CAN_ID_OPERATION, &op_byte, 1);
+	} else {
+		CAN1_Send_Message(CAN_ID_OPERATION, &op_byte, 1);
+	}
+    Console_Num1_Ready = 0;
+    Console_Num2_Ready = 0;
+    DMA_SendString("\r\n[CAN] Sent ");
+    DMA_SendString(use_can2 ? "CAN2" : "CAN1");
+    DMA_SendString("\r\n> ");
+}
+
+void CAN_Process_Received(void)
+{
+    // CAN1
+    if (CAN1_RxPending) {
+        CAN1_RxPending = 0;
+
+        if (CAN1_RxMessage.ExtId == ((CAN_ID_NUMBERS >> 3) & 0x1FFFFFFF)) {
+            Unpack_Numbers_Message(CAN1_RxMessage.Data,
+                                  &CAN_Received_Num1,
+                                  &CAN_Received_Num2);
+            CAN_Pending_Numbers = 1;
+        }
+        else if (CAN1_RxMessage.ExtId == (CAN_ID_OPERATION >> 3)) {
+            CAN_Received_Op = CAN1_RxMessage.Data[0];
+            CAN_Pending_Op = 1;
+        }
+    }
+
+    // CAN2
+//    if (CAN2_RxPending) {
+//        CAN2_RxPending = 0;
+//
+//        if (CAN2_RxMessage.ExtId == (CAN_ID_NUMBERS >> 3)) {
+//            Unpack_Numbers_Message(CAN2_RxMessage.Data,
+//                                  &CAN_Received_Num1,
+//                                  &CAN_Received_Num2);
+//            CAN_Pending_Numbers = 1;
+//        }
+//        else if (CAN2_RxMessage.ExtId == (CAN_ID_OPERATION >> 3)) {
+//            CAN_Received_Op = CAN2_RxMessage.Data[0];
+//            CAN_Pending_Op = 1;
+//        }
+//    }
+
+    if (CAN_Pending_Numbers && CAN_Pending_Op) {
+        CAN_Pending_Numbers = 0;
+        CAN_Pending_Op = 0;
+
+        int32_t result = 0;
+        char buf[12];
+
+        switch (CAN_Received_Op) {
+            case CAN_OP_ADD: result = CAN_Received_Num1 + CAN_Received_Num2; break;
+            case CAN_OP_SUB: result = CAN_Received_Num1 - CAN_Received_Num2; break;
+            case CAN_OP_MUL: result = CAN_Received_Num1 * CAN_Received_Num2; break;
+            case CAN_OP_DIV:
+                if (CAN_Received_Num2 != 0) {
+                    result = CAN_Received_Num1 / CAN_Received_Num2;
+                } else {
+                    DMA_SendString("\r\n[CAN] Error: div by zero\r\n> ");
+                    return;
+                }
+                break;
+            default:
+                DMA_SendString("\r\n[CAN] Error: unknown op\r\n> ");
+                return;
+        }
+
+        DMA_SendString("\r\n[CAN] Result: ");
+        DMA_SendNumber(CAN_Received_Num1);
+        DMA_SendString(" ");
+        DMA_SendString(CAN_Op_To_String(CAN_Received_Op));
+        DMA_SendString(" ");
+        DMA_SendNumber(CAN_Received_Num2);
+        DMA_SendString(" = ");
+        DMA_SendNumber(result);
+        DMA_SendString("\r\n> ");
+    }
 }
 
 /* USART and DMA Config */
@@ -272,7 +396,7 @@ void LED_GPIO_Config(void)
     GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_Out_PP;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
     GPIO_Init(GPIOB, &GPIO_InitStructure);
-    GPIO_ResetBits(GPIOB, GPIO_Pin_15);
+    GPIO_SetBits(GPIOB, GPIO_Pin_15);
 }
 
 void TIM2_Config(void)
@@ -296,7 +420,7 @@ void TIM2_Config(void)
     TIM_Cmd(TIM2, ENABLE);
 }
 
-void EXTI1_Config()
+void DIP_Config()
 {
 	/* Enable GPIOC clocking */
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC | RCC_APB2Periph_AFIO, ENABLE);
@@ -304,7 +428,12 @@ void EXTI1_Config()
 	//Structure name for EXTI
 	GPIO_InitTypeDef  GPIO_InitStructure;
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5; /* EXTI1 Pin */
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPD; /* INPUT PULL UP like button */
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPD; /* INPUT PULL DOWN like button */
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+	GPIO_Init(GPIOC, &GPIO_InitStructure);
+
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4; /* EXTI0 Pin */
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPD; /* INPUT PULL DOWN like button */
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_Init(GPIOC, &GPIO_InitStructure);
 
@@ -327,16 +456,23 @@ void EXTI1_Config()
 	NVIC_Init(&NVIC_InitStructure);
 }
 
+uint8_t DIP_Get_CAN_Select(void)
+{
+    return !GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_4);
+}
+
+/* Send trigger flag */
+volatile uint8_t CAN_Send_Trigger = 0;
+
 /* The interrupt handler for EXTI */
 void EXTI9_5_IRQHandler(void)
 {
-    /* Check status */
     if (EXTI_GetITStatus(EXTI_Line5) != RESET)
     {
-    	EXTI1_Interrupt = 1;
-    	lastTime = millis();
-    	  /* Clear Flag */
-    	EXTI_ClearITPendingBit(EXTI_Line5);
+        CAN_Send_Trigger = 1;
+        EXTI1_Interrupt = 1;
+        lastTime = millis();
+        EXTI_ClearITPendingBit(EXTI_Line5);
     }
 }
 
@@ -411,6 +547,7 @@ void Command_Parse(uint8_t *buffer) /* String to int and cmd */
 {
     char cmd[16] = {0}; /* array for commands */
     int32_t val1 = 0, val2 = 0;
+    uint8_t op_code = 0;
 
     /* Find first space: separates cmd from num1 */
     char *space1 = strchr((char*)buffer, ' ');
@@ -443,6 +580,19 @@ void Command_Parse(uint8_t *buffer) /* String to int and cmd */
     val1 = atoi(num1_ptr); /* Converting first string to a number */
     val2 = atoi(num2_ptr); /* Converting second string to a number */
 
+    op_code = Command_To_CAN_Op(cmd);
+		if (op_code == 0xFF) {
+		    DMA_SendString("\r\nerror: unknown command (use add/sub/mul/div)\r\n> ");
+		    Console_Num1_Ready = 0;
+		    Console_Num2_Ready = 0;
+		    return;
+		}
+    Console_Num1 = val1;
+	Console_Num2 = val2;
+	Console_Op = op_code;
+	Console_Num1_Ready = 1;
+	Console_Num2_Ready = 1;
+
     /* Pass the parsed command to the handler */
     Command_Execute(cmd, val1, val2);
 }
@@ -466,7 +616,7 @@ void EXTI1_Name_Output(void)
 			/* Checking Current Status of EXTI1 */
 			if ((GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_5) == 1) /*&& (State == 0)*/)
 			{
-				DMA_SendString("Simonov Egor\r\n> ");
+//				DMA_SendString("Simonov Egor\r\n> ");
 			}
 //					State = GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_5);
 		}
@@ -486,6 +636,8 @@ uint32_t millis(void)
     return uwTick; /* Returning uwTick value */
 }
 
+
+
 int main(void)
 {
     SystemClock_Config(); /* Configure system clock: HSE -> 72 MHz */
@@ -493,7 +645,8 @@ int main(void)
     lastTime = millis();  /* Record startup time */
     USART_DMA_Config();   /* Configure USART1 with DMA1 for TX */
     LED_GPIO_Config();    /* Configure LED on PB15 */
-    EXTI1_Config();       /* Configure EXTI for DIP switch on PC5 */
+    DIP_Config();       /* Configure EXTI for DIP switch on PC5 */
+    CAN1_Config();
 
     /* Resetting variables */
     memset((void*)RxBuffer, 0, sizeof(RxBuffer));
@@ -505,6 +658,30 @@ int main(void)
     DMA_SendString("> ");
     while (1)
     {
+	 if (RxReady == 1) {
+				RxReady = 0;
+				Command_Parse(RxBuffer);
+				memset((void*)RxBuffer, 0, sizeof(RxBuffer));
+			}
+
+			if (CAN_Send_Trigger == 1) {
+				CAN_Send_Trigger = 0;
+				if (Console_Num1_Ready && Console_Num2_Ready && Console_Op != 0xFF) {
+					CAN_Send_Calculated_Data();
+				} else {
+					DMA_SendString("\r\nError");
+				}
+			}
+
+			static uint32_t last_dbg = 0;
+			if (millis() - last_dbg > 1000) {
+			    last_dbg = millis();
+			    uint8_t can_sel = DIP_Get_CAN_Select();
+			    DMA_SendString("\r\n[DIP] CAN select (PC4)=");
+			    DMA_SendNumber(can_sel);
+			    DMA_SendString(" (0=CAN1, 1=CAN2)");
+			}
+
     	DMA_CheckRX();
 
         /* Process DIP switch */
@@ -512,5 +689,12 @@ int main(void)
 
         /* Process USART commands */
         USART1_Calculation();
+        CAN_Process_Received();
     }
+
 }
+
+
+
+
+
