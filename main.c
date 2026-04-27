@@ -246,13 +246,6 @@ void DMA_CheckRX(void)
         DMA_RxLastPos = (DMA_RxLastPos + 1) % 64;
     }
 }
-//
-//void DMA1_Channel5_IRQHandler(void)
-//{
-//    if (DMA_GetITStatus(DMA1_IT_TC5) != RESET) {
-//        DMA_ClearITPendingBit(DMA1_IT_TC5);
-//    }
-//}
 
 // Interrupt handler for TX
 void DMA1_Channel4_IRQHandler(void)
@@ -484,6 +477,76 @@ void Delay_ms(volatile uint32_t ms)
 uint32_t millis(void)
 {
     return uwTick; /* Returning uwTick value */
+}
+
+void CAN2_Init(void) {
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_CAN1 | RCC_APB1Periph_CAN2, ENABLE);
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB | RCC_APB2Periph_AFIO, ENABLE);
+
+    GPIO_InitTypeDef gpio = {0};
+    gpio.GPIO_Pin = GPIO_Pin_12;
+    gpio.GPIO_Mode = GPIO_Mode_IPU;
+    gpio.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_Init(GPIOB, &gpio);
+    gpio.GPIO_Pin = GPIO_Pin_13;
+    gpio.GPIO_Mode = GPIO_Mode_AF_PP;
+    gpio.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_Init(GPIOB, &gpio);
+
+    CAN_InitTypeDef can = {0};
+    CAN_StructInit(&can);
+    can.CAN_TTCM = DISABLE;
+    can.CAN_ABOM = ENABLE;
+    can.CAN_AWUM = DISABLE;
+    can.CAN_NART = ENABLE;
+    can.CAN_RFLM = DISABLE;
+    can.CAN_TXFP = DISABLE;
+    can.CAN_Mode = CAN_Mode_Normal;
+    can.CAN_SJW = CAN_SJW_1tq;
+    can.CAN_BS1 = CAN_BS1_4tq;
+    can.CAN_BS2 = CAN_BS2_4tq;
+    can.CAN_Prescaler = 32;//125кбсек//
+    CAN_Init(CAN2, &can);
+
+    CAN_FilterInitTypeDef filter = {0};
+    filter.CAN_FilterNumber = 14;
+    filter.CAN_FilterMode = CAN_FilterMode_IdMask;
+    filter.CAN_FilterScale = CAN_FilterScale_32bit;
+    filter.CAN_FilterIdHigh = 0;
+    filter.CAN_FilterIdLow = 0;
+    filter.CAN_FilterMaskIdHigh = 0;
+    filter.CAN_FilterMaskIdLow = 0;
+    filter.CAN_FilterFIFOAssignment = CAN_Filter_FIFO0;
+    filter.CAN_FilterActivation = ENABLE;
+    CAN_FilterInit(&filter);
+
+    CAN_ITConfig(CAN2, CAN_IT_FMP0, ENABLE);
+
+    NVIC_InitTypeDef nvic = {0};
+    nvic.NVIC_IRQChannel = CAN2_RX0_IRQn;
+    nvic.NVIC_IRQChannelPreemptionPriority = 1;
+    nvic.NVIC_IRQChannelSubPriority = 0;
+    nvic.NVIC_IRQChannelCmd = ENABLE;
+    NVIC_Init(&nvic);
+    nvic.NVIC_IRQChannel = CAN2_TX_IRQn;
+    nvic.NVIC_IRQChannelPreemptionPriority = 1;
+    nvic.NVIC_IRQChannelSubPriority = 1;
+    NVIC_Init(&nvic);
+}
+
+void CAN2_RX0_IRQHandler(void) {
+    if (CAN_GetITStatus(CAN2, CAN_IT_FMP0) != RESET) {
+        CAN_Receive(CAN2, CAN_FIFO0, &can2_rx_buf);
+        can2_rx_ready = 1;
+        CAN_ClearITPendingBit(CAN2, CAN_IT_FMP0);
+    }
+}
+
+void CAN2_TX_IRQHandler(void) {
+    if (CAN_GetITStatus(CAN2, CAN_IT_TME) != RESET) {
+        can2_tx_free = 1;
+        CAN_ClearITPendingBit(CAN2, CAN_IT_TME);
+    }
 }
 
 int main(void)
