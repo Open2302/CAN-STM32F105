@@ -11,6 +11,8 @@
 #include <string.h>
 #include <stdlib.h>
 #include "stm32f10x_can.h"
+#include "can_common.h"
+#include "can_packing.h"
 
 /* DMA Buffers */
 uint8_t DMA_RxBuffer[64];
@@ -20,10 +22,6 @@ uint8_t DMA_TxBuffer[64];
 volatile uint8_t RxBuffer[64];
 volatile uint8_t RxIndex = 0;
 volatile uint8_t RxReady = 0;
-
-volatile CanRxMsg CAN1_RxMessage;
-volatile uint8_t CAN1_RxPending = 0;
-volatile uint8_t CAN1_TxBusy = 0;
 
 volatile uint8_t TxInProgress = 0;
 
@@ -35,8 +33,8 @@ uint8_t EXTI1_Interrupt = 0;
 
 /* Functions Prototypes */
 void SystemClock_Config(void);
-void CAN1_Filter_Config(void);
-void CAN1_Config(void);
+void CAN_Send_Calculated_Data(void);
+void CAN_Process_Received(void);
 void USART_DMA_Config(void);
 void LED_GPIO_Config(void);
 void TIM2_Config(void);
@@ -81,114 +79,121 @@ void SystemClock_Config(void)
 
     SystemCoreClock = 72000000UL;
 }
-/* Filter Config for CAN1 */
-void CAN1_Filter_Config(void)
+
+/* Can */
+volatile uint8_t CAN_Pending_Numbers = 0;
+volatile uint8_t CAN_Pending_Op = 0;
+volatile int32_t CAN_Received_Num1 = 0;
+volatile int32_t CAN_Received_Num2 = 0;
+volatile uint8_t CAN_Received_Op = 0;
+
+/* Console Variables (from USART) */
+volatile uint8_t Console_Num1_Ready = 0;
+volatile uint8_t Console_Num2_Ready = 0;
+volatile int32_t Console_Num1 = 0;
+volatile int32_t Console_Num2 = 0;
+volatile uint8_t Console_Op = 0;
+
+void CAN_Send_Calculated_Data(void)
 {
-    CAN_FilterInitTypeDef CAN_FilterInitStructure;
+    uint8_t data[8];
+    uint8_t op_byte;
 
-    CAN_FilterInitStructure.CAN_FilterNumber = 0; /* Filter 0 initialization */
-    CAN_FilterInitStructure.CAN_FilterMode = CAN_FilterMode_IdMask; /* Mask mode */
-    CAN_FilterInitStructure.CAN_FilterScale = CAN_FilterScale_32bit; /* 32 bit */
+    // CAN DIP3
+    uint8_t use_can2 = DIP_Get_CAN_Select();
 
-    // Accept ALL messages
-    CAN_FilterInitStructure.CAN_FilterIdHigh = 0x0000;
-    CAN_FilterInitStructure.CAN_FilterIdLow = 0x0000;
-    CAN_FilterInitStructure.CAN_FilterMaskIdHigh = 0x0000;
-    CAN_FilterInitStructure.CAN_FilterMaskIdLow = 0x0000;
+    // Pack Numbers
+    Pack_Numbers_Message(Console_Num1, Console_Num2, data);
+    if (use_can2)
+    {
+		// CAN2_Send_Message(CAN_ID_NUMBERS, data, 8);
+		DMA_SendString("\r\n[ERROR] CAN2 not implemented yet\r\n");
+	} else {
+		CAN1_Send_Message(CAN_ID_NUMBERS, data, 8);
+		DMA_SendString("\r\n CAN1");
 
-    CAN_FilterInitStructure.CAN_FilterFIFOAssignment = CAN_Filter_FIFO0; /* First input buffer */
-    CAN_FilterInitStructure.CAN_FilterActivation = ENABLE;
-    CAN_FilterInit(&CAN_FilterInitStructure);
-}
-void CAN1_Config(void)
-{
-    RCC_APB1PeriphClockCmd(RCC_APB1Periph_CAN1, ENABLE);
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
-
-    // PA11=RX (Input)
-    GPIO_InitTypeDef GPIO_InitStructure;
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_11;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;  // Input Pull-Up
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_Init(GPIOA, &GPIO_InitStructure);
-
-    // PA12=TX (AF_PP)
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_12;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP; // Alternate Push pull
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_Init(GPIOA, &GPIO_InitStructure);
-
-    // CAN Initialization
-    CAN_InitTypeDef CAN_InitStructure;
-    CAN_DeInit(CAN1);
-
-//    CAN_StructInit(&CAN_InitStructure);
-
-    CAN_InitStructure.CAN_Mode = CAN_Mode_Normal; /* Normal mode */
-    CAN_InitStructure.CAN_TTCM = DISABLE; /* Working on event not on time */
-    CAN_InitStructure.CAN_ABOM = ENABLE; /* Auto bus-off management for troubles */
-    CAN_InitStructure.CAN_AWUM = DISABLE;   /* Auto wake-up */
-    CAN_InitStructure.CAN_NART = ENABLE;  /* Auto retransmit */
-    CAN_InitStructure.CAN_RFLM = DISABLE; /* Rewrite */
-    CAN_InitStructure.CAN_TXFP = DISABLE;   /* FIFO priority order */
-
-    /* Timing */
-    CAN_InitStructure.CAN_SJW  = CAN_SJW_1tq; /* 1 of time */
-    CAN_InitStructure.CAN_BS1  = CAN_BS1_4tq; /* Bit sampling point */
-    CAN_InitStructure.CAN_BS2  = CAN_BS2_4tq; /* Bit sampling point */
-    CAN_InitStructure.CAN_Prescaler = 32; /* 125 K/bit */
-
-    CAN_Init(CAN1, &CAN_InitStructure);
-
-    CAN1_Filter_Config();
-
-    // RX FIFO0 pending when new message
-    CAN_ITConfig(CAN1, CAN_IT_FMP0, ENABLE);
-
-    // NVIC
-    NVIC_InitTypeDef NVIC_InitStructure;
-    NVIC_InitStructure.NVIC_IRQChannel = CAN1_RX0_IRQn; /* FIFO0 */
-    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
-    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
-    NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-    NVIC_Init(&NVIC_InitStructure);
-}
-
-/* CAN1 Send Message */
-uint8_t CAN1_Send_Message(uint32_t id, uint8_t *data, uint8_t len)
-{
-    if (CAN1_TxBusy) return 0;  // The previous transmission is still going
-
-    CanTxMsg TxMessage; /* Convert */
-    TxMessage.ExtId = 0x01000A1; // Extended ID
-    TxMessage.IDE = CAN_Id_Extended;        // Extended ID
-    TxMessage.RTR = CAN_RTR_Data; // Remote Transmission Request data
-    TxMessage.DLC = len; // lenght that will be transmitted
-
-    // Copying data
-    for (uint8_t i = 0; i < len && i < 8; i++) {
-        TxMessage.Data[i] = data[i];
-    }
-    // send into mailbox
-    uint8_t mailbox = CAN_Transmit(CAN1, &TxMessage);
-    if (mailbox == CAN_TxStatus_NoMailBox) return 0;
-
-    CAN1_TxBusy = 1;
-
-    while (CAN_TransmitStatus(CAN1, mailbox) == CAN_TxStatus_Pending);
-
-    CAN1_TxBusy = 0;
-    return (CAN_TransmitStatus(CAN1, mailbox) == CAN_TxStatus_Ok);
-}
-
-void CAN1_RX0_IRQHandler(void)
-{
-	CanRxMsg RxMsg;
-
-	if(CAN_GetITStatus(CAN1, CAN_IT_FMP0) != RESET)
-	{
-		CAN_Receive(CAN1, CAN_FIFO0, &RxMsg);
 	}
+    // Send operation
+    op_byte = Console_Op;
+    if (use_can2)
+    {
+		// CAN2_Send_Message(CAN_ID_OPERATION, &op_byte, 1);
+	} else {
+		CAN1_Send_Message(CAN_ID_OPERATION, &op_byte, 1);
+	}
+    DMA_SendString("\r\n[CAN] Sent ");
+    DMA_SendString(use_can2 ? "CAN2" : "CAN1");
+    DMA_SendString("\r\n> ");
+}
+
+void CAN_Process_Received(void)
+{
+    // CAN1
+    if (CAN1_RxPending) {
+        CAN1_RxPending = 0;
+
+        if (CAN1_RxMessage.ExtId == ((CAN_ID_NUMBERS >> 3) & 0x1FFFFFFF)) {
+            Unpack_Numbers_Message(CAN1_RxMessage.Data,
+                                  &CAN_Received_Num1,
+                                  &CAN_Received_Num2);
+            CAN_Pending_Numbers = 1;
+        }
+        else if (CAN1_RxMessage.ExtId == (CAN_ID_OPERATION >> 3)) {
+            CAN_Received_Op = CAN1_RxMessage.Data[0];
+            CAN_Pending_Op = 1;
+        }
+    }
+
+    // CAN2
+//    if (CAN2_RxPending) {
+//        CAN2_RxPending = 0;
+//
+//        if (CAN2_RxMessage.ExtId == (CAN_ID_NUMBERS >> 3)) {
+//            Unpack_Numbers_Message(CAN2_RxMessage.Data,
+//                                  &CAN_Received_Num1,
+//                                  &CAN_Received_Num2);
+//            CAN_Pending_Numbers = 1;
+//        }
+//        else if (CAN2_RxMessage.ExtId == (CAN_ID_OPERATION >> 3)) {
+//            CAN_Received_Op = CAN2_RxMessage.Data[0];
+//            CAN_Pending_Op = 1;
+//        }
+//    }
+
+    if (CAN_Pending_Numbers && CAN_Pending_Op) {
+        CAN_Pending_Numbers = 0;
+        CAN_Pending_Op = 0;
+
+        int32_t result = 0;
+        char buf[12];
+
+        switch (CAN_Received_Op) {
+            case CAN_OP_ADD: result = CAN_Received_Num1 + CAN_Received_Num2; break;
+            case CAN_OP_SUB: result = CAN_Received_Num1 - CAN_Received_Num2; break;
+            case CAN_OP_MUL: result = CAN_Received_Num1 * CAN_Received_Num2; break;
+            case CAN_OP_DIV:
+                if (CAN_Received_Num2 != 0) {
+                    result = CAN_Received_Num1 / CAN_Received_Num2;
+                } else {
+                    DMA_SendString("\r\n[CAN] Error: div by zero\r\n> ");
+                    return;
+                }
+                break;
+            default:
+                DMA_SendString("\r\n[CAN] Error: unknown op\r\n> ");
+                return;
+        }
+
+        DMA_SendString("\r\n[CAN] Result: ");
+        DMA_SendNumber(CAN_Received_Num1);
+        DMA_SendString(" ");
+        DMA_SendString(CAN_Op_To_String(CAN_Received_Op));
+        DMA_SendString(" ");
+        DMA_SendNumber(CAN_Received_Num2);
+        DMA_SendString(" = ");
+        DMA_SendNumber(result);
+        DMA_SendString("\r\n> ");
+    }
 }
 
 /* USART and DMA Config */
@@ -476,6 +481,7 @@ void TIM2_IRQHandler(void)
     if (TIM_GetITStatus(TIM2, TIM_IT_Update)) /* Flag check */
     {
         uwTick++; /* Tick +1 if flag is different */
+        uint8_t use_can2 = DIP_Get_CAN_Select();
         TIM_ClearITPendingBit(TIM2, TIM_IT_Update); /* Clear Flag */
 
 //        if (GPIO_ReadOutputDataBit(GPIOB, GPIO_Pin_15) == Bit_RESET)
@@ -542,6 +548,7 @@ void Command_Parse(uint8_t *buffer) /* String to int and cmd */
 {
     char cmd[16] = {0}; /* array for commands */
     int32_t val1 = 0, val2 = 0;
+    uint8_t op_code = 0;
 
     /* Find first space: separates cmd from num1 */
     char *space1 = strchr((char*)buffer, ' ');
@@ -574,6 +581,13 @@ void Command_Parse(uint8_t *buffer) /* String to int and cmd */
     val1 = atoi(num1_ptr); /* Converting first string to a number */
     val2 = atoi(num2_ptr); /* Converting second string to a number */
 
+    op_code = Command_To_CAN_Op(cmd);
+    Console_Num1 = val1;
+	Console_Num2 = val2;
+	Console_Op = op_code;
+	Console_Num1_Ready = 1;
+	Console_Num2_Ready = 1;
+
     /* Pass the parsed command to the handler */
     Command_Execute(cmd, val1, val2);
 }
@@ -597,7 +611,7 @@ void EXTI1_Name_Output(void)
 			/* Checking Current Status of EXTI1 */
 			if ((GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_5) == 1) /*&& (State == 0)*/)
 			{
-				DMA_SendString("Simonov Egor\r\n> ");
+//				DMA_SendString("Simonov Egor\r\n> ");
 			}
 //					State = GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_5);
 		}
@@ -629,9 +643,6 @@ int main(void)
     DIP_Config();       /* Configure EXTI for DIP switch on PC5 */
     CAN1_Config();
 
-    uint32_t last_toggle = 0;
-    uint8_t  led_state   = 0;
-
     /* Resetting variables */
     memset((void*)RxBuffer, 0, sizeof(RxBuffer));
     RxIndex = 0;
@@ -642,36 +653,20 @@ int main(void)
     DMA_SendString("> ");
     while (1)
     {
-    	if (millis() - last_toggle >= 10)
-		{
-    		GPIOB->ODR ^= (1 << 10);
-			last_toggle = millis();
-			led_state = !led_state;
+	 if (RxReady == 1) {
+				RxReady = 0;
+				Command_Parse(RxBuffer);
+				memset((void*)RxBuffer, 0, sizeof(RxBuffer));
+			}
 
-			CanTxMsg TxMsg;
-			TxMsg.ExtId = 0x010000A1;
-			TxMsg.IDE = CAN_Id_Extended;
-			TxMsg.RTR = CAN_RTR_Data;
-			TxMsg.DLC = 1;
-			TxMsg.Data[0] = led_state;
-
-			CAN_Transmit(CAN1, &TxMsg);
-		}
-
-    	if (CAN_GetITStatus(CAN1, CAN_IT_FMP0) != RESET) {
-    	    CanRxMsg RxMsg;
-    	    CAN_Receive(CAN1, CAN_FIFO0, &RxMsg);
-
-    	    if (RxMsg.StdId == 0x123 && RxMsg.DLC >= 1) {
-    	        if (RxMsg.Data[0] == 1) {
-    	            GPIO_ResetBits(GPIOB, GPIO_Pin_10);
-    	        } else {
-    	            GPIO_SetBits(GPIOB, GPIO_Pin_10);
-    	        }
-    	    }
-    	    CAN_ClearITPendingBit(CAN1, CAN_IT_FMP0);
-    	}
-
+			if (CAN_Send_Trigger == 1) {
+				CAN_Send_Trigger = 0;
+				if (Console_Num1_Ready && Console_Num2_Ready && Console_Op != 0xFF) {
+					CAN_Send_Calculated_Data();
+				} else {
+					DMA_SendString("\r\nError");
+				}
+			}
     	DMA_CheckRX();
 
         /* Process DIP switch */
@@ -679,6 +674,7 @@ int main(void)
 
         /* Process USART commands */
         USART1_Calculation();
+        CAN_Process_Received();
     }
 
 }
