@@ -521,6 +521,7 @@ void CAN2_Init(void) {
     CAN_FilterInit(&filter);
 
     CAN_ITConfig(CAN2, CAN_IT_FMP0, ENABLE);
+    CAN_ITConfig(CAN2, CAN_IT_TME, ENABLE);
 
     NVIC_InitTypeDef nvic = {0};
     nvic.NVIC_IRQChannel = CAN2_RX0_IRQn;
@@ -547,6 +548,48 @@ void CAN2_TX_IRQHandler(void) {
         can2_tx_free = 1;
         CAN_ClearITPendingBit(CAN2, CAN_IT_TME);
     }
+}
+
+void CAN2_Send(uint32_t id, uint8_t *data, uint8_t len) {
+	if (len > 8)
+		len = 8;
+	if (!can2_tx_free)
+		return;
+
+	CanTxMsg tx = { 0 };
+	tx.StdId = id & 0x7FF;
+	tx.IDE = CAN_ID_STD;
+	tx.RTR = CAN_RTR_DATA;
+	tx.DLC = len;
+	for (uint8_t i = 0; i < len; i++)
+		tx.Data[i] = data[i];
+
+	uint32_t timeout = 100000;
+	uint8_t mb = CAN_Transmit(CAN2, &tx);
+	while (mb == CAN_TxStatus_NoMailBox && --timeout)
+		mb = CAN_Transmit(CAN2, &tx);
+
+	if (timeout == 0) {
+		can2_tx_free = 1;
+		return;
+	}
+
+	timeout = 100000;
+	while (CAN_TransmitStatus(CAN2, mb) == CAN_TxStatus_Pending && --timeout);
+
+	if (timeout == 0 || CAN_TransmitStatus(CAN2, mb) != CAN_TxStatus_Ok) {
+		CAN_CancelTransmit(CAN2, mb);
+		can2_tx_free = 1;
+	}
+}
+
+uint8_t CAN2_GetMessage(CanRxMsg *dst) {
+    if (can2_rx_ready && dst != NULL) {
+        *dst = can2_rx_buf;
+        can2_rx_ready = 0;
+        return 1;
+    }
+    return 0;
 }
 
 int main(void)
