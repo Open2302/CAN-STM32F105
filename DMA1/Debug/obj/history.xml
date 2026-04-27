@@ -28,23 +28,23 @@
       <target file="stm32f10x_flash.o" lastModified="19dcd228fa4">
          <source file="..\..\..\stm_lib\src\stm32f10x_flash.c" lastModified="19da51e9c60"/>
       </target>
-      <target file="main.o" lastModified="19dcdc324c8">
-         <source file="..\..\..\main.c" lastModified="19dcdc28db5"/>
-      </target>
-      <target file="stm32f10x_gpio.o" lastModified="19dcd228be7">
-         <source file="..\..\..\stm_lib\src\stm32f10x_gpio.c" lastModified="19da51d9a90"/>
+      <target file="main.o" lastModified="19dce5adbba">
+         <source file="..\..\..\main.c" lastModified="19dce58bd24"/>
       </target>
       <target file="stm32f10x_usart.o" lastModified="19dcd228f4a">
          <source file="..\..\..\stm_lib\src\stm32f10x_usart.c" lastModified="19da51de0e0"/>
       </target>
+      <target file="stm32f10x_gpio.o" lastModified="19dcd228be7">
+         <source file="..\..\..\stm_lib\src\stm32f10x_gpio.c" lastModified="19da51d9a90"/>
+      </target>
       <target file="stm32f10x_rcc.o" lastModified="19dcd228e39">
          <source file="..\..\..\stm_lib\src\stm32f10x_rcc.c" lastModified="19da51d6bb0"/>
       </target>
-      <target file="stm32f10x_dma.o" lastModified="19dcd228fef">
-         <source file="..\..\..\stm_lib\src\stm32f10x_dma.c" lastModified="19da51e5de0"/>
-      </target>
       <target file="misc.o" lastModified="19dcd229034">
          <source file="..\..\..\stm_lib\src\misc.c" lastModified="19dbe64239c"/>
+      </target>
+      <target file="stm32f10x_dma.o" lastModified="19dcd228fef">
+         <source file="..\..\..\stm_lib\src\stm32f10x_dma.c" lastModified="19da51e5de0"/>
       </target>
    </processor>
 </history>

@@ -80,7 +80,7 @@
       <source file="..\..\..\stm_lib\src\stm32f10x_rcc.c" lastModified="19da51d6bb0">
          <include file="..\..\..\stm_lib\inc\stm32f10x_rcc.h"/>
       </source>
-      <source file="..\..\..\main.c" lastModified="19dcdc2996d">
+      <source file="..\..\..\main.c" lastModified="19dce58c8dc">
          <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
          <include file="..\..\..\stm_lib\inc\stm32f10x_usart.h"/>
          <include file="..\..\..\stm_lib\inc\stm32f10x_rcc.h"/>
@@ -96,11 +96,11 @@
       </source>
       <source file="..\..\..\cmsis\core_cmFunc.h" lastModified="19da51d8320">
       </source>
+      <source file="..\..\..\cmsis_boot\system_stm32f10x.h" lastModified="19da51d6bb0">
+      </source>
       <source file="..\..\..\stm_lib\src\stm32f10x_usart.c" lastModified="19da51de0e0">
          <include file="..\..\..\stm_lib\inc\stm32f10x_usart.h"/>
          <include file="..\..\..\stm_lib\inc\stm32f10x_rcc.h"/>
-      </source>
-      <source file="..\..\..\cmsis_boot\system_stm32f10x.h" lastModified="19da51d6bb0">
       </source>
       <source file="..\..\..\cmsis_boot\system_stm32f10x.c" lastModified="19da51d6bb0">
          <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
@@ -169,11 +169,11 @@
       <source file="..\..\..\stm_lib\src\stm32f10x_rcc.c" lastModified="19da51d6bb0">
          <include file="..\..\..\stm_lib\inc\stm32f10x_rcc.h"/>
       </source>
+      <source file="..\..\..\cmsis_boot\system_stm32f10x.h" lastModified="19da51d6bb0">
+      </source>
       <source file="..\..\..\stm_lib\src\stm32f10x_usart.c" lastModified="19da51de0e0">
          <include file="..\..\..\stm_lib\inc\stm32f10x_usart.h"/>
          <include file="..\..\..\stm_lib\inc\stm32f10x_rcc.h"/>
-      </source>
-      <source file="..\..\..\cmsis_boot\system_stm32f10x.h" lastModified="19da51d6bb0">
       </source>
       <source file="..\..\..\cmsis_boot\system_stm32f10x.c" lastModified="19da51d6bb0">
          <include file="..\..\..\cmsis_boot\stm32f10x.h"/>

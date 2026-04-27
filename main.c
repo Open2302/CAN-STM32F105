@@ -121,6 +121,8 @@ void CAN_Send_Calculated_Data(void)
 	} else {
 		CAN1_Send_Message(CAN_ID_OPERATION, &op_byte, 1);
 	}
+    Console_Num1_Ready = 0;
+    Console_Num2_Ready = 0;
     DMA_SendString("\r\n[CAN] Sent ");
     DMA_SendString(use_can2 ? "CAN2" : "CAN1");
     DMA_SendString("\r\n> ");
@@ -456,7 +458,7 @@ void DIP_Config()
 
 uint8_t DIP_Get_CAN_Select(void)
 {
-    return GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_4);
+    return !GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_4);
 }
 
 /* Send trigger flag */
@@ -465,14 +467,12 @@ volatile uint8_t CAN_Send_Trigger = 0;
 /* The interrupt handler for EXTI */
 void EXTI9_5_IRQHandler(void)
 {
-    /* Check status */
     if (EXTI_GetITStatus(EXTI_Line5) != RESET)
     {
-    	CAN_Send_Trigger = 1;
-    	EXTI1_Interrupt = 1;
-    	lastTime = millis();
-    	  /* Clear Flag */
-    	EXTI_ClearITPendingBit(EXTI_Line5);
+        CAN_Send_Trigger = 1;
+        EXTI1_Interrupt = 1;
+        lastTime = millis();
+        EXTI_ClearITPendingBit(EXTI_Line5);
     }
 }
 
@@ -481,7 +481,6 @@ void TIM2_IRQHandler(void)
     if (TIM_GetITStatus(TIM2, TIM_IT_Update)) /* Flag check */
     {
         uwTick++; /* Tick +1 if flag is different */
-        uint8_t use_can2 = DIP_Get_CAN_Select();
         TIM_ClearITPendingBit(TIM2, TIM_IT_Update); /* Clear Flag */
 
 //        if (GPIO_ReadOutputDataBit(GPIOB, GPIO_Pin_15) == Bit_RESET)
@@ -582,6 +581,12 @@ void Command_Parse(uint8_t *buffer) /* String to int and cmd */
     val2 = atoi(num2_ptr); /* Converting second string to a number */
 
     op_code = Command_To_CAN_Op(cmd);
+		if (op_code == 0xFF) {
+		    DMA_SendString("\r\nerror: unknown command (use add/sub/mul/div)\r\n> ");
+		    Console_Num1_Ready = 0;
+		    Console_Num2_Ready = 0;
+		    return;
+		}
     Console_Num1 = val1;
 	Console_Num2 = val2;
 	Console_Op = op_code;
@@ -667,6 +672,16 @@ int main(void)
 					DMA_SendString("\r\nError");
 				}
 			}
+
+			static uint32_t last_dbg = 0;
+			if (millis() - last_dbg > 1000) {
+			    last_dbg = millis();
+			    uint8_t can_sel = DIP_Get_CAN_Select();
+			    DMA_SendString("\r\n[DIP] CAN select (PC4)=");
+			    DMA_SendNumber(can_sel);
+			    DMA_SendString(" (0=CAN1, 1=CAN2)");
+			}
+
     	DMA_CheckRX();
 
         /* Process DIP switch */
