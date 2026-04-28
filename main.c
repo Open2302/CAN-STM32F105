@@ -418,7 +418,6 @@ void DIP_Config()
 	/* Enable GPIOC clocking */
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC | RCC_APB2Periph_AFIO, ENABLE);
 
-	//Structure name for EXTI
 	GPIO_InitTypeDef  GPIO_InitStructure;
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5; /* EXTI1 Pin */
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPD; /* INPUT PULL DOWN like button */
