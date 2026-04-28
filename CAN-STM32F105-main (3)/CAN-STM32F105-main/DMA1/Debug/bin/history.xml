@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<history>
+   <processor signature="arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -g -nostartfiles -Map=DMA1.map -O0 --gc-sections -LC:\CooCox\CoIDE\configuration\ProgramData\DMA1 -TC:\CooCox\CoIDE\configuration\ProgramData\DMA1/link.ld -g">
+      <target file="DMA1.elf" lastModified="19dd2e4741c">
+         <source file="..\obj\stm32f10x_tim.o" lastModified="19dceaf87e2"/>
+         <source file="..\obj\system_stm32f10x.o" lastModified="19dceaf8818"/>
+         <source file="..\obj\stm32f10x_can.o" lastModified="19dceaf887c"/>
+         <source file="..\obj\stm32f10x_gpio.o" lastModified="19dceaf88d0"/>
+         <source file="..\obj\main.o" lastModified="19dd2e4720f"/>
+         <source file="..\obj\printf.o" lastModified="19dceaf8ac3"/>
+         <source file="..\obj\stm32f10x_rcc.o" lastModified="19dceaf8b27"/>
+         <source file="..\obj\startup_stm32f10x_cl.o" lastModified="19dceaf8b5a"/>
+         <source file="..\obj\stm32f10x_exti.o" lastModified="19dceaf8b9c"/>
+         <source file="..\obj\can1.o" lastModified="19dd2cb1822"/>
+         <source file="..\obj\stm32f10x_usart.o" lastModified="19dceaf8c32"/>
+         <source file="..\obj\can2.o" lastModified="19dd2cb186e"/>
+         <source file="..\obj\stm32f10x_flash.o" lastModified="19dceaf8cd9"/>
+         <source file="..\obj\stm32f10x_dma.o" lastModified="19dceaf8d1c"/>
+         <source file="..\obj\can_packing.o" lastModified="19dceaf8d76"/>
+         <source file="..\obj\misc.o" lastModified="19dceaf8db1"/>
+      </target>
+   </processor>
+</history>

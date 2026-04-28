@@ -1161,57 +1161,57 @@ LOAD linker stubs
  .debug_ranges  0x000009f8       0x28 ..\obj\can_packing.o
  .debug_ranges  0x00000a20       0x30 ..\obj\misc.o
 
-.debug_line     0x00000000     0x6437
- .debug_line    0x00000000     0x1219 ..\obj\stm32f10x_tim.o
- .debug_line    0x00001219      0x3c9 ..\obj\system_stm32f10x.o
- .debug_line    0x000015e2      0xa8f ..\obj\stm32f10x_can.o
- .debug_line    0x00002071      0x60c ..\obj\stm32f10x_gpio.o
- .debug_line    0x0000267d      0xa15 ..\obj\main.o
- .debug_line    0x00003092      0x59c ..\obj\printf.o
- .debug_line    0x0000362e      0x91d ..\obj\stm32f10x_rcc.o
- .debug_line    0x00003f4b       0xde ..\obj\startup_stm32f10x_cl.o
- .debug_line    0x00004029      0x3c3 ..\obj\stm32f10x_exti.o
- .debug_line    0x000043ec      0x368 ..\obj\can1.o
- .debug_line    0x00004754      0x753 ..\obj\stm32f10x_usart.o
- .debug_line    0x00004ea7      0x33c ..\obj\can2.o
- .debug_line    0x000051e3      0x7c1 ..\obj\stm32f10x_flash.o
- .debug_line    0x000059a4      0x4b6 ..\obj\stm32f10x_dma.o
- .debug_line    0x00005e5a      0x26a ..\obj\can_packing.o
- .debug_line    0x000060c4      0x373 ..\obj\misc.o
+.debug_line     0x00000000     0x60c5
+ .debug_line    0x00000000     0x11da ..\obj\stm32f10x_tim.o
+ .debug_line    0x000011da      0x39f ..\obj\system_stm32f10x.o
+ .debug_line    0x00001579      0xa50 ..\obj\stm32f10x_can.o
+ .debug_line    0x00001fc9      0x5cd ..\obj\stm32f10x_gpio.o
+ .debug_line    0x00002596      0x9c1 ..\obj\main.o
+ .debug_line    0x00002f57      0x587 ..\obj\printf.o
+ .debug_line    0x000034de      0x8de ..\obj\stm32f10x_rcc.o
+ .debug_line    0x00003dbc       0xc9 ..\obj\startup_stm32f10x_cl.o
+ .debug_line    0x00003e85      0x384 ..\obj\stm32f10x_exti.o
+ .debug_line    0x00004209      0x329 ..\obj\can1.o
+ .debug_line    0x00004532      0x714 ..\obj\stm32f10x_usart.o
+ .debug_line    0x00004c46      0x312 ..\obj\can2.o
+ .debug_line    0x00004f58      0x782 ..\obj\stm32f10x_flash.o
+ .debug_line    0x000056da      0x477 ..\obj\stm32f10x_dma.o
+ .debug_line    0x00005b51      0x255 ..\obj\can_packing.o
+ .debug_line    0x00005da6      0x31f ..\obj\misc.o
 
-.debug_str      0x00000000     0x3b35
- .debug_str     0x00000000      0xd65 ..\obj\stm32f10x_tim.o
-                                0xe2a (size before relaxing)
- .debug_str     0x00000d65      0x1d3 ..\obj\system_stm32f10x.o
-                                0x37d (size before relaxing)
- .debug_str     0x00000f38      0x53a ..\obj\stm32f10x_can.o
-                                0x77b (size before relaxing)
- .debug_str     0x00001472      0x39e ..\obj\stm32f10x_gpio.o
-                                0x566 (size before relaxing)
- .debug_str     0x00001810      0xadb ..\obj\main.o
-                                0xf8f (size before relaxing)
- .debug_str     0x000022eb      0x4e6 ..\obj\printf.o
-                                0x69b (size before relaxing)
- .debug_str     0x000027d1      0x4f5 ..\obj\stm32f10x_rcc.o
-                                0x7af (size before relaxing)
- .debug_str     0x00002cc6       0xd0 ..\obj\startup_stm32f10x_cl.o
-                                0x1b8 (size before relaxing)
- .debug_str     0x00002d96      0x125 ..\obj\stm32f10x_exti.o
-                                0x396 (size before relaxing)
- .debug_str     0x00002ebb       0xc7 ..\obj\can1.o
-                                0xa5d (size before relaxing)
- .debug_str     0x00002f82      0x3c2 ..\obj\stm32f10x_usart.o
-                                0x6dd (size before relaxing)
- .debug_str     0x00003344       0x77 ..\obj\can2.o
-                                0xa37 (size before relaxing)
- .debug_str     0x000033bb      0x427 ..\obj\stm32f10x_flash.o
-                                0x635 (size before relaxing)
- .debug_str     0x000037e2      0x15f ..\obj\stm32f10x_dma.o
-                                0x404 (size before relaxing)
- .debug_str     0x00003941       0xac ..\obj\can_packing.o
-                                0x23a (size before relaxing)
- .debug_str     0x000039ed      0x148 ..\obj\misc.o
-                                0x40b (size before relaxing)
+.debug_str      0x00000000     0x39e5
+ .debug_str     0x00000000      0xd3b ..\obj\stm32f10x_tim.o
+                                0xe00 (size before relaxing)
+ .debug_str     0x00000d3b      0x1be ..\obj\system_stm32f10x.o
+                                0x353 (size before relaxing)
+ .debug_str     0x00000ef9      0x525 ..\obj\stm32f10x_can.o
+                                0x751 (size before relaxing)
+ .debug_str     0x0000141e      0x389 ..\obj\stm32f10x_gpio.o
+                                0x53c (size before relaxing)
+ .debug_str     0x000017a7      0xac6 ..\obj\main.o
+                                0xf65 (size before relaxing)
+ .debug_str     0x0000226d      0x4d1 ..\obj\printf.o
+                                0x671 (size before relaxing)
+ .debug_str     0x0000273e      0x4e0 ..\obj\stm32f10x_rcc.o
+                                0x785 (size before relaxing)
+ .debug_str     0x00002c1e       0xbb ..\obj\startup_stm32f10x_cl.o
+                                0x18e (size before relaxing)
+ .debug_str     0x00002cd9      0x110 ..\obj\stm32f10x_exti.o
+                                0x36c (size before relaxing)
+ .debug_str     0x00002de9       0xb2 ..\obj\can1.o
+                                0xa33 (size before relaxing)
+ .debug_str     0x00002e9b      0x3ad ..\obj\stm32f10x_usart.o
+                                0x6b3 (size before relaxing)
+ .debug_str     0x00003248       0x77 ..\obj\can2.o
+                                0xa22 (size before relaxing)
+ .debug_str     0x000032bf      0x412 ..\obj\stm32f10x_flash.o
+                                0x60b (size before relaxing)
+ .debug_str     0x000036d1      0x14a ..\obj\stm32f10x_dma.o
+                                0x3da (size before relaxing)
+ .debug_str     0x0000381b       0x97 ..\obj\can_packing.o
+                                0x210 (size before relaxing)
+ .debug_str     0x000038b2      0x133 ..\obj\misc.o
+                                0x3e1 (size before relaxing)
 
 .comment        0x00000000       0x4d
  .comment       0x00000000       0x4d ..\obj\stm32f10x_tim.o

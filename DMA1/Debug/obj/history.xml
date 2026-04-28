@@ -1,53 +1,53 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <history>
-   <processor signature="arm-none-eabi-gcc noversion nomachine -mcpu=cortex-m3 -mthumb -Wall -ffunction-sections -g -O0 -c -DSTM32F105RC -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -D__ASSEMBLY__ -I..\..\..\..\..\Users\simonov\Downloads\CAN-STM32F105-main (2)\CAN-STM32F105-main\stm_lib\inc -I..\..\..\..\..\Users\simonov\Downloads\CAN-STM32F105-main (2)\CAN-STM32F105-main\stm_lib -I..\..\..\..\..\Users\simonov\Downloads\CAN-STM32F105-main (2)\CAN-STM32F105-main -I..\..\..\..\..\Users\simonov\Downloads\CAN-STM32F105-main (2) -I..\..\..\..\..\Users\simonov\Downloads -I..\..\..\..\..\Users\simonov\Downloads\CAN-STM32F105-main (2)\CAN-STM32F105-main\cmsis_boot -I..\..\..\..\..\Users\simonov\Downloads\CAN-STM32F105-main (2)\CAN-STM32F105-main\cmsis">
-      <target file="stm32f10x_can.o" lastModified="19dcea50c53">
+   <processor signature="arm-none-eabi-gcc noversion nomachine -mcpu=cortex-m3 -mthumb -Wall -ffunction-sections -g -O0 -c -DSTM32F105RC -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -D__ASSEMBLY__ -I..\..\..\..\..\Users\simonov\Documents\GitHub\CAN-STM32F105\stm_lib -I..\..\..\..\..\Users\simonov\Documents\GitHub\CAN-STM32F105 -I..\..\..\..\..\Users\simonov\Documents\GitHub -I..\..\..\..\..\Users\simonov\Documents -I..\..\..\..\..\Users\simonov\Documents\GitHub\CAN-STM32F105\cmsis -I..\..\..\..\..\Users\simonov\Documents\GitHub\CAN-STM32F105\stm_lib\inc -I..\..\..\..\..\Users\simonov\Documents\GitHub\CAN-STM32F105\cmsis_boot">
+      <target file="stm32f10x_can.o" lastModified="19dceaad53c">
          <source file="..\..\..\stm_lib\src\stm32f10x_can.c" lastModified="19dcc08ccb0"/>
       </target>
-      <target file="can1.o" lastModified="19dcea50f9e">
+      <target file="can1.o" lastModified="19dceaad85d">
          <source file="..\..\..\can1.c" lastModified="19dcc08ccb0"/>
       </target>
-      <target file="can_packing.o" lastModified="19dcea7252c">
+      <target file="can_packing.o" lastModified="19dceaad9cc">
          <source file="..\..\..\can_packing.c" lastModified="19dcea701d6"/>
       </target>
-      <target file="stm32f10x_tim.o" lastModified="19dcea50ba9">
-         <source file="..\..\..\stm_lib\src\stm32f10x_tim.c" lastModified="19dcc08ccb0"/>
-      </target>
-      <target file="stm32f10x_exti.o" lastModified="19dcea50f59">
+      <target file="stm32f10x_exti.o" lastModified="19dceaad81a">
          <source file="..\..\..\stm_lib\src\stm32f10x_exti.c" lastModified="19dcc08ccb0"/>
       </target>
-      <target file="startup_stm32f10x_cl.o" lastModified="19dcea50f19">
-         <source file="..\..\..\cmsis_boot\startup\startup_stm32f10x_cl.c" lastModified="19dcc08ccb0"/>
+      <target file="stm32f10x_tim.o" lastModified="19dceaad496">
+         <source file="..\..\..\stm_lib\src\stm32f10x_tim.c" lastModified="19dcc08ccb0"/>
       </target>
-      <target file="can2.o" lastModified="19dcea51031">
+      <target file="can2.o" lastModified="19dceaad8f3">
          <source file="..\..\..\..\..\..\..\..\CooCox\CoIDE\workspace\DMA1\can2.c" lastModified="19dcea504b1"/>
       </target>
-      <target file="printf.o" lastModified="19dcea50e8d">
+      <target file="startup_stm32f10x_cl.o" lastModified="19dceaad7e8">
+         <source file="..\..\..\cmsis_boot\startup\startup_stm32f10x_cl.c" lastModified="19dcc08ccb0"/>
+      </target>
+      <target file="printf.o" lastModified="19dceaad763">
          <source file="..\..\..\stdio\printf.c" lastModified="19dcc08ccb0"/>
       </target>
-      <target file="system_stm32f10x.o" lastModified="19dcea50bee">
+      <target file="system_stm32f10x.o" lastModified="19dceaad4d9">
          <source file="..\..\..\cmsis_boot\system_stm32f10x.c" lastModified="19dcc08ccb0"/>
       </target>
-      <target file="stm32f10x_flash.o" lastModified="19dcea51082">
+      <target file="stm32f10x_flash.o" lastModified="19dceaad946">
          <source file="..\..\..\stm_lib\src\stm32f10x_flash.c" lastModified="19dcc08ccb0"/>
       </target>
-      <target file="main.o" lastModified="19dcea5d516">
+      <target file="main.o" lastModified="19dceaad70f">
          <source file="..\..\..\main.c" lastModified="19dcea50481"/>
       </target>
-      <target file="stm32f10x_gpio.o" lastModified="19dcea50ca6">
-         <source file="..\..\..\stm_lib\src\stm32f10x_gpio.c" lastModified="19dcc08ccb0"/>
-      </target>
-      <target file="stm32f10x_usart.o" lastModified="19dcea50fee">
+      <target file="stm32f10x_usart.o" lastModified="19dceaad8b0">
          <source file="..\..\..\stm_lib\src\stm32f10x_usart.c" lastModified="19dcc08ccb0"/>
       </target>
-      <target file="stm32f10x_rcc.o" lastModified="19dcea50ee7">
+      <target file="stm32f10x_gpio.o" lastModified="19dceaad57f">
+         <source file="..\..\..\stm_lib\src\stm32f10x_gpio.c" lastModified="19dcc08ccb0"/>
+      </target>
+      <target file="stm32f10x_rcc.o" lastModified="19dceaad7b6">
          <source file="..\..\..\stm_lib\src\stm32f10x_rcc.c" lastModified="19dcc08ccb0"/>
       </target>
-      <target file="stm32f10x_dma.o" lastModified="19dcea510c5">
-         <source file="..\..\..\stm_lib\src\stm32f10x_dma.c" lastModified="19dcc08ccb0"/>
-      </target>
-      <target file="misc.o" lastModified="19dcea5114d">
+      <target file="misc.o" lastModified="19dceaada0e">
          <source file="..\..\..\stm_lib\src\misc.c" lastModified="19dcc08ccb0"/>
+      </target>
+      <target file="stm32f10x_dma.o" lastModified="19dceaad989">
+         <source file="..\..\..\stm_lib\src\stm32f10x_dma.c" lastModified="19dcc08ccb0"/>
       </target>
    </processor>
 </history>
