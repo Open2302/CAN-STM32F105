@@ -1,0 +1,434 @@
+#include "stm32f10x.h"
+#include "stm32f10x_usart.h"
+#include "stm32f10x_rcc.h"
+#include "stm32f10x_gpio.h"
+#include "misc.h"
+#include "stm32f10x_tim.h"
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include "stm32f10x_exti.h"
+#include "stm32f10x_flash.h"
+
+volatile uint8_t RxBuffer[64]; /* Buffer Lenght */
+volatile uint8_t RxIndex = 0; /* Buffer Position */
+volatile uint8_t RxReady = 0; /* Rx is Ready */
+#define Constant 10 /* Const number to work with */
+
+volatile uint32_t uwTick = 0; /* Tics - millis() */
+volatile uint32_t lastTime = 0; /* Fixes the last millis */
+int EXTI1_Interrupt = 0;
+
+//Functions prototypes
+void SystemClock_Config(void);
+void USART_Config(void);
+void LED_GPIO_Config(void);;
+void TIM2_Config(void);
+void TIM2_IRQHandler(void);
+void USART_SendString(USART_TypeDef* USARTx, const char *str);
+void USART1_IRQHandler(void);
+void USART_SendChar(USART_TypeDef* USARTx, char c);
+void Command_Execute(char *cmd, int32_t value);
+void Command_Parse(uint8_t *buffer);
+void USART1_Calculation(void);
+void EXTI1_Config(void);
+void EXTI9_5_IRQHandler(void);
+void EXTI1_Name_Output(void);
+
+//* System Сlocking */
+void SystemClock_Config()
+{
+	 ErrorStatus HSEStartUpStatus;
+
+	    RCC_DeInit();
+	    RCC_HSEConfig(RCC_HSE_ON);
+
+	    HSEStartUpStatus = RCC_WaitForHSEStartUp();
+
+	    if (HSEStartUpStatus == SUCCESS)
+	    {
+	        FLASH_SetLatency(FLASH_Latency_2);
+	        FLASH_PrefetchBufferCmd(FLASH_PrefetchBuffer_Enable);
+
+	        RCC_HCLKConfig(RCC_SYSCLK_Div1);
+	        RCC_PCLK1Config(RCC_HCLK_Div2);
+	        RCC_PCLK2Config(RCC_HCLK_Div1);
+
+	        RCC_PLLConfig(RCC_PLLSource_PREDIV1, RCC_PLLMul_9);
+
+	        RCC_PLLCmd(ENABLE);
+	        while (RCC_GetFlagStatus(RCC_FLAG_PLLRDY) == RESET);
+
+	        RCC_SYSCLKConfig(RCC_SYSCLKSource_PLLCLK);
+	        while (RCC_GetSYSCLKSource() != 0x08);
+	    }
+	    else while(1);
+
+	    SystemCoreClock = 72000000UL;
+	}
+
+//* USART Configuration */
+void USART_Config()
+{
+	/* Clocking */
+	RCC_APB2PeriphClockCmd (RCC_APB2Periph_USART1 | RCC_APB2Periph_GPIOA, ENABLE);
+
+	/* ---GPIO Configuration--- */
+
+	//Structure name for USART
+	GPIO_InitTypeDef  GPIO_InitStructure;
+
+	/* Configure USART1 Rx - Receive*/
+	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_10; /* Rx-USART1 PA10 */
+	GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_IN_FLOATING; /* FLOATING to Receive */
+	GPIO_Init(GPIOA, &GPIO_InitStructure);
+
+	/* Configure USART1 Tx - Transmit */
+	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_9; /* Tx-USART1 PA10 */
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz; /* Speed for Tx */
+	GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_AF_PP; /* AF_PP Alternate Function Push-Pull specifically for the module USART */
+	GPIO_Init(GPIOA, &GPIO_InitStructure);
+
+	/* ---USART Configuration--- */
+
+	//Structure name for USART
+	USART_InitTypeDef USART_InitStructure;
+
+	USART_InitStructure.USART_BaudRate = 19200; /* BaudRate = 19200 Bit per Second Speed */
+	USART_InitStructure.USART_WordLength = USART_WordLength_8b; /* Wordlength(Message) = 8 Bits how many bits will be transmitted between the start and stop bits*/
+	USART_InitStructure.USART_StopBits = USART_StopBits_1; /* StopBits = 1 Bit signals the receiver that the data packet has ended*/
+	USART_InitStructure.USART_Parity = USART_Parity_No ; /* The Parity bit is not added */
+	USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None; /* No Flow Control and no other inputs except Tx, Rx, GND */
+	USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx; /* Full Duplex: reception and transmission */
+	USART_Init(USART1, &USART_InitStructure);
+
+	/* Interrupt on Get Message */
+	USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);
+
+	NVIC_InitTypeDef NVIC_InitStructure;
+	NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_Init(&NVIC_InitStructure);
+
+	USART_Cmd(USART1, ENABLE); /* Enable USART */
+}
+
+void LED_GPIO_Config()
+{
+	/* Enable GPIOB clocking */
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
+
+	//Structure name for LED
+	GPIO_InitTypeDef  GPIO_InitStructure;
+
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_15; /* Red LED Pin */
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
+	GPIO_Init(GPIOB, &GPIO_InitStructure);
+	/* Checking if the STM32 is working */
+	GPIO_ResetBits(GPIOB, GPIO_Pin_15);
+}
+
+void TIM2_Config()
+{
+	/* Clocking TIM2 */
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
+
+	/* Structure name for TIM2 */
+	TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure = {0};
+
+	TIM_TimeBaseStructure.TIM_Prescaler = 7200  - 1; /* System clocking on HSI */
+	TIM_TimeBaseStructure.TIM_Period = 1000 - 1; /* Time Needed P.S 1millis */
+	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up; /* The score is up */
+	TIM_TimeBaseInit(TIM2, &TIM_TimeBaseStructure);
+
+	TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE); /* Enable flag update */
+
+	NVIC_InitTypeDef NVIC_InitStructure = {0};
+	NVIC_InitStructure.NVIC_IRQChannel = TIM2_IRQn; /* Interrupt for TIM2 */
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE; /* Enable NVCI Channel for TIM */
+	NVIC_Init(&NVIC_InitStructure);
+
+	NVIC_EnableIRQ(TIM2_IRQn); /* Enable NVCI for TIM */
+	TIM_Cmd(TIM2, ENABLE); /* Enable TIM2 */
+}
+
+/* USART Send Function */
+void USART_SendString(USART_TypeDef* USARTx, const char *str)
+{
+	while (*str) /* While str not equal to 0 */
+	{
+	        while (USART_GetFlagStatus(USARTx, USART_FLAG_TXE) == RESET); /* Waiting when byte will go */
+	        USART_SendData(USARTx, *str); /* Send byte */
+	        str++; /* Byte String + 1 */
+	    }
+	    while (USART_GetFlagStatus(USARTx, USART_FLAG_TC) == RESET); /* Last Byte Sent */
+}
+
+/* Interrupt Handler for USART */
+void USART1_IRQHandler(void)
+{
+    if (USART_GetITStatus(USART1, USART_IT_RXNE) != RESET) { /* New Data */
+        uint8_t data = USART_ReceiveData(USART1); /* Data = received data 0-255 */
+
+        /* Enter or String reset */
+        if (data == '\r' || data == '\n') {
+            if (RxIndex > 0) { /* Buffer is not Null, Position */
+                RxBuffer[RxIndex] = '\0'; /* Now Buffer is RxIndex and ended by 0 */
+                RxReady = 1; /* Flag that signals that something typed in terminal */
+            }
+        }
+        /* Backspace or Del */
+        else if (data == '\b' || data == 127) {
+            if (RxIndex > 0) { /* If terminal have something in Buffer */
+                RxIndex--; /* Buffer -1 symbol */
+                USART_SendString(USART1, "\b \b"); /* Buffer -1 on Terminal */
+            }
+        }
+        /* Just Symbol */
+        else {
+        	/* Checking that buffer < 64 */
+            if (RxIndex < sizeof(RxBuffer) - 1) {
+                RxBuffer[RxIndex++] = data; /* Save symbol in data on Current Position */
+                USART_SendData(USART1, data); /* Echo */
+                while (USART_GetFlagStatus(USART1, USART_FLAG_TC) == RESET); /* Last byte */
+            }
+        }
+
+        USART_ClearITPendingBit(USART1, USART_IT_RXNE); /*Clear Flag */
+    }
+}
+
+/* Blocking delay */
+void Delay_ms(volatile uint32_t ms)
+{
+	uint32_t start = uwTick;
+	while ((uwTick - start) < ms);
+}
+/* Millis like arduino */
+uint32_t millis(void)
+{
+    return uwTick; /* Returning uwTick value */
+}
+
+/* The interrupt handler for TIM2 */
+void TIM2_IRQHandler(void)
+{
+	if (TIM_GetITStatus(TIM2, TIM_IT_Update)) /* Flag check */
+	{
+		uwTick++; /* Tick +1 if flag is different */
+		TIM_ClearITPendingBit(TIM2, TIM_IT_Update); /* Clear Flag */
+
+		 if (GPIO_ReadOutputDataBit(GPIOB, GPIO_Pin_15) == Bit_RESET)
+		            GPIO_SetBits(GPIOB, GPIO_Pin_15);
+		        else
+		            GPIO_ResetBits(GPIOB, GPIO_Pin_15);
+	}
+}
+
+/* Checking Buffer and Check cmd(mul, div, sub, add) and number */
+void Command_Execute(char *cmd, int32_t value)
+{
+    int32_t result = 0; /* result variable */
+
+    USART_SendString(USART1, "\r\n");  /* String Transmission */
+
+    if (strcmp(cmd, "add") == 0) { /* If buffer(cmd) that typed == add */
+        result = value + Constant; /* Result = value(number) + const */
+        USART_SendString(USART1, "add: "); /* Print "add: " */
+    }
+    else if (strcmp(cmd, "sub") == 0) { /* If buffer(cmd) that typed == sub */
+        result = value - Constant; /* Result = value(number) + const */
+        USART_SendString(USART1, "sub: "); /* Print "sub: " */
+    }
+    else if (strcmp(cmd, "mul") == 0) { /* If buffer(cmd) that typed == mul */
+        result = value * Constant;/* Result = value(number) + const */
+        USART_SendString(USART1, "mul: "); /* Print "mul: " */
+    }
+    else if (strcmp(cmd, "div") == 0) {  /* If buffer(cmd) that typed == div */
+        result = value / Constant;/* Result = value(number) + const */
+        USART_SendString(USART1, "div: "); /* Print "div: " */
+    }
+    else { /* if unknown cmd */
+        USART_SendString(USART1, "error: unknown\r\n> ");
+        return;
+    }
+
+    char buf[12]; /* Temperary buffer */
+    int i = 0; /* Position counter */
+    int32_t temp = value; /* Temperary variable = number */
+    if (temp < 0) { /* If number is negative */
+        USART_SendChar(USART1, '-'); /* minus on start */
+        temp = -temp; /* Make the number positive for the conversion */
+    }
+    if (temp == 0) { /* If number == 0 */
+        USART_SendString(USART1, "0"); /* Print number 0 */
+    } else { /* Default conversion number to  string */
+        // Конвертируем в строку (задом наперёд)
+        while (temp > 0 && i < 11) { /* While number > 0 and buffer is not full */
+            buf[i++] = (temp % 10) + '0';  /* After division by 10 = the last digit */
+            temp /= 10; /* Delete last number */
+        }
+
+        while (i > 0) { /* While the remaining numbers */
+            USART_SendChar(USART1, buf[--i]); /* in the reverse order */
+        }
+    }
+
+    if (strcmp(cmd, "add") == 0) USART_SendString(USART1, " + ");
+    else if (strcmp(cmd, "sub") == 0) USART_SendString(USART1, " - ");
+    else if (strcmp(cmd, "mul") == 0) USART_SendString(USART1, " * ");
+    else if (strcmp(cmd, "div") == 0) USART_SendString(USART1, " / ");
+
+    USART_SendString(USART1, "10");
+    USART_SendString(USART1, " = ");
+
+    temp = result; /* Temp = result */
+    i = 0; /* Counter reset */
+    if (temp < 0) {
+        USART_SendChar(USART1, '-');
+        temp = -temp;
+    }
+    if (temp == 0) {
+        USART_SendString(USART1, "0");
+    } else {
+        while (temp > 0 && i < 11) {
+            buf[i++] = (temp % 10) + '0';
+            temp /= 10;
+        }
+        while (i > 0) {
+            USART_SendChar(USART1, buf[--i]);
+        }
+    }
+
+    USART_SendString(USART1, "\r\n> ");
+}
+void USART_SendChar(USART_TypeDef* USARTx, char c) /* Send 1 symbol */
+{
+    while (USART_GetFlagStatus(USARTx, USART_FLAG_TXE) == RESET); /* While txe is not null */
+    USART_SendData(USARTx, c); /* Send symbol that typed */
+    while (USART_GetFlagStatus(USARTx, USART_FLAG_TC) == RESET); /* While transimt is complete */
+}
+
+
+void Command_Parse(uint8_t *buffer) /* String to int and cmd */
+{
+    char cmd[16]; /* array for commands */
+    int32_t value = 0;
+
+    memset(cmd, 0, sizeof(cmd)); /* fill memory cmd 0 */
+
+    char *space_ptr = strchr((char*)buffer, ' '); /* searching for a space */
+
+    if (space_ptr == NULL) { /* Command there is no space or argument */
+        strncpy(cmd, (char*)buffer, 15); // Copy the command from buffer to cmd
+        cmd[15] = '\0';
+        value = 0;
+    } else { /* Space */
+        *space_ptr = '\0'; /* dereference 0 Instead of space */
+        strncpy(cmd, (char*)buffer, 15); /* Copy the command name */
+        cmd[15] = '\0';
+        /* pointer to the numeric part */
+        char *num_ptr = space_ptr + 1; /* start after the space */
+        while (*num_ptr == ' ') num_ptr++; /* if there are a lot of spaces */
+        value = atoi(num_ptr); /* Converting a string to a number */
+    }
+
+    // Pass the parsed command to the handler
+    Command_Execute(cmd, value);
+}
+void USART1_Calculation(void)
+{
+	if (RxReady == 1) { /* USART interrupt flag */
+		RxReady = 0;
+	    Command_Parse(RxBuffer);
+	    memset((void*)RxBuffer, 0, sizeof(RxBuffer));
+	    RxIndex = 0;
+	}
+}
+void EXTI1_Config()
+{
+	/* Enable GPIOC clocking */
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC | RCC_APB2Periph_AFIO, ENABLE);
+
+	//Structure name for EXTI
+	GPIO_InitTypeDef  GPIO_InitStructure;
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5; /* EXTI1 Pin */
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPD; /* INPUT PULL UP like button */
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+	GPIO_Init(GPIOC, &GPIO_InitStructure);
+
+	GPIO_EXTILineConfig(GPIO_PortSourceGPIOC, GPIO_PinSource5); /* Connection to EXTI */
+
+	/* Structure name for EXTI External interruptions*/
+	EXTI_InitTypeDef EXTI_InitStructure;
+	EXTI_InitStructure.EXTI_Line = EXTI_Line5; /* Dip switch on line 5 */
+	EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
+	EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Falling; /* Trigger on OFF */
+	EXTI_InitStructure.EXTI_LineCmd = ENABLE; /* Enable EXTI */
+	EXTI_Init(&EXTI_InitStructure);
+
+	/* Structure name for NVIC Interrupt module */
+	NVIC_InitTypeDef NVIC_InitStructure;
+	NVIC_InitStructure.NVIC_IRQChannel = EXTI9_5_IRQn; /* External Line[9:5] Interrupts */
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_Init(&NVIC_InitStructure);
+}
+
+/* The interrupt handler for EXTI */
+void EXTI9_5_IRQHandler(void)
+{
+    /* Check status */
+    if (EXTI_GetITStatus(EXTI_Line5) != RESET)
+    {
+    	EXTI1_Interrupt = 1;
+    	lastTime = millis();
+    	  /* Clear Flag */
+    	EXTI_ClearITPendingBit(EXTI_Line5);
+    }
+}
+
+void EXTI1_Name_Output(void)
+{
+	if (EXTI1_Interrupt == 1)
+	{
+//	    		EXTI1_Interrupt = 0;
+		if ((millis() - lastTime) >= 5)
+		{
+			EXTI1_Interrupt = 0;
+			/* Checking Current Status of EXTI1 */
+			if ((GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_5) == 1) /*&& (State == 0)*/)
+			{
+				USART_SendString(USART1, "Simonov Egor\r\n");
+			}
+//					State = GPIO_ReadInputDataBit(GPIOC, GPIO_Pin_5);
+		}
+//	    	    	lastTime = millis();
+	}
+}
+int main(void)
+{
+    SystemClock_Config();
+    TIM2_Config();
+    lastTime = millis();
+    USART_Config();
+    LED_GPIO_Config();
+    EXTI1_Config();
+
+    /* Resetting variables */
+    memset((void*)RxBuffer, 0, sizeof(RxBuffer));
+    RxIndex = 0;
+    RxReady = 0;
+
+    while (1)
+    {
+    	EXTI1_Name_Output();
+    	USART1_Calculation();
+    }
+}

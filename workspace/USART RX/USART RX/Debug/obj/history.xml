@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<history>
+   <processor signature="arm-none-eabi-gcc noversion nomachine -mcpu=cortex-m3 -mthumb -Wall -ffunction-sections -g -O0 -c -DSTM32F105RC -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -D__ASSEMBLY__ -I..\..\..\workspace\USART RX\cmsis_boot -I..\..\..\workspace\USART RX\stm_lib\inc -I..\..\..\workspace\USART RX\stm_lib -I..\..\..\workspace -I..\..\..\workspace\USART RX -I..\..\..\workspace\USART RX\cmsis">
+      <target file="stm32f10x_exti.o" lastModified="19d768ba77a">
+         <source file="..\..\..\stm_lib\src\stm32f10x_exti.c" lastModified="19d764980b5"/>
+      </target>
+      <target file="stm32f10x_tim.o" lastModified="19d768ba57b">
+         <source file="..\..\..\stm_lib\src\stm32f10x_tim.c" lastModified="19d6629cbdb"/>
+      </target>
+      <target file="startup_stm32f10x_cl.o" lastModified="19d665f87dd">
+         <source file="..\..\..\cmsis_boot\startup\startup_stm32f10x_cl.c" lastModified="19d6629a5c9"/>
+      </target>
+      <target file="printf.o" lastModified="19d672149c8">
+         <source file="..\..\..\stdio\printf.c" lastModified="19d6719ebe9"/>
+      </target>
+      <target file="system_stm32f10x.o" lastModified="19d768ba5bb">
+         <source file="..\..\..\cmsis_boot\system_stm32f10x.c" lastModified="19d6629a5f7"/>
+      </target>
+      <target file="stm32f10x_flash.o" lastModified="19d768ba824">
+         <source file="..\..\..\stm_lib\src\stm32f10x_flash.c" lastModified="19d7689e89e"/>
+      </target>
+      <target file="main.o" lastModified="19d768ba6cc">
+         <source file="..\..\..\main.c" lastModified="19d768a086a"/>
+      </target>
+      <target file="stm32f10x_usart.o" lastModified="19d768ba7d2">
+         <source file="..\..\..\stm_lib\src\stm32f10x_usart.c" lastModified="19d6629b8d3"/>
+      </target>
+      <target file="stm32f10x_gpio.o" lastModified="19d768ba605">
+         <source file="..\..\..\stm_lib\src\stm32f10x_gpio.c" lastModified="19d6629aa9d"/>
+      </target>
+      <target file="stm32f10x_rcc.o" lastModified="19d768ba736">
+         <source file="..\..\..\stm_lib\src\stm32f10x_rcc.c" lastModified="19d6629a5be"/>
+      </target>
+      <target file="misc.o" lastModified="19d768ba864">
+         <source file="..\..\..\stm_lib\src\misc.c" lastModified="19d6629c764"/>
+      </target>
+   </processor>
+</history>

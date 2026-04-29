@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<history>
+   <processor signature="arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -g -nostartfiles -Map=LedBlink2.map -O0 --gc-sections -LC:\CooCox\CoIDE\configuration\ProgramData\LedBlink2 -TC:\CooCox\CoIDE\configuration\ProgramData\LedBlink2/link.ld -g">
+      <target file="LedBlink2.elf" lastModified="19d3d565df6">
+         <source file="..\obj\stm32f10x_tim.o" lastModified="19d3d529c85"/>
+         <source file="..\obj\system_stm32f10x.o" lastModified="19d3d529ccd"/>
+         <source file="..\obj\stm32f10x_gpio.o" lastModified="19d3d529d19"/>
+         <source file="..\obj\main.o" lastModified="19d3d565bed"/>
+         <source file="..\obj\stm32f10x_rcc.o" lastModified="19d3d529ea9"/>
+         <source file="..\obj\startup_stm32f10x_cl.o" lastModified="19d3d529edd"/>
+         <source file="..\obj\stm32f10x_flash.o" lastModified="19d3d55ceab"/>
+      </target>
+   </processor>
+</history>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<History> 
+  <File usedCount="2" path="cox/cox_peripheral/inc/xuart.h"/>  
+  <File usedCount="2" path="cox/cox_peripheral/src/xuart.c"/> 
+</History>

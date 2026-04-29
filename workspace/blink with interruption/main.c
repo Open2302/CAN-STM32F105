@@ -1,0 +1,112 @@
+#include "stm32f10x.h"
+#include "stm32f10x_rcc.h"
+#include "stm32f10x_gpio.h"
+#include "stm32f10x_tim.h"
+#include "misc.h"
+#include "stm32f10x_flash.h"
+
+#define HSE_VALUE    8000000UL
+#define SYSCLK_FREQ  72000000UL
+
+int step = 0;
+extern uint32_t SystemCoreClock;
+
+void SystemClock_Config(void);
+void TIM2_Config(void);
+void GPIO_Config(void);
+
+void SystemClock_Config(void)
+{
+    ErrorStatus HSEStartUpStatus;
+
+    RCC_DeInit();
+    RCC_HSEConfig(RCC_HSE_ON);
+
+    HSEStartUpStatus = RCC_WaitForHSEStartUp();
+
+    if (HSEStartUpStatus == SUCCESS)
+    {
+        FLASH_SetLatency(FLASH_Latency_2);
+        FLASH_PrefetchBufferCmd(FLASH_PrefetchBuffer_Enable);
+
+        RCC_HCLKConfig(RCC_SYSCLK_Div1);
+        RCC_PCLK1Config(RCC_HCLK_Div2);
+        RCC_PCLK2Config(RCC_HCLK_Div1);
+
+        RCC_PLLConfig(RCC_PLLSource_PREDIV1, RCC_PLLMul_9);
+
+        RCC_PLLCmd(ENABLE);
+        while (RCC_GetFlagStatus(RCC_FLAG_PLLRDY) == RESET);
+
+        RCC_SYSCLKConfig(RCC_SYSCLKSource_PLLCLK);
+        while (RCC_GetSYSCLKSource() != 0x08);
+    }
+    else while(1);
+
+    SystemCoreClock = SYSCLK_FREQ;
+}
+
+void TIM2_Config(void)
+{
+    TIM_TimeBaseInitTypeDef TIM_InitStruct = {0};
+    NVIC_InitTypeDef NVIC_InitStructure;
+
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
+
+    TIM_InitStruct.TIM_Prescaler = 7200 - 1;
+    TIM_InitStruct.TIM_CounterMode = TIM_CounterMode_Up;
+    TIM_InitStruct.TIM_Period = 1000 - 1;
+    TIM_TimeBaseInit(TIM2, &TIM_InitStruct);
+
+    NVIC_InitStructure.NVIC_IRQChannel = TIM2_IRQn;
+    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+    NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+    NVIC_Init(&NVIC_InitStructure);
+
+    TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);
+
+    TIM_Cmd(TIM2, ENABLE);
+}
+
+void GPIO_Config(void)
+{
+    GPIO_InitTypeDef GPIO_InitStruct = {0};
+
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
+
+    GPIO_InitStruct.GPIO_Pin = GPIO_Pin_15;
+    GPIO_InitStruct.GPIO_Mode = GPIO_Mode_Out_PP;
+    GPIO_InitStruct.GPIO_Speed = GPIO_Speed_2MHz;
+    GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+    GPIO_ResetBits(GPIOB, GPIO_Pin_15);
+}
+
+void TIM2_IRQHandler(void)
+{
+    if (TIM_GetITStatus(TIM2, TIM_IT_Update) != RESET)
+    {
+        TIM_ClearITPendingBit(TIM2, TIM_IT_Update);
+
+        step++;
+        if (step == 3){
+        	step = 1;
+        }
+        if (GPIO_ReadOutputDataBit(GPIOB, GPIO_Pin_15) == Bit_RESET)
+            GPIO_SetBits(GPIOB, GPIO_Pin_15);
+        else
+            GPIO_ResetBits(GPIOB, GPIO_Pin_15);
+    }
+}
+
+int main(void)
+{
+    SystemClock_Config();
+    TIM2_Config();
+    GPIO_Config();
+
+    while (1)
+    {
+    }
+}

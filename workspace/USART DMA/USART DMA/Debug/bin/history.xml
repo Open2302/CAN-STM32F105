@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<history>
+   <processor signature="arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -g -nostartfiles -Map=USART DMA.map -O0 --gc-sections -LC:\CooCox\CoIDE\configuration\ProgramData\USART DMA -TC:\CooCox\CoIDE\configuration\ProgramData\USART DMA/link.ld -g">
+      <target file="USART DMA.elf" lastModified="19d8618cdea">
+         <source file="..\obj\stm32f10x_tim.o" lastModified="19d84ec8eae"/>
+         <source file="..\obj\system_stm32f10x.o" lastModified="19d84ec8efd"/>
+         <source file="..\obj\stm32f10x_gpio.o" lastModified="19d84ec8f44"/>
+         <source file="..\obj\main.o" lastModified="19d8618cbe5"/>
+         <source file="..\obj\printf.o" lastModified="19d84eb72de"/>
+         <source file="..\obj\stm32f10x_rcc.o" lastModified="19d84ec9138"/>
+         <source file="..\obj\startup_stm32f10x_cl.o" lastModified="19d84eb7361"/>
+         <source file="..\obj\stm32f10x_exti.o" lastModified="19d84ec917b"/>
+         <source file="..\obj\stm32f10x_usart.o" lastModified="19d84ec91ce"/>
+         <source file="..\obj\stm32f10x_flash.o" lastModified="19d84ec9222"/>
+         <source file="..\obj\stm32f10x_dma.o" lastModified="19d84ec9264"/>
+         <source file="..\obj\misc.o" lastModified="19d84ec92a8"/>
+      </target>
+   </processor>
+</history>

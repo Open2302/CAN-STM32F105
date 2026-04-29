@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<history>
+   <processor signature="arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -g -nostartfiles -Map=USART Terminal.map -O0 --gc-sections -LC:\CooCox\CoIDE\configuration\ProgramData\USART Terminal -TC:\CooCox\CoIDE\configuration\ProgramData\USART Terminal/link.ld -g">
+      <target file="USART Terminal.elf" lastModified="19d664e1476">
+         <source file="..\obj\stm32f10x_tim.o" lastModified="19d6206d0d5"/>
+         <source file="..\obj\system_stm32f10x.o" lastModified="19d6206d134"/>
+         <source file="..\obj\stm32f10x_gpio.o" lastModified="19d6206d18b"/>
+         <source file="..\obj\main.o" lastModified="19d664e10f2"/>
+         <source file="..\obj\stm32f10x_rcc.o" lastModified="19d6206d213"/>
+         <source file="..\obj\startup_stm32f10x_cl.o" lastModified="19d6206d252"/>
+         <source file="..\obj\stm32f10x_exti.o" lastModified="19d6206d2a2"/>
+         <source file="..\obj\stm32f10x_usart.o" lastModified="19d6206d2f1"/>
+         <source file="..\obj\stm32f10x_flash.o" lastModified="19d6206d341"/>
+         <source file="..\obj\ConfigPeriph.o" lastModified="19d623b397d"/>
+         <source file="..\obj\misc.o" lastModified="19d6206d3c0"/>
+      </target>
+   </processor>
+</history>

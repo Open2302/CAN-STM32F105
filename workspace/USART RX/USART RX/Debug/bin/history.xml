@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<history>
+   <processor signature="arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -g -nostartfiles -Map=USART RX.map -O0 --gc-sections -LC:\CooCox\CoIDE\configuration\ProgramData\USART RX -TC:\CooCox\CoIDE\configuration\ProgramData\USART RX/link.ld -g">
+      <target file="USART RX.elf" lastModified="19d768baa7c">
+         <source file="..\obj\stm32f10x_tim.o" lastModified="19d768ba57b"/>
+         <source file="..\obj\system_stm32f10x.o" lastModified="19d768ba5bb"/>
+         <source file="..\obj\stm32f10x_gpio.o" lastModified="19d768ba605"/>
+         <source file="..\obj\main.o" lastModified="19d768ba6cc"/>
+         <source file="..\obj\printf.o" lastModified="19d672149c8"/>
+         <source file="..\obj\stm32f10x_rcc.o" lastModified="19d768ba736"/>
+         <source file="..\obj\startup_stm32f10x_cl.o" lastModified="19d665f87dd"/>
+         <source file="..\obj\stm32f10x_exti.o" lastModified="19d768ba77a"/>
+         <source file="..\obj\stm32f10x_usart.o" lastModified="19d768ba7d2"/>
+         <source file="..\obj\stm32f10x_flash.o" lastModified="19d768ba824"/>
+         <source file="..\obj\misc.o" lastModified="19d768ba864"/>
+      </target>
+   </processor>
+</history>

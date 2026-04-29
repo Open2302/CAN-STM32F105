@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<history>
+   <processor signature="arm-none-eabi-gcc noversion nomachine -mcpu=cortex-m3 -mthumb -Wall -ffunction-sections -g -O0 -c -DSTM32F105RC -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -D__ASSEMBLY__ -I..\..\..\workspace\USART DMA\cmsis -I..\..\..\workspace -I..\..\..\workspace\USART DMA\cmsis_boot -I..\..\..\workspace\USART DMA\stm_lib -I..\..\..\workspace\USART DMA -I..\..\..\workspace\USART DMA\stm_lib\inc">
+      <target file="stm32f10x_tim.o" lastModified="19d84ec8eae">
+         <source file="..\..\..\stm_lib\src\stm32f10x_tim.c" lastModified="19d84e899ad"/>
+      </target>
+      <target file="stm32f10x_exti.o" lastModified="19d84ec917b">
+         <source file="..\..\..\stm_lib\src\stm32f10x_exti.c" lastModified="19d84e8573c"/>
+      </target>
+      <target file="startup_stm32f10x_cl.o" lastModified="19d84eb7361">
+         <source file="..\..\..\cmsis_boot\startup\startup_stm32f10x_cl.c" lastModified="19d84e84843"/>
+      </target>
+      <target file="printf.o" lastModified="19d84eb72de">
+         <source file="..\..\..\stdio\printf.c" lastModified="19d84eb5052"/>
+      </target>
+      <target file="system_stm32f10x.o" lastModified="19d84ec8efd">
+         <source file="..\..\..\cmsis_boot\system_stm32f10x.c" lastModified="19d84e84864"/>
+      </target>
+      <target file="stm32f10x_flash.o" lastModified="19d84ec9222">
+         <source file="..\..\..\stm_lib\src\stm32f10x_flash.c" lastModified="19d84e957ff"/>
+      </target>
+      <target file="main.o" lastModified="19d8618cbe5">
+         <source file="..\..\..\main.c" lastModified="19d86882199"/>
+      </target>
+      <target file="stm32f10x_gpio.o" lastModified="19d84ec8f44">
+         <source file="..\..\..\stm_lib\src\stm32f10x_gpio.c" lastModified="19d84e8575d"/>
+      </target>
+      <target file="stm32f10x_usart.o" lastModified="19d84ec91ce">
+         <source file="..\..\..\stm_lib\src\stm32f10x_usart.c" lastModified="19d84e88e93"/>
+      </target>
+      <target file="stm32f10x_rcc.o" lastModified="19d84ec9138">
+         <source file="..\..\..\stm_lib\src\stm32f10x_rcc.c" lastModified="19d84e84833"/>
+      </target>
+      <target file="stm32f10x_dma.o" lastModified="19d84ec9264">
+         <source file="..\..\..\stm_lib\src\stm32f10x_dma.c" lastModified="19d84e85eeb"/>
+      </target>
+      <target file="misc.o" lastModified="19d84ec92a8">
+         <source file="..\..\..\stm_lib\src\misc.c" lastModified="19d84e89497"/>
+      </target>
+   </processor>
+</history>

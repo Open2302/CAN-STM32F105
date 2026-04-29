@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<history>
+   <processor signature="arm-none-eabi-gcc noversion nomachine -mcpu=cortex-m3 -mthumb -Wall -ffunction-sections -g -O0 -c -DSTM32F105RC -DSTM32F10X_CL -DUSE_STDPERIPH_DRIVER -D__ASSEMBLY__ -I..\..\..\workspace\blink with interruption\cmsis_boot -I..\..\..\workspace\blink with interruption\stm_lib -I..\..\..\workspace\blink with interruption\cmsis -I..\..\..\workspace -I..\..\..\workspace\blink with interruption -I..\..\..\workspace\blink with interruption\stm_lib\inc">
+      <target file="stm32f10x_rcc.o" lastModified="19d3d97f5e2">
+         <source file="..\..\..\stm_lib\src\stm32f10x_rcc.c" lastModified="19d3d88175f"/>
+      </target>
+      <target file="system_stm32f10x.o" lastModified="19d3d97f495">
+         <source file="..\..\..\cmsis_boot\system_stm32f10x.c" lastModified="19d3d880406"/>
+      </target>
+      <target file="misc.o" lastModified="19d3d9fe77d">
+         <source file="..\..\..\stm_lib\src\misc.c" lastModified="19d3d9f578c"/>
+      </target>
+      <target file="stm32f10x_flash.o" lastModified="19d3d97f67d">
+         <source file="..\..\..\stm_lib\src\stm32f10x_flash.c" lastModified="19d3d8803d9"/>
+      </target>
+      <target file="main.o" lastModified="19d763b8467">
+         <source file="..\..\..\main.c" lastModified="19d763b82e8"/>
+      </target>
+      <target file="stm32f10x_gpio.o" lastModified="19d3d97f4f2">
+         <source file="..\..\..\stm_lib\src\stm32f10x_gpio.c" lastModified="19d3d882189"/>
+      </target>
+      <target file="stm32f10x_tim.o" lastModified="19d3d97f44c">
+         <source file="..\..\..\stm_lib\src\stm32f10x_tim.c" lastModified="19d3d88261a"/>
+      </target>
+      <target file="startup_stm32f10x_cl.o" lastModified="19d3d97f61d">
+         <source file="..\..\..\cmsis_boot\startup\startup_stm32f10x_cl.c" lastModified="19d3d8803e9"/>
+      </target>
+   </processor>
+</history>

@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<history>
+   <processor signature="arm-none-eabi-gcc -mcpu=cortex-m3 -mthumb -g -nostartfiles -Map=blink with interruption.map -O0 --gc-sections -LC:\CooCox\CoIDE\configuration\ProgramData\blink with interruption -TC:\CooCox\CoIDE\configuration\ProgramData\blink with interruption/link.ld -g">
+      <target file="blink with interruption.elf" lastModified="19d763b8687">
+         <source file="..\obj\stm32f10x_tim.o" lastModified="19d3d97f44c"/>
+         <source file="..\obj\system_stm32f10x.o" lastModified="19d3d97f495"/>
+         <source file="..\obj\stm32f10x_gpio.o" lastModified="19d3d97f4f2"/>
+         <source file="..\obj\main.o" lastModified="19d763b8467"/>
+         <source file="..\obj\stm32f10x_rcc.o" lastModified="19d3d97f5e2"/>
+         <source file="..\obj\startup_stm32f10x_cl.o" lastModified="19d3d97f61d"/>
+         <source file="..\obj\stm32f10x_flash.o" lastModified="19d3d97f67d"/>
+         <source file="..\obj\misc.o" lastModified="19d3d9fe77d"/>
+      </target>
+   </processor>
+</history>
