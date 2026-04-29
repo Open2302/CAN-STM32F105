@@ -21,8 +21,7 @@ uint8_t DMA_TxBuffer[64];
 extern volatile uint8_t CAN1_RxPending;
 extern volatile CanRxMsg CAN1_RxMessage;
 extern volatile uint8_t CAN2_RxPending;
-extern volatile CanRxMsg CAN_RxMessage;
-extern volatile uint32_t CAN1_Debug_Counter;
+extern volatile CanRxMsg CAN2_RxMessage;
 
 /* Cmd buffer */
 volatile uint8_t RxBuffer[64];
@@ -135,76 +134,19 @@ void CAN_Send_Calculated_Data(void)
     DMA_SendString("\r\n> ");
 }
 
-void CAN_Process_Received(void)
-{
-    // CAN1
+void CAN_Process_Received(void) {
     if (CAN1_RxPending) {
         CAN1_RxPending = 0;
-        DMA_SendString("\r\n[DBG] CAN1 message received!\r\n");
-        if (CAN1_RxMessage.ExtId == CAN_ID_NUMBERS) {
-        	DMA_SendString("[DBG] Got NUMBERS message\r\n");
-            Unpack_Numbers_Message(CAN1_RxMessage.Data,
-                                  &CAN_Received_Num1,
-                                  &CAN_Received_Num2);
-            CAN_Pending_Numbers = 1;
-        }
-        else if (CAN1_RxMessage.ExtId == (CAN_ID_OPERATION)) {
-        	DMA_SendString("[DBG] Got OPERATION message\r\n");
-            CAN_Received_Op = CAN1_RxMessage.Data[0];
-            CAN_Pending_Op = 1;
-        }
-    }
+        DMA_SendString("\r\n*** CAN1 RX ***\r\n");
 
-    // CAN2
-    if (CAN2_RxPending) {
-        CAN2_RxPending = 0;
 
-        if (CAN2_RxMessage.ExtId == CAN_ID_NUMBERS) {
-            Unpack_Numbers_Message(CAN2_RxMessage.Data,
-                                  &CAN_Received_Num1,
-                                  &CAN_Received_Num2);
-            CAN_Pending_Numbers = 1;
-        }
-        else if (CAN2_RxMessage.ExtId == (CAN_ID_OPERATION)) {
-            CAN_Received_Op = CAN2_RxMessage.Data[0];
-            CAN_Pending_Op = 1;
-        }
-    }
-
-    if (CAN_Pending_Numbers && CAN_Pending_Op) {
-    	DMA_SendString("[DBG] Calculating result...\r\n");
-        CAN_Pending_Numbers = 0;
-        CAN_Pending_Op = 0;
-
-        int32_t result = 0;
-        char buf[12];
-
-        switch (CAN_Received_Op) {
-            case CAN_OP_ADD: result = CAN_Received_Num1 + CAN_Received_Num2; break;
-            case CAN_OP_SUB: result = CAN_Received_Num1 - CAN_Received_Num2; break;
-            case CAN_OP_MUL: result = CAN_Received_Num1 * CAN_Received_Num2; break;
-            case CAN_OP_DIV:
-                if (CAN_Received_Num2 != 0) {
-                    result = CAN_Received_Num1 / CAN_Received_Num2;
-                } else {
-                    DMA_SendString("\r\n[CAN] Error: div by zero\r\n> ");
-                    return;
-                }
-                break;
-            default:
-                DMA_SendString("\r\n[CAN] Error: unknown op\r\n> ");
-                return;
-        }
-
-        DMA_SendString("\r\n[CAN] Result: ");
-        DMA_SendNumber(CAN_Received_Num1);
-        DMA_SendString(" ");
-        DMA_SendString(CAN_Op_To_String(CAN_Received_Op));
-        DMA_SendString(" ");
-        DMA_SendNumber(CAN_Received_Num2);
-        DMA_SendString(" = ");
-        DMA_SendNumber(result);
-        DMA_SendString("\r\n> ");
+        DMA_SendString("Data[0] = 0x");
+        char hex[3] = {0};
+        uint8_t val = CAN1_RxMessage.Data[0];
+        hex[0] = "0123456789ABCDEF"[val >> 4];
+        hex[1] = "0123456789ABCDEF"[val & 0xF];
+        DMA_SendString(hex);
+        DMA_SendString("\r\n");
     }
 }
 
@@ -294,7 +236,12 @@ void USART_DMA_Config(void)
 /* Old USART Send String but on DMA */
 void DMA_SendString(const char *str)
 {
-    while (TxInProgress == 1);
+	uint32_t timeout = 100000;
+	while (TxInProgress == 1 && timeout--);
+	if (TxInProgress == 1) {
+		DMA_Cmd(DMA1_Channel4, DISABLE);
+		TxInProgress = 0;
+	}
 
     uint16_t len = 0;
     while (*str && len < 63) { /* Current Symbol */
@@ -668,36 +615,24 @@ int main(void)
     DMA_SendString("> ");
     while (1)
     {
-	 if (RxReady == 1) {
-				RxReady = 0;
-				Command_Parse(RxBuffer);
-				memset((void*)RxBuffer, 0, sizeof(RxBuffer));
-			}
-		if (CAN_Send_Trigger == 1) {
-			CAN_Send_Trigger = 0;
-			if (Console_Num1_Ready && Console_Num2_Ready && Console_Op != 0xFF) {
-				CAN_Send_Calculated_Data();
-			} else {
-				DMA_SendString("\r\nError");
-			}
+	if (CAN_Send_Trigger == 1) {
+		CAN_Send_Trigger = 0;
+		if (Console_Num1_Ready && Console_Num2_Ready && Console_Op != 0xFF) {
+			CAN_Send_Calculated_Data();
+		} else {
+			DMA_SendString("\r\nError");
 		}
-		static uint32_t last_cnt = 0;
-		if (CAN1_Debug_Counter != last_cnt) {
-		    last_cnt = CAN1_Debug_Counter;
-		    DMA_SendString("IRQ CNT: ");  // Hard_Print - вывод мину€ DMA
-		    char buf[16];
-		    sprintf(buf, "%lu\r\n", last_cnt);
-		    DMA_SendString(buf);
-		}
+	}
 
-    	DMA_CheckRX();
-    	CAN_Process_Received();
+	DMA_CheckRX();
 
-        /* Process DIP switch */
-        EXTI1_Name_Output();
+	CAN_Process_Received();
 
-        /* Process USART commands */
-        USART1_Calculation();
+	/* Process DIP switch */
+	EXTI1_Name_Output();
+
+	/* Process USART commands */
+	USART1_Calculation();
     }
 
 }

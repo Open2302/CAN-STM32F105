@@ -6,7 +6,7 @@
          <include file="..\..\..\cmsis_boot\system_stm32f10x.h"/>
          <include file="..\..\..\cmsis_boot\stm32f10x_conf.h"/>
       </source>
-      <source file="..\..\..\..\..\..\..\..\CooCox\CoIDE\workspace\DMA1\can2.c" lastModified="19dd2cb155c">
+      <source file="..\..\..\..\..\..\..\..\CooCox\CoIDE\workspace\DMA1\can2.c" lastModified="19dd75a4c6d">
          <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
          <include file="..\..\..\stm_lib\inc\stm32f10x_can.h"/>
          <include file="..\..\..\stm_lib\inc\stm32f10x_rcc.h"/>
@@ -57,7 +57,7 @@
       <source file="..\..\..\can_packing.c" lastModified="19dcc146958">
          <include file="..\..\..\can_packing.h"/>
       </source>
-      <source file="..\..\..\can1.c" lastModified="19dd2cb1554">
+      <source file="..\..\..\can1.c" lastModified="19dd75a4c52">
          <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
          <include file="..\..\..\stm_lib\inc\stm32f10x_can.h"/>
          <include file="..\..\..\stm_lib\inc\stm32f10x_rcc.h"/>
@@ -85,7 +85,7 @@
       <source file="..\..\..\stm_lib\src\stm32f10x_rcc.c" lastModified="19dcc146570">
          <include file="..\..\..\stm_lib\inc\stm32f10x_rcc.h"/>
       </source>
-      <source file="..\..\..\main.c" lastModified="19dd2ccb579">
+      <source file="..\..\..\main.c" lastModified="19dd336b072">
          <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
          <include file="..\..\..\stm_lib\inc\stm32f10x_usart.h"/>
          <include file="..\..\..\stm_lib\inc\stm32f10x_rcc.h"/>
@@ -101,11 +101,11 @@
       </source>
       <source file="..\..\..\cmsis\core_cmFunc.h" lastModified="19dcc146d40">
       </source>
+      <source file="..\..\..\cmsis_boot\system_stm32f10x.h" lastModified="19dcc146570">
+      </source>
       <source file="..\..\..\stm_lib\src\stm32f10x_usart.c" lastModified="19dcc146570">
          <include file="..\..\..\stm_lib\inc\stm32f10x_usart.h"/>
          <include file="..\..\..\stm_lib\inc\stm32f10x_rcc.h"/>
-      </source>
-      <source file="..\..\..\cmsis_boot\system_stm32f10x.h" lastModified="19dcc146570">
       </source>
       <source file="..\..\..\cmsis_boot\system_stm32f10x.c" lastModified="19dcc146570">
          <include file="..\..\..\cmsis_boot\stm32f10x.h"/>

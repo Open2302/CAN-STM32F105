@@ -116,5 +116,6 @@ void CAN1_RX0_IRQHandler(void)
 		CAN1_Debug_Counter++;
 		CAN_Receive(CAN1, CAN_FIFO0, (CanRxMsg*)&CAN1_RxMessage);
 		CAN1_RxPending = 1;
+		CAN_ClearITPendingBit(CAN1, CAN_IT_FMP0);
 	}
 }
