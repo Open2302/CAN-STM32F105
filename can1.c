@@ -87,7 +87,7 @@ uint8_t CAN1_Send_Message(uint32_t id, uint8_t *data, uint8_t len)
     if (CAN1_TxBusy) return 0;  // The previous transmission is still going
 
     CanTxMsg TxMessage; /* Convert */
-    TxMessage.ExtId = (id >> 3) & 0x1FFFFFFF; // Extended ID
+    TxMessage.ExtId = id & 0x1FFFFFFF; // Extended ID
     TxMessage.IDE = CAN_Id_Extended;        // Extended ID
     TxMessage.RTR = CAN_RTR_Data; // Remote Transmission Request data
     TxMessage.DLC = len; // lenght that will be transmitted

@@ -24,6 +24,5 @@ void CAN1_Config(void);
 void CAN2_Config(void);
 uint8_t CAN1_Send_Message(uint32_t id, uint8_t *data, uint8_t len);
 uint8_t CAN2_Send_Message(uint32_t id, uint8_t *data, uint8_t len);
-void CAN_Process_Received(void);
 
 #endif /* __CAN_COMMON_H */
