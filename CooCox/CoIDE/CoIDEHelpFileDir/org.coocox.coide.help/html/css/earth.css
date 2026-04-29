@@ -1,0 +1,220 @@
+@charset "utf-8";
+
+body {
+  padding: 1em; 
+  max-width: 1000px;
+  font-family:Verdana, sans-serif;
+  height:100%;
+  margin:1px;
+  padding:0;
+  color:#000;
+  background:#fff
+}
+table {
+  margin-bottom: 1em; 
+  vertical-align: top;
+}
+td {
+  padding: 5px 5px 5px 0; 
+  vertical-align: top; 
+}
+th {
+  padding: 5px 5px 5px 0; 
+  vertical-align: top; 
+  font-weight: bold; 
+}
+ul, ol {
+  margin-left: 5px; 
+}
+li {
+  padding-bottom: 2px; 
+  list-style: square; 
+}
+a img {
+  text-decoration: none;
+}
+h2, h3, h4, h5, h6 {
+  font-size: 110%;
+  color: #3A9457; 
+  padding: 4px 0 4px 0; 
+  margin: 4px 0 4px 0; 
+}
+
+/* Site-wide generic classes */
+.hidden {
+  display: none; 
+}
+.center {
+  text-align: center; 
+}
+.border {
+  border: 1px solid #ccc; 
+}
+.border_green {
+  border: 1px solid #006633; 
+}
+.red {
+  color: #ff0000; 
+}
+.bg_green {
+  background-color: #deefe0; 
+}
+.bg_white {
+  background-color: #fff;
+}
+
+/* Site-wide headers */
+h1 { 
+  font-size: 130%;
+  color: #333; 
+  float: left; 
+  padding: 0px; 
+}
+h2 {
+width:95%;
+  font-size: 120%; 
+  border-bottom: 1px solid #ccc; 
+    font-family:Arial;
+}
+h4 {
+  border-bottom: 1px solid #ccc; 
+  font-weight: normal; 
+    font-family:Arial;
+}
+h5 {
+  font-weight: normal;
+  font-family:Arial; 
+}
+h6 {
+  font-weight: bold; 
+  color: #000; 
+  font-family:Arial;
+}
+.grayheader {
+  font-size: 100%; 
+  font-weight: normal; 
+  color:#BBB;
+}
+.grayheader2 {
+  font-size: 100%; 
+  font-weight: normal; 
+  color:#333;
+}
+.grayheader3 {
+  font-size: 100%; 
+  font-weight: normal; 
+  color:#D2D2D2;
+}
+/* Top header section: logo, header text, lang dropdwown */
+.header {
+  padding: 0 0 1em 0; 
+}
+
+/* Top header section: header text*/
+.header .title div {
+  float: left; 
+  width: 100%; 
+  margin: 1.2em 0 0.2em 0;
+  padding: 0 0 0.1em 0; 
+  border-bottom: 1px solid #999; 
+}
+
+/* Top header section: text on the right side of the header */
+.header .title div p {
+  float: right; 
+  padding: 0; 
+  vertical-align: bottom; 
+}
+
+/* Top header section: language dropdown */
+.langselect { 
+  float: right; 
+}
+.langselect select {
+  width: 160px;
+}
+
+/* Navigation: header used in the left nav */
+h5.nav {
+  margin-left: 18px; 
+  margin-top: 0.5em; 
+  padding-bottom: 0px;
+}
+
+/* Navigation: left nav links */
+ul.nav li {
+  list-style: none; 
+}
+
+/* Navigation: right nav on enterprise pages */
+ul.main li {
+  list-style: none; 
+}
+
+/* Navigation: currently selected item */
+a.selected {
+  text-decoration: none; 
+  font-weight: bold; 
+  color: #000; 
+}
+
+/* Navigation: previously selected item */
+a.selected: visited {
+  color: #000; 
+}
+
+/* Footer section: image, footer text */
+.footer_container {
+  margin-top: 2em; 
+  margin-bottom:2em;
+}
+
+/* Footer section for landing pages: image, footer text */
+.footer_container_landing {
+  margin-top: 2em;
+  text-align: center;
+}
+
+/* Footer section: footer text */
+.footer {
+  margin: 1em 0 0 0; 
+  padding: 0.8em 0 0 0; 
+  border-top: 1px solid #999; 
+  color: #666; 
+}
+
+
+
+
+
+
+
+/* Download page EULA */
+.eula {
+  border: 1px solid #999999;
+  background-color: #efefef; 
+  width: 70%;
+}
+.eula td {
+  padding: 3px;
+}
+.eula iframe {
+  background-color: #fff; 
+  border: 1px solid #ccc;
+  width: 95%;
+  margin: 2px;
+}
+
+
+
+/* Homepage product info (thumb, cost, description) */
+.features td { 
+  padding-top: 1em; 
+}
+.features img {
+  padding: 2px; 
+  margin: 2px 10px 0 0; 
+  float: left; 
+  border: 1px solid #ccc; 
+}
+

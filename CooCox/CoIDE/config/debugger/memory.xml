@@ -1,0 +1,4 @@
+<memory>
+ <flash id='0' start="0x00000000" size="0x00002000" />
+ <ram id='0' start="0x20000000" size="0x00001000" />
+</memory>

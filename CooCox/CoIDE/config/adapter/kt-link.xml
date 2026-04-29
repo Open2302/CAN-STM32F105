@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+<!-- Copyright 2011 coocox.org    This file is part of CooCox Softwares.-->
+<adapter>
+	<Name>KT-Link</Name>
+	<Vendor>KT</Vendor>
+	<Debugger>
+		<Set>FTDI</Set>
+		<Driver>IFTD2xx.dll</Driver>
+		<JTAG support="true">
+			<transaction name="open"  mask="0xFF3B" value="0x8328" /> 
+			<transaction name="reset" mask="0x7A00" value="0x0400" /> 
+			<transaction name="busy"  mask="0x0000" value="0x0000" />
+			<transaction name="close" mask="0xFF3B" value="0x8328" />
+		</JTAG>
+
+		<!-- under Dev. -->
+		<SWD support="false">
+			<transaction name="open"  mask="0x7C2B" value="0x0C28" /> 
+			<transaction name="send"  mask="0x7C2B" value="0x0C28" /> 
+			<transaction name="recv"  mask="0x7C2B" value="0x0C28" /> 			
+			<transaction name="reset" mask="0x7A00" value="0x0400" /> 
+			<transaction name="busy"  mask="0x0000" value="0x0000" />
+			<transaction name="close" mask="0x7CE0" value="0x7C60" />		
+		</SWD>
+	</Debugger>
+</adapter>

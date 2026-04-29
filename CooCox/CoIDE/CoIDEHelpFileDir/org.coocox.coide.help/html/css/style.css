@@ -1,0 +1,40 @@
+.showexample{width:95%; margin:10px auto;}
+.examtitle{height:30px; text-align:left; padding-top:10px; vertical-align:middle; border-bottom:#000000 solid 2px;border-top:#000000 solid 2px;border-left:none;border-right:none; font-size:150%; font-weight:bold; font-family: Arial, Helvetica, sans-serif; background-color:#f7f7f7; text-indent:8px;}
+.examauthor{width:97%; float:left;margin:5px  0px 10px 0px; padding:5px;border:#C0C060 solid 1px;  background-color:#FFFFF0;}
+.examcode{height:20px; text-align:left; padding-top:10px; vertical-align:middle;border-top:none;border-left:none;border-right:none; font-size:110%;  font-family: Arial, Helvetica, sans-serif; text-indent:8px; font-weight:bold; }
+.adarea{width:99%; float:left; line-height:20px;margin:5px  0px 0px 0px; padding:5px;  background-color:#fdf6f6; font-size:110%; color:red; }
+.adarea a{color:green; }
+.adarea span{color:black; }
+.red{ color:#FF0000}
+
+
+div.inblock { float:right; border:2px solid #caca55; width:24%; padding:5px ;background:#ececaf; height:inherit; margin-top:2%; margin-right:2%;}
+div.inblock div.domain a{ color:green;line-height:20px; font-size:110%; font-weight:bold; }
+div.inblock div.dename a{ color:#FF0000;line-height:20px; font-size:11px; font-weight:bold; }
+div.inblock div.domain span.dename{ color:#FF0000; font-weight:bold; font-size:11px; line-height:20px; }
+div.inblock div.deprice{ font-family:Arial; font-size:100%; font-weight:bold; line-height:20px; }
+div.inblock div.deNote{ padding-right: 5px; padding-top:3px;  height: auto; font-family:Arial; font-size:115%; font-style:italic; font-weight:bold; color:#0000FF;}
+div.shadows {
+    margin: px auto;
+    width: 80%;
+    font-size: 100%;
+    padding: 1px;
+    background: #fdf6f6;
+    border: 1px solid #ccc;
+   }
+   
+  
+div.shadows {
+    -moz-box-shadow: 2px 2px 10px #000;
+    -webkit-box-shadow: 2px 2px 10px #000;
+   }
+  
+div.shadows {
+     -ms-filter: "progid:DXImageTransform.Microsoft.Glow(color=#666666,strength=3) 
+progid:DXImageTransform.Microsoft.Shadow(color=#000000,direction=135,strength=6)";
+     filter: progid:DXImageTransform.Microsoft.Glow(color=#666666,strength=3) 
+progid:DXImageTransform.Microsoft.Shadow(color=#000000,direction=135,strength=6);
+    }
+
+
+

@@ -1,0 +1,143 @@
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD obj/FlashExecFnc.o
+LOAD obj/FlashAlgoFncs.o
+LOAD obj/FlashAlgoInfo.o
+START GROUP
+LOAD d:/sourcery2013/bin/../lib/gcc/arm-none-eabi/4.7.3/thumb2\libgcc.a
+LOAD d:/sourcery2013/bin/../lib/gcc/arm-none-eabi/4.7.3/../../../../arm-none-eabi/lib/thumb2\libc.a
+END GROUP
+
+.text           0x00000000      0x2ec
+                0x00000000                . = 0x0
+ *(.text .text.*)
+ .text          0x00000000       0x30 obj/FlashExecFnc.o
+                0x00000000                BreakHere
+                0x00000004                ExecFunction
+ .text          0x00000030      0x2bc obj/FlashAlgoFncs.o
+                0x00000030                GetSecNum
+                0x00000094                FlashInit
+                0x0000010c                FlashUnInit
+                0x00000134                FlashEraseChip
+                0x000001a0                FlashEraseSector
+                0x0000023c                FlashProgramPage
+ .text          0x000002ec        0x0 obj/FlashAlgoInfo.o
+
+.glue_7         0x000002ec        0x0
+ .glue_7        0x00000000        0x0 linker stubs
+
+.glue_7t        0x000002ec        0x0
+ .glue_7t       0x00000000        0x0 linker stubs
+
+.vfp11_veneer   0x000002ec        0x0
+ .vfp11_veneer  0x00000000        0x0 linker stubs
+
+.v4_bx          0x000002ec        0x0
+ .v4_bx         0x00000000        0x0 linker stubs
+
+.iplt           0x000002ec        0x0
+ .iplt          0x00000000        0x0 obj/FlashExecFnc.o
+
+.rodata
+ *(.rodata .rodata*)
+
+.data           0x000002ec        0x0
+ *(.data .data.*)
+ .data          0x000002ec        0x0 obj/FlashExecFnc.o
+ .data          0x000002ec        0x0 obj/FlashAlgoFncs.o
+ .data          0x000002ec        0x0 obj/FlashAlgoInfo.o
+
+.igot.plt       0x000002ec        0x0
+ .igot.plt      0x00000000        0x0 obj/FlashExecFnc.o
+
+.got
+ *(.got .got.*)
+
+.bss            0x000002ec        0x0
+ *(.bss .bss.*)
+ .bss           0x000002ec        0x0 obj/FlashExecFnc.o
+ .bss           0x000002ec        0x0 obj/FlashAlgoFncs.o
+ .bss           0x000002ec        0x0 obj/FlashAlgoInfo.o
+ *(COMMON)
+
+.driver_info    0x000002ec     0x10a8
+ *(.driver_info .driver_info.*)
+ .driver_info   0x000002ec     0x10a8 obj/FlashAlgoInfo.o
+                0x000002ec                FlashDriver
+OUTPUT(bin/STM32F4xx_2048.elf elf32-littlearm)
+
+.rel.dyn        0x00001394        0x0
+ .rel.iplt      0x00000000        0x0 obj/FlashExecFnc.o
+
+.debug_info     0x00000000      0x4dd
+ .debug_info    0x00000000       0xfc obj/FlashExecFnc.o
+ .debug_info    0x000000fc      0x26f obj/FlashAlgoFncs.o
+ .debug_info    0x0000036b      0x172 obj/FlashAlgoInfo.o
+
+.debug_abbrev   0x00000000      0x257
+ .debug_abbrev  0x00000000       0xa4 obj/FlashExecFnc.o
+ .debug_abbrev  0x000000a4      0x138 obj/FlashAlgoFncs.o
+ .debug_abbrev  0x000001dc       0x7b obj/FlashAlgoInfo.o
+
+.debug_loc      0x00000000      0x17c
+ .debug_loc     0x00000000       0x38 obj/FlashExecFnc.o
+ .debug_loc     0x00000038      0x144 obj/FlashAlgoFncs.o
+
+.debug_aranges  0x00000000       0x58
+ .debug_aranges
+                0x00000000       0x20 obj/FlashExecFnc.o
+ .debug_aranges
+                0x00000020       0x20 obj/FlashAlgoFncs.o
+ .debug_aranges
+                0x00000040       0x18 obj/FlashAlgoInfo.o
+
+.debug_line     0x00000000      0x156
+ .debug_line    0x00000000       0x57 obj/FlashExecFnc.o
+ .debug_line    0x00000057       0xa8 obj/FlashAlgoFncs.o
+ .debug_line    0x000000ff       0x57 obj/FlashAlgoInfo.o
+
+.debug_str      0x00000000      0x28b
+ .debug_str     0x00000000       0xed obj/FlashExecFnc.o
+                                 0xf2 (size before relaxing)
+ .debug_str     0x000000ed       0xd7 obj/FlashAlgoFncs.o
+                                0x154 (size before relaxing)
+ .debug_str     0x000001c4       0xc7 obj/FlashAlgoInfo.o
+                                0x157 (size before relaxing)
+
+.comment        0x00000000       0x30
+ .comment       0x00000000       0x30 obj/FlashExecFnc.o
+                                 0x31 (size before relaxing)
+ .comment       0x00000000       0x31 obj/FlashAlgoFncs.o
+ .comment       0x00000000       0x31 obj/FlashAlgoInfo.o
+
+.ARM.attributes
+                0x00000000       0x33
+ .ARM.attributes
+                0x00000000       0x33 obj/FlashExecFnc.o
+ .ARM.attributes
+                0x00000033       0x33 obj/FlashAlgoFncs.o
+ .ARM.attributes
+                0x00000066       0x33 obj/FlashAlgoInfo.o
+
+.debug_frame    0x00000000       0xf8
+ .debug_frame   0x00000000       0x40 obj/FlashExecFnc.o
+ .debug_frame   0x00000040       0xb8 obj/FlashAlgoFncs.o
+
+Cross Reference Table
+
+Symbol                                            File
+BreakHere                                         obj/FlashExecFnc.o
+ExecFunction                                      obj/FlashExecFnc.o
+FlashDriver                                       obj/FlashAlgoInfo.o
+FlashEraseChip                                    obj/FlashAlgoFncs.o
+FlashEraseSector                                  obj/FlashAlgoFncs.o
+FlashInit                                         obj/FlashAlgoFncs.o
+FlashProgramPage                                  obj/FlashAlgoFncs.o
+FlashUnInit                                       obj/FlashAlgoFncs.o
+GetSecNum                                         obj/FlashAlgoFncs.o

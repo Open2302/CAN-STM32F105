@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.coocox.codebugger.gdbjtag.launchConfigurationType">
+<stringAttribute key="LastModifyTimeOfElf" value="0"/>
+<stringAttribute key="MyDefinition.ElfFileAbsolutePathName" value="C:/CooCox/CoIDE/workspace/LedBlink/LedBlink/Debug/bin/LedBlink.elf"/>
+<stringAttribute key="org.coocox.codebugger.gdbjtag.core.adapter" value="ST-Link"/>
+<booleanAttribute key="org.coocox.codebugger.gdbjtag.core.autoDownload" value="true"/>
+<stringAttribute key="org.coocox.codebugger.gdbjtag.core.chipType" value="334"/>
+<stringAttribute key="org.coocox.codebugger.gdbjtag.core.clockDiv" value="1M"/>
+<stringAttribute key="org.coocox.codebugger.gdbjtag.core.debugMode" value="SWD"/>
+<stringAttribute key="org.coocox.codebugger.gdbjtag.core.defaultAlgorithm" value="C:/CooCox/CoIDE/flash/STM32F10x_CL_256.elf"/>
+<stringAttribute key="org.coocox.codebugger.gdbjtag.core.defaultIram0Size" value=""/>
+<stringAttribute key="org.coocox.codebugger.gdbjtag.core.defaultIram0Start" value=""/>
+<stringAttribute key="org.coocox.codebugger.gdbjtag.core.defaultIram1Size" value=""/>
+<stringAttribute key="org.coocox.codebugger.gdbjtag.core.defaultIram1Start" value=""/>
+<stringAttribute key="org.coocox.codebugger.gdbjtag.core.defaultIrom0Size" value="0x00040000"/>
+<stringAttribute key="org.coocox.codebugger.gdbjtag.core.defaultIrom0Start" value="0x08000000"/>
+<stringAttribute key="org.coocox.codebugger.gdbjtag.core.defaultIrom1Size" value="0x00010000"/>
+<stringAttribute key="org.coocox.codebugger.gdbjtag.core.defaultIrom1Start" value="0x20000000"/>
+<stringAttribute key="org.coocox.codebugger.gdbjtag.core.downloadFuction" value="Erase Effected"/>
+<stringAttribute key="org.coocox.codebugger.gdbjtag.core.gdbinitscript" value="monitor speed auto&#13;&#10;monitor flash device = STM32F105RC&#13;&#10;monitor flash breakpoints = 1&#13;&#10;monitor flash download = 1&#13;&#10;"/>
+<booleanAttribute key="org.coocox.codebugger.gdbjtag.core.ifCacheRom" value="true"/>
+<booleanAttribute key="org.coocox.codebugger.gdbjtag.core.ifSemihost" value="false"/>
+<stringAttribute key="org.coocox.codebugger.gdbjtag.core.ipAddress" value="127.0.0.1"/>
+<stringAttribute key="org.coocox.codebugger.gdbjtag.core.iram0Size" value=""/>
+<stringAttribute key="org.coocox.codebugger.gdbjtag.core.iram0Start" value=""/>
+<stringAttribute key="org.coocox.codebugger.gdbjtag.core.iram1Size" value=""/>
+<stringAttribute key="org.coocox.codebugger.gdbjtag.core.iram1Start" value=""/>
+<stringAttribute key="org.coocox.codebugger.gdbjtag.core.irom0Size" value="0x00040000"/>
+<stringAttribute key="org.coocox.codebugger.gdbjtag.core.irom0Start" value="0x08000000"/>
+<stringAttribute key="org.coocox.codebugger.gdbjtag.core.irom1Size" value="0x00010000"/>
+<stringAttribute key="org.coocox.codebugger.gdbjtag.core.irom1Start" value="0x20000000"/>
+<stringAttribute key="org.coocox.codebugger.gdbjtag.core.jflashscript" value=""/>
+<stringAttribute key="org.coocox.codebugger.gdbjtag.core.jflashtool" value=""/>
+<stringAttribute key="org.coocox.codebugger.gdbjtag.core.jlinkResetMode" value="Type 0: Normal"/>
+<stringAttribute key="org.coocox.codebugger.gdbjtag.core.jlinkgdbserver" value=""/>
+<stringAttribute key="org.coocox.codebugger.gdbjtag.core.jtagDevice" value="Generic"/>
+<stringAttribute key="org.coocox.codebugger.gdbjtag.core.manufacturer" value="9"/>
+<stringAttribute key="org.coocox.codebugger.gdbjtag.core.portNumber" value="2009"/>
+<stringAttribute key="org.coocox.codebugger.gdbjtag.core.programAddr" value="0x08000000"/>
+<stringAttribute key="org.coocox.codebugger.gdbjtag.core.resetMode" value="SYSRESETREQ"/>
+<intAttribute key="org.coocox.codebugger.gdbjtag.core.targetEndianess" value="0"/>
+<booleanAttribute key="org.coocox.codebugger.gdbjtag.core.useRemoteTarget" value="true"/>
+<stringAttribute key="org.coocox.codebugger.gdbjtag.core.userDefineGDBScript" value=""/>
+<booleanAttribute key="org.coocox.codebugger.gdbjtag.core.verify" value="true"/>
+<booleanAttribute key="org.coocox.codebugger.gdbjtag.coredebugInRam" value="false"/>
+<stringAttribute key="org.coocox.codebugger.gdbjtag.coredebugInRamInitCommands" value=""/>
+<booleanAttribute key="org.coocox.codebugger.gdbjtag.coreelfIsValid" value="true"/>
+<booleanAttribute key="org.coocox.codebugger.gdbjtag.corerunToMain" value="true"/>
+<stringAttribute key="org.coocox.codebugger.gdbjtag.corerunToMainScript" value="tbreak main&#10;continue&#10;"/>
+<stringAttribute key="org.eclipse.cdt.debug.mi.core.DEBUG_NAME" value="C:\Program Files (x86)\GNU Arm Embedded Toolchain\10 2020-q4-major\bin\arm-none-eabi-gdb"/>
+<stringAttribute key="org.eclipse.cdt.debug.mi.core.commandFactory" value="Standard (Windows)"/>
+<stringAttribute key="org.eclipse.cdt.debug.mi.core.protocol" value="mi"/>
+<booleanAttribute key="org.eclipse.cdt.debug.mi.core.verboseMode" value="false"/>
+<stringAttribute key="org.eclipse.cdt.launch.PROGRAM_NAME" value="C:/CooCox/CoIDE/workspace/LedBlink/LedBlink/Debug/bin/LedBlink.elf"/>
+<stringAttribute key="org.eclipse.cdt.launch.PROJECT_ATTR" value="LedBlink"/>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/LedBlink"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="4"/>
+</listAttribute>
+<stringAttribute key="projectRootDirectory" value="C:/CooCox/CoIDE/configuration/ProgramData/LedBlink"/>
+</launchConfiguration>

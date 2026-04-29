@@ -1,0 +1,670 @@
+
+bin/M051_32.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00000000 <BreakHere>:
+ */
+#if (defined (__GNUC__)) /*------------------ GNU Compiler ---------------------*/
+void BreakHere(int status) __attribute__( ( naked ) );
+void BreakHere(int status)
+{
+  __asm volatile ("BKPT #0 \n\t"  );
+   0:	be00      	bkpt	0x0000
+   2:	46c0      	nop			; (mov r8, r8)
+
+00000004 <ExecFunction>:
+ */
+int ExecFunction (FlashAlgoFnc algoFnc,
+				  unsigned long parameter0,
+				  unsigned long parameter1,
+				  unsigned long parameter2)
+{
+   4:	b580      	push	{r7, lr}
+   6:	b086      	sub	sp, #24
+   8:	af00      	add	r7, sp, #0
+   a:	60f8      	str	r0, [r7, #12]
+   c:	60b9      	str	r1, [r7, #8]
+   e:	607a      	str	r2, [r7, #4]
+  10:	603b      	str	r3, [r7, #0]
+	 int retval;
+	 retval = algoFnc(parameter0,parameter1,parameter2);
+  12:	68b8      	ldr	r0, [r7, #8]
+  14:	6879      	ldr	r1, [r7, #4]
+  16:	683a      	ldr	r2, [r7, #0]
+  18:	68fb      	ldr	r3, [r7, #12]
+  1a:	4798      	blx	r3
+  1c:	1c03      	adds	r3, r0, #0
+  1e:	617b      	str	r3, [r7, #20]
+	 BreakHere(retval);
+  20:	697b      	ldr	r3, [r7, #20]
+  22:	1c18      	adds	r0, r3, #0
+  24:	f7ff ffec 	bl	0 <BreakHere>
+	 
+	 return (retval);
+  28:	697b      	ldr	r3, [r7, #20]
+}
+  2a:	1c18      	adds	r0, r3, #0
+  2c:	46bd      	mov	sp, r7
+  2e:	b006      	add	sp, #24
+  30:	bd80      	pop	{r7, pc}
+  32:	46c0      	nop			; (mov r8, r8)
+
+00000034 <FlashInit>:
+ *******************************************************************************
+ */
+int FlashInit (unsigned long baseAddr,
+               unsigned long clk,
+               unsigned long operateFuc)
+{
+  34:	b580      	push	{r7, lr}
+  36:	b086      	sub	sp, #24
+  38:	af00      	add	r7, sp, #0
+  3a:	60f8      	str	r0, [r7, #12]
+  3c:	60b9      	str	r1, [r7, #8]
+  3e:	607a      	str	r2, [r7, #4]
+  
+  int delay = 100;
+  40:	2364      	movs	r3, #100	; 0x64
+  42:	617b      	str	r3, [r7, #20]
+
+  GCR->REGLOCK = 0x59;                                   // Unlock System Control Registers
+  44:	23a0      	movs	r3, #160	; 0xa0
+  46:	05da      	lsls	r2, r3, #23
+  48:	2380      	movs	r3, #128	; 0x80
+  4a:	005b      	lsls	r3, r3, #1
+  4c:	2159      	movs	r1, #89	; 0x59
+  4e:	50d1      	str	r1, [r2, r3]
+  GCR->REGLOCK = 0x16;                              
+  50:	23a0      	movs	r3, #160	; 0xa0
+  52:	05da      	lsls	r2, r3, #23
+  54:	2380      	movs	r3, #128	; 0x80
+  56:	005b      	lsls	r3, r3, #1
+  58:	2116      	movs	r1, #22
+  5a:	50d1      	str	r1, [r2, r3]
+  GCR->REGLOCK = 0x88;                              
+  5c:	23a0      	movs	r3, #160	; 0xa0
+  5e:	05da      	lsls	r2, r3, #23
+  60:	2380      	movs	r3, #128	; 0x80
+  62:	005b      	lsls	r3, r3, #1
+  64:	2188      	movs	r1, #136	; 0x88
+  66:	50d1      	str	r1, [r2, r3]
+
+  if (!(GCR->REGLOCK & 0x01))
+  68:	23a0      	movs	r3, #160	; 0xa0
+  6a:	05da      	lsls	r2, r3, #23
+  6c:	2380      	movs	r3, #128	; 0x80
+  6e:	005b      	lsls	r3, r3, #1
+  70:	58d2      	ldr	r2, [r2, r3]
+  72:	2301      	movs	r3, #1
+  74:	4013      	ands	r3, r2
+  76:	d101      	bne.n	7c <FlashInit+0x48>
+  {
+    return 1;                                           // Not able to unlock 
+  78:	2301      	movs	r3, #1
+  7a:	e02f      	b.n	dc <FlashInit+0xa8>
+  }
+
+  CLK->PWRCON |= (1 << 2);                              // enable internal OSC22MHz 
+  7c:	4b19      	ldr	r3, [pc, #100]	; (e4 <FlashInit+0xb0>)
+  7e:	4a19      	ldr	r2, [pc, #100]	; (e4 <FlashInit+0xb0>)
+  80:	6812      	ldr	r2, [r2, #0]
+  82:	2104      	movs	r1, #4
+  84:	430a      	orrs	r2, r1
+  86:	601a      	str	r2, [r3, #0]
+  while (delay--);
+  88:	46c0      	nop			; (mov r8, r8)
+  8a:	697b      	ldr	r3, [r7, #20]
+  8c:	1e5a      	subs	r2, r3, #1
+  8e:	4193      	sbcs	r3, r2
+  90:	b2db      	uxtb	r3, r3
+  92:	697a      	ldr	r2, [r7, #20]
+  94:	3a01      	subs	r2, #1
+  96:	617a      	str	r2, [r7, #20]
+  98:	2b00      	cmp	r3, #0
+  9a:	d1f6      	bne.n	8a <FlashInit+0x56>
+
+  CLK->AHBCLK |= CLK_ISP_EN;                            // enable the Flash ISP controller clock
+  9c:	4b11      	ldr	r3, [pc, #68]	; (e4 <FlashInit+0xb0>)
+  9e:	4a11      	ldr	r2, [pc, #68]	; (e4 <FlashInit+0xb0>)
+  a0:	6852      	ldr	r2, [r2, #4]
+  a2:	2140      	movs	r1, #64	; 0x40
+  a4:	430a      	orrs	r2, r1
+  a6:	605a      	str	r2, [r3, #4]
+  
+  FMC->ISPCON |= (FMC_ISPEN | FMC_LDUEN);               // Enable ISP function
+  a8:	4b0f      	ldr	r3, [pc, #60]	; (e8 <FlashInit+0xb4>)
+  aa:	4a0f      	ldr	r2, [pc, #60]	; (e8 <FlashInit+0xb4>)
+  ac:	6812      	ldr	r2, [r2, #0]
+  ae:	2121      	movs	r1, #33	; 0x21
+  b0:	430a      	orrs	r2, r1
+  b2:	601a      	str	r2, [r3, #0]
+  FMC->ICPCON |= (FMC_ICPEN);                           // Enable ICP functions ?
+  b4:	4b0c      	ldr	r3, [pc, #48]	; (e8 <FlashInit+0xb4>)
+  b6:	4a0c      	ldr	r2, [pc, #48]	; (e8 <FlashInit+0xb4>)
+  b8:	69d2      	ldr	r2, [r2, #28]
+  ba:	2101      	movs	r1, #1
+  bc:	430a      	orrs	r2, r1
+  be:	61da      	str	r2, [r3, #28]
+
+  if (!(FMC->ISPCON & FMC_ISPEN))
+  c0:	4b09      	ldr	r3, [pc, #36]	; (e8 <FlashInit+0xb4>)
+  c2:	681a      	ldr	r2, [r3, #0]
+  c4:	2301      	movs	r3, #1
+  c6:	4013      	ands	r3, r2
+  c8:	d101      	bne.n	ce <FlashInit+0x9a>
+  {
+    return 1;                                           // ISP not enabled 
+  ca:	2301      	movs	r3, #1
+  cc:	e006      	b.n	dc <FlashInit+0xa8>
+  }
+
+  FMC->ISPCON |= FMC_ISPFF;                             // Reset Error Flag
+  ce:	4b06      	ldr	r3, [pc, #24]	; (e8 <FlashInit+0xb4>)
+  d0:	4a05      	ldr	r2, [pc, #20]	; (e8 <FlashInit+0xb4>)
+  d2:	6812      	ldr	r2, [r2, #0]
+  d4:	2140      	movs	r1, #64	; 0x40
+  d6:	430a      	orrs	r2, r1
+  d8:	601a      	str	r2, [r3, #0]
+   
+                         
+  return 0;
+  da:	2300      	movs	r3, #0
+}
+  dc:	1c18      	adds	r0, r3, #0
+  de:	46bd      	mov	sp, r7
+  e0:	b006      	add	sp, #24
+  e2:	bd80      	pop	{r7, pc}
+  e4:	50000200 	.word	0x50000200
+  e8:	5000c000 	.word	0x5000c000
+
+000000ec <FlashUnInit>:
+ * @details    This function is called after flash programming/erase. 
+ * @note 
+ *******************************************************************************
+ */
+int FlashUnInit (unsigned long operateFuc)
+{
+  ec:	b580      	push	{r7, lr}
+  ee:	b082      	sub	sp, #8
+  f0:	af00      	add	r7, sp, #0
+  f2:	6078      	str	r0, [r7, #4]
+	return 0;
+  f4:	2300      	movs	r3, #0
+}
+  f6:	1c18      	adds	r0, r3, #0
+  f8:	46bd      	mov	sp, r7
+  fa:	b002      	add	sp, #8
+  fc:	bd80      	pop	{r7, pc}
+  fe:	46c0      	nop			; (mov r8, r8)
+
+00000100 <FlashEraseChip>:
+ * @details     
+ * @note 
+ *******************************************************************************
+ */
+int FlashEraseChip   (void)
+{
+ 100:	b580      	push	{r7, lr}
+ 102:	b084      	sub	sp, #16
+ 104:	af00      	add	r7, sp, #0
+	int i;
+	
+#ifdef M051_LDROM
+  offs = 0x00100000;
+#else
+  offs = 0x00000000;
+ 106:	2300      	movs	r3, #0
+ 108:	607b      	str	r3, [r7, #4]
+#endif
+
+	FMC->ISPCON |= FMC_ISPFF;                             // Reset Error Flags
+ 10a:	4b1d      	ldr	r3, [pc, #116]	; (180 <FlashEraseChip+0x80>)
+ 10c:	4a1c      	ldr	r2, [pc, #112]	; (180 <FlashEraseChip+0x80>)
+ 10e:	6812      	ldr	r2, [r2, #0]
+ 110:	2140      	movs	r1, #64	; 0x40
+ 112:	430a      	orrs	r2, r1
+ 114:	601a      	str	r2, [r3, #0]
+	adr = 0;
+ 116:	2300      	movs	r3, #0
+ 118:	60fb      	str	r3, [r7, #12]
+	for(i = 0; i < SECTOR_NUM; i++)
+ 11a:	2300      	movs	r3, #0
+ 11c:	60bb      	str	r3, [r7, #8]
+ 11e:	e027      	b.n	170 <FlashEraseChip+0x70>
+	{
+		
+		FMC->ISPCMD = FMC_PAGE_ERASE;                       // Prepare Command
+ 120:	4b17      	ldr	r3, [pc, #92]	; (180 <FlashEraseChip+0x80>)
+ 122:	2222      	movs	r2, #34	; 0x22
+ 124:	60da      	str	r2, [r3, #12]
+		FMC->ISPADR = ((adr + offs) & ~0x00000003);         // Prepare Address
+ 126:	4b16      	ldr	r3, [pc, #88]	; (180 <FlashEraseChip+0x80>)
+ 128:	68f9      	ldr	r1, [r7, #12]
+ 12a:	687a      	ldr	r2, [r7, #4]
+ 12c:	188a      	adds	r2, r1, r2
+ 12e:	2103      	movs	r1, #3
+ 130:	438a      	bics	r2, r1
+ 132:	605a      	str	r2, [r3, #4]
+		FMC->ISPTRG = FMC_ISPGO;                            // Exacute Command
+ 134:	4b12      	ldr	r3, [pc, #72]	; (180 <FlashEraseChip+0x80>)
+ 136:	2201      	movs	r2, #1
+ 138:	611a      	str	r2, [r3, #16]
+		
+		while (FMC->ISPTRG & FMC_ISPGO)                     // Wait until command is finished
+ 13a:	46c0      	nop			; (mov r8, r8)
+ 13c:	4b10      	ldr	r3, [pc, #64]	; (180 <FlashEraseChip+0x80>)
+ 13e:	691a      	ldr	r2, [r3, #16]
+ 140:	2301      	movs	r3, #1
+ 142:	4013      	ands	r3, r2
+ 144:	d1fa      	bne.n	13c <FlashEraseChip+0x3c>
+		{
+		/* reload Watdchdog */                              // Reload IWDG
+		}
+		
+		if (FMC->ISPCON &  FMC_ISPFF)                       // Check for Error
+ 146:	4b0e      	ldr	r3, [pc, #56]	; (180 <FlashEraseChip+0x80>)
+ 148:	681a      	ldr	r2, [r3, #0]
+ 14a:	2340      	movs	r3, #64	; 0x40
+ 14c:	4013      	ands	r3, r2
+ 14e:	d007      	beq.n	160 <FlashEraseChip+0x60>
+		{
+			FMC->ISPCON |= FMC_ISPFF;                       // Reset Error Flags
+ 150:	4b0b      	ldr	r3, [pc, #44]	; (180 <FlashEraseChip+0x80>)
+ 152:	4a0b      	ldr	r2, [pc, #44]	; (180 <FlashEraseChip+0x80>)
+ 154:	6812      	ldr	r2, [r2, #0]
+ 156:	2140      	movs	r1, #64	; 0x40
+ 158:	430a      	orrs	r2, r1
+ 15a:	601a      	str	r2, [r3, #0]
+			return 1;                                       // Failed
+ 15c:	2301      	movs	r3, #1
+ 15e:	e00b      	b.n	178 <FlashEraseChip+0x78>
+		}
+		
+		adr += 512;
+ 160:	68fb      	ldr	r3, [r7, #12]
+ 162:	2280      	movs	r2, #128	; 0x80
+ 164:	0092      	lsls	r2, r2, #2
+ 166:	189b      	adds	r3, r3, r2
+ 168:	60fb      	str	r3, [r7, #12]
+  offs = 0x00000000;
+#endif
+
+	FMC->ISPCON |= FMC_ISPFF;                             // Reset Error Flags
+	adr = 0;
+	for(i = 0; i < SECTOR_NUM; i++)
+ 16a:	68bb      	ldr	r3, [r7, #8]
+ 16c:	3301      	adds	r3, #1
+ 16e:	60bb      	str	r3, [r7, #8]
+ 170:	68bb      	ldr	r3, [r7, #8]
+ 172:	2b3f      	cmp	r3, #63	; 0x3f
+ 174:	ddd4      	ble.n	120 <FlashEraseChip+0x20>
+		
+		adr += 512;
+		
+	}
+	
+  return 0;
+ 176:	2300      	movs	r3, #0
+}
+ 178:	1c18      	adds	r0, r3, #0
+ 17a:	46bd      	mov	sp, r7
+ 17c:	b004      	add	sp, #16
+ 17e:	bd80      	pop	{r7, pc}
+ 180:	5000c000 	.word	0x5000c000
+
+00000184 <FlashEraseSector>:
+ * @details     
+ * @note 
+ *******************************************************************************
+ */
+int FlashEraseSector (unsigned long sectorAddr)
+{
+ 184:	b580      	push	{r7, lr}
+ 186:	b084      	sub	sp, #16
+ 188:	af00      	add	r7, sp, #0
+ 18a:	6078      	str	r0, [r7, #4]
+	unsigned long offs;                                   // Flash Offset
+
+#ifdef M051_LDROM
+	offs = 0x00100000;
+#else
+	offs = 0x00000000;
+ 18c:	2300      	movs	r3, #0
+ 18e:	60fb      	str	r3, [r7, #12]
+#endif
+	
+	FMC->ISPCON |= FMC_ISPFF;                             // Reset Error Flags
+ 190:	4b15      	ldr	r3, [pc, #84]	; (1e8 <FlashEraseSector+0x64>)
+ 192:	4a15      	ldr	r2, [pc, #84]	; (1e8 <FlashEraseSector+0x64>)
+ 194:	6812      	ldr	r2, [r2, #0]
+ 196:	2140      	movs	r1, #64	; 0x40
+ 198:	430a      	orrs	r2, r1
+ 19a:	601a      	str	r2, [r3, #0]
+	
+	FMC->ISPCMD = FMC_PAGE_ERASE;                         // Prepare Command
+ 19c:	4b12      	ldr	r3, [pc, #72]	; (1e8 <FlashEraseSector+0x64>)
+ 19e:	2222      	movs	r2, #34	; 0x22
+ 1a0:	60da      	str	r2, [r3, #12]
+	FMC->ISPADR = ((sectorAddr + offs) & ~0x00000003);    // Prepare Address
+ 1a2:	4b11      	ldr	r3, [pc, #68]	; (1e8 <FlashEraseSector+0x64>)
+ 1a4:	6879      	ldr	r1, [r7, #4]
+ 1a6:	68fa      	ldr	r2, [r7, #12]
+ 1a8:	188a      	adds	r2, r1, r2
+ 1aa:	2103      	movs	r1, #3
+ 1ac:	438a      	bics	r2, r1
+ 1ae:	605a      	str	r2, [r3, #4]
+	FMC->ISPTRG = FMC_ISPGO;                              // Exacute Command
+ 1b0:	4b0d      	ldr	r3, [pc, #52]	; (1e8 <FlashEraseSector+0x64>)
+ 1b2:	2201      	movs	r2, #1
+ 1b4:	611a      	str	r2, [r3, #16]
+	
+	while (FMC->ISPTRG & FMC_ISPGO)                       // Wait until command is finished
+ 1b6:	46c0      	nop			; (mov r8, r8)
+ 1b8:	4b0b      	ldr	r3, [pc, #44]	; (1e8 <FlashEraseSector+0x64>)
+ 1ba:	691a      	ldr	r2, [r3, #16]
+ 1bc:	2301      	movs	r3, #1
+ 1be:	4013      	ands	r3, r2
+ 1c0:	d1fa      	bne.n	1b8 <FlashEraseSector+0x34>
+	{
+	  /* reload Watdchdog */                              // Reload IWDG
+	}
+	
+	if (FMC->ISPCON &  FMC_ISPFF)                         // Check for Error
+ 1c2:	4b09      	ldr	r3, [pc, #36]	; (1e8 <FlashEraseSector+0x64>)
+ 1c4:	681a      	ldr	r2, [r3, #0]
+ 1c6:	2340      	movs	r3, #64	; 0x40
+ 1c8:	4013      	ands	r3, r2
+ 1ca:	d007      	beq.n	1dc <FlashEraseSector+0x58>
+	{    
+      FMC->ISPCON |= FMC_ISPFF;                           // Reset Error Flags
+ 1cc:	4b06      	ldr	r3, [pc, #24]	; (1e8 <FlashEraseSector+0x64>)
+ 1ce:	4a06      	ldr	r2, [pc, #24]	; (1e8 <FlashEraseSector+0x64>)
+ 1d0:	6812      	ldr	r2, [r2, #0]
+ 1d2:	2140      	movs	r1, #64	; 0x40
+ 1d4:	430a      	orrs	r2, r1
+ 1d6:	601a      	str	r2, [r3, #0]
+      return 1;                                           // Failed
+ 1d8:	2301      	movs	r3, #1
+ 1da:	e000      	b.n	1de <FlashEraseSector+0x5a>
+	}
+	
+  
+  return 0;
+ 1dc:	2300      	movs	r3, #0
+}
+ 1de:	1c18      	adds	r0, r3, #0
+ 1e0:	46bd      	mov	sp, r7
+ 1e2:	b004      	add	sp, #16
+ 1e4:	bd80      	pop	{r7, pc}
+ 1e6:	46c0      	nop			; (mov r8, r8)
+ 1e8:	5000c000 	.word	0x5000c000
+
+000001ec <FlashProgramPage>:
+ *******************************************************************************
+ */ 
+int FlashProgramPage (unsigned long pageAddr,     
+                      unsigned long size,
+                      unsigned char *buf)
+{
+ 1ec:	b580      	push	{r7, lr}
+ 1ee:	b088      	sub	sp, #32
+ 1f0:	af00      	add	r7, sp, #0
+ 1f2:	60f8      	str	r0, [r7, #12]
+ 1f4:	60b9      	str	r1, [r7, #8]
+ 1f6:	607a      	str	r2, [r7, #4]
+	unsigned long offs;                                 	// Flash Offset
+	unsigned long adr = pageAddr;
+ 1f8:	68fb      	ldr	r3, [r7, #12]
+ 1fa:	61fb      	str	r3, [r7, #28]
+	unsigned long sz = size;
+ 1fc:	68bb      	ldr	r3, [r7, #8]
+ 1fe:	61bb      	str	r3, [r7, #24]
+	
+#ifdef M051_LDROM
+	offs = 0x00100000;
+#else
+	offs = 0x00000000;
+ 200:	2300      	movs	r3, #0
+ 202:	617b      	str	r3, [r7, #20]
+#endif
+	
+	sz = (sz + 3) & ~3;                                 	// Adjust size for Words
+ 204:	69bb      	ldr	r3, [r7, #24]
+ 206:	3303      	adds	r3, #3
+ 208:	2203      	movs	r2, #3
+ 20a:	4393      	bics	r3, r2
+ 20c:	61bb      	str	r3, [r7, #24]
+	
+	FMC->ISPCON |= FMC_ISPFF;                           	// Reset Error Flags
+ 20e:	4b1e      	ldr	r3, [pc, #120]	; (288 <FlashProgramPage+0x9c>)
+ 210:	4a1d      	ldr	r2, [pc, #116]	; (288 <FlashProgramPage+0x9c>)
+ 212:	6812      	ldr	r2, [r2, #0]
+ 214:	2140      	movs	r1, #64	; 0x40
+ 216:	430a      	orrs	r2, r1
+ 218:	601a      	str	r2, [r3, #0]
+	
+	while (sz) 
+ 21a:	e02c      	b.n	276 <FlashProgramPage+0x8a>
+	{
+		FMC->ISPCMD = FMC_PROGRAM;                          // Prepare Command
+ 21c:	4b1a      	ldr	r3, [pc, #104]	; (288 <FlashProgramPage+0x9c>)
+ 21e:	2221      	movs	r2, #33	; 0x21
+ 220:	60da      	str	r2, [r3, #12]
+		FMC->ISPADR = ((adr + offs) & ~0x00000003);         // Prepare Address
+ 222:	4b19      	ldr	r3, [pc, #100]	; (288 <FlashProgramPage+0x9c>)
+ 224:	69f9      	ldr	r1, [r7, #28]
+ 226:	697a      	ldr	r2, [r7, #20]
+ 228:	188a      	adds	r2, r1, r2
+ 22a:	2103      	movs	r1, #3
+ 22c:	438a      	bics	r2, r1
+ 22e:	605a      	str	r2, [r3, #4]
+		FMC->ISPDAT	= *((u32 *)buf);                        // Prepare Data
+ 230:	4b15      	ldr	r3, [pc, #84]	; (288 <FlashProgramPage+0x9c>)
+ 232:	687a      	ldr	r2, [r7, #4]
+ 234:	6812      	ldr	r2, [r2, #0]
+ 236:	609a      	str	r2, [r3, #8]
+		FMC->ISPTRG = FMC_ISPGO;                            // Exacute Command
+ 238:	4b13      	ldr	r3, [pc, #76]	; (288 <FlashProgramPage+0x9c>)
+ 23a:	2201      	movs	r2, #1
+ 23c:	611a      	str	r2, [r3, #16]
+		
+		while (FMC->ISPTRG & FMC_ISPGO) 
+ 23e:	46c0      	nop			; (mov r8, r8)
+ 240:	4b11      	ldr	r3, [pc, #68]	; (288 <FlashProgramPage+0x9c>)
+ 242:	691a      	ldr	r2, [r3, #16]
+ 244:	2301      	movs	r3, #1
+ 246:	4013      	ands	r3, r2
+ 248:	d1fa      	bne.n	240 <FlashProgramPage+0x54>
+		{                   																// Wait until command is finished
+		  /* reload Watdchdog */                            // Reload IWDG
+		}
+		
+		if (FMC->ISPCON &  FMC_ISPFF) 
+ 24a:	4b0f      	ldr	r3, [pc, #60]	; (288 <FlashProgramPage+0x9c>)
+ 24c:	681a      	ldr	r2, [r3, #0]
+ 24e:	2340      	movs	r3, #64	; 0x40
+ 250:	4013      	ands	r3, r2
+ 252:	d007      	beq.n	264 <FlashProgramPage+0x78>
+	    {                     															// Check for Error
+		    FMC->ISPCON |= FMC_ISPFF;                       // Reset Error Flags
+ 254:	4b0c      	ldr	r3, [pc, #48]	; (288 <FlashProgramPage+0x9c>)
+ 256:	4a0c      	ldr	r2, [pc, #48]	; (288 <FlashProgramPage+0x9c>)
+ 258:	6812      	ldr	r2, [r2, #0]
+ 25a:	2140      	movs	r1, #64	; 0x40
+ 25c:	430a      	orrs	r2, r1
+ 25e:	601a      	str	r2, [r3, #0]
+		    return 1;                                       // Failed
+ 260:	2301      	movs	r3, #1
+ 262:	e00c      	b.n	27e <FlashProgramPage+0x92>
+		}
+		
+		adr += 4;                                           // Go to next Word
+ 264:	69fb      	ldr	r3, [r7, #28]
+ 266:	3304      	adds	r3, #4
+ 268:	61fb      	str	r3, [r7, #28]
+		buf += 4;
+ 26a:	687b      	ldr	r3, [r7, #4]
+ 26c:	3304      	adds	r3, #4
+ 26e:	607b      	str	r3, [r7, #4]
+		sz  -= 4;
+ 270:	69bb      	ldr	r3, [r7, #24]
+ 272:	3b04      	subs	r3, #4
+ 274:	61bb      	str	r3, [r7, #24]
+	
+	sz = (sz + 3) & ~3;                                 	// Adjust size for Words
+	
+	FMC->ISPCON |= FMC_ISPFF;                           	// Reset Error Flags
+	
+	while (sz) 
+ 276:	69bb      	ldr	r3, [r7, #24]
+ 278:	2b00      	cmp	r3, #0
+ 27a:	d1cf      	bne.n	21c <FlashProgramPage+0x30>
+		buf += 4;
+		sz  -= 4;
+	}
+
+  
+  return 0;
+ 27c:	2300      	movs	r3, #0
+}
+ 27e:	1c18      	adds	r0, r3, #0
+ 280:	46bd      	mov	sp, r7
+ 282:	b008      	add	sp, #32
+ 284:	bd80      	pop	{r7, pc}
+ 286:	46c0      	nop			; (mov r8, r8)
+ 288:	5000c000 	.word	0x5000c000
+
+0000028c <FlashVerify>:
+ *    Return Value:   (adr+size) - OK, Failed Address
+ */
+
+int
+FlashVerify(unsigned long verifyAddr, unsigned long size, unsigned char *buf)
+{
+ 28c:	b580      	push	{r7, lr}
+ 28e:	b084      	sub	sp, #16
+ 290:	af00      	add	r7, sp, #0
+ 292:	60f8      	str	r0, [r7, #12]
+ 294:	60b9      	str	r1, [r7, #8]
+ 296:	607a      	str	r2, [r7, #4]
+	size = (size + 3) & ~3; // Adjust size for Words
+ 298:	68bb      	ldr	r3, [r7, #8]
+ 29a:	3303      	adds	r3, #3
+ 29c:	2203      	movs	r2, #3
+ 29e:	4393      	bics	r3, r2
+ 2a0:	60bb      	str	r3, [r7, #8]
+
+	while (FMC->ISPTRG & FMC_ISPGO); // Wait until command is finished
+ 2a2:	46c0      	nop			; (mov r8, r8)
+ 2a4:	4b22      	ldr	r3, [pc, #136]	; (330 <FlashVerify+0xa4>)
+ 2a6:	691a      	ldr	r2, [r3, #16]
+ 2a8:	2301      	movs	r3, #1
+ 2aa:	4013      	ands	r3, r2
+ 2ac:	d1fa      	bne.n	2a4 <FlashVerify+0x18>
+
+	FMC->ISPCON |= FMC_ISPFF; // Reset Error Flags
+ 2ae:	4b20      	ldr	r3, [pc, #128]	; (330 <FlashVerify+0xa4>)
+ 2b0:	4a1f      	ldr	r2, [pc, #124]	; (330 <FlashVerify+0xa4>)
+ 2b2:	6812      	ldr	r2, [r2, #0]
+ 2b4:	2140      	movs	r1, #64	; 0x40
+ 2b6:	430a      	orrs	r2, r1
+ 2b8:	601a      	str	r2, [r3, #0]
+
+	while (size) {
+ 2ba:	e031      	b.n	320 <FlashVerify+0x94>
+		FMC->ISPCMD = FMC_READ; // set command
+ 2bc:	4b1c      	ldr	r3, [pc, #112]	; (330 <FlashVerify+0xa4>)
+ 2be:	2200      	movs	r2, #0
+ 2c0:	60da      	str	r2, [r3, #12]
+		FMC->ISPADR = (verifyAddr & ~0x00000003); // Prepare Address
+ 2c2:	4b1b      	ldr	r3, [pc, #108]	; (330 <FlashVerify+0xa4>)
+ 2c4:	68fa      	ldr	r2, [r7, #12]
+ 2c6:	2103      	movs	r1, #3
+ 2c8:	438a      	bics	r2, r1
+ 2ca:	605a      	str	r2, [r3, #4]
+		FMC->ISPDAT = 0x00000000; // Prepare Data
+ 2cc:	4b18      	ldr	r3, [pc, #96]	; (330 <FlashVerify+0xa4>)
+ 2ce:	2200      	movs	r2, #0
+ 2d0:	609a      	str	r2, [r3, #8]
+		FMC->ISPTRG = FMC_ISPGO; // Exacute Command
+ 2d2:	4b17      	ldr	r3, [pc, #92]	; (330 <FlashVerify+0xa4>)
+ 2d4:	2201      	movs	r2, #1
+ 2d6:	611a      	str	r2, [r3, #16]
+
+
+		while (FMC->ISPTRG & FMC_ISPGO) { // Wait until command is finished
+ 2d8:	46c0      	nop			; (mov r8, r8)
+ 2da:	4b15      	ldr	r3, [pc, #84]	; (330 <FlashVerify+0xa4>)
+ 2dc:	691a      	ldr	r2, [r3, #16]
+ 2de:	2301      	movs	r3, #1
+ 2e0:	4013      	ands	r3, r2
+ 2e2:	d1fa      	bne.n	2da <FlashVerify+0x4e>
+			/* reload Watdchdog */// Reload IWDG
+		}
+
+		if (FMC->ISPCON & FMC_ISPFF) { // Check for Error
+ 2e4:	4b12      	ldr	r3, [pc, #72]	; (330 <FlashVerify+0xa4>)
+ 2e6:	681a      	ldr	r2, [r3, #0]
+ 2e8:	2340      	movs	r3, #64	; 0x40
+ 2ea:	4013      	ands	r3, r2
+ 2ec:	d007      	beq.n	2fe <FlashVerify+0x72>
+			FMC->ISPCON |= FMC_ISPFF;  // Reset Error Flags
+ 2ee:	4b10      	ldr	r3, [pc, #64]	; (330 <FlashVerify+0xa4>)
+ 2f0:	4a0f      	ldr	r2, [pc, #60]	; (330 <FlashVerify+0xa4>)
+ 2f2:	6812      	ldr	r2, [r2, #0]
+ 2f4:	2140      	movs	r1, #64	; 0x40
+ 2f6:	430a      	orrs	r2, r1
+ 2f8:	601a      	str	r2, [r3, #0]
+			return (1); // Failed
+ 2fa:	2301      	movs	r3, #1
+ 2fc:	e014      	b.n	328 <FlashVerify+0x9c>
+		}
+
+		if (FMC->ISPDAT != *((u32 *) buf)) { // Compare Data
+ 2fe:	4b0c      	ldr	r3, [pc, #48]	; (330 <FlashVerify+0xa4>)
+ 300:	689a      	ldr	r2, [r3, #8]
+ 302:	687b      	ldr	r3, [r7, #4]
+ 304:	681b      	ldr	r3, [r3, #0]
+ 306:	429a      	cmp	r2, r3
+ 308:	d001      	beq.n	30e <FlashVerify+0x82>
+			return (1); // Failed
+ 30a:	2301      	movs	r3, #1
+ 30c:	e00c      	b.n	328 <FlashVerify+0x9c>
+		}
+
+		verifyAddr += 4; // Go to next Word
+ 30e:	68fb      	ldr	r3, [r7, #12]
+ 310:	3304      	adds	r3, #4
+ 312:	60fb      	str	r3, [r7, #12]
+		buf += 4;
+ 314:	687b      	ldr	r3, [r7, #4]
+ 316:	3304      	adds	r3, #4
+ 318:	607b      	str	r3, [r7, #4]
+		size -= 4;
+ 31a:	68bb      	ldr	r3, [r7, #8]
+ 31c:	3b04      	subs	r3, #4
+ 31e:	60bb      	str	r3, [r7, #8]
+
+	while (FMC->ISPTRG & FMC_ISPGO); // Wait until command is finished
+
+	FMC->ISPCON |= FMC_ISPFF; // Reset Error Flags
+
+	while (size) {
+ 320:	68bb      	ldr	r3, [r7, #8]
+ 322:	2b00      	cmp	r3, #0
+ 324:	d1ca      	bne.n	2bc <FlashVerify+0x30>
+		verifyAddr += 4; // Go to next Word
+		buf += 4;
+		size -= 4;
+	}
+
+	return (0); // Done
+ 326:	2300      	movs	r3, #0
+}
+ 328:	1c18      	adds	r0, r3, #0
+ 32a:	46bd      	mov	sp, r7
+ 32c:	b004      	add	sp, #16
+ 32e:	bd80      	pop	{r7, pc}
+ 330:	5000c000 	.word	0x5000c000

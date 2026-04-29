@@ -1,0 +1,44 @@
+@charset "utf-8";
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 5px; font-family:Verdana, Arial;
+}
+body,td,th {
+	color: #000;
+}
+.from{ font-size:12px; color:#F4D020;}
+.topbg {
+	width:1260px;
+	background-image: url(../images/bg.png);
+	height:789px;
+	background-repeat: no-repeat;  
+}
+.whitebox{margin-top:5px; border:solid 1px #FFFFFF; height:127px; width:95%; color:#FFFFFF; font-size:14px;}
+.topbg2 {
+	width:1024px;
+	background-image: url(../images/bgs.png);
+	height:828px;
+	background-repeat: no-repeat; 
+}
+.whitebox2{margin-top:5px; border:solid 1px #FFFFFF; height:148px; margin-left:0px; width:97%; color:#FFFFFF; font-size:12px;}
+
+    div{border:solid 1px #fff;overflow:hidden;margin:0 auto;}
+    p{padding:0;margin:0;}
+    p span{display:inline-block;margin:10px; font-size:14px;}
+    p b{margin:1em .5em;display:inline-block;font-size:120%;color:red;}
+    .tips{border:solid 1px red;background:#FFC;padding:.5em;}
+blockquote {
+ width: 99.5%;
+ margin: 0px;
+ quotes: "\201C" "\201D" ; margin-top:0px; 
+ 
+ }
+ #quote{  color:#fff; font-family:Verdana, Arial;width:95%; text-align:justify; padding: 5px; padding-left:10px; margin-top:5px; font-size:13px;
+}
+#quote a,a:visited{ text-decoration:none; cursor:hand; color:#fff;}
+#quote a:hover{ text-decoration: underline; cursor:hand; color:#fff;}
+ #author{ text-indent:50px;font-size:100%; font-weight:bold; color:#000}
+ blockquote:before { content: open-quote; font-weight: bold; }
+ blockquote:after { content: close-quote; font-weight: bold; }

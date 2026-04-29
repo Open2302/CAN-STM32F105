@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><!-- InstanceBegin template="/Templates/CoIDEguide.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<!-- InstanceBeginEditable name="top" -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> <link href="../css/page.css" rel="stylesheet" type="text/css" /><!-- InstanceEndEditable -->
+</head> 
+<body >
+<div class="main">
+     <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        
+      <td  valign="top">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+                <tr>
+                    <td width="76%" valign="top" style="padding-left:0.5em; padding-top:0.5em;">
+					  <!-- InstanceBeginEditable name="pagecenter" -->
+				    <h2 class="fontsize140">Debug View</h2>
+					<ol style="font-size:10pt;margin:0px 0 0px 25px;padding:0px;">
+      <li style="padding:2px 0 2px 0;margin:0; font-family:Verdana, sans-serif;">The Debug view shows the target debugging information in a tree hierarchy.</li>
+      <li style="padding:2px 0 2px 0;margin:0; font-family:Verdana, sans-serif;">The number beside the thread label is a reference counter, not a thread identification number.</li>
+	   <li style="padding:2px 0 2px 0;margin:0; font-family:Verdana, sans-serif;">The CDT displays stack frames as child elements. It displays the reason for the suspension beside the thread, (such as end of stepping range, breakpoint hit, and signal received). When a program exits, the exit code is displayed.</li>
+      </ol>
+	  	  <table width="100%" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td ><img src="../images/Debug/Debug_View.gif" /></td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+        </tr>
+      </table>
+
+	  <p><strong>Debug view context menu commands</strong></p>
+<p>The Debug view  commands include: </p>
+       <table width="93%" border="0" cellpadding="0" cellspacing="1" bgcolor="#dddddd">
+         <tr>
+           <td width="13%" height="30" align="center" bgcolor="#f7f7f7"><strong>Icons</strong> </td>
+           <td width="31%" height="30" align="center" bgcolor="#f7f7f7"><strong>Name</strong> </td>
+           <td width="56%" height="30" align="center" bgcolor="#f7f7f7"><strong>Description</strong> </td>
+         </tr>
+         <tr>
+           <td height="38" align="center" bgcolor="#FFFFFF"><img width="21" height="20" src="../images/Debug/CoDebugger_Debug_view_clip_image023.jpg" alt="Remote all Terminated icon" /></td>
+           <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Remove All Terminated </td>
+           <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Clears all terminated processes in Debug view</td>
+         </tr>
+         <tr>
+           <td height="38" align="center" bgcolor="#FFFFFF"><img width="18" height="17" src="../images/Debug/CoDebugger_Debug_view_clip_image004.jpg" alt="Drop to Frame icon" /></td>
+           <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Drop To Frame </td>
+           <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Select the Drop to Frame command to re-enter the selected stack    frame in the Debug view.</td>
+         </tr>
+         <tr>
+           <td height="38" align="center" bgcolor="#FFFFFF"><img width="18" height="17" src="../images/Debug/CoDebugger_Debug_view_clip_image013.jpg" alt="Use Step Filters icon" /></td>
+           <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Use Step Filters </td>
+           <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Toggles step filters on/off. When on, all step functions apply    step filters.</td>
+         </tr>
+         <tr>
+           <td height="38" align="center" bgcolor="#FFFFFF"><img width="20" height="19" src="../images/Debug/CoDebugger_Debug_view_clip_image002_0000.jpg" alt="Copy Stack icon" /></td> 
+           <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Copy Stack  </td> 
+           <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Copies the selected stack of suspended threads as well as the    state of the running threads to the clipboard. </td>
+         </tr>
+         <tr>
+           <td height="38" align="center" bgcolor="#FFFFFF">&nbsp;</td> 
+           <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Find... </td> 
+           <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Opens the debug view element searching dialog.</td>
+         </tr>
+         <tr>
+           <td height="38" align="center" bgcolor="#FFFFFF"><img width="16" height="16" src="../images/Debug/CoDebugger_Debug_view_clip_image007_0000.gif" /></td>
+           <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Step Into  </td> 
+           <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Select to execute the current line, including any routines, and    proceed to the next statement.</td>
+         </tr>
+         <tr>
+           <td height="38" align="center" bgcolor="#FFFFFF"><img width="16" height="16" src="../images/Debug/CoDebugger_Debug_view_clip_image008_0000.gif" /></td>
+           <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Step Over  </td> 
+           <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Select to execute the current line, following execution inside a    routine.</td>
+         </tr>
+         <tr>
+           <td height="38" align="center" bgcolor="#FFFFFF"><img width="16" height="16" src="../images/Debug/CoDebugger_Debug_view_clip_image009.gif" /></td>
+           <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Step Out  </td> 
+           <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Select to continue execution to the end of the current routine,    then follow execution to the routine’s caller.</td>
+         </tr>
+         <tr>
+           <td height="38" align="center" bgcolor="#FFFFFF"><img width="19" height="14" src="../images/Debug/CoDebugger_Debug_view_clip_image011.jpg" alt="Instruction Stepping Mode icon" /></td>
+           <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Instruction Stepping Mode  </td>
+           <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Activate to enable instruction stepping mode to examine a    program as it steps into disassembled code. </td>
+         </tr>
+         <tr>
+           <td height="38" align="center" bgcolor="#FFFFFF"><img width="16" height="16" src="../images/Debug/CoDebugger_Debug_view_clip_image016.gif" /></td>
+           <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Resume </td>
+           <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Select the Resume command to resume execution of the currently    suspended debug target.</td>
+         </tr>
+         <tr>
+           <td height="38" align="center" bgcolor="#FFFFFF"><img width="16" height="16" src="../images/Debug/CoDebugger_Debug_view_clip_image017.gif" /></td>
+           <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Suspend </td>
+           <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Select the Suspend command to halt execution of the currently    selected thread in a debug target.</td>
+         </tr>
+         <tr>
+           <td height="38" align="center" bgcolor="#FFFFFF"><img width="16" height="16" src="../images/Debug/CoDebugger_Debug_view_clip_image018.gif" alt="*" /></td>
+           <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Terminate  </td>
+           <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Ends the selected debug session and/or process. The impact of    this action depends on the type of the item selected in the Debug view.</td>
+         </tr>
+         <tr>
+           <td height="38" align="center" bgcolor="#FFFFFF"><img width="19" height="17" src="../images/Debug/CoDebugger_Debug_view_clip_image020.jpg" alt="Terminate and Relaunch icon" /></td> 
+           <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Terminate and Relaunch  </td> 
+           <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Select the Terminate and Relaunch command to terminate the    selected debug target and then relaunch it.</td>
+         </tr>
+         <tr>
+           <td height="38" align="center" bgcolor="#FFFFFF"><img width="21" height="19" src="../images/Debug/CoDebugger_Debug_view_clip_image025.jpg" alt="Relaunch icon" /></td> 
+           <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Relaunch </td> 
+           <td height="38" bgcolor="#FFFFFF" style="padding:3px;">This command relaunches the selected debug target. </td>
+         </tr>
+         <tr>
+           <td height="38" align="center" bgcolor="#FFFFFF">&nbsp;</td> 
+           <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Edit... </td> 
+           <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Opens the launch configuration dialog, allowing you to make    changes. </td>
+         </tr>
+         <tr>
+           <td height="38" align="center" bgcolor="#FFFFFF"><img width="20" height="18" src="../images/Debug/CoDebugger_Debug_view_clip_image027.jpg" alt="Edit Source Lookup icon" /></td> 
+           <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Edit Source Lookup...  </td>
+           <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Opens the source lookup dialog, allowing you to make changes. </td>
+         </tr>
+         <tr>
+           <td height="38" align="center" bgcolor="#FFFFFF">&nbsp;</td> 
+           <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Lookup Source  </td> 
+           <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Select to force a source lookup to take place. </td>
+         </tr>
+         <tr>
+           <td height="38" align="center" bgcolor="#FFFFFF"><img width="19" height="17" src="../images/Debug/CoDebugger_Debug_view_clip_image029.jpg" alt="Terminate and Remove icon" /></td> 
+           <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Terminate and Remove  </td> 
+           <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Terminates the selected debug target and removes it from the    view. </td>
+         </tr>
+         <tr>
+           <td height="38" align="center" bgcolor="#FFFFFF"><img width="19" height="18" src="../images/Debug/CoDebugger_Debug_view_clip_image031.jpg" alt="Terminate all icon" /></td> 
+           <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Terminate/Disconnect All  </td> 
+           <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Terminates all active launches in the view. </td>
+         </tr>
+         <tr>
+           <td height="38" align="center" bgcolor="#FFFFFF">&nbsp;</td> 
+           <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Properties </td> 
+           <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Opens the <strong>Properties for</strong> window showing the process    properties. </td>
+         </tr>
+       </table> 
+				  <!-- InstanceEndEditable -->        </td>
+                    
+              </tr>
+          </table>
+        </td>
+      </tr>
+     </table>
+ 
+</div></body>
+<!-- InstanceEnd --></html>

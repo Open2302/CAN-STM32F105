@@ -1,0 +1,822 @@
+
+bin/LPC17xx_32.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00000000 <BreakHere>:
+ */
+#if (defined (__GNUC__)) /*------------------ GNU Compiler ---------------------*/
+void BreakHere(int status) __attribute__( ( naked ) );
+void BreakHere(int status)
+{
+  __asm volatile ("BKPT #0 \n\t"  );
+   0:	be00      	bkpt	0x0000
+   2:	bf00      	nop
+
+00000004 <ExecFunction>:
+ */
+int ExecFunction (FlashAlgoFnc algoFnc,
+				  unsigned long parameter0,
+				  unsigned long parameter1,
+				  unsigned long parameter2)
+{
+   4:	b580      	push	{r7, lr}
+   6:	b086      	sub	sp, #24
+   8:	af00      	add	r7, sp, #0
+   a:	60f8      	str	r0, [r7, #12]
+   c:	60b9      	str	r1, [r7, #8]
+   e:	607a      	str	r2, [r7, #4]
+  10:	603b      	str	r3, [r7, #0]
+	 int retval;
+	 retval = algoFnc(parameter0,parameter1,parameter2);
+  12:	68fb      	ldr	r3, [r7, #12]
+  14:	68b8      	ldr	r0, [r7, #8]
+  16:	6879      	ldr	r1, [r7, #4]
+  18:	683a      	ldr	r2, [r7, #0]
+  1a:	4798      	blx	r3
+  1c:	6178      	str	r0, [r7, #20]
+	 BreakHere(retval);
+  1e:	6978      	ldr	r0, [r7, #20]
+  20:	f7ff ffee 	bl	0 <BreakHere>
+	 
+	 return (retval);
+  24:	697b      	ldr	r3, [r7, #20]
+}
+  26:	4618      	mov	r0, r3
+  28:	f107 0718 	add.w	r7, r7, #24
+  2c:	46bd      	mov	sp, r7
+  2e:	bd80      	pop	{r7, pc}
+
+00000030 <GetSecNum>:
+/* IAP Call */
+typedef void (*IAP_Entry) (unsigned long *cmd, unsigned long *stat);
+#define IAP_Call ((IAP_Entry) 0x1FFF1FF1)
+
+
+unsigned long GetSecNum (unsigned long adr) {
+  30:	b480      	push	{r7}
+  32:	b085      	sub	sp, #20
+  34:	af00      	add	r7, sp, #0
+  36:	6078      	str	r0, [r7, #4]
+  unsigned long n;
+
+  n = adr >> 12;                               //  4kB Sector
+  38:	687b      	ldr	r3, [r7, #4]
+  3a:	ea4f 3313 	mov.w	r3, r3, lsr #12
+  3e:	60fb      	str	r3, [r7, #12]
+  if (n >= 0x10) {
+  40:	68fb      	ldr	r3, [r7, #12]
+  42:	2b0f      	cmp	r3, #15
+  44:	d905      	bls.n	52 <GetSecNum+0x22>
+    n = 0x0E + (n >> 3);                       // 32kB Sector
+  46:	68fb      	ldr	r3, [r7, #12]
+  48:	ea4f 03d3 	mov.w	r3, r3, lsr #3
+  4c:	f103 030e 	add.w	r3, r3, #14
+  50:	60fb      	str	r3, [r7, #12]
+  }
+
+  return (n);                                  // Sector Number
+  52:	68fb      	ldr	r3, [r7, #12]
+}
+  54:	4618      	mov	r0, r3
+  56:	f107 0714 	add.w	r7, r7, #20
+  5a:	46bd      	mov	sp, r7
+  5c:	bc80      	pop	{r7}
+  5e:	4770      	bx	lr
+
+00000060 <FlashInit>:
+ * @details    This function is called before flash programming/erase. 
+ * @note 
+ *******************************************************************************
+ */
+int FlashInit (unsigned long baseAddr, unsigned long clk, unsigned long operateFuc)
+{
+  60:	b480      	push	{r7}
+  62:	b085      	sub	sp, #20
+  64:	af00      	add	r7, sp, #0
+  66:	60f8      	str	r0, [r7, #12]
+  68:	60b9      	str	r1, [r7, #8]
+  6a:	607a      	str	r2, [r7, #4]
+
+  CCLK     = 4000;                             // 4MHz Internal RC Oscillator
+  6c:	4b11      	ldr	r3, [pc, #68]	; (b4 <FlashInit+0x54>)
+  6e:	f859 3003 	ldr.w	r3, [r9, r3]
+  72:	f44f 627a 	mov.w	r2, #4000	; 0xfa0
+  76:	601a      	str	r2, [r3, #0]
+
+  PLL0CON  = 0x00;                             // Disable PLL (use Oscillator)
+  78:	4b0b      	ldr	r3, [pc, #44]	; (a8 <FlashInit+0x48>)
+  7a:	f04f 0200 	mov.w	r2, #0
+  7e:	701a      	strb	r2, [r3, #0]
+  PLL0FEED = 0xAA;                             // Feed Sequence Part #1
+  80:	4b0a      	ldr	r3, [pc, #40]	; (ac <FlashInit+0x4c>)
+  82:	f04f 02aa 	mov.w	r2, #170	; 0xaa
+  86:	701a      	strb	r2, [r3, #0]
+  PLL0FEED = 0x55;                             // Feed Sequence Part #2
+  88:	4b08      	ldr	r3, [pc, #32]	; (ac <FlashInit+0x4c>)
+  8a:	f04f 0255 	mov.w	r2, #85	; 0x55
+  8e:	701a      	strb	r2, [r3, #0]
+
+  MEMMAP   = 0x01;                             // User Flash Mode
+  90:	4b07      	ldr	r3, [pc, #28]	; (b0 <FlashInit+0x50>)
+  92:	f04f 0201 	mov.w	r2, #1
+  96:	701a      	strb	r2, [r3, #0]
+
+  return (0);
+  98:	f04f 0300 	mov.w	r3, #0
+}
+  9c:	4618      	mov	r0, r3
+  9e:	f107 0714 	add.w	r7, r7, #20
+  a2:	46bd      	mov	sp, r7
+  a4:	bc80      	pop	{r7}
+  a6:	4770      	bx	lr
+  a8:	400fc080 	.word	0x400fc080
+  ac:	400fc08c 	.word	0x400fc08c
+  b0:	400fc040 	.word	0x400fc040
+  b4:	00000000 	.word	0x00000000
+
+000000b8 <FlashUnInit>:
+ * @details    This function is called after flash programming/erase. 
+ * @note 
+ *******************************************************************************
+ */
+int FlashUnInit (unsigned long operateFuc)
+{
+  b8:	b480      	push	{r7}
+  ba:	b083      	sub	sp, #12
+  bc:	af00      	add	r7, sp, #0
+  be:	6078      	str	r0, [r7, #4]
+  return (0);
+  c0:	f04f 0300 	mov.w	r3, #0
+}
+  c4:	4618      	mov	r0, r3
+  c6:	f107 070c 	add.w	r7, r7, #12
+  ca:	46bd      	mov	sp, r7
+  cc:	bc80      	pop	{r7}
+  ce:	4770      	bx	lr
+
+000000d0 <FlashEraseChip>:
+ * @details     
+ * @note 
+ *******************************************************************************
+ */
+__attribute__((optimize("O0"))) int FlashEraseChip (void)
+{
+  d0:	b580      	push	{r7, lr}
+  d2:	b082      	sub	sp, #8
+  d4:	af00      	add	r7, sp, #0
+  int i;
+  i = 50;
+  d6:	f04f 0332 	mov.w	r3, #50	; 0x32
+  da:	607b      	str	r3, [r7, #4]
+  IAP.cmd    = 50;                             // Prepare Sector for Erase
+  dc:	4b2e      	ldr	r3, [pc, #184]	; (198 <FlashEraseChip+0xc8>)
+  de:	f859 3003 	ldr.w	r3, [r9, r3]
+  e2:	f04f 0232 	mov.w	r2, #50	; 0x32
+  e6:	601a      	str	r2, [r3, #0]
+  IAP.par[0] = 0;                              // Start Sector
+  e8:	4b2b      	ldr	r3, [pc, #172]	; (198 <FlashEraseChip+0xc8>)
+  ea:	f859 3003 	ldr.w	r3, [r9, r3]
+  ee:	f04f 0200 	mov.w	r2, #0
+  f2:	605a      	str	r2, [r3, #4]
+  IAP.par[1] = END_SECTOR;               	   // End Sector
+  f4:	4b28      	ldr	r3, [pc, #160]	; (198 <FlashEraseChip+0xc8>)
+  f6:	f859 3003 	ldr.w	r3, [r9, r3]
+  fa:	f04f 0207 	mov.w	r2, #7
+  fe:	609a      	str	r2, [r3, #8]
+  IAP_Call (&(IAP.cmd), &(IAP.stat));              // Call IAP Command
+ 100:	4b24      	ldr	r3, [pc, #144]	; (194 <FlashEraseChip+0xc4>)
+ 102:	4a25      	ldr	r2, [pc, #148]	; (198 <FlashEraseChip+0xc8>)
+ 104:	f859 2002 	ldr.w	r2, [r9, r2]
+ 108:	4610      	mov	r0, r2
+ 10a:	4a23      	ldr	r2, [pc, #140]	; (198 <FlashEraseChip+0xc8>)
+ 10c:	f859 2002 	ldr.w	r2, [r9, r2]
+ 110:	f102 0114 	add.w	r1, r2, #20
+ 114:	4798      	blx	r3
+  if (IAP.stat) return (1);                    // Command Failed
+ 116:	4b20      	ldr	r3, [pc, #128]	; (198 <FlashEraseChip+0xc8>)
+ 118:	f859 3003 	ldr.w	r3, [r9, r3]
+ 11c:	695b      	ldr	r3, [r3, #20]
+ 11e:	2b00      	cmp	r3, #0
+ 120:	d002      	beq.n	128 <FlashEraseChip+0x58>
+ 122:	f04f 0301 	mov.w	r3, #1
+ 126:	e02f      	b.n	188 <FlashEraseChip+0xb8>
+
+  IAP.cmd    = 52;                             // Erase Sector
+ 128:	4b1b      	ldr	r3, [pc, #108]	; (198 <FlashEraseChip+0xc8>)
+ 12a:	f859 3003 	ldr.w	r3, [r9, r3]
+ 12e:	f04f 0234 	mov.w	r2, #52	; 0x34
+ 132:	601a      	str	r2, [r3, #0]
+  IAP.par[0] = 0;                              // Start Sector
+ 134:	4b18      	ldr	r3, [pc, #96]	; (198 <FlashEraseChip+0xc8>)
+ 136:	f859 3003 	ldr.w	r3, [r9, r3]
+ 13a:	f04f 0200 	mov.w	r2, #0
+ 13e:	605a      	str	r2, [r3, #4]
+  IAP.par[1] = END_SECTOR;                     // End Sector
+ 140:	4b15      	ldr	r3, [pc, #84]	; (198 <FlashEraseChip+0xc8>)
+ 142:	f859 3003 	ldr.w	r3, [r9, r3]
+ 146:	f04f 0207 	mov.w	r2, #7
+ 14a:	609a      	str	r2, [r3, #8]
+  IAP.par[2] = CCLK;                           // CCLK in kHz
+ 14c:	4b13      	ldr	r3, [pc, #76]	; (19c <FlashEraseChip+0xcc>)
+ 14e:	f859 3003 	ldr.w	r3, [r9, r3]
+ 152:	681a      	ldr	r2, [r3, #0]
+ 154:	4b10      	ldr	r3, [pc, #64]	; (198 <FlashEraseChip+0xc8>)
+ 156:	f859 3003 	ldr.w	r3, [r9, r3]
+ 15a:	60da      	str	r2, [r3, #12]
+  IAP_Call (&IAP.cmd, &IAP.stat);              // Call IAP Command
+ 15c:	4b0d      	ldr	r3, [pc, #52]	; (194 <FlashEraseChip+0xc4>)
+ 15e:	4a0e      	ldr	r2, [pc, #56]	; (198 <FlashEraseChip+0xc8>)
+ 160:	f859 2002 	ldr.w	r2, [r9, r2]
+ 164:	4610      	mov	r0, r2
+ 166:	4a0c      	ldr	r2, [pc, #48]	; (198 <FlashEraseChip+0xc8>)
+ 168:	f859 2002 	ldr.w	r2, [r9, r2]
+ 16c:	f102 0114 	add.w	r1, r2, #20
+ 170:	4798      	blx	r3
+  if (IAP.stat) return (1);                    // Command Failed
+ 172:	4b09      	ldr	r3, [pc, #36]	; (198 <FlashEraseChip+0xc8>)
+ 174:	f859 3003 	ldr.w	r3, [r9, r3]
+ 178:	695b      	ldr	r3, [r3, #20]
+ 17a:	2b00      	cmp	r3, #0
+ 17c:	d002      	beq.n	184 <FlashEraseChip+0xb4>
+ 17e:	f04f 0301 	mov.w	r3, #1
+ 182:	e001      	b.n	188 <FlashEraseChip+0xb8>
+
+  return (0);                                  // Finished without Errors
+ 184:	f04f 0300 	mov.w	r3, #0
+  
+}
+ 188:	4618      	mov	r0, r3
+ 18a:	f107 0708 	add.w	r7, r7, #8
+ 18e:	46bd      	mov	sp, r7
+ 190:	bd80      	pop	{r7, pc}
+ 192:	bf00      	nop
+ 194:	1fff1ff1 	.word	0x1fff1ff1
+ 198:	00000004 	.word	0x00000004
+ 19c:	00000000 	.word	0x00000000
+
+000001a0 <FlashEraseSector>:
+ * @details     
+ * @note 
+ *******************************************************************************
+ */
+__attribute__((optimize("O0")))int FlashEraseSector (unsigned long sectorAddr)
+{
+ 1a0:	b580      	push	{r7, lr}
+ 1a2:	b084      	sub	sp, #16
+ 1a4:	af00      	add	r7, sp, #0
+ 1a6:	6078      	str	r0, [r7, #4]
+  unsigned long n;
+
+  n = GetSecNum(sectorAddr);                   // Get Sector Number
+ 1a8:	6878      	ldr	r0, [r7, #4]
+ 1aa:	f7ff ff41 	bl	30 <GetSecNum>
+ 1ae:	60f8      	str	r0, [r7, #12]
+
+  IAP.cmd    = 50;                             // Prepare Sector for Erase
+ 1b0:	4b2c      	ldr	r3, [pc, #176]	; (264 <FlashEraseSector+0xc4>)
+ 1b2:	f859 3003 	ldr.w	r3, [r9, r3]
+ 1b6:	f04f 0232 	mov.w	r2, #50	; 0x32
+ 1ba:	601a      	str	r2, [r3, #0]
+  IAP.par[0] = n;                              // Start Sector
+ 1bc:	4b29      	ldr	r3, [pc, #164]	; (264 <FlashEraseSector+0xc4>)
+ 1be:	f859 3003 	ldr.w	r3, [r9, r3]
+ 1c2:	68fa      	ldr	r2, [r7, #12]
+ 1c4:	605a      	str	r2, [r3, #4]
+  IAP.par[1] = n;                              // End Sector
+ 1c6:	4b27      	ldr	r3, [pc, #156]	; (264 <FlashEraseSector+0xc4>)
+ 1c8:	f859 3003 	ldr.w	r3, [r9, r3]
+ 1cc:	68fa      	ldr	r2, [r7, #12]
+ 1ce:	609a      	str	r2, [r3, #8]
+  IAP_Call (&IAP.cmd, &IAP.stat);              // Call IAP Command
+ 1d0:	4b23      	ldr	r3, [pc, #140]	; (260 <FlashEraseSector+0xc0>)
+ 1d2:	4a24      	ldr	r2, [pc, #144]	; (264 <FlashEraseSector+0xc4>)
+ 1d4:	f859 2002 	ldr.w	r2, [r9, r2]
+ 1d8:	4610      	mov	r0, r2
+ 1da:	4a22      	ldr	r2, [pc, #136]	; (264 <FlashEraseSector+0xc4>)
+ 1dc:	f859 2002 	ldr.w	r2, [r9, r2]
+ 1e0:	f102 0114 	add.w	r1, r2, #20
+ 1e4:	4798      	blx	r3
+  if (IAP.stat) return (1);                    // Command Failed
+ 1e6:	4b1f      	ldr	r3, [pc, #124]	; (264 <FlashEraseSector+0xc4>)
+ 1e8:	f859 3003 	ldr.w	r3, [r9, r3]
+ 1ec:	695b      	ldr	r3, [r3, #20]
+ 1ee:	2b00      	cmp	r3, #0
+ 1f0:	d002      	beq.n	1f8 <FlashEraseSector+0x58>
+ 1f2:	f04f 0301 	mov.w	r3, #1
+ 1f6:	e02d      	b.n	254 <FlashEraseSector+0xb4>
+
+  IAP.cmd    = 52;                             // Erase Sector
+ 1f8:	4b1a      	ldr	r3, [pc, #104]	; (264 <FlashEraseSector+0xc4>)
+ 1fa:	f859 3003 	ldr.w	r3, [r9, r3]
+ 1fe:	f04f 0234 	mov.w	r2, #52	; 0x34
+ 202:	601a      	str	r2, [r3, #0]
+  IAP.par[0] = n;                              // Start Sector
+ 204:	4b17      	ldr	r3, [pc, #92]	; (264 <FlashEraseSector+0xc4>)
+ 206:	f859 3003 	ldr.w	r3, [r9, r3]
+ 20a:	68fa      	ldr	r2, [r7, #12]
+ 20c:	605a      	str	r2, [r3, #4]
+  IAP.par[1] = n;                              // End Sector
+ 20e:	4b15      	ldr	r3, [pc, #84]	; (264 <FlashEraseSector+0xc4>)
+ 210:	f859 3003 	ldr.w	r3, [r9, r3]
+ 214:	68fa      	ldr	r2, [r7, #12]
+ 216:	609a      	str	r2, [r3, #8]
+  IAP.par[2] = CCLK;                           // CCLK in kHz
+ 218:	4b13      	ldr	r3, [pc, #76]	; (268 <FlashEraseSector+0xc8>)
+ 21a:	f859 3003 	ldr.w	r3, [r9, r3]
+ 21e:	681a      	ldr	r2, [r3, #0]
+ 220:	4b10      	ldr	r3, [pc, #64]	; (264 <FlashEraseSector+0xc4>)
+ 222:	f859 3003 	ldr.w	r3, [r9, r3]
+ 226:	60da      	str	r2, [r3, #12]
+  IAP_Call (&IAP.cmd, &IAP.stat);              // Call IAP Command
+ 228:	4b0d      	ldr	r3, [pc, #52]	; (260 <FlashEraseSector+0xc0>)
+ 22a:	4a0e      	ldr	r2, [pc, #56]	; (264 <FlashEraseSector+0xc4>)
+ 22c:	f859 2002 	ldr.w	r2, [r9, r2]
+ 230:	4610      	mov	r0, r2
+ 232:	4a0c      	ldr	r2, [pc, #48]	; (264 <FlashEraseSector+0xc4>)
+ 234:	f859 2002 	ldr.w	r2, [r9, r2]
+ 238:	f102 0114 	add.w	r1, r2, #20
+ 23c:	4798      	blx	r3
+  if (IAP.stat) return (1);                    // Command Failed
+ 23e:	4b09      	ldr	r3, [pc, #36]	; (264 <FlashEraseSector+0xc4>)
+ 240:	f859 3003 	ldr.w	r3, [r9, r3]
+ 244:	695b      	ldr	r3, [r3, #20]
+ 246:	2b00      	cmp	r3, #0
+ 248:	d002      	beq.n	250 <FlashEraseSector+0xb0>
+ 24a:	f04f 0301 	mov.w	r3, #1
+ 24e:	e001      	b.n	254 <FlashEraseSector+0xb4>
+
+  return (0);                                  // Finished without Errors
+ 250:	f04f 0300 	mov.w	r3, #0
+}
+ 254:	4618      	mov	r0, r3
+ 256:	f107 0710 	add.w	r7, r7, #16
+ 25a:	46bd      	mov	sp, r7
+ 25c:	bd80      	pop	{r7, pc}
+ 25e:	bf00      	nop
+ 260:	1fff1ff1 	.word	0x1fff1ff1
+ 264:	00000004 	.word	0x00000004
+ 268:	00000000 	.word	0x00000000
+
+0000026c <FlashProgramPage>:
+ * @details     
+ * @note 
+ *******************************************************************************
+ */ 
+__attribute__((optimize("O0")))int FlashProgramPage (unsigned long pageAddr, unsigned long size, unsigned char *buf)
+{
+ 26c:	b580      	push	{r7, lr}
+ 26e:	b086      	sub	sp, #24
+ 270:	af00      	add	r7, sp, #0
+ 272:	60f8      	str	r0, [r7, #12]
+ 274:	60b9      	str	r1, [r7, #8]
+ 276:	607a      	str	r2, [r7, #4]
+  unsigned long n;
+
+#if SET_VALID_CODE != 0                        // Set valid User Code Signature
+  if (pageAddr == 0) {                         // Check for Vector Table
+ 278:	68fb      	ldr	r3, [r7, #12]
+ 27a:	2b00      	cmp	r3, #0
+ 27c:	d127      	bne.n	2ce <FlashProgramPage+0x62>
+    n = *((unsigned long *)(buf + 0x00)) +
+ 27e:	687b      	ldr	r3, [r7, #4]
+ 280:	681a      	ldr	r2, [r3, #0]
+        *((unsigned long *)(buf + 0x04)) +
+ 282:	687b      	ldr	r3, [r7, #4]
+ 284:	f103 0304 	add.w	r3, r3, #4
+ 288:	681b      	ldr	r3, [r3, #0]
+{
+  unsigned long n;
+
+#if SET_VALID_CODE != 0                        // Set valid User Code Signature
+  if (pageAddr == 0) {                         // Check for Vector Table
+    n = *((unsigned long *)(buf + 0x00)) +
+ 28a:	18d2      	adds	r2, r2, r3
+        *((unsigned long *)(buf + 0x04)) +
+        *((unsigned long *)(buf + 0x08)) +
+ 28c:	687b      	ldr	r3, [r7, #4]
+ 28e:	f103 0308 	add.w	r3, r3, #8
+ 292:	681b      	ldr	r3, [r3, #0]
+  unsigned long n;
+
+#if SET_VALID_CODE != 0                        // Set valid User Code Signature
+  if (pageAddr == 0) {                         // Check for Vector Table
+    n = *((unsigned long *)(buf + 0x00)) +
+        *((unsigned long *)(buf + 0x04)) +
+ 294:	18d2      	adds	r2, r2, r3
+        *((unsigned long *)(buf + 0x08)) +
+        *((unsigned long *)(buf + 0x0C)) +
+ 296:	687b      	ldr	r3, [r7, #4]
+ 298:	f103 030c 	add.w	r3, r3, #12
+ 29c:	681b      	ldr	r3, [r3, #0]
+
+#if SET_VALID_CODE != 0                        // Set valid User Code Signature
+  if (pageAddr == 0) {                         // Check for Vector Table
+    n = *((unsigned long *)(buf + 0x00)) +
+        *((unsigned long *)(buf + 0x04)) +
+        *((unsigned long *)(buf + 0x08)) +
+ 29e:	18d2      	adds	r2, r2, r3
+        *((unsigned long *)(buf + 0x0C)) +
+        *((unsigned long *)(buf + 0x10)) +
+ 2a0:	687b      	ldr	r3, [r7, #4]
+ 2a2:	f103 0310 	add.w	r3, r3, #16
+ 2a6:	681b      	ldr	r3, [r3, #0]
+#if SET_VALID_CODE != 0                        // Set valid User Code Signature
+  if (pageAddr == 0) {                         // Check for Vector Table
+    n = *((unsigned long *)(buf + 0x00)) +
+        *((unsigned long *)(buf + 0x04)) +
+        *((unsigned long *)(buf + 0x08)) +
+        *((unsigned long *)(buf + 0x0C)) +
+ 2a8:	18d2      	adds	r2, r2, r3
+        *((unsigned long *)(buf + 0x10)) +
+        *((unsigned long *)(buf + 0x14)) +
+ 2aa:	687b      	ldr	r3, [r7, #4]
+ 2ac:	f103 0314 	add.w	r3, r3, #20
+ 2b0:	681b      	ldr	r3, [r3, #0]
+  if (pageAddr == 0) {                         // Check for Vector Table
+    n = *((unsigned long *)(buf + 0x00)) +
+        *((unsigned long *)(buf + 0x04)) +
+        *((unsigned long *)(buf + 0x08)) +
+        *((unsigned long *)(buf + 0x0C)) +
+        *((unsigned long *)(buf + 0x10)) +
+ 2b2:	18d2      	adds	r2, r2, r3
+        *((unsigned long *)(buf + 0x14)) +
+        *((unsigned long *)(buf + 0x18));
+ 2b4:	687b      	ldr	r3, [r7, #4]
+ 2b6:	f103 0318 	add.w	r3, r3, #24
+ 2ba:	681b      	ldr	r3, [r3, #0]
+{
+  unsigned long n;
+
+#if SET_VALID_CODE != 0                        // Set valid User Code Signature
+  if (pageAddr == 0) {                         // Check for Vector Table
+    n = *((unsigned long *)(buf + 0x00)) +
+ 2bc:	18d3      	adds	r3, r2, r3
+ 2be:	617b      	str	r3, [r7, #20]
+        *((unsigned long *)(buf + 0x08)) +
+        *((unsigned long *)(buf + 0x0C)) +
+        *((unsigned long *)(buf + 0x10)) +
+        *((unsigned long *)(buf + 0x14)) +
+        *((unsigned long *)(buf + 0x18));
+    *((unsigned long *)(buf + 0x1C)) = 0 - n;  // Signature at Reserved Vector
+ 2c0:	687b      	ldr	r3, [r7, #4]
+ 2c2:	f103 031c 	add.w	r3, r3, #28
+ 2c6:	697a      	ldr	r2, [r7, #20]
+ 2c8:	f1c2 0200 	rsb	r2, r2, #0
+ 2cc:	601a      	str	r2, [r3, #0]
+  }
+#endif
+
+  n = GetSecNum(pageAddr);                     // Get Sector Number
+ 2ce:	68f8      	ldr	r0, [r7, #12]
+ 2d0:	f7ff feae 	bl	30 <GetSecNum>
+ 2d4:	6178      	str	r0, [r7, #20]
+
+  IAP.cmd    = 50;                             // Prepare Sector for Write
+ 2d6:	4b2f      	ldr	r3, [pc, #188]	; (394 <FlashProgramPage+0x128>)
+ 2d8:	f859 3003 	ldr.w	r3, [r9, r3]
+ 2dc:	f04f 0232 	mov.w	r2, #50	; 0x32
+ 2e0:	601a      	str	r2, [r3, #0]
+  IAP.par[0] = n;                              // Start Sector
+ 2e2:	4b2c      	ldr	r3, [pc, #176]	; (394 <FlashProgramPage+0x128>)
+ 2e4:	f859 3003 	ldr.w	r3, [r9, r3]
+ 2e8:	697a      	ldr	r2, [r7, #20]
+ 2ea:	605a      	str	r2, [r3, #4]
+  IAP.par[1] = n;                              // End Sector
+ 2ec:	4b29      	ldr	r3, [pc, #164]	; (394 <FlashProgramPage+0x128>)
+ 2ee:	f859 3003 	ldr.w	r3, [r9, r3]
+ 2f2:	697a      	ldr	r2, [r7, #20]
+ 2f4:	609a      	str	r2, [r3, #8]
+  IAP_Call (&IAP.cmd, &IAP.stat);              // Call IAP Command
+ 2f6:	4b26      	ldr	r3, [pc, #152]	; (390 <FlashProgramPage+0x124>)
+ 2f8:	4a26      	ldr	r2, [pc, #152]	; (394 <FlashProgramPage+0x128>)
+ 2fa:	f859 2002 	ldr.w	r2, [r9, r2]
+ 2fe:	4610      	mov	r0, r2
+ 300:	4a24      	ldr	r2, [pc, #144]	; (394 <FlashProgramPage+0x128>)
+ 302:	f859 2002 	ldr.w	r2, [r9, r2]
+ 306:	f102 0114 	add.w	r1, r2, #20
+ 30a:	4798      	blx	r3
+  if (IAP.stat) return (1);                    // Command Failed
+ 30c:	4b21      	ldr	r3, [pc, #132]	; (394 <FlashProgramPage+0x128>)
+ 30e:	f859 3003 	ldr.w	r3, [r9, r3]
+ 312:	695b      	ldr	r3, [r3, #20]
+ 314:	2b00      	cmp	r3, #0
+ 316:	d002      	beq.n	31e <FlashProgramPage+0xb2>
+ 318:	f04f 0301 	mov.w	r3, #1
+ 31c:	e033      	b.n	386 <FlashProgramPage+0x11a>
+
+  IAP.cmd    = 51;                             // Copy RAM to Flash
+ 31e:	4b1d      	ldr	r3, [pc, #116]	; (394 <FlashProgramPage+0x128>)
+ 320:	f859 3003 	ldr.w	r3, [r9, r3]
+ 324:	f04f 0233 	mov.w	r2, #51	; 0x33
+ 328:	601a      	str	r2, [r3, #0]
+  IAP.par[0] = pageAddr;                       // Destination Flash Address
+ 32a:	4b1a      	ldr	r3, [pc, #104]	; (394 <FlashProgramPage+0x128>)
+ 32c:	f859 3003 	ldr.w	r3, [r9, r3]
+ 330:	68fa      	ldr	r2, [r7, #12]
+ 332:	605a      	str	r2, [r3, #4]
+  IAP.par[1] = (unsigned long)buf;             // Source RAM Address
+ 334:	687a      	ldr	r2, [r7, #4]
+ 336:	4b17      	ldr	r3, [pc, #92]	; (394 <FlashProgramPage+0x128>)
+ 338:	f859 3003 	ldr.w	r3, [r9, r3]
+ 33c:	609a      	str	r2, [r3, #8]
+  IAP.par[2] = 1024;                           // Fixed Page Size
+ 33e:	4b15      	ldr	r3, [pc, #84]	; (394 <FlashProgramPage+0x128>)
+ 340:	f859 3003 	ldr.w	r3, [r9, r3]
+ 344:	f44f 6280 	mov.w	r2, #1024	; 0x400
+ 348:	60da      	str	r2, [r3, #12]
+  IAP.par[3] = CCLK;                           // CCLK in kHz
+ 34a:	4b13      	ldr	r3, [pc, #76]	; (398 <FlashProgramPage+0x12c>)
+ 34c:	f859 3003 	ldr.w	r3, [r9, r3]
+ 350:	681a      	ldr	r2, [r3, #0]
+ 352:	4b10      	ldr	r3, [pc, #64]	; (394 <FlashProgramPage+0x128>)
+ 354:	f859 3003 	ldr.w	r3, [r9, r3]
+ 358:	611a      	str	r2, [r3, #16]
+  IAP_Call (&IAP.cmd, &IAP.stat);              // Call IAP Command
+ 35a:	4b0d      	ldr	r3, [pc, #52]	; (390 <FlashProgramPage+0x124>)
+ 35c:	4a0d      	ldr	r2, [pc, #52]	; (394 <FlashProgramPage+0x128>)
+ 35e:	f859 2002 	ldr.w	r2, [r9, r2]
+ 362:	4610      	mov	r0, r2
+ 364:	4a0b      	ldr	r2, [pc, #44]	; (394 <FlashProgramPage+0x128>)
+ 366:	f859 2002 	ldr.w	r2, [r9, r2]
+ 36a:	f102 0114 	add.w	r1, r2, #20
+ 36e:	4798      	blx	r3
+  if (IAP.stat) return (1);                    // Command Failed
+ 370:	4b08      	ldr	r3, [pc, #32]	; (394 <FlashProgramPage+0x128>)
+ 372:	f859 3003 	ldr.w	r3, [r9, r3]
+ 376:	695b      	ldr	r3, [r3, #20]
+ 378:	2b00      	cmp	r3, #0
+ 37a:	d002      	beq.n	382 <FlashProgramPage+0x116>
+ 37c:	f04f 0301 	mov.w	r3, #1
+ 380:	e001      	b.n	386 <FlashProgramPage+0x11a>
+
+  return (0);                                  // Finished without Errors
+ 382:	f04f 0300 	mov.w	r3, #0
+}
+ 386:	4618      	mov	r0, r3
+ 388:	f107 0718 	add.w	r7, r7, #24
+ 38c:	46bd      	mov	sp, r7
+ 38e:	bd80      	pop	{r7, pc}
+ 390:	1fff1ff1 	.word	0x1fff1ff1
+ 394:	00000004 	.word	0x00000004
+ 398:	00000000 	.word	0x00000000
+
+0000039c <FlashVerify>:
+ *            the link will read flash memory directly to do verify.  
+ * @note 
+ *******************************************************************************
+ */ 
+__attribute__((optimize("O0")))int FlashVerify(unsigned long verifyAddr,unsigned long size,unsigned char *buf)
+{
+ 39c:	b480      	push	{r7}
+ 39e:	b089      	sub	sp, #36	; 0x24
+ 3a0:	af00      	add	r7, sp, #0
+ 3a2:	60f8      	str	r0, [r7, #12]
+ 3a4:	60b9      	str	r1, [r7, #8]
+ 3a6:	607a      	str	r2, [r7, #4]
+  // TODO: your code for the page verify 
+  int i;
+  unsigned long sum = 0;
+ 3a8:	f04f 0300 	mov.w	r3, #0
+ 3ac:	61bb      	str	r3, [r7, #24]
+  unsigned char* pageBuf = (unsigned char*)verifyAddr;
+ 3ae:	68fb      	ldr	r3, [r7, #12]
+ 3b0:	617b      	str	r3, [r7, #20]
+  
+  // Gen CheckSum
+  if(verifyAddr == 0)
+ 3b2:	68fb      	ldr	r3, [r7, #12]
+ 3b4:	2b00      	cmp	r3, #0
+ 3b6:	d127      	bne.n	408 <FlashVerify+0x6c>
+  {
+	  sum = *((unsigned long *)(buf + 0x00)) +
+ 3b8:	687b      	ldr	r3, [r7, #4]
+ 3ba:	681a      	ldr	r2, [r3, #0]
+			*((unsigned long *)(buf + 0x04)) +
+ 3bc:	687b      	ldr	r3, [r7, #4]
+ 3be:	f103 0304 	add.w	r3, r3, #4
+ 3c2:	681b      	ldr	r3, [r3, #0]
+  unsigned char* pageBuf = (unsigned char*)verifyAddr;
+  
+  // Gen CheckSum
+  if(verifyAddr == 0)
+  {
+	  sum = *((unsigned long *)(buf + 0x00)) +
+ 3c4:	18d2      	adds	r2, r2, r3
+			*((unsigned long *)(buf + 0x04)) +
+			*((unsigned long *)(buf + 0x08)) +
+ 3c6:	687b      	ldr	r3, [r7, #4]
+ 3c8:	f103 0308 	add.w	r3, r3, #8
+ 3cc:	681b      	ldr	r3, [r3, #0]
+  
+  // Gen CheckSum
+  if(verifyAddr == 0)
+  {
+	  sum = *((unsigned long *)(buf + 0x00)) +
+			*((unsigned long *)(buf + 0x04)) +
+ 3ce:	18d2      	adds	r2, r2, r3
+			*((unsigned long *)(buf + 0x08)) +
+			*((unsigned long *)(buf + 0x0C)) +
+ 3d0:	687b      	ldr	r3, [r7, #4]
+ 3d2:	f103 030c 	add.w	r3, r3, #12
+ 3d6:	681b      	ldr	r3, [r3, #0]
+  // Gen CheckSum
+  if(verifyAddr == 0)
+  {
+	  sum = *((unsigned long *)(buf + 0x00)) +
+			*((unsigned long *)(buf + 0x04)) +
+			*((unsigned long *)(buf + 0x08)) +
+ 3d8:	18d2      	adds	r2, r2, r3
+			*((unsigned long *)(buf + 0x0C)) +
+			*((unsigned long *)(buf + 0x10)) +
+ 3da:	687b      	ldr	r3, [r7, #4]
+ 3dc:	f103 0310 	add.w	r3, r3, #16
+ 3e0:	681b      	ldr	r3, [r3, #0]
+  if(verifyAddr == 0)
+  {
+	  sum = *((unsigned long *)(buf + 0x00)) +
+			*((unsigned long *)(buf + 0x04)) +
+			*((unsigned long *)(buf + 0x08)) +
+			*((unsigned long *)(buf + 0x0C)) +
+ 3e2:	18d2      	adds	r2, r2, r3
+			*((unsigned long *)(buf + 0x10)) +
+			*((unsigned long *)(buf + 0x14)) +
+ 3e4:	687b      	ldr	r3, [r7, #4]
+ 3e6:	f103 0314 	add.w	r3, r3, #20
+ 3ea:	681b      	ldr	r3, [r3, #0]
+  {
+	  sum = *((unsigned long *)(buf + 0x00)) +
+			*((unsigned long *)(buf + 0x04)) +
+			*((unsigned long *)(buf + 0x08)) +
+			*((unsigned long *)(buf + 0x0C)) +
+			*((unsigned long *)(buf + 0x10)) +
+ 3ec:	18d2      	adds	r2, r2, r3
+			*((unsigned long *)(buf + 0x14)) +
+			*((unsigned long *)(buf + 0x18));
+ 3ee:	687b      	ldr	r3, [r7, #4]
+ 3f0:	f103 0318 	add.w	r3, r3, #24
+ 3f4:	681b      	ldr	r3, [r3, #0]
+  unsigned char* pageBuf = (unsigned char*)verifyAddr;
+  
+  // Gen CheckSum
+  if(verifyAddr == 0)
+  {
+	  sum = *((unsigned long *)(buf + 0x00)) +
+ 3f6:	18d3      	adds	r3, r2, r3
+ 3f8:	61bb      	str	r3, [r7, #24]
+			*((unsigned long *)(buf + 0x0C)) +
+			*((unsigned long *)(buf + 0x10)) +
+			*((unsigned long *)(buf + 0x14)) +
+			*((unsigned long *)(buf + 0x18));
+		
+	  *((unsigned long *)(buf + 0x1C)) = 0 - sum;  // Signature at Reserved Vector
+ 3fa:	687b      	ldr	r3, [r7, #4]
+ 3fc:	f103 031c 	add.w	r3, r3, #28
+ 400:	69ba      	ldr	r2, [r7, #24]
+ 402:	f1c2 0200 	rsb	r2, r2, #0
+ 406:	601a      	str	r2, [r3, #0]
+  }
+		
+  for(i = 0; i < size; i++)
+ 408:	f04f 0300 	mov.w	r3, #0
+ 40c:	61fb      	str	r3, [r7, #28]
+ 40e:	e010      	b.n	432 <FlashVerify+0x96>
+  {
+	if(pageBuf[i] != buf[i])
+ 410:	69fb      	ldr	r3, [r7, #28]
+ 412:	697a      	ldr	r2, [r7, #20]
+ 414:	18d3      	adds	r3, r2, r3
+ 416:	781a      	ldrb	r2, [r3, #0]
+ 418:	69fb      	ldr	r3, [r7, #28]
+ 41a:	6879      	ldr	r1, [r7, #4]
+ 41c:	18cb      	adds	r3, r1, r3
+ 41e:	781b      	ldrb	r3, [r3, #0]
+ 420:	429a      	cmp	r2, r3
+ 422:	d002      	beq.n	42a <FlashVerify+0x8e>
+	{
+		return (1);
+ 424:	f04f 0301 	mov.w	r3, #1
+ 428:	e009      	b.n	43e <FlashVerify+0xa2>
+			*((unsigned long *)(buf + 0x18));
+		
+	  *((unsigned long *)(buf + 0x1C)) = 0 - sum;  // Signature at Reserved Vector
+  }
+		
+  for(i = 0; i < size; i++)
+ 42a:	69fb      	ldr	r3, [r7, #28]
+ 42c:	f103 0301 	add.w	r3, r3, #1
+ 430:	61fb      	str	r3, [r7, #28]
+ 432:	69fa      	ldr	r2, [r7, #28]
+ 434:	68bb      	ldr	r3, [r7, #8]
+ 436:	429a      	cmp	r2, r3
+ 438:	d3ea      	bcc.n	410 <FlashVerify+0x74>
+	{
+		return (1);
+	}
+  }
+   
+  return (0);
+ 43a:	f04f 0300 	mov.w	r3, #0
+}
+ 43e:	4618      	mov	r0, r3
+ 440:	f107 0724 	add.w	r7, r7, #36	; 0x24
+ 444:	46bd      	mov	sp, r7
+ 446:	bc80      	pop	{r7}
+ 448:	4770      	bx	lr
+ 44a:	bf00      	nop
+
+0000044c <FlashBlankCheck>:
+ * @note      Sector can be significant.We check the page rather than the sector,
+ *            having regard to the actual size of the ram.
+ *******************************************************************************
+ */ 
+int FlashBlankCheck (unsigned long checkAddr,unsigned long size)
+{
+ 44c:	b480      	push	{r7}
+ 44e:	b087      	sub	sp, #28
+ 450:	af00      	add	r7, sp, #0
+ 452:	6078      	str	r0, [r7, #4]
+ 454:	6039      	str	r1, [r7, #0]
+  #define JUMP_VECT_SIZE  0x400UL
+  unsigned char* pageBuf = (unsigned char*)checkAddr;
+ 456:	687b      	ldr	r3, [r7, #4]
+ 458:	617b      	str	r3, [r7, #20]
+  unsigned  long i;
+  unsigned  long resize = size;
+ 45a:	683b      	ldr	r3, [r7, #0]
+ 45c:	60fb      	str	r3, [r7, #12]
+  //int sectorNum = GetSecNum(checkAddr);
+  if (checkAddr < JUMP_VECT_SIZE) {
+ 45e:	687a      	ldr	r2, [r7, #4]
+ 460:	f240 33ff 	movw	r3, #1023	; 0x3ff
+ 464:	429a      	cmp	r2, r3
+ 466:	d812      	bhi.n	48e <FlashBlankCheck+0x42>
+    if ((checkAddr + size) > JUMP_VECT_SIZE) {
+ 468:	687a      	ldr	r2, [r7, #4]
+ 46a:	683b      	ldr	r3, [r7, #0]
+ 46c:	18d3      	adds	r3, r2, r3
+ 46e:	f5b3 6f80 	cmp.w	r3, #1024	; 0x400
+ 472:	d909      	bls.n	488 <FlashBlankCheck+0x3c>
+	  resize = size - (JUMP_VECT_SIZE - checkAddr);
+ 474:	687a      	ldr	r2, [r7, #4]
+ 476:	683b      	ldr	r3, [r7, #0]
+ 478:	18d3      	adds	r3, r2, r3
+ 47a:	f5a3 6380 	sub.w	r3, r3, #1024	; 0x400
+ 47e:	60fb      	str	r3, [r7, #12]
+	  pageBuf = (unsigned char*)JUMP_VECT_SIZE;
+ 480:	f44f 6380 	mov.w	r3, #1024	; 0x400
+ 484:	617b      	str	r3, [r7, #20]
+ 486:	e002      	b.n	48e <FlashBlankCheck+0x42>
+	}
+	else 
+	{
+	  return (0);
+ 488:	f04f 0300 	mov.w	r3, #0
+ 48c:	e016      	b.n	4bc <FlashBlankCheck+0x70>
+	} 
+	  
+  }
+  
+  for(i = 0; i < resize; i++)
+ 48e:	f04f 0300 	mov.w	r3, #0
+ 492:	613b      	str	r3, [r7, #16]
+ 494:	e00c      	b.n	4b0 <FlashBlankCheck+0x64>
+  {
+	if(pageBuf[i] != 0xFF)
+ 496:	697a      	ldr	r2, [r7, #20]
+ 498:	693b      	ldr	r3, [r7, #16]
+ 49a:	18d3      	adds	r3, r2, r3
+ 49c:	781b      	ldrb	r3, [r3, #0]
+ 49e:	2bff      	cmp	r3, #255	; 0xff
+ 4a0:	d002      	beq.n	4a8 <FlashBlankCheck+0x5c>
+	{
+		return (1);
+ 4a2:	f04f 0301 	mov.w	r3, #1
+ 4a6:	e009      	b.n	4bc <FlashBlankCheck+0x70>
+	  return (0);
+	} 
+	  
+  }
+  
+  for(i = 0; i < resize; i++)
+ 4a8:	693b      	ldr	r3, [r7, #16]
+ 4aa:	f103 0301 	add.w	r3, r3, #1
+ 4ae:	613b      	str	r3, [r7, #16]
+ 4b0:	693a      	ldr	r2, [r7, #16]
+ 4b2:	68fb      	ldr	r3, [r7, #12]
+ 4b4:	429a      	cmp	r2, r3
+ 4b6:	d3ee      	bcc.n	496 <FlashBlankCheck+0x4a>
+	if(pageBuf[i] != 0xFF)
+	{
+		return (1);
+	}
+  }
+  return (0);
+ 4b8:	f04f 0300 	mov.w	r3, #0
+}
+ 4bc:	4618      	mov	r0, r3
+ 4be:	f107 071c 	add.w	r7, r7, #28
+ 4c2:	46bd      	mov	sp, r7
+ 4c4:	bc80      	pop	{r7}
+ 4c6:	4770      	bx	lr

@@ -1,0 +1,13 @@
+@media screen,projection{.g-button *,.g-button-basic *{margin:0;padding:0}
+.g-button,.g-button-basic{direction:ltr;line-height:1.2;width:20em;max-width:795px;padding:15px;text-align:center;overflow:visible}
+.g-button div,.g-button-basic div{background:url(../images/g-button-chocobo-1.gif) no-repeat;font-size:1.7em;}
+.g-button div span span a,.g-button-basic div span span a{display:block;color:#fff!important;background:url(../images/g-button-chocobo-2.gif) no-repeat right bottom;padding:8px 18px 13px 13px;text-decoration:none;font-weight:bold}
+* html .g-button div span span a,* html .g-button-basic div span span a{width:100%}
+.g-button div span,.g-button-basic div span{display:block;background:url(../images/g-button-chocobo-1.gif) no-repeat right -400px;height:1%}
+.g-button div span span{background:url(../images/g-button-chocobo-1.gif) no-repeat left bottom}
+.g-button p,.g-button-basic p{text-align:center;margin:10px 0 0}
+.g-button-basic{padding:0;background:none;border:0}
+.g-button-basic div{background:url(../images/g-button-chocobo-basic-1.gif) no-repeat}
+.g-button-basic div span span a{background:url(../images/g-button-chocobo-basic-2.gif) no-repeat right bottom}
+.g-button-basic div span{background:url(../images/g-button-chocobo-basic-1.gif) no-repeat right -400px}
+.g-button-basic div span span{background:url(../images/g-button-chocobo-basic-1.gif) no-repeat left bottom}}

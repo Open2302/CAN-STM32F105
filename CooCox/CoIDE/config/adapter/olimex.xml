@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<!-- Copyright 2011 coocox.org    This file is part of CooCox Softwares.-->
+<adapter>
+	<Name>Olimex-OpenOCD</Name>
+	<Vendor>Olimex</Vendor>
+	<Debugger>
+		<Set>FTDI</Set>
+		<Driver>IFTD2xx.dll</Driver>
+		<JTAG support="true">
+			<transaction name="open"  mask="0x0A1B" value="0x0808" /> 
+			<transaction name="reset" mask="0x0A00" value="0x0A00" /> 
+			<transaction name="busy"  mask="0x0000" value="0x0000" />
+			<transaction name="close" mask="0x0A10" value="0x0010" />
+		</JTAG>
+
+		<SWD support="false">
+		</SWD>
+	</Debugger>
+</adapter>

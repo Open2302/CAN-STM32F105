@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><!-- InstanceBegin template="/Templates/CoIDEguide.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<!-- InstanceBeginEditable name="top" -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> <link href="../css/page.css" rel="stylesheet" type="text/css" /><!-- InstanceEndEditable -->
+</head> 
+<body >
+<div class="main">
+     <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        
+      <td  valign="top">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+                <tr>
+                    <td width="76%" valign="top" style="padding-left:0.5em; padding-top:0.5em;">
+					  <!-- InstanceBeginEditable name="pagecenter" -->
+					  <h2 class="fontsize140">Debug Configurations</h2>
+                      <p style="margin-top:10px;">Before debugging your project, you need to configure the debug items first. Follow the steps below:</p>
+                      <strong><span class="title1">Enter the configuration interface:</span></strong>
+                      <table width="90%" border="0" align="center" cellpadding="0" cellspacing="0">
+                        <tr>
+                          <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td><img src="../images/Debug/configuring_Main_tab1.gif" name="pic" id="pic" /></td>
+                        </tr>
+                        <tr>
+                          <td align="center">&nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td><ol style="LINE-HEIGHT: 25px; list-style:none;" id="step">
+                            <li class=" blue6" id="step1">1. Click the Debug Configuration button. </li>
+                            <li class="blue6"  id="step2" style=" display:none;" >2. Enter the configuration interface. Click the configuration of your project. </li>
+                          </ol></td>
+                        </tr>
+                        <tr>
+                          <td align="center"><input type="button" id="la" class="input" onclick="lastPic()" value="&lt;&lt;  Prev" />
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="button" id="ne" class="input"  value="Next  &gt;&gt;" onclick="nextPic()" /></td>
+                        </tr>
+                      </table>
+                      <script language="JavaScript" type="text/javascript">
+
+var i=1;
+function nextPic()
+{
+i=i+1;	
+if(i>=3)
+{	alert('This is last photo.');
+	i=2;
+}
+var pic=document.getElementById("pic").src="../images/Debug/configuring_Main_tab"+i+".gif";	
+if(i>1&&i<3)
+{
+var k=i-1;
+document.getElementById("step"+k).style.display="None";
+document.getElementById("step"+i).style.display="block";
+}
+
+}
+function lastPic()
+{
+i=i-1;	
+if(i<=0)
+{	
+alert('This is first photo.');	
+i=1;
+}
+var pic=document.getElementById("pic").src="../images/Debug/configuring_Main_tab"+i+".gif";	
+if(i>0&&i<2)
+{
+var k=i+1;
+document.getElementById("step"+k).style.display="None";
+document.getElementById("step"+i).style.display="block";
+}
+
+}
+                      
+</script>
+                      <br />
+                      <p><strong><span class="title1">To specify the Debugger tab:</span></strong><a name="Debugger" id="Debugger"></a></p>
+                      <ol style="font-size:10pt;margin:0px 0 0px 35px;padding:0px;">
+                        <li style="padding:2px 0 2px 0;margin:0; font-family:Verdana, sans-serif;">Hardware Tab:
+                          <ul>
+                            <li>Adapter: CoIDE supports Colink, CoLinkEx, Nu-Link, ST-Link, J-Link, Stellaris-ICDI, etc.</li>
+                            <li>Port: CoIDE supports both SWD and JTAG debugging modes.</li>
+                            <li>Max Clock(Hz): You could select 2M, 1M, 500K, 300K and 100K clock here.</li>
+                          </ul>
+                        </li>
+                        <li style="padding:2px 0 2px 0;margin:0; font-family:Verdana, sans-serif;">Startup Tab: You could check Run to main or not according to your needs.</li>
+                        <li style="padding:2px 0 2px 0;margin:0; font-family:Verdana, sans-serif;">Advance Tab:
+                          <ul>
+                            <li>Reset Mode: There are there reset modes for you to choose: HW RESET, VECTRESET and SYSRESETREQ.</li>
+                            <li>CacheRomEnable: Checked indicates enable ROM cache.</li>
+                            <li>TargetInfo: It will show your Host Name and Port Number.</li>
+                          </ul>
+                        </li>
+                      </ol>
+                      <table width="90%" border="0" align="center" cellpadding="0" cellspacing="0">
+                        <tr>
+                          <td ><img src="../images/Debug/configuring_Main_tab3.gif" /></td>
+                        </tr>
+                      </table>
+                      <br />
+                      <p><strong><span class="title1">To specify the Download tab:</span></strong><a name="Download" id="Download"></a></p>
+                      <ol style="font-size:10pt;margin:0px 0 0px 35px;padding:0px;">
+                        <li style="padding:2px 0 2px 0;margin:0; font-family:Verdana, sans-serif;">You could select Download Functions:
+                          <ul>
+                            <li>Auto Download Before Debugging: Download the program to the chip automatically before start debug.</li>
+                            <li>Verify After Download: Verify the program after download it to the chip.</li>
+                            <li>Erase Full Chip: Erase the full chip before downloading your program.</li>
+                            <li>Erase Effected: Erase the effected sectors before downloading your program.</li>
+                            <li>Do not Erase: It will not erase the chip before downloading your program.</li>
+                          </ul>
+                        </li>
+                        <li style="padding:2px 0 2px 0;margin:0; font-family:Verdana, sans-serif;"><strong>Programming Algorithm</strong> will show the programming algorithm file. </li>
+                        <li><strong>Add...</strong>, <strong>Remove</strong> and <strong>default</strong> are used to configurate program downloading algorithm.</li>
+                      </ol>
+                      <table width="90%" border="0" align="center" cellpadding="0" cellspacing="0">
+                        <tr>
+                          <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td ><img src="../images/Debug/configuring_Main_tab4.gif" /></td>
+                        </tr>
+                      </table>
+                    <!-- InstanceEndEditable -->        </td>
+                    
+              </tr>
+          </table>
+        </td>
+      </tr>
+     </table>
+ 
+</div></body>
+<!-- InstanceEnd --></html>

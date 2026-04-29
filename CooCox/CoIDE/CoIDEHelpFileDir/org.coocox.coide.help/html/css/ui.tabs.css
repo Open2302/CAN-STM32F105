@@ -1,0 +1,144 @@
+
+@media Screen, Projection    
+{
+.ui-tabs-hide {
+	DISPLAY: none
+}
+
+}
+
+@media Print    
+{
+.ui-tabs-nav {
+	DISPLAY: none
+}
+    }
+.ui-tabs-nav {
+	FONT-SIZE: 12px; FONT-FAMILY: "Trebuchet MS", Trebuchet, Verdana, Helvetica, Arial, sans-serif
+}
+.ui-tabs-panel {
+	FONT-SIZE: 12px; FONT-FAMILY: "Trebuchet MS", Trebuchet, Verdana, Helvetica, Arial, sans-serif
+}
+.ui-tabs-nav {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 4px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; LIST-STYLE-TYPE: none
+}
+.ui-tabs-nav:unknown {
+	CLEAR: both; DISPLAY: block; content: " "
+}
+.ui-tabs-nav LI {
+	FLOAT: left; MARGIN: 0px 0px 0px 1px; min-width: 84px
+}
+.ui-tabs-nav A {
+	PADDING-RIGHT: 10px; DISPLAY: block; PADDING-LEFT: 10px; BACKGROUND: url(tab.png) no-repeat; PADDING-BOTTOM: 0px; PADDING-TOP: 0px
+}
+.ui-tabs-nav A SPAN {
+	PADDING-RIGHT: 10px; DISPLAY: block; PADDING-LEFT: 10px; BACKGROUND: url(tab.png) no-repeat; PADDING-BOTTOM: 0px; PADDING-TOP: 0px
+}
+.ui-tabs-nav A {
+	PADDING-LEFT: 0px; FONT-WEIGHT: bold; MARGIN: 1px 0px 0px; COLOR: #27537a; LINE-HEIGHT: 1.2; WHITE-SPACE: nowrap; TEXT-ALIGN: center; TEXT-DECORATION: none; outline: 0
+}
+.ui-tabs-nav .ui-tabs-selected A {
+	MARGIN-TOP: 0px; Z-INDEX: 2; COLOR: #000; POSITION: relative; TOP: 1px
+}
+.ui-tabs-nav A SPAN {
+	PADDING-RIGHT: 0px; MIN-HEIGHT: 18px; WIDTH: 64px; PADDING-TOP: 6px; HEIGHT: 18px; min-width: 64px
+}
+UNKNOWN {
+	WIDTH: auto; HEIGHT: auto
+}
+.ui-tabs-nav .ui-tabs-selected A SPAN {
+	PADDING-BOTTOM: 1px
+}
+.ui-tabs-nav .ui-tabs-selected A {
+	BACKGROUND-POSITION: 100% -150px
+}
+.ui-tabs-nav A:hover {
+	BACKGROUND-POSITION: 100% -150px
+}
+.ui-tabs-nav A:unknown {
+	BACKGROUND-POSITION: 100% -150px
+}
+.ui-tabs-nav A:active {
+	BACKGROUND-POSITION: 100% -150px
+}
+.ui-tabs-nav A {
+	BACKGROUND-POSITION: 100% -100px
+}
+.ui-tabs-nav .ui-tabs-disabled A:hover {
+	BACKGROUND-POSITION: 100% -100px
+}
+.ui-tabs-nav .ui-tabs-disabled A:unknown {
+	BACKGROUND-POSITION: 100% -100px
+}
+.ui-tabs-nav .ui-tabs-disabled A:active {
+	BACKGROUND-POSITION: 100% -100px
+}
+.ui-tabs-nav .ui-tabs-selected A SPAN {
+	BACKGROUND-POSITION: 0px -50px
+}
+.ui-tabs-nav A:hover SPAN {
+	BACKGROUND-POSITION: 0px -50px
+}
+.ui-tabs-nav A:unknown SPAN {
+	BACKGROUND-POSITION: 0px -50px
+}
+.ui-tabs-nav A:active SPAN {
+	BACKGROUND-POSITION: 0px -50px
+}
+.ui-tabs-nav A SPAN {
+	BACKGROUND-POSITION: 0px 0px
+}
+.ui-tabs-nav .ui-tabs-disabled A:hover SPAN {
+	BACKGROUND-POSITION: 0px 0px
+}
+.ui-tabs-nav .ui-tabs-disabled A:unknown SPAN {
+	BACKGROUND-POSITION: 0px 0px
+}
+.ui-tabs-nav .ui-tabs-disabled A:active SPAN {
+	BACKGROUND-POSITION: 0px 0px
+}
+.ui-tabs-nav .ui-tabs-selected A:link {
+	CURSOR: text
+}
+.ui-tabs-nav .ui-tabs-selected A:visited {
+	CURSOR: text
+}
+.ui-tabs-nav .ui-tabs-disabled A:link {
+	CURSOR: text
+}
+.ui-tabs-nav .ui-tabs-disabled A:visited {
+	CURSOR: text
+}
+.ui-tabs-nav A:hover {
+	CURSOR: pointer
+}
+.ui-tabs-nav A:unknown {
+	CURSOR: pointer
+}
+.ui-tabs-nav A:active {
+	CURSOR: pointer
+}
+.ui-tabs-nav .ui-tabs-deselectable A:hover {
+	CURSOR: pointer
+}
+.ui-tabs-nav .ui-tabs-deselectable A:unknown {
+	CURSOR: pointer
+}
+.ui-tabs-nav .ui-tabs-deselectable A:active {
+	CURSOR: pointer
+}
+.ui-tabs-disabled {
+	FILTER: alpha(opacity=40); opacity: .4
+}
+.ui-tabs-panel {
+	PADDING-RIGHT: 8px; BORDER-TOP: #97a5b0 1px solid; PADDING-LEFT: 8px; BACKGROUND: #fff; PADDING-BOTTOM: 1em; PADDING-TOP: 1em
+}
+.ui-tabs-loading EM {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 20px; BACKGROUND: url(loading.gif) no-repeat 0px 50%; PADDING-BOTTOM: 0px; PADDING-TOP: 0px
+}
+ HTML .ui-tabs-nav {
+	DISPLAY: inline-block
+}
+UNKNOWN {
+	DISPLAY: inline-block
+}

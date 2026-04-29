@@ -1,0 +1,576 @@
+
+bin/MB9xFxxx_32WF.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00000000 <BreakHere>:
+ */
+#if (defined (__GNUC__)) /*------------------ GNU Compiler ---------------------*/
+void BreakHere(int status) __attribute__( ( naked ) );
+void BreakHere(int status)
+{
+  __asm volatile ("BKPT #0 \n\t"  );
+   0:	be00      	bkpt	0x0000
+   2:	bf00      	nop
+
+00000004 <ExecFunction>:
+ */
+int ExecFunction (FlashAlgoFnc algoFnc,
+				  unsigned long parameter0,
+				  unsigned long parameter1,
+				  unsigned long parameter2)
+{
+   4:	b580      	push	{r7, lr}
+   6:	b086      	sub	sp, #24
+   8:	af00      	add	r7, sp, #0
+   a:	60f8      	str	r0, [r7, #12]
+   c:	60b9      	str	r1, [r7, #8]
+   e:	607a      	str	r2, [r7, #4]
+  10:	603b      	str	r3, [r7, #0]
+	 int retval;
+	 retval = algoFnc(parameter0,parameter1,parameter2);
+  12:	68fb      	ldr	r3, [r7, #12]
+  14:	68b8      	ldr	r0, [r7, #8]
+  16:	6879      	ldr	r1, [r7, #4]
+  18:	683a      	ldr	r2, [r7, #0]
+  1a:	4798      	blx	r3
+  1c:	6178      	str	r0, [r7, #20]
+	 BreakHere(retval);
+  1e:	6978      	ldr	r0, [r7, #20]
+  20:	f7ff ffee 	bl	0 <BreakHere>
+	 
+	 return (retval);
+  24:	697b      	ldr	r3, [r7, #20]
+}
+  26:	4618      	mov	r0, r3
+  28:	f107 0718 	add.w	r7, r7, #24
+  2c:	46bd      	mov	sp, r7
+  2e:	bd80      	pop	{r7, pc}
+
+00000030 <Polling>:
+ * @note
+ *******************************************************************************
+ */
+
+int Polling (unsigned long adr)
+{
+  30:	b480      	push	{r7}
+  32:	b085      	sub	sp, #20
+  34:	af00      	add	r7, sp, #0
+  36:	6078      	str	r0, [r7, #4]
+  unsigned int q6;
+
+  fsr.v = M16(adr);
+  38:	687b      	ldr	r3, [r7, #4]
+  3a:	881b      	ldrh	r3, [r3, #0]
+  3c:	b29b      	uxth	r3, r3
+  3e:	461a      	mov	r2, r3
+  40:	4b32      	ldr	r3, [pc, #200]	; (10c <Polling+0xdc>)
+  42:	f859 3003 	ldr.w	r3, [r9, r3]
+  46:	601a      	str	r2, [r3, #0]
+  q6 = fsr.b.q6;
+  48:	4b30      	ldr	r3, [pc, #192]	; (10c <Polling+0xdc>)
+  4a:	f859 3003 	ldr.w	r3, [r9, r3]
+  4e:	681b      	ldr	r3, [r3, #0]
+  50:	f3c3 1380 	ubfx	r3, r3, #6, #1
+  54:	b2db      	uxtb	r3, r3
+  56:	60fb      	str	r3, [r7, #12]
+  do {
+    fsr.v = M16(adr);
+  58:	687b      	ldr	r3, [r7, #4]
+  5a:	881b      	ldrh	r3, [r3, #0]
+  5c:	b29b      	uxth	r3, r3
+  5e:	461a      	mov	r2, r3
+  60:	4b2a      	ldr	r3, [pc, #168]	; (10c <Polling+0xdc>)
+  62:	f859 3003 	ldr.w	r3, [r9, r3]
+  66:	601a      	str	r2, [r3, #0]
+    if (fsr.b.q6 == q6) return (0);  // Done
+  68:	4b28      	ldr	r3, [pc, #160]	; (10c <Polling+0xdc>)
+  6a:	f859 3003 	ldr.w	r3, [r9, r3]
+  6e:	681b      	ldr	r3, [r3, #0]
+  70:	f3c3 1380 	ubfx	r3, r3, #6, #1
+  74:	b2db      	uxtb	r3, r3
+  76:	461a      	mov	r2, r3
+  78:	68fb      	ldr	r3, [r7, #12]
+  7a:	429a      	cmp	r2, r3
+  7c:	d102      	bne.n	84 <Polling+0x54>
+  7e:	f04f 0300 	mov.w	r3, #0
+  82:	e03c      	b.n	fe <Polling+0xce>
+    q6 = fsr.b.q6;
+  84:	4b21      	ldr	r3, [pc, #132]	; (10c <Polling+0xdc>)
+  86:	f859 3003 	ldr.w	r3, [r9, r3]
+  8a:	681b      	ldr	r3, [r3, #0]
+  8c:	f3c3 1380 	ubfx	r3, r3, #6, #1
+  90:	b2db      	uxtb	r3, r3
+  92:	60fb      	str	r3, [r7, #12]
+  } while (fsr.b.q5 == 0);           // Check for Timeout
+  94:	4b1d      	ldr	r3, [pc, #116]	; (10c <Polling+0xdc>)
+  96:	f859 3003 	ldr.w	r3, [r9, r3]
+  9a:	681b      	ldr	r3, [r3, #0]
+  9c:	f3c3 1340 	ubfx	r3, r3, #5, #1
+  a0:	b2db      	uxtb	r3, r3
+  a2:	2b00      	cmp	r3, #0
+  a4:	d0d8      	beq.n	58 <Polling+0x28>
+  fsr.v = M16(adr);
+  a6:	687b      	ldr	r3, [r7, #4]
+  a8:	881b      	ldrh	r3, [r3, #0]
+  aa:	b29b      	uxth	r3, r3
+  ac:	461a      	mov	r2, r3
+  ae:	4b17      	ldr	r3, [pc, #92]	; (10c <Polling+0xdc>)
+  b0:	f859 3003 	ldr.w	r3, [r9, r3]
+  b4:	601a      	str	r2, [r3, #0]
+  q6 = fsr.b.q6;
+  b6:	4b15      	ldr	r3, [pc, #84]	; (10c <Polling+0xdc>)
+  b8:	f859 3003 	ldr.w	r3, [r9, r3]
+  bc:	681b      	ldr	r3, [r3, #0]
+  be:	f3c3 1380 	ubfx	r3, r3, #6, #1
+  c2:	b2db      	uxtb	r3, r3
+  c4:	60fb      	str	r3, [r7, #12]
+  fsr.v = M16(adr);
+  c6:	687b      	ldr	r3, [r7, #4]
+  c8:	881b      	ldrh	r3, [r3, #0]
+  ca:	b29b      	uxth	r3, r3
+  cc:	461a      	mov	r2, r3
+  ce:	4b0f      	ldr	r3, [pc, #60]	; (10c <Polling+0xdc>)
+  d0:	f859 3003 	ldr.w	r3, [r9, r3]
+  d4:	601a      	str	r2, [r3, #0]
+  if (fsr.b.q6 == q6) return (0);    // Done
+  d6:	4b0d      	ldr	r3, [pc, #52]	; (10c <Polling+0xdc>)
+  d8:	f859 3003 	ldr.w	r3, [r9, r3]
+  dc:	681b      	ldr	r3, [r3, #0]
+  de:	f3c3 1380 	ubfx	r3, r3, #6, #1
+  e2:	b2db      	uxtb	r3, r3
+  e4:	461a      	mov	r2, r3
+  e6:	68fb      	ldr	r3, [r7, #12]
+  e8:	429a      	cmp	r2, r3
+  ea:	d102      	bne.n	f2 <Polling+0xc2>
+  ec:	f04f 0300 	mov.w	r3, #0
+  f0:	e005      	b.n	fe <Polling+0xce>
+  M16(adr) = 0xF0;                   // Reset Device
+  f2:	687b      	ldr	r3, [r7, #4]
+  f4:	f04f 02f0 	mov.w	r2, #240	; 0xf0
+  f8:	801a      	strh	r2, [r3, #0]
+  return (1);                        // Failed
+  fa:	f04f 0301 	mov.w	r3, #1
+}
+  fe:	4618      	mov	r0, r3
+ 100:	f107 0714 	add.w	r7, r7, #20
+ 104:	46bd      	mov	sp, r7
+ 106:	bc80      	pop	{r7}
+ 108:	4770      	bx	lr
+ 10a:	bf00      	nop
+ 10c:	00000000 	.word	0x00000000
+
+00000110 <FlashInit>:
+ *******************************************************************************
+ */
+
+int FlashInit(unsigned long baseAddr, unsigned long clk,
+		      unsigned long operateFuc)
+{
+ 110:	b480      	push	{r7}
+ 112:	b085      	sub	sp, #20
+ 114:	af00      	add	r7, sp, #0
+ 116:	60f8      	str	r0, [r7, #12]
+ 118:	60b9      	str	r1, [r7, #8]
+ 11a:	607a      	str	r2, [r7, #4]
+	HWWDT->LCK = 0x1ACCE551;
+ 11c:	4b0c      	ldr	r3, [pc, #48]	; (150 <FlashInit+0x40>)
+ 11e:	4a0d      	ldr	r2, [pc, #52]	; (154 <FlashInit+0x44>)
+ 120:	f8c3 2c00 	str.w	r2, [r3, #3072]	; 0xc00
+	HWWDT->LCK = 0xE5331AAE;
+ 124:	4b0a      	ldr	r3, [pc, #40]	; (150 <FlashInit+0x40>)
+ 126:	4a0c      	ldr	r2, [pc, #48]	; (158 <FlashInit+0x48>)
+ 128:	f8c3 2c00 	str.w	r2, [r3, #3072]	; 0xc00
+	HWWDT->CTL = 0;                                       // Disable Watchdog
+ 12c:	4b08      	ldr	r3, [pc, #32]	; (150 <FlashInit+0x40>)
+ 12e:	f04f 0200 	mov.w	r2, #0
+ 132:	609a      	str	r2, [r3, #8]
+
+	base_adr = baseAddr;
+ 134:	4b09      	ldr	r3, [pc, #36]	; (15c <FlashInit+0x4c>)
+ 136:	f859 3003 	ldr.w	r3, [r9, r3]
+ 13a:	68fa      	ldr	r2, [r7, #12]
+ 13c:	601a      	str	r2, [r3, #0]
+
+	return (0);                                           // Done
+ 13e:	f04f 0300 	mov.w	r3, #0
+}
+ 142:	4618      	mov	r0, r3
+ 144:	f107 0714 	add.w	r7, r7, #20
+ 148:	46bd      	mov	sp, r7
+ 14a:	bc80      	pop	{r7}
+ 14c:	4770      	bx	lr
+ 14e:	bf00      	nop
+ 150:	40011000 	.word	0x40011000
+ 154:	1acce551 	.word	0x1acce551
+ 158:	e5331aae 	.word	0xe5331aae
+ 15c:	00000004 	.word	0x00000004
+
+00000160 <FlashUnInit>:
+ * @details    This function is called after flash programming/erase.
+ * @note
+ *******************************************************************************
+ */
+int FlashUnInit(unsigned long operateFuc)
+{
+ 160:	b480      	push	{r7}
+ 162:	b083      	sub	sp, #12
+ 164:	af00      	add	r7, sp, #0
+ 166:	6078      	str	r0, [r7, #4]
+
+	return (0);
+ 168:	f04f 0300 	mov.w	r3, #0
+}
+ 16c:	4618      	mov	r0, r3
+ 16e:	f107 070c 	add.w	r7, r7, #12
+ 172:	46bd      	mov	sp, r7
+ 174:	bc80      	pop	{r7}
+ 176:	4770      	bx	lr
+
+00000178 <FlashEraseSector>:
+ * @note
+ *******************************************************************************
+ */
+
+int FlashEraseSector(unsigned long sectorAddr)
+{
+ 178:	b580      	push	{r7, lr}
+ 17a:	b084      	sub	sp, #16
+ 17c:	af00      	add	r7, sp, #0
+ 17e:	6078      	str	r0, [r7, #4]
+  vu32 dummy;
+
+#ifdef MB9xFxxx_32WF                                    // MB9xFxxx 32KB WorkFlash
+  WFIF->WFASZR = 0x00;                                  // set CPU programming mode
+ 180:	4b2f      	ldr	r3, [pc, #188]	; (240 <FlashEraseSector+0xc8>)
+ 182:	f04f 0200 	mov.w	r2, #0
+ 186:	601a      	str	r2, [r3, #0]
+  dummy = WFIF->WFASZR;                                 // dummy read
+ 188:	4b2d      	ldr	r3, [pc, #180]	; (240 <FlashEraseSector+0xc8>)
+ 18a:	681b      	ldr	r3, [r3, #0]
+ 18c:	60fb      	str	r3, [r7, #12]
+  FIF->FASZR = 0x01;                                    // set CPU programming mode
+  dummy = FIF->FASZR;                                   // dummy read
+#endif
+
+  // Start Erase Sector Command
+  M16(base_adr + ADDR_1st) = 0xAA;
+ 18e:	4b2d      	ldr	r3, [pc, #180]	; (244 <FlashEraseSector+0xcc>)
+ 190:	f859 3003 	ldr.w	r3, [r9, r3]
+ 194:	681b      	ldr	r3, [r3, #0]
+ 196:	f603 23a8 	addw	r3, r3, #2728	; 0xaa8
+ 19a:	f04f 02aa 	mov.w	r2, #170	; 0xaa
+ 19e:	801a      	strh	r2, [r3, #0]
+  M16(base_adr + ADDR_2nd) = 0x55;
+ 1a0:	4b28      	ldr	r3, [pc, #160]	; (244 <FlashEraseSector+0xcc>)
+ 1a2:	f859 3003 	ldr.w	r3, [r9, r3]
+ 1a6:	681b      	ldr	r3, [r3, #0]
+ 1a8:	f203 5354 	addw	r3, r3, #1364	; 0x554
+ 1ac:	f04f 0255 	mov.w	r2, #85	; 0x55
+ 1b0:	801a      	strh	r2, [r3, #0]
+  M16(base_adr + ADDR_3rd) = 0x80;
+ 1b2:	4b24      	ldr	r3, [pc, #144]	; (244 <FlashEraseSector+0xcc>)
+ 1b4:	f859 3003 	ldr.w	r3, [r9, r3]
+ 1b8:	681b      	ldr	r3, [r3, #0]
+ 1ba:	f603 23a8 	addw	r3, r3, #2728	; 0xaa8
+ 1be:	f04f 0280 	mov.w	r2, #128	; 0x80
+ 1c2:	801a      	strh	r2, [r3, #0]
+  M16(base_adr + ADDR_4th) = 0xAA;
+ 1c4:	4b1f      	ldr	r3, [pc, #124]	; (244 <FlashEraseSector+0xcc>)
+ 1c6:	f859 3003 	ldr.w	r3, [r9, r3]
+ 1ca:	681b      	ldr	r3, [r3, #0]
+ 1cc:	f603 23a8 	addw	r3, r3, #2728	; 0xaa8
+ 1d0:	f04f 02aa 	mov.w	r2, #170	; 0xaa
+ 1d4:	801a      	strh	r2, [r3, #0]
+  M16(base_adr + ADDR_5th) = 0x55;
+ 1d6:	4b1b      	ldr	r3, [pc, #108]	; (244 <FlashEraseSector+0xcc>)
+ 1d8:	f859 3003 	ldr.w	r3, [r9, r3]
+ 1dc:	681b      	ldr	r3, [r3, #0]
+ 1de:	f203 5354 	addw	r3, r3, #1364	; 0x554
+ 1e2:	f04f 0255 	mov.w	r2, #85	; 0x55
+ 1e6:	801a      	strh	r2, [r3, #0]
+  M16(sectorAddr)     = 0x30;                                  // erase fist   internal sector
+ 1e8:	687b      	ldr	r3, [r7, #4]
+ 1ea:	f04f 0230 	mov.w	r2, #48	; 0x30
+ 1ee:	801a      	strh	r2, [r3, #0]
+#if !defined (MB9BF500_256) && !defined (MB9xFxxx_32WF)
+  M16(sectorAddr + 4) = 0x30;                                  // erase second internal sector
+#endif
+  do {
+	fsr.v = M16(sectorAddr);
+ 1f0:	687b      	ldr	r3, [r7, #4]
+ 1f2:	881b      	ldrh	r3, [r3, #0]
+ 1f4:	b29b      	uxth	r3, r3
+ 1f6:	461a      	mov	r2, r3
+ 1f8:	4b13      	ldr	r3, [pc, #76]	; (248 <FlashEraseSector+0xd0>)
+ 1fa:	f859 3003 	ldr.w	r3, [r9, r3]
+ 1fe:	601a      	str	r2, [r3, #0]
+  } while (fsr.b.q3 == 0);                              // Wait for Sector Erase Timeout
+ 200:	4b11      	ldr	r3, [pc, #68]	; (248 <FlashEraseSector+0xd0>)
+ 202:	f859 3003 	ldr.w	r3, [r9, r3]
+ 206:	681b      	ldr	r3, [r3, #0]
+ 208:	f3c3 03c0 	ubfx	r3, r3, #3, #1
+ 20c:	b2db      	uxtb	r3, r3
+ 20e:	2b00      	cmp	r3, #0
+ 210:	d0ee      	beq.n	1f0 <FlashEraseSector+0x78>
+
+  if (Polling(sectorAddr) != 0) return (1);                    // Wait until Erase completed
+ 212:	6878      	ldr	r0, [r7, #4]
+ 214:	f7ff ff0c 	bl	30 <Polling>
+ 218:	4603      	mov	r3, r0
+ 21a:	2b00      	cmp	r3, #0
+ 21c:	d002      	beq.n	224 <FlashEraseSector+0xac>
+ 21e:	f04f 0301 	mov.w	r3, #1
+ 222:	e008      	b.n	236 <FlashEraseSector+0xbe>
+
+#ifdef MB9xFxxx_32WF                                    // MB9xFxxx 32KB WorkFlash
+  WFIF->WFASZR = 0x01;                                  // set CPU ROM mode
+ 224:	4b06      	ldr	r3, [pc, #24]	; (240 <FlashEraseSector+0xc8>)
+ 226:	f04f 0201 	mov.w	r2, #1
+ 22a:	601a      	str	r2, [r3, #0]
+  dummy = WFIF->WFASZR;                                 // dummy read
+ 22c:	4b04      	ldr	r3, [pc, #16]	; (240 <FlashEraseSector+0xc8>)
+ 22e:	681b      	ldr	r3, [r3, #0]
+ 230:	60fb      	str	r3, [r7, #12]
+#else
+  FIF->FASZR = 0x02;                                    // set CPU ROM mode
+  dummy = FIF->FASZR;                                   // dummy read
+#endif
+
+  return (0);
+ 232:	f04f 0300 	mov.w	r3, #0
+}
+ 236:	4618      	mov	r0, r3
+ 238:	f107 0710 	add.w	r7, r7, #16
+ 23c:	46bd      	mov	sp, r7
+ 23e:	bd80      	pop	{r7, pc}
+ 240:	200e0000 	.word	0x200e0000
+ 244:	00000004 	.word	0x00000004
+ 248:	00000000 	.word	0x00000000
+
+0000024c <FlashEraseChip>:
+ * @details
+ * @note
+ *******************************************************************************
+ */
+int FlashEraseChip   (void)
+{
+ 24c:	b580      	push	{r7, lr}
+ 24e:	b082      	sub	sp, #8
+ 250:	af00      	add	r7, sp, #0
+vu32 dummy;
+#ifdef MB9xFxxx_32WF                                    // MB9xFxxx 32KB WorkFlash
+  WFIF->WFASZR = 0x00;                                  // set CPU programming mode
+ 252:	4b2c      	ldr	r3, [pc, #176]	; (304 <FlashEraseChip+0xb8>)
+ 254:	f04f 0200 	mov.w	r2, #0
+ 258:	601a      	str	r2, [r3, #0]
+  dummy = WFIF->WFASZR;                                 // dummy read
+ 25a:	4b2a      	ldr	r3, [pc, #168]	; (304 <FlashEraseChip+0xb8>)
+ 25c:	681b      	ldr	r3, [r3, #0]
+ 25e:	607b      	str	r3, [r7, #4]
+#else
+  FIF->FASZR = 0x01;                                    // set CPU programming mode
+  dummy = FIF->FASZR;                                   // dummy read
+#endif
+  // Start Chip Erase Command
+  M16(base_adr + ADDR_1st) = 0xAA;
+ 260:	4b29      	ldr	r3, [pc, #164]	; (308 <FlashEraseChip+0xbc>)
+ 262:	f859 3003 	ldr.w	r3, [r9, r3]
+ 266:	681b      	ldr	r3, [r3, #0]
+ 268:	f603 23a8 	addw	r3, r3, #2728	; 0xaa8
+ 26c:	f04f 02aa 	mov.w	r2, #170	; 0xaa
+ 270:	801a      	strh	r2, [r3, #0]
+  M16(base_adr + ADDR_2nd) = 0x55;
+ 272:	4b25      	ldr	r3, [pc, #148]	; (308 <FlashEraseChip+0xbc>)
+ 274:	f859 3003 	ldr.w	r3, [r9, r3]
+ 278:	681b      	ldr	r3, [r3, #0]
+ 27a:	f203 5354 	addw	r3, r3, #1364	; 0x554
+ 27e:	f04f 0255 	mov.w	r2, #85	; 0x55
+ 282:	801a      	strh	r2, [r3, #0]
+  M16(base_adr + ADDR_3rd) = 0x80;
+ 284:	4b20      	ldr	r3, [pc, #128]	; (308 <FlashEraseChip+0xbc>)
+ 286:	f859 3003 	ldr.w	r3, [r9, r3]
+ 28a:	681b      	ldr	r3, [r3, #0]
+ 28c:	f603 23a8 	addw	r3, r3, #2728	; 0xaa8
+ 290:	f04f 0280 	mov.w	r2, #128	; 0x80
+ 294:	801a      	strh	r2, [r3, #0]
+  M16(base_adr + ADDR_4th) = 0xAA;
+ 296:	4b1c      	ldr	r3, [pc, #112]	; (308 <FlashEraseChip+0xbc>)
+ 298:	f859 3003 	ldr.w	r3, [r9, r3]
+ 29c:	681b      	ldr	r3, [r3, #0]
+ 29e:	f603 23a8 	addw	r3, r3, #2728	; 0xaa8
+ 2a2:	f04f 02aa 	mov.w	r2, #170	; 0xaa
+ 2a6:	801a      	strh	r2, [r3, #0]
+  M16(base_adr + ADDR_5th) = 0x55;
+ 2a8:	4b17      	ldr	r3, [pc, #92]	; (308 <FlashEraseChip+0xbc>)
+ 2aa:	f859 3003 	ldr.w	r3, [r9, r3]
+ 2ae:	681b      	ldr	r3, [r3, #0]
+ 2b0:	f203 5354 	addw	r3, r3, #1364	; 0x554
+ 2b4:	f04f 0255 	mov.w	r2, #85	; 0x55
+ 2b8:	801a      	strh	r2, [r3, #0]
+  M16(base_adr + ADDR_6th) = 0x10;
+ 2ba:	4b13      	ldr	r3, [pc, #76]	; (308 <FlashEraseChip+0xbc>)
+ 2bc:	f859 3003 	ldr.w	r3, [r9, r3]
+ 2c0:	681b      	ldr	r3, [r3, #0]
+ 2c2:	f603 23a8 	addw	r3, r3, #2728	; 0xaa8
+ 2c6:	f04f 0210 	mov.w	r2, #16
+ 2ca:	801a      	strh	r2, [r3, #0]
+
+  if (Polling(base_adr) != 0) return (1);               // Wait until Erase completed
+ 2cc:	4b0e      	ldr	r3, [pc, #56]	; (308 <FlashEraseChip+0xbc>)
+ 2ce:	f859 3003 	ldr.w	r3, [r9, r3]
+ 2d2:	681b      	ldr	r3, [r3, #0]
+ 2d4:	4618      	mov	r0, r3
+ 2d6:	f7ff feab 	bl	30 <Polling>
+ 2da:	4603      	mov	r3, r0
+ 2dc:	2b00      	cmp	r3, #0
+ 2de:	d002      	beq.n	2e6 <FlashEraseChip+0x9a>
+ 2e0:	f04f 0301 	mov.w	r3, #1
+ 2e4:	e008      	b.n	2f8 <FlashEraseChip+0xac>
+
+#ifdef MB9xFxxx_32WF                                    // MB9xFxxx 32KB WorkFlash
+  WFIF->WFASZR = 0x01;                                  // set CPU ROM mode
+ 2e6:	4b07      	ldr	r3, [pc, #28]	; (304 <FlashEraseChip+0xb8>)
+ 2e8:	f04f 0201 	mov.w	r2, #1
+ 2ec:	601a      	str	r2, [r3, #0]
+  dummy = WFIF->WFASZR;                                 // dummy read
+ 2ee:	4b05      	ldr	r3, [pc, #20]	; (304 <FlashEraseChip+0xb8>)
+ 2f0:	681b      	ldr	r3, [r3, #0]
+ 2f2:	607b      	str	r3, [r7, #4]
+#else
+  FIF->FASZR = 0x02;                                    // set CPU ROM mode
+  dummy = FIF->FASZR;                                   // dummy read
+#endif
+
+  return (0);
+ 2f4:	f04f 0300 	mov.w	r3, #0
+}
+ 2f8:	4618      	mov	r0, r3
+ 2fa:	f107 0708 	add.w	r7, r7, #8
+ 2fe:	46bd      	mov	sp, r7
+ 300:	bd80      	pop	{r7, pc}
+ 302:	bf00      	nop
+ 304:	200e0000 	.word	0x200e0000
+ 308:	00000004 	.word	0x00000004
+
+0000030c <FlashProgramPage>:
+ * @details
+ * @note
+ *******************************************************************************
+ */
+int FlashProgramPage(unsigned long pageAddr, unsigned long size, unsigned char *buf)
+{
+ 30c:	b580      	push	{r7, lr}
+ 30e:	b086      	sub	sp, #24
+ 310:	af00      	add	r7, sp, #0
+ 312:	60f8      	str	r0, [r7, #12]
+ 314:	60b9      	str	r1, [r7, #8]
+ 316:	607a      	str	r2, [r7, #4]
+  int  i;
+  vu32 dummy;
+
+#ifdef MB9xFxxx_32WF                                    // MB9xFxxx 32KB WorkFlash
+  WFIF->WFASZR = 0x00;                                  // set CPU programming mode
+ 318:	4b2a      	ldr	r3, [pc, #168]	; (3c4 <FlashProgramPage+0xb8>)
+ 31a:	f04f 0200 	mov.w	r2, #0
+ 31e:	601a      	str	r2, [r3, #0]
+  dummy = WFIF->WFASZR;                                 // dummy read
+ 320:	4b28      	ldr	r3, [pc, #160]	; (3c4 <FlashProgramPage+0xb8>)
+ 322:	681b      	ldr	r3, [r3, #0]
+ 324:	613b      	str	r3, [r7, #16]
+#else
+  FIF->FASZR = 0x01;                                    // set CPU programming mode
+  dummy = FIF->FASZR;                                   // dummy read
+#endif
+
+  for (i = 0; i < ((size+1)/2); i++)  {
+ 326:	f04f 0300 	mov.w	r3, #0
+ 32a:	617b      	str	r3, [r7, #20]
+ 32c:	e033      	b.n	396 <FlashProgramPage+0x8a>
+	// Start Program Command
+	M16(base_adr + ADDR_1st) = 0xAA;
+ 32e:	4b26      	ldr	r3, [pc, #152]	; (3c8 <FlashProgramPage+0xbc>)
+ 330:	f859 3003 	ldr.w	r3, [r9, r3]
+ 334:	681b      	ldr	r3, [r3, #0]
+ 336:	f603 23a8 	addw	r3, r3, #2728	; 0xaa8
+ 33a:	f04f 02aa 	mov.w	r2, #170	; 0xaa
+ 33e:	801a      	strh	r2, [r3, #0]
+	M16(base_adr + ADDR_2nd) = 0x55;
+ 340:	4b21      	ldr	r3, [pc, #132]	; (3c8 <FlashProgramPage+0xbc>)
+ 342:	f859 3003 	ldr.w	r3, [r9, r3]
+ 346:	681b      	ldr	r3, [r3, #0]
+ 348:	f203 5354 	addw	r3, r3, #1364	; 0x554
+ 34c:	f04f 0255 	mov.w	r2, #85	; 0x55
+ 350:	801a      	strh	r2, [r3, #0]
+	M16(base_adr + ADDR_3rd) = 0xA0;
+ 352:	4b1d      	ldr	r3, [pc, #116]	; (3c8 <FlashProgramPage+0xbc>)
+ 354:	f859 3003 	ldr.w	r3, [r9, r3]
+ 358:	681b      	ldr	r3, [r3, #0]
+ 35a:	f603 23a8 	addw	r3, r3, #2728	; 0xaa8
+ 35e:	f04f 02a0 	mov.w	r2, #160	; 0xa0
+ 362:	801a      	strh	r2, [r3, #0]
+	M16(pageAddr) = *((u16 *) buf);
+ 364:	68fb      	ldr	r3, [r7, #12]
+ 366:	687a      	ldr	r2, [r7, #4]
+ 368:	8812      	ldrh	r2, [r2, #0]
+ 36a:	801a      	strh	r2, [r3, #0]
+	if (Polling(pageAddr) != 0) return (1);
+ 36c:	68f8      	ldr	r0, [r7, #12]
+ 36e:	f7ff fe5f 	bl	30 <Polling>
+ 372:	4603      	mov	r3, r0
+ 374:	2b00      	cmp	r3, #0
+ 376:	d002      	beq.n	37e <FlashProgramPage+0x72>
+ 378:	f04f 0301 	mov.w	r3, #1
+ 37c:	e01c      	b.n	3b8 <FlashProgramPage+0xac>
+	buf += 2;
+ 37e:	687b      	ldr	r3, [r7, #4]
+ 380:	f103 0302 	add.w	r3, r3, #2
+ 384:	607b      	str	r3, [r7, #4]
+	pageAddr += 2;
+ 386:	68fb      	ldr	r3, [r7, #12]
+ 388:	f103 0302 	add.w	r3, r3, #2
+ 38c:	60fb      	str	r3, [r7, #12]
+#else
+  FIF->FASZR = 0x01;                                    // set CPU programming mode
+  dummy = FIF->FASZR;                                   // dummy read
+#endif
+
+  for (i = 0; i < ((size+1)/2); i++)  {
+ 38e:	697b      	ldr	r3, [r7, #20]
+ 390:	f103 0301 	add.w	r3, r3, #1
+ 394:	617b      	str	r3, [r7, #20]
+ 396:	697a      	ldr	r2, [r7, #20]
+ 398:	68bb      	ldr	r3, [r7, #8]
+ 39a:	f103 0301 	add.w	r3, r3, #1
+ 39e:	ea4f 0353 	mov.w	r3, r3, lsr #1
+ 3a2:	429a      	cmp	r2, r3
+ 3a4:	d3c3      	bcc.n	32e <FlashProgramPage+0x22>
+	if (Polling(pageAddr) != 0) return (1);
+	buf += 2;
+	pageAddr += 2;
+  }
+#ifdef MB9xFxxx_32WF                                    // MB9xFxxx 32KB WorkFlash
+  WFIF->WFASZR = 0x01;                                  // set CPU ROM mode
+ 3a6:	4b07      	ldr	r3, [pc, #28]	; (3c4 <FlashProgramPage+0xb8>)
+ 3a8:	f04f 0201 	mov.w	r2, #1
+ 3ac:	601a      	str	r2, [r3, #0]
+  dummy = WFIF->WFASZR;                                 // dummy read
+ 3ae:	4b05      	ldr	r3, [pc, #20]	; (3c4 <FlashProgramPage+0xb8>)
+ 3b0:	681b      	ldr	r3, [r3, #0]
+ 3b2:	613b      	str	r3, [r7, #16]
+#else
+  FIF->FASZR = 0x02;                                    // set CPU ROM mode
+  dummy = FIF->FASZR;                                   // dummy read
+#endif
+  return (0);
+ 3b4:	f04f 0300 	mov.w	r3, #0
+}
+ 3b8:	4618      	mov	r0, r3
+ 3ba:	f107 0718 	add.w	r7, r7, #24
+ 3be:	46bd      	mov	sp, r7
+ 3c0:	bd80      	pop	{r7, pc}
+ 3c2:	bf00      	nop
+ 3c4:	200e0000 	.word	0x200e0000
+ 3c8:	00000004 	.word	0x00000004

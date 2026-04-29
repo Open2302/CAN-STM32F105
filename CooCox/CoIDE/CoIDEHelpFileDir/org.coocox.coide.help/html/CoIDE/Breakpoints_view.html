@@ -1,0 +1,167 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><!-- InstanceBegin template="/Templates/CoIDEguide.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<!-- InstanceBeginEditable name="top" --> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> <link href="../css/page.css" rel="stylesheet" type="text/css" /><!-- InstanceEndEditable -->
+</head> 
+<body >
+<div class="main">
+     <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        
+      <td  valign="top">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+                <tr>
+                    <td width="76%" valign="top" style="padding-left:0.5em; padding-top:0.5em;">
+					  <!-- InstanceBeginEditable name="pagecenter" -->
+					  <h2 class="fontsize140">Breakpoints View</h2>
+                      <p style="margin-top:10px;">The Breakpoints View lists all the breakpoints you  have set in your workspace. Only up to six breakpoints can be toggled if you are debugging in flash with Cortex-M3 series' chips, for Cortex-M0, the number is four. Otherwise, warnings will be presented at runtime.</p>
+                      <p> You can double-click a breakpoint to find its location in the editor (if applicable). You can also enable or disable breakpoints, delete them, add new ones. </p>
+                      <img src="../images/Debug/Breakpoint_View.gif" name="pic" id="pic" />
+                      <p> <br/>
+                        The commands available in the Breakpoints View are listed below. </p>
+                      <table width="93%" border="0" cellpadding="0" cellspacing="1" bgcolor="#dddddd">
+                        <tr>
+                          <td width="13%" height="30" align="center" valign="middle" bgcolor="#f7f7f7"><strong>Command </strong></td>
+                          <td width="21%" height="30" align="center" valign="middle" bgcolor="#f7f7f7"><strong>Name </strong></td>
+                          <td width="46%" height="30" align="center" valign="middle" bgcolor="#f7f7f7"><strong>Description </strong></td>
+                          <td width="20%" height="30" align="center" valign="middle" bgcolor="#f7f7f7"><strong>Availability </strong></td>
+                        </tr>
+                        <tr>
+                          <td height="38" align="center" valign="middle" bgcolor="#FFFFFF"><img border="0" width="16" height="16" src="../images/Debug/CoDebugger_Breakpoints_view_clip_image012.gif" alt="Remove Selected Breakpoints" /></td>
+                          <td height="38" align="left" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Remove Selected Breakpoints</td>
+                          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Only removes  the selected breakpoint(s).</td>
+                          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Context menu and view action </td>
+                        </tr>
+                        <tr>
+                          <td height="38" align="center" valign="middle" bgcolor="#FFFFFF"><img border="0" width="16" height="16" src="../images/Debug/CoDebugger_Breakpoints_view_clip_image011.gif" alt="Remove All Breakpoints" /></td>
+                          <td height="38" align="left" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Remove All </strong>BreakPpoints</td>
+                          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Removes all breakpoints. </td>
+                          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Context menu and view action </td>
+                        </tr>
+                        <tr>
+                          <td height="38" align="center" valign="middle" bgcolor="#FFFFFF"><img border="0" width="16" height="16" src="../images/Debug/CoDebugger_Breakpoints_view_clip_image007.gif" alt="Go to File" /></td>
+                          <td height="38" align="left" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Go to File</td>
+                          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Goes to  the corresponding location of the breakpoint in the java    editor. </td>
+                          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Context menu and view action </td>
+                        </tr>
+                        <tr>
+                          <td height="38" align="center" valign="middle" bgcolor="#FFFFFF"><img border="0" width="16" height="16" src="../images/Debug/CoDebugger_Breakpoints_view_clip_image014.gif" alt="Skip All Breakpoints" /></td>
+                          <td height="38" align="left" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Skip All </td>
+                          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Sets all breakpoints to be    skipped.</td>
+                          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">View action </td>
+                        </tr>
+                        <tr>
+                          <td height="38" align="center" valign="middle" bgcolor="#FFFFFF"><img border="0" width="16" height="16" src="../images/Debug/CoDebugger_Breakpoints_view_clip_image005.gif" alt="Expand All" /></td>
+                          <td height="38" align="left" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Expand All </td>
+                          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Expands all of the items in the view.</td>
+                          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">View action </td>
+                        </tr>
+                        <tr>
+                          <td height="38" align="center" valign="middle" bgcolor="#FFFFFF"><img width="16" height="16" src="../images/Debug/CoDebugger_Breakpoints_view_clip_image001.gif" alt="Collapse All" /></td>
+                          <td height="38" align="left" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Collapse All</td>
+                          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Collapses all of the items in the view.</td>
+                          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">View action </td>
+                        </tr>
+                        <tr>
+                          <td height="38" align="center" valign="middle" bgcolor="#FFFFFF"><img border="0" width="16" height="16" src="../images/Debug/CoDebugger_Breakpoints_view_clip_image009.gif" alt="Link with View" /></td>
+                          <td height="38" align="left" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Link with View</td>
+                          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Changes if the breakpoints    should be linked to the Debug View. </td>
+                          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">View action </td>
+                        </tr>
+                        <tr>
+                          <td height="38" align="center" valign="middle" bgcolor="#FFFFFF"><img border="0" width="16" height="16" src="../images/Debug/CoDebugger_Breakpoints_view_clip_image015.gif" alt="Import Breakpoints" /></td>
+                          <td height="38" align="left" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Add Watchpoint (C/C++)... </td>
+                          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Add watchpoints (Not supported by the current version. It will be supported in the future versions.)</td>
+                          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">View action </td>
+                        </tr>
+                        <tr>
+                          <td height="38" align="center" valign="middle" bgcolor="#FFFFFF"><img border="0" width="16" height="16" src="../images/Debug/CoDebugger_Breakpoints_view_clip_image016.gif" alt="Import Breakpoints" /></td>
+                          <td height="38" align="left" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Show full paths</td>
+                          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Show the full paths of the breakpoints.</td>
+                          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">View action </td>
+                        </tr>
+                        <tr>
+                          <td height="38" align="center" valign="middle" bgcolor="#FFFFFF"></td>
+                          <td height="38" align="left" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Group By... </td>
+                          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Allows you to select an alternate grouping for your breakpoints or create your own. </td>
+                          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">View action </td>
+                        </tr>
+                        <tr>
+                          <td height="38" align="center" valign="middle" bgcolor="#FFFFFF"><img border="0" width="16" height="16" src="../images/Debug/CoDebugger_Breakpoints_view_clip_image017.gif" alt="Import Breakpoints" /></td>
+                          <td height="38" align="left" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Select default Working Sets... </td>
+                          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;"> Select the default working set so that the new breakpoints will be added into this working set. </td>
+                          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">View action </td>
+                        </tr>
+                        <tr>
+                          <td height="38" align="center" valign="middle" bgcolor="#FFFFFF"></td>
+                          <td height="38" align="left" valign="middle" bgcolor="#FFFFFF" style="padding:3px;"> Deselect Default Working Set </td>
+                          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;"> Deselect the default working set so that the new breakpoints will not be added into any working set. </td>
+                          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">View action </td>
+                        </tr>
+                        <tr>
+                          <td height="38" align="center" valign="middle" bgcolor="#FFFFFF"></td>
+                          <td height="38" align="left" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Working Sets... </td>
+                          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Opens the working sets dialog.</td>
+                          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">View action </td>
+                        </tr>
+                        <tr>
+                          <td height="38" align="center" valign="middle" bgcolor="#FFFFFF"><img border="0" width="16" height="16" src="../images/Debug/CoDebugger_Breakpoints_view_clip_image004.gif" alt="Enable" /></td>
+                          <td height="38" align="left" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Enable</td>
+                          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Change the selected breakpoint(s) to be enabled.</td>
+                          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Context menu </td>
+                        </tr>
+                        <tr>
+                          <td height="38" align="center" valign="middle" bgcolor="#FFFFFF"><img border="0" width="16" height="16" src="../images/Debug/CoDebugger_Breakpoints_view_clip_image003.gif" alt="Disabled" /></td>
+                          <td height="38" align="left" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Disable</td>
+                          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Change the selected breakpoint(s) to be disabled.</td>
+                          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Context menu </td>
+                        </tr>
+                        <tr>
+                          <td height="38" align="center" valign="middle" bgcolor="#FFFFFF"></td>
+                          <td height="38" align="left" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Select All </td>
+                          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Selects all of the breakpoints    in the view.</td>
+                          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Context menu </td>
+                        </tr>
+                        <tr>
+                          <td height="38" align="center" valign="middle" bgcolor="#FFFFFF"><img border="0" width="16" height="16" src="../images/Debug/CoDebugger_Breakpoints_view_clip_image002.gif" alt="Copy" /></td>
+                          <td height="38" align="left" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Copy</td>
+                          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Copies the selected breakpoints    to the system clipboard. </td>
+                          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Context menu </td>
+                        </tr>
+                        <tr>
+                          <td height="38" align="center" valign="middle" bgcolor="#FFFFFF"><img border="0" width="16" height="16" src="../images/Debug/CoDebugger_Breakpoints_view_clip_image010.gif" alt="Paste Breakpoints" /></td>
+                          <td height="38" align="left" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Paste</td>
+                          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Pastes copied breakpoints into the view.</td>
+                          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Context menu </td>
+                        </tr>
+                        <tr>
+                          <td height="38" align="center" valign="middle" bgcolor="#FFFFFF"><img border="0" width="16" height="16" src="../images/Debug/CoDebugger_Breakpoints_view_clip_image008.gif" alt="Import Breakpoints" /></td>
+                          <td height="38" align="left" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Import Breakpoints... </td>
+                          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Opens the import breakpoints    wizard. </td>
+                          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Context menu </td>
+                        </tr>
+                        <tr>
+                          <td height="38" align="center" valign="middle" bgcolor="#FFFFFF"><img border="0" width="16" height="16" src="../images/Debug/CoDebugger_Breakpoints_view_clip_image006.gif" alt="Export Breakpoints" /></td>
+                          <td height="38" align="left" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Export Breakpoints...</td>
+                          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Opens the export breakpoints    wizard.</td>
+                          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Context menu </td>
+                        </tr>
+                        <tr>
+                          <td height="38" align="center" valign="middle" bgcolor="#FFFFFF"></td>
+                          <td height="38" align="left" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Breakpoint Properties...</td>
+                          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Opens the breakpoints properties    dialog. </td>
+                          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Context menu </td>
+                        </tr>
+                      </table>
+                    <!-- InstanceEndEditable -->        </td>
+                    
+              </tr>
+          </table>
+        </td>
+      </tr>
+     </table>
+ 
+</div></body>
+<!-- InstanceEnd --></html>

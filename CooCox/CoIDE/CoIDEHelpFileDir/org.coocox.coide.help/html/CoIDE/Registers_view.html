@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><!-- InstanceBegin template="/Templates/CoIDEguide.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<!-- InstanceBeginEditable name="top" -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> <link href="../css/page.css" rel="stylesheet" type="text/css" /><!-- InstanceEndEditable -->
+</head> 
+<body >
+<div class="main">
+     <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        
+      <td  valign="top">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+                <tr>
+                    <td width="76%" valign="top" style="padding-left:0.5em; padding-top:0.5em;">
+					  <!-- InstanceBeginEditable name="pagecenter" -->
+				    <h2 class="fontsize140">Registers view</h2>
+      <P style="margin-top:10px;">The Registers view of the Debug perspective lists information about the registers in a selected stack frame. </P>
+	  <p>You can view information about the registers in a selected stack frame. Values that have changed are highlighted in the Registers view when your program stops.</p>
+      <table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td ><img src="../images/Debug/Registers_View.gif" /></td>
+  </tr>
+     
+</table>
+      <h2 class="blue4bold fontsize140">Registers view toolbar icons:</h2>
+       
+       <p>The table below lists the icons displayed in the Registers view toolbar. </p>
+       <table width="93%" border="0" cellpadding="0" cellspacing="1" bgcolor="#dddddd" style="padding:5px;">
+         <tr>
+           <td width="13%" height="30" align="center" bgcolor="#f7f7f7"><strong>Command</strong></td>
+           <td width="31%" height="30" align="center" bgcolor="#f7f7f7"><strong>Name</strong></td>
+           <td width="56%" height="30" align="center" bgcolor="#f7f7f7"><strong>Description</strong></td>
+         </tr>
+         <tr valign="middle" bgcolor="#FFFFFF">
+           <td height="38" align="center" valign="middle"><img src="../images/Debug/CoDebugger_Registers_view_clip_image003.jpg" width="16" height="16"></td>
+           <td height="38" align="left" bgcolor="#FFFFFF" style="padding:3px;">Show Type Name</td>
+           <td height="38"  bgcolor="#FFFFFF" style="padding:3px;">Configure columns to show type names(unavailable when columns are displayed).</td>
+         </tr>
+         <tr valign="middle" bgcolor="#FFFFFF">
+           <td height="38" align="center" valign="middle"><img src="../images/Debug/CoDebugger_Registers_view_clip_image005.jpg" width="16" height="16"></td>
+           <td height="38" align="left" bgcolor="#FFFFFF" style="padding:3px;">Show logic structure</td>
+           <td height="38"  bgcolor="#FFFFFF" style="padding:3px;">Show logic structure of the registers.</td>
+         </tr>
+         <tr valign="middle" bgcolor="#FFFFFF">
+           <td height="38" align="center" valign="middle"><img src="../images/Debug/CoDebugger_Registers_view_clip_image007.gif" width="16" height="16"></td>
+           <td height="38" align="left" bgcolor="#FFFFFF" style="padding:3px;">Collapse All</td>
+           <td height="38"  bgcolor="#FFFFFF" style="padding:3px;">Collapse all the registers.</td>
+         </tr>
+         <tr valign="middle" bgcolor="#FFFFFF">
+           <td height="38" align="center" valign="middle">&nbsp;</td>
+           <td height="38" align="left" bgcolor="#FFFFFF" style="padding:3px;"> Layout</td>
+           <td height="38"  bgcolor="#FFFFFF" style="padding:3px;">Provides multiple layout options for the Registers view. </td>
+         </tr>
+       </table>
+	        
+     <h2 class="blue4bold fontsize140"><strong>Registers view context menu commands:</strong></h2>
+       
+       <p>The Registers view context menu commands include:</p>
+
+       <table width="93%" border="0" cellpadding="0" cellspacing="1" bgcolor="#dddddd">
+         <tr>
+           <td width="13%" height="30" align="center" bgcolor="#f7f7f7"><strong>Command</strong> </td>
+           <td width="31%" height="30" align="center" bgcolor="#f7f7f7"><strong>Name</strong> </td>
+           <td width="56%" height="30" align="center" bgcolor="#f7f7f7"><strong>Description</strong> </td>
+         </tr>
+             <tr>
+           <td height="38" align="center" valign="middle" bgcolor="#FFFFFF"></td>
+           <td height="38" align="left" bgcolor="#FFFFFF" style="padding:3px;">Select All </td>
+           <td height="38"  bgcolor="#FFFFFF" style="padding:3px;">Select all the editor content.</td>
+         </tr>
+          <tr>
+           <td height="38" align="center" valign="middle" bgcolor="#FFFFFF"><img width="23" height="22" src="../images/Debug/CoDebugger_Registers_view_clip_image006.jpg" alt="Copy Registers icon" /></td>
+           <td height="38" align="left" bgcolor="#FFFFFF" style="padding:3px;">Copy Registers </td>
+           <td height="38"  bgcolor="#FFFFFF" style="padding:3px;">Copies the register names and contents to the clipboard. </td>
+         </tr>
+         <tr>
+           <td height="38" align="center" valign="middle" bgcolor="#FFFFFF"><img width="22" height="21" src="../images/Debug/CoDebugger_Registers_view_clip_image014.jpg" alt="Enable icon" /></td>
+           <td height="38" align="left" bgcolor="#FFFFFF" style="padding:3px;">Enable</td>
+           <td height="38"  bgcolor="#FFFFFF" style="padding:3px;">Enables the selected register. </td>
+         </tr>
+         <tr>
+           <td height="38" align="center" valign="middle" bgcolor="#FFFFFF"><img width="22" height="21" src="../images/Debug/CoDebugger_Registers_view_clip_image010.jpg" alt="Disable icon" /></td>
+           <td height="38" align="left" bgcolor="#FFFFFF" style="padding:3px;">Disable</td>
+           <td height="38"  bgcolor="#FFFFFF" style="padding:3px;">Disables the selected register. </td>
+         </tr>
+         <tr>
+           <td height="38" align="center" valign="middle" bgcolor="#FFFFFF"></td>
+           <td height="38" align="left" bgcolor="#FFFFFF" style="padding:3px;">Format</td>
+           <td height="38"  bgcolor="#FFFFFF" style="padding:3px;">Select a format type. Choices include: BInary, Decimal, Natural,    and hexadecimal. </td>
+         </tr>
+         <tr>
+           <td height="38" align="center" valign="middle" bgcolor="#FFFFFF"></td>
+           <td height="38" align="left" bgcolor="#FFFFFF" style="padding:3px;">Find...</td>
+           <td height="38"  bgcolor="#FFFFFF" style="padding:3px;">Open the <strong>Find</strong> dialog which allows you to find specific    elements within the view.</td>
+         </tr>
+         <tr>
+           <td height="38" align="center" valign="middle" bgcolor="#FFFFFF"><img width="23" height="22" src="../images/Debug/CoDebugger_Registers_view_clip_image004.jpg" alt="Change Value icon" /></td>
+           <td height="38" align="left" bgcolor="#FFFFFF" style="padding:3px;">Change Value... </td>
+           <td height="38"  bgcolor="#FFFFFF" style="padding:3px;">Open the <strong>Set Value</strong> dialog to change the selected    registers value. </td>
+         </tr>
+         <tr>
+           <td height="38" align="center" valign="middle" bgcolor="#FFFFFF"></td>
+           <td height="38" align="left" bgcolor="#FFFFFF" style="padding:3px;"> Add Register Group </td>
+           <td height="38"  bgcolor="#FFFFFF" style="padding:3px;">Open the <strong>Register Group</strong> dialog which allows you to define    a register group that is shown in the Registers view. </td>
+         </tr>
+         <tr>
+           <td height="38" align="center" valign="middle" bgcolor="#FFFFFF"></td>
+           <td height="38" align="left" bgcolor="#FFFFFF" style="padding:3px;">Restore Default Register Groups</td>
+           <td height="38"  bgcolor="#FFFFFF" style="padding:3px;">Restores the original register groups. </td>
+         </tr>
+         <tr>
+           <td height="38" align="center" valign="middle" bgcolor="#FFFFFF"></td>
+           <td height="38" align="left" bgcolor="#FFFFFF" style="padding:3px;">Edit Register Group </td>
+           <td height="38"  bgcolor="#FFFFFF" style="padding:3px;">Open the <strong>Register Group</strong> dialog to edit the selected    register group. </td>
+         </tr>
+          <tr>
+           <td height="38" align="center" valign="middle" bgcolor="#FFFFFF"></td>
+           <td height="38" align="left" bgcolor="#FFFFFF" style="padding:3px;">Remove Register Group </td>
+           <td height="38"  bgcolor="#FFFFFF" style="padding:3px;">Removes the currently selected register group. </td>
+         </tr>
+         <tr>
+           <td height="38" align="center" valign="middle" bgcolor="#FFFFFF"><img border="0" width="16" height="16" src="../images/Debug/CoDebugger_Registers_view_clip_image012.gif" alt="Import Breakpoints" /></td>
+           <td height="38" align="left" bgcolor="#FFFFFF" style="padding:3px;">Add Watchpoint (C/C++)... </td>
+           <td height="38"  bgcolor="#FFFFFF" style="padding:3px;">Add watchpoints(Not supported by the current version. It will be supported in the future versions.).</td>
+         </tr>
+         <tr>
+           <td height="38" align="center" valign="middle" bgcolor="#FFFFFF"><img width="24" height="22" src="../images/Debug/CoDebugger_Registers_view_clip_image008.jpg" alt="Create Watch Expression icon" /></td>
+           <td height="38" align="left" bgcolor="#FFFFFF" style="padding:3px;">Watch </td>
+           <td height="38"  bgcolor="#FFFFFF" style="padding:3px;">Converts the selected register into a watch expression.</td>
+         </tr>
+     
+       </table> 
+				  <!-- InstanceEndEditable -->        </td>
+                    
+              </tr>
+          </table>
+        </td>
+      </tr>
+     </table>
+ 
+</div></body>
+<!-- InstanceEnd --></html>

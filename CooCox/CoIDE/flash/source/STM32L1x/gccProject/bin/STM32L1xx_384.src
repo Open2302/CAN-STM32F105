@@ -1,0 +1,543 @@
+
+bin/STM32L1xx_384.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00000000 <BreakHere>:
+ */
+#if (defined (__GNUC__)) /*------------------ GNU Compiler ---------------------*/
+void BreakHere(int status) __attribute__( ( naked ) );
+void BreakHere(int status)
+{
+  __asm volatile ("BKPT #0 \n\t"  );
+   0:	be00      	bkpt	0x0000
+   2:	bf00      	nop
+
+00000004 <ExecFunction>:
+ */
+int ExecFunction (FlashAlgoFnc algoFnc,
+				  unsigned long parameter0,
+				  unsigned long parameter1,
+				  unsigned long parameter2)
+{
+   4:	b580      	push	{r7, lr}
+   6:	b086      	sub	sp, #24
+   8:	af00      	add	r7, sp, #0
+   a:	60f8      	str	r0, [r7, #12]
+   c:	60b9      	str	r1, [r7, #8]
+   e:	607a      	str	r2, [r7, #4]
+  10:	603b      	str	r3, [r7, #0]
+	 int retval;
+	 retval = algoFnc(parameter0,parameter1,parameter2);
+  12:	68fb      	ldr	r3, [r7, #12]
+  14:	68b8      	ldr	r0, [r7, #8]
+  16:	6879      	ldr	r1, [r7, #4]
+  18:	683a      	ldr	r2, [r7, #0]
+  1a:	4798      	blx	r3
+  1c:	6178      	str	r0, [r7, #20]
+	 BreakHere(retval);
+  1e:	6978      	ldr	r0, [r7, #20]
+  20:	f7ff ffee 	bl	0 <BreakHere>
+	 
+	 return (retval);
+  24:	697b      	ldr	r3, [r7, #20]
+}
+  26:	4618      	mov	r0, r3
+  28:	f107 0718 	add.w	r7, r7, #24
+  2c:	46bd      	mov	sp, r7
+  2e:	bd80      	pop	{r7, pc}
+
+00000030 <FlashInit>:
+ *******************************************************************************
+ */
+int FlashInit (unsigned long baseAddr,
+               unsigned long clk,
+               unsigned long operateFuc)
+{
+  30:	b480      	push	{r7}
+  32:	b085      	sub	sp, #20
+  34:	af00      	add	r7, sp, #0
+  36:	60f8      	str	r0, [r7, #12]
+  38:	60b9      	str	r1, [r7, #8]
+  3a:	607a      	str	r2, [r7, #4]
+
+	      FLASH->SR |= FLASH_ERRs;                  // clear error flags
+  3c:	4b15      	ldr	r3, [pc, #84]	; (94 <FlashInit+0x64>)
+  3e:	4a15      	ldr	r2, [pc, #84]	; (94 <FlashInit+0x64>)
+  40:	6992      	ldr	r2, [r2, #24]
+  42:	f442 6270 	orr.w	r2, r2, #3840	; 0xf00
+  46:	619a      	str	r2, [r3, #24]
+
+	      // Unlock PECR Register
+	      FLASH->PEKEYR = FLASH_PEKEY1;
+  48:	4b12      	ldr	r3, [pc, #72]	; (94 <FlashInit+0x64>)
+  4a:	4a13      	ldr	r2, [pc, #76]	; (98 <FlashInit+0x68>)
+  4c:	60da      	str	r2, [r3, #12]
+	      FLASH->PEKEYR = FLASH_PEKEY2;
+  4e:	4b11      	ldr	r3, [pc, #68]	; (94 <FlashInit+0x64>)
+  50:	4a12      	ldr	r2, [pc, #72]	; (9c <FlashInit+0x6c>)
+  52:	60da      	str	r2, [r3, #12]
+
+	      // Unlock Program Matrix
+	      FLASH->PRGKEYR = FLASH_PRGKEY1;
+  54:	4b0f      	ldr	r3, [pc, #60]	; (94 <FlashInit+0x64>)
+  56:	4a12      	ldr	r2, [pc, #72]	; (a0 <FlashInit+0x70>)
+  58:	611a      	str	r2, [r3, #16]
+	      FLASH->PRGKEYR = FLASH_PRGKEY2;
+  5a:	4b0e      	ldr	r3, [pc, #56]	; (94 <FlashInit+0x64>)
+  5c:	4a11      	ldr	r2, [pc, #68]	; (a4 <FlashInit+0x74>)
+  5e:	611a      	str	r2, [r3, #16]
+
+	      // Test if IWDG is running (IWDG in HW mode)
+	      if ((FLASH->OBR & FLASH_IWDG_SW) == 0x00) {
+  60:	4b0c      	ldr	r3, [pc, #48]	; (94 <FlashInit+0x64>)
+  62:	69db      	ldr	r3, [r3, #28]
+  64:	f403 1380 	and.w	r3, r3, #1048576	; 0x100000
+  68:	2b00      	cmp	r3, #0
+  6a:	d10b      	bne.n	84 <FlashInit+0x54>
+	        // Set IWDG time out to ~32.768 second
+	        IWDG->KR  = 0x5555;                     // Enable write access to IWDG_PR and IWDG_RLR
+  6c:	4b0e      	ldr	r3, [pc, #56]	; (a8 <FlashInit+0x78>)
+  6e:	f245 5255 	movw	r2, #21845	; 0x5555
+  72:	601a      	str	r2, [r3, #0]
+	        IWDG->PR  = 0x06;                       // Set prescaler to 256
+  74:	4b0c      	ldr	r3, [pc, #48]	; (a8 <FlashInit+0x78>)
+  76:	f04f 0206 	mov.w	r2, #6
+  7a:	605a      	str	r2, [r3, #4]
+	        IWDG->RLR = 0xFFF;                      // Set reload value to 4095
+  7c:	4b0a      	ldr	r3, [pc, #40]	; (a8 <FlashInit+0x78>)
+  7e:	f640 72ff 	movw	r2, #4095	; 0xfff
+  82:	609a      	str	r2, [r3, #8]
+	      }
+	    
+	  
+
+	  return (0);
+  84:	f04f 0300 	mov.w	r3, #0
+}
+  88:	4618      	mov	r0, r3
+  8a:	f107 0714 	add.w	r7, r7, #20
+  8e:	46bd      	mov	sp, r7
+  90:	bc80      	pop	{r7}
+  92:	4770      	bx	lr
+  94:	40023c00 	.word	0x40023c00
+  98:	89abcdef 	.word	0x89abcdef
+  9c:	02030405 	.word	0x02030405
+  a0:	8c9daebf 	.word	0x8c9daebf
+  a4:	13141516 	.word	0x13141516
+  a8:	40003000 	.word	0x40003000
+
+000000ac <FlashUnInit>:
+ * @details    This function is called after flash programming/erase. 
+ * @note 
+ *******************************************************************************
+ */
+int FlashUnInit (unsigned long operateFuc)
+{
+  ac:	b480      	push	{r7}
+  ae:	b083      	sub	sp, #12
+  b0:	af00      	add	r7, sp, #0
+  b2:	6078      	str	r0, [r7, #4]
+
+	      // Lock PECR register and program matrix
+	      FLASH->PECR |= FLASH_PRGLOCK;             // Program memory lock
+  b4:	4b09      	ldr	r3, [pc, #36]	; (dc <FlashUnInit+0x30>)
+  b6:	4a09      	ldr	r2, [pc, #36]	; (dc <FlashUnInit+0x30>)
+  b8:	6852      	ldr	r2, [r2, #4]
+  ba:	f042 0202 	orr.w	r2, r2, #2
+  be:	605a      	str	r2, [r3, #4]
+	      FLASH->PECR |= FLASH_PELOCK;              // FLASH_PECR and data memory lock
+  c0:	4b06      	ldr	r3, [pc, #24]	; (dc <FlashUnInit+0x30>)
+  c2:	4a06      	ldr	r2, [pc, #24]	; (dc <FlashUnInit+0x30>)
+  c4:	6852      	ldr	r2, [r2, #4]
+  c6:	f042 0201 	orr.w	r2, r2, #1
+  ca:	605a      	str	r2, [r3, #4]
+
+
+	      return (0);
+  cc:	f04f 0300 	mov.w	r3, #0
+}
+  d0:	4618      	mov	r0, r3
+  d2:	f107 070c 	add.w	r7, r7, #12
+  d6:	46bd      	mov	sp, r7
+  d8:	bc80      	pop	{r7}
+  da:	4770      	bx	lr
+  dc:	40023c00 	.word	0x40023c00
+
+000000e0 <FlashEraseChip>:
+ * @details     
+ * @note 
+ *******************************************************************************
+ */
+int FlashEraseChip   (void)
+{
+  e0:	b580      	push	{r7, lr}
+  e2:	b082      	sub	sp, #8
+  e4:	af00      	add	r7, sp, #0
+	int i =0;
+  e6:	f04f 0300 	mov.w	r3, #0
+  ea:	607b      	str	r3, [r7, #4]
+	while (i < 0x20000)
+  ec:	e007      	b.n	fe <FlashEraseChip+0x1e>
+	{
+		FlashEraseSector(i);
+  ee:	687b      	ldr	r3, [r7, #4]
+  f0:	4618      	mov	r0, r3
+  f2:	f000 f811 	bl	118 <FlashEraseSector>
+		i=i+256;
+  f6:	687b      	ldr	r3, [r7, #4]
+  f8:	f503 7380 	add.w	r3, r3, #256	; 0x100
+  fc:	607b      	str	r3, [r7, #4]
+ *******************************************************************************
+ */
+int FlashEraseChip   (void)
+{
+	int i =0;
+	while (i < 0x20000)
+  fe:	687a      	ldr	r2, [r7, #4]
+ 100:	4b04      	ldr	r3, [pc, #16]	; (114 <FlashEraseChip+0x34>)
+ 102:	429a      	cmp	r2, r3
+ 104:	ddf3      	ble.n	ee <FlashEraseChip+0xe>
+	{
+		FlashEraseSector(i);
+		i=i+256;
+	}
+    return (0);                                   // Done
+ 106:	f04f 0300 	mov.w	r3, #0
+}
+ 10a:	4618      	mov	r0, r3
+ 10c:	f107 0708 	add.w	r7, r7, #8
+ 110:	46bd      	mov	sp, r7
+ 112:	bd80      	pop	{r7, pc}
+ 114:	0001ffff 	.word	0x0001ffff
+
+00000118 <FlashEraseSector>:
+ * @details     
+ * @note 
+ *******************************************************************************
+ */
+int FlashEraseSector (unsigned long sectorAddr)
+{
+ 118:	b480      	push	{r7}
+ 11a:	b083      	sub	sp, #12
+ 11c:	af00      	add	r7, sp, #0
+ 11e:	6078      	str	r0, [r7, #4]
+
+	  FLASH->PECR |= FLASH_ERASE;                   // Page or Double Word Erase enabled
+ 120:	4b17      	ldr	r3, [pc, #92]	; (180 <FlashEraseSector+0x68>)
+ 122:	4a17      	ldr	r2, [pc, #92]	; (180 <FlashEraseSector+0x68>)
+ 124:	6852      	ldr	r2, [r2, #4]
+ 126:	f442 7200 	orr.w	r2, r2, #512	; 0x200
+ 12a:	605a      	str	r2, [r3, #4]
+	  FLASH->PECR |= FLASH_PROG;                    // Program memory selected
+ 12c:	4b14      	ldr	r3, [pc, #80]	; (180 <FlashEraseSector+0x68>)
+ 12e:	4a14      	ldr	r2, [pc, #80]	; (180 <FlashEraseSector+0x68>)
+ 130:	6852      	ldr	r2, [r2, #4]
+ 132:	f042 0208 	orr.w	r2, r2, #8
+ 136:	605a      	str	r2, [r3, #4]
+
+	  M32(sectorAddr) = 0x00000000;                        // write '0' to the first address to erase page
+ 138:	687b      	ldr	r3, [r7, #4]
+ 13a:	f04f 0200 	mov.w	r2, #0
+ 13e:	601a      	str	r2, [r3, #0]
+
+	  while (FLASH->SR & FLASH_BSY) {
+ 140:	e003      	b.n	14a <FlashEraseSector+0x32>
+	    IWDG->KR = 0xAAAA;                          // Reload IWDG
+ 142:	4b10      	ldr	r3, [pc, #64]	; (184 <FlashEraseSector+0x6c>)
+ 144:	f64a 22aa 	movw	r2, #43690	; 0xaaaa
+ 148:	601a      	str	r2, [r3, #0]
+	  FLASH->PECR |= FLASH_ERASE;                   // Page or Double Word Erase enabled
+	  FLASH->PECR |= FLASH_PROG;                    // Program memory selected
+
+	  M32(sectorAddr) = 0x00000000;                        // write '0' to the first address to erase page
+
+	  while (FLASH->SR & FLASH_BSY) {
+ 14a:	4b0d      	ldr	r3, [pc, #52]	; (180 <FlashEraseSector+0x68>)
+ 14c:	699b      	ldr	r3, [r3, #24]
+ 14e:	f003 0301 	and.w	r3, r3, #1
+ 152:	2b00      	cmp	r3, #0
+ 154:	d1f5      	bne.n	142 <FlashEraseSector+0x2a>
+	    IWDG->KR = 0xAAAA;                          // Reload IWDG
+	  }
+
+	  FLASH->PECR &= ~FLASH_ERASE;                  // Page or Double Word Erase disabled
+ 156:	4b0a      	ldr	r3, [pc, #40]	; (180 <FlashEraseSector+0x68>)
+ 158:	4a09      	ldr	r2, [pc, #36]	; (180 <FlashEraseSector+0x68>)
+ 15a:	6852      	ldr	r2, [r2, #4]
+ 15c:	f422 7200 	bic.w	r2, r2, #512	; 0x200
+ 160:	605a      	str	r2, [r3, #4]
+	  FLASH->PECR &= ~FLASH_PROG;                   // Program memory deselected
+ 162:	4b07      	ldr	r3, [pc, #28]	; (180 <FlashEraseSector+0x68>)
+ 164:	4a06      	ldr	r2, [pc, #24]	; (180 <FlashEraseSector+0x68>)
+ 166:	6852      	ldr	r2, [r2, #4]
+ 168:	f022 0208 	bic.w	r2, r2, #8
+ 16c:	605a      	str	r2, [r3, #4]
+
+	  return (0);                                   // Done
+ 16e:	f04f 0300 	mov.w	r3, #0
+}
+ 172:	4618      	mov	r0, r3
+ 174:	f107 070c 	add.w	r7, r7, #12
+ 178:	46bd      	mov	sp, r7
+ 17a:	bc80      	pop	{r7}
+ 17c:	4770      	bx	lr
+ 17e:	bf00      	nop
+ 180:	40023c00 	.word	0x40023c00
+ 184:	40003000 	.word	0x40003000
+
+00000188 <FlashProgramPage>:
+ *******************************************************************************
+ */ 
+int FlashProgramPage (unsigned long pageAddr,     
+                      unsigned long size,
+                      unsigned char *buf)
+{
+ 188:	b480      	push	{r7}
+ 18a:	b087      	sub	sp, #28
+ 18c:	af00      	add	r7, sp, #0
+ 18e:	60f8      	str	r0, [r7, #12]
+ 190:	60b9      	str	r1, [r7, #8]
+ 192:	607a      	str	r2, [r7, #4]
+	  unsigned long  cnt = 128;
+ 194:	f04f 0380 	mov.w	r3, #128	; 0x80
+ 198:	617b      	str	r3, [r7, #20]
+
+	  size = (size + 255) & ~255;                       // adjust programming size
+ 19a:	68bb      	ldr	r3, [r7, #8]
+ 19c:	f103 03ff 	add.w	r3, r3, #255	; 0xff
+ 1a0:	f023 03ff 	bic.w	r3, r3, #255	; 0xff
+ 1a4:	60bb      	str	r3, [r7, #8]
+
+	  FLASH->PECR |= FLASH_FPRG;                    // Half Page programming mode enabled
+ 1a6:	4b56      	ldr	r3, [pc, #344]	; (300 <FlashProgramPage+0x178>)
+ 1a8:	4a55      	ldr	r2, [pc, #340]	; (300 <FlashProgramPage+0x178>)
+ 1aa:	6852      	ldr	r2, [r2, #4]
+ 1ac:	f442 6280 	orr.w	r2, r2, #1024	; 0x400
+ 1b0:	605a      	str	r2, [r3, #4]
+	  FLASH->PECR |= FLASH_PROG;                    // Program memory selected
+ 1b2:	4b53      	ldr	r3, [pc, #332]	; (300 <FlashProgramPage+0x178>)
+ 1b4:	4a52      	ldr	r2, [pc, #328]	; (300 <FlashProgramPage+0x178>)
+ 1b6:	6852      	ldr	r2, [r2, #4]
+ 1b8:	f042 0208 	orr.w	r2, r2, #8
+ 1bc:	605a      	str	r2, [r3, #4]
+
+	  // program first half page
+	  cnt = 128;
+ 1be:	f04f 0380 	mov.w	r3, #128	; 0x80
+ 1c2:	617b      	str	r3, [r7, #20]
+	  while (size && cnt) {
+ 1c4:	e013      	b.n	1ee <FlashProgramPage+0x66>
+	     M32(pageAddr) = *((unsigned long *)buf);        // Program Word
+ 1c6:	68fb      	ldr	r3, [r7, #12]
+ 1c8:	687a      	ldr	r2, [r7, #4]
+ 1ca:	6812      	ldr	r2, [r2, #0]
+ 1cc:	601a      	str	r2, [r3, #0]
+	     pageAddr += 4;
+ 1ce:	68fb      	ldr	r3, [r7, #12]
+ 1d0:	f103 0304 	add.w	r3, r3, #4
+ 1d4:	60fb      	str	r3, [r7, #12]
+	     buf += 4;
+ 1d6:	687b      	ldr	r3, [r7, #4]
+ 1d8:	f103 0304 	add.w	r3, r3, #4
+ 1dc:	607b      	str	r3, [r7, #4]
+	     size  -= 4;
+ 1de:	68bb      	ldr	r3, [r7, #8]
+ 1e0:	f1a3 0304 	sub.w	r3, r3, #4
+ 1e4:	60bb      	str	r3, [r7, #8]
+	     cnt -= 4;
+ 1e6:	697b      	ldr	r3, [r7, #20]
+ 1e8:	f1a3 0304 	sub.w	r3, r3, #4
+ 1ec:	617b      	str	r3, [r7, #20]
+	  FLASH->PECR |= FLASH_FPRG;                    // Half Page programming mode enabled
+	  FLASH->PECR |= FLASH_PROG;                    // Program memory selected
+
+	  // program first half page
+	  cnt = 128;
+	  while (size && cnt) {
+ 1ee:	68bb      	ldr	r3, [r7, #8]
+ 1f0:	2b00      	cmp	r3, #0
+ 1f2:	d008      	beq.n	206 <FlashProgramPage+0x7e>
+ 1f4:	697b      	ldr	r3, [r7, #20]
+ 1f6:	2b00      	cmp	r3, #0
+ 1f8:	d1e5      	bne.n	1c6 <FlashProgramPage+0x3e>
+	     buf += 4;
+	     size  -= 4;
+	     cnt -= 4;
+	  }
+
+	  while (FLASH->SR & FLASH_BSY) {
+ 1fa:	e004      	b.n	206 <FlashProgramPage+0x7e>
+	    IWDG->KR = 0xAAAA;                          // Reload IWDG
+ 1fc:	4b41      	ldr	r3, [pc, #260]	; (304 <FlashProgramPage+0x17c>)
+ 1fe:	f64a 22aa 	movw	r2, #43690	; 0xaaaa
+ 202:	601a      	str	r2, [r3, #0]
+ 204:	e000      	b.n	208 <FlashProgramPage+0x80>
+	     buf += 4;
+	     size  -= 4;
+	     cnt -= 4;
+	  }
+
+	  while (FLASH->SR & FLASH_BSY) {
+ 206:	bf00      	nop
+ 208:	4b3d      	ldr	r3, [pc, #244]	; (300 <FlashProgramPage+0x178>)
+ 20a:	699b      	ldr	r3, [r3, #24]
+ 20c:	f003 0301 	and.w	r3, r3, #1
+ 210:	2b00      	cmp	r3, #0
+ 212:	d1f3      	bne.n	1fc <FlashProgramPage+0x74>
+	    IWDG->KR = 0xAAAA;                          // Reload IWDG
+	  }
+
+	  // Check for Errors
+	  if (FLASH->SR & (FLASH_ERRs)) {
+ 214:	4b3a      	ldr	r3, [pc, #232]	; (300 <FlashProgramPage+0x178>)
+ 216:	699b      	ldr	r3, [r3, #24]
+ 218:	f403 6370 	and.w	r3, r3, #3840	; 0xf00
+ 21c:	2b00      	cmp	r3, #0
+ 21e:	d008      	beq.n	232 <FlashProgramPage+0xaa>
+	    FLASH->SR |= FLASH_ERRs;                    // clear error flags
+ 220:	4b37      	ldr	r3, [pc, #220]	; (300 <FlashProgramPage+0x178>)
+ 222:	4a37      	ldr	r2, [pc, #220]	; (300 <FlashProgramPage+0x178>)
+ 224:	6992      	ldr	r2, [r2, #24]
+ 226:	f442 6270 	orr.w	r2, r2, #3840	; 0xf00
+ 22a:	619a      	str	r2, [r3, #24]
+	    return (1);                                 // Failed
+ 22c:	f04f 0301 	mov.w	r3, #1
+ 230:	e05f      	b.n	2f2 <FlashProgramPage+0x16a>
+	  }
+
+	  FLASH->PECR &= ~FLASH_FPRG;                   // Half Page programming mode disabled
+ 232:	4b33      	ldr	r3, [pc, #204]	; (300 <FlashProgramPage+0x178>)
+ 234:	4a32      	ldr	r2, [pc, #200]	; (300 <FlashProgramPage+0x178>)
+ 236:	6852      	ldr	r2, [r2, #4]
+ 238:	f422 6280 	bic.w	r2, r2, #1024	; 0x400
+ 23c:	605a      	str	r2, [r3, #4]
+	  FLASH->PECR &= ~FLASH_PROG;                   // Program memory deselected
+ 23e:	4b30      	ldr	r3, [pc, #192]	; (300 <FlashProgramPage+0x178>)
+ 240:	4a2f      	ldr	r2, [pc, #188]	; (300 <FlashProgramPage+0x178>)
+ 242:	6852      	ldr	r2, [r2, #4]
+ 244:	f022 0208 	bic.w	r2, r2, #8
+ 248:	605a      	str	r2, [r3, #4]
+
+	  FLASH->PECR |= FLASH_FPRG;                    // Half Page programming mode enabled
+ 24a:	4b2d      	ldr	r3, [pc, #180]	; (300 <FlashProgramPage+0x178>)
+ 24c:	4a2c      	ldr	r2, [pc, #176]	; (300 <FlashProgramPage+0x178>)
+ 24e:	6852      	ldr	r2, [r2, #4]
+ 250:	f442 6280 	orr.w	r2, r2, #1024	; 0x400
+ 254:	605a      	str	r2, [r3, #4]
+	  FLASH->PECR |= FLASH_PROG;                    // Program memory selected
+ 256:	4b2a      	ldr	r3, [pc, #168]	; (300 <FlashProgramPage+0x178>)
+ 258:	4a29      	ldr	r2, [pc, #164]	; (300 <FlashProgramPage+0x178>)
+ 25a:	6852      	ldr	r2, [r2, #4]
+ 25c:	f042 0208 	orr.w	r2, r2, #8
+ 260:	605a      	str	r2, [r3, #4]
+
+	  // program second half page
+	  cnt = 128;
+ 262:	f04f 0380 	mov.w	r3, #128	; 0x80
+ 266:	617b      	str	r3, [r7, #20]
+	  while (size && cnt) {
+ 268:	e013      	b.n	292 <FlashProgramPage+0x10a>
+	    M32(pageAddr) = *((unsigned long *)buf);         // Program Word
+ 26a:	68fb      	ldr	r3, [r7, #12]
+ 26c:	687a      	ldr	r2, [r7, #4]
+ 26e:	6812      	ldr	r2, [r2, #0]
+ 270:	601a      	str	r2, [r3, #0]
+	    pageAddr += 4;
+ 272:	68fb      	ldr	r3, [r7, #12]
+ 274:	f103 0304 	add.w	r3, r3, #4
+ 278:	60fb      	str	r3, [r7, #12]
+	    buf += 4;
+ 27a:	687b      	ldr	r3, [r7, #4]
+ 27c:	f103 0304 	add.w	r3, r3, #4
+ 280:	607b      	str	r3, [r7, #4]
+	    size  -= 4;
+ 282:	68bb      	ldr	r3, [r7, #8]
+ 284:	f1a3 0304 	sub.w	r3, r3, #4
+ 288:	60bb      	str	r3, [r7, #8]
+	    cnt -= 4;
+ 28a:	697b      	ldr	r3, [r7, #20]
+ 28c:	f1a3 0304 	sub.w	r3, r3, #4
+ 290:	617b      	str	r3, [r7, #20]
+	  FLASH->PECR |= FLASH_FPRG;                    // Half Page programming mode enabled
+	  FLASH->PECR |= FLASH_PROG;                    // Program memory selected
+
+	  // program second half page
+	  cnt = 128;
+	  while (size && cnt) {
+ 292:	68bb      	ldr	r3, [r7, #8]
+ 294:	2b00      	cmp	r3, #0
+ 296:	d008      	beq.n	2aa <FlashProgramPage+0x122>
+ 298:	697b      	ldr	r3, [r7, #20]
+ 29a:	2b00      	cmp	r3, #0
+ 29c:	d1e5      	bne.n	26a <FlashProgramPage+0xe2>
+	    buf += 4;
+	    size  -= 4;
+	    cnt -= 4;
+	  }
+
+	  while (FLASH->SR & FLASH_BSY) {
+ 29e:	e004      	b.n	2aa <FlashProgramPage+0x122>
+	    IWDG->KR = 0xAAAA;                          // Reload IWDG
+ 2a0:	4b18      	ldr	r3, [pc, #96]	; (304 <FlashProgramPage+0x17c>)
+ 2a2:	f64a 22aa 	movw	r2, #43690	; 0xaaaa
+ 2a6:	601a      	str	r2, [r3, #0]
+ 2a8:	e000      	b.n	2ac <FlashProgramPage+0x124>
+	    buf += 4;
+	    size  -= 4;
+	    cnt -= 4;
+	  }
+
+	  while (FLASH->SR & FLASH_BSY) {
+ 2aa:	bf00      	nop
+ 2ac:	4b14      	ldr	r3, [pc, #80]	; (300 <FlashProgramPage+0x178>)
+ 2ae:	699b      	ldr	r3, [r3, #24]
+ 2b0:	f003 0301 	and.w	r3, r3, #1
+ 2b4:	2b00      	cmp	r3, #0
+ 2b6:	d1f3      	bne.n	2a0 <FlashProgramPage+0x118>
+	    IWDG->KR = 0xAAAA;                          // Reload IWDG
+	  }
+
+	  // Check for Errors
+	  if (FLASH->SR & (FLASH_ERRs)) {
+ 2b8:	4b11      	ldr	r3, [pc, #68]	; (300 <FlashProgramPage+0x178>)
+ 2ba:	699b      	ldr	r3, [r3, #24]
+ 2bc:	f403 6370 	and.w	r3, r3, #3840	; 0xf00
+ 2c0:	2b00      	cmp	r3, #0
+ 2c2:	d008      	beq.n	2d6 <FlashProgramPage+0x14e>
+	    FLASH->SR |= FLASH_ERRs;                    // clear error flags
+ 2c4:	4b0e      	ldr	r3, [pc, #56]	; (300 <FlashProgramPage+0x178>)
+ 2c6:	4a0e      	ldr	r2, [pc, #56]	; (300 <FlashProgramPage+0x178>)
+ 2c8:	6992      	ldr	r2, [r2, #24]
+ 2ca:	f442 6270 	orr.w	r2, r2, #3840	; 0xf00
+ 2ce:	619a      	str	r2, [r3, #24]
+	    return (1);                                 // Failed
+ 2d0:	f04f 0301 	mov.w	r3, #1
+ 2d4:	e00d      	b.n	2f2 <FlashProgramPage+0x16a>
+	  }
+
+	  FLASH->PECR &= ~FLASH_FPRG;                   // Half Page programming mode disabled
+ 2d6:	4b0a      	ldr	r3, [pc, #40]	; (300 <FlashProgramPage+0x178>)
+ 2d8:	4a09      	ldr	r2, [pc, #36]	; (300 <FlashProgramPage+0x178>)
+ 2da:	6852      	ldr	r2, [r2, #4]
+ 2dc:	f422 6280 	bic.w	r2, r2, #1024	; 0x400
+ 2e0:	605a      	str	r2, [r3, #4]
+	  FLASH->PECR &= ~FLASH_PROG;                   // Program memory deselected
+ 2e2:	4b07      	ldr	r3, [pc, #28]	; (300 <FlashProgramPage+0x178>)
+ 2e4:	4a06      	ldr	r2, [pc, #24]	; (300 <FlashProgramPage+0x178>)
+ 2e6:	6852      	ldr	r2, [r2, #4]
+ 2e8:	f022 0208 	bic.w	r2, r2, #8
+ 2ec:	605a      	str	r2, [r3, #4]
+
+	  return (0);                                   // Done
+ 2ee:	f04f 0300 	mov.w	r3, #0
+}
+ 2f2:	4618      	mov	r0, r3
+ 2f4:	f107 071c 	add.w	r7, r7, #28
+ 2f8:	46bd      	mov	sp, r7
+ 2fa:	bc80      	pop	{r7}
+ 2fc:	4770      	bx	lr
+ 2fe:	bf00      	nop
+ 300:	40023c00 	.word	0x40023c00
+ 304:	40003000 	.word	0x40003000

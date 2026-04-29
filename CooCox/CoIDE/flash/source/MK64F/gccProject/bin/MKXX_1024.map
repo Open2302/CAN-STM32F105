@@ -1,0 +1,745 @@
+
+Allocating common symbols
+Common symbol       size              file
+
+flashSSDConfig      0x28              obj/FlashAlgoFncs.o
+base_adr            0x4               obj/FlashAlgoFncs.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD obj/FlashExecFnc.o
+LOAD obj/DEFlashPartition.o
+LOAD obj/DFlashGetProtection.o
+LOAD obj/DFlashSetProtection.o
+LOAD obj/EEEWrite.o
+LOAD obj/EERAMGetProtection.o
+LOAD obj/EERAMSetProtection.o
+LOAD obj/FlashAlgoFncs.o
+LOAD obj/FlashAlgoInfo.o
+LOAD obj/FlashCheckSum.o
+LOAD obj/FlashCommandSequence.o
+LOAD obj/FlashEraseAllBlock.o
+LOAD obj/FlashEraseBlock.o
+LOAD obj/FlashEraseResume.o
+LOAD obj/FlashEraseSector_Keil.o
+LOAD obj/FlashEraseSuspend.o
+LOAD obj/FlashGetInterruptEnable.o
+LOAD obj/FlashGetSecurityState.o
+LOAD obj/FlashInit.o
+LOAD obj/FlashProgramCheck.o
+LOAD obj/FlashProgramLongword_Keil.o
+LOAD obj/FlashProgramOnce.o
+LOAD obj/FlashProgramSection.o
+LOAD obj/FlashReadOnce.o
+LOAD obj/FlashReadResource.o
+LOAD obj/FlashSecurityBypass.o
+LOAD obj/FlashSetInterruptEnable.o
+LOAD obj/FlashVerifyAllBlock.o
+LOAD obj/FlashVerifyBlock.o
+LOAD obj/FlashVerifySection.o
+LOAD obj/PFlashGetProtection.o
+LOAD obj/PFlashGetSwapStatus.o
+LOAD obj/PFlashSetProtection.o
+LOAD obj/PFlashSwap.o
+LOAD obj/SetEEEEnable.o
+START GROUP
+LOAD d:/sourcery2013/bin/../lib/gcc/arm-none-eabi/4.7.3/thumb2\libgcc.a
+LOAD d:/sourcery2013/bin/../lib/gcc/arm-none-eabi/4.7.3/../../../../arm-none-eabi/lib/thumb2\libc.a
+END GROUP
+
+.text           0x00000000     0x1d6c
+                0x00000000                . = 0x0
+ *(.text .text.*)
+ .text          0x00000000       0x30 obj/FlashExecFnc.o
+                0x00000000                BreakHere
+                0x00000004                ExecFunction
+ .text          0x00000030       0x44 obj/DEFlashPartition.o
+                0x00000030                DEFlashPartition
+ .text          0x00000074       0x40 obj/DFlashGetProtection.o
+                0x00000074                DFlashGetProtection
+ .text          0x000000b4       0xa8 obj/DFlashSetProtection.o
+                0x000000b4                DFlashSetProtection
+ .text          0x0000015c       0xc0 obj/EEEWrite.o
+                0x0000015c                EEEWrite
+ .text          0x0000021c       0x4c obj/EERAMGetProtection.o
+                0x0000021c                EERAMGetProtection
+ .text          0x00000268       0xb4 obj/EERAMSetProtection.o
+                0x00000268                EERAMSetProtection
+ .text          0x0000031c      0x348 obj/FlashAlgoFncs.o
+                0x0000031c                FlashProgramPhrase
+                0x0000047c                FlashInit
+                0x0000054c                FlashUnInit
+                0x00000564                FlashEraseSector
+                0x000005a8                FlashEraseChip
+                0x00000610                FlashProgramPage
+ .text          0x00000664        0x0 obj/FlashAlgoInfo.o
+ .text          0x00000664       0xcc obj/FlashCheckSum.o
+                0x00000664                FlashCheckSum
+ .text          0x00000730      0x1f4 obj/FlashCommandSequence.o
+                0x00000730                FlashCommandSequence
+ .text          0x00000924       0x34 obj/FlashEraseAllBlock.o
+                0x00000924                FlashEraseAllBlock
+ .text          0x00000958       0xb8 obj/FlashEraseBlock.o
+                0x00000958                FlashEraseBlock
+ .text          0x00000a10       0x28 obj/FlashEraseResume.o
+                0x00000a10                FlashEraseResume
+ .text          0x00000a38       0x7c obj/FlashEraseSector_Keil.o
+                0x00000a38                FlashEraseSector0
+ .text          0x00000ab4       0x48 obj/FlashEraseSuspend.o
+                0x00000ab4                FlashEraseSuspend
+ .text          0x00000afc       0x48 obj/FlashGetInterruptEnable.o
+                0x00000afc                FlashGetInterruptEnable
+ .text          0x00000b44       0x58 obj/FlashGetSecurityState.o
+                0x00000b44                FlashGetSecurityState
+ .text          0x00000b9c      0x2a0 obj/FlashInit.o
+                0x00000b9c                FlashInit0
+ .text          0x00000e3c      0x174 obj/FlashProgramCheck.o
+                0x00000e3c                FlashProgramCheck
+ .text          0x00000fb0       0xc4 obj/FlashProgramLongword_Keil.o
+                0x00000fb0                FlashProgramLongword
+ .text          0x00001074       0xcc obj/FlashProgramOnce.o
+                0x00001074                FlashProgramOnce
+ .text          0x00001140      0x168 obj/FlashProgramSection.o
+                0x00001140                FlashProgramSection
+ .text          0x000012a8       0xd4 obj/FlashReadOnce.o
+                0x000012a8                FlashReadOnce
+ .text          0x0000137c      0x110 obj/FlashReadResource.o
+                0x0000137c                FlashReadResource
+ .text          0x0000148c       0x80 obj/FlashSecurityBypass.o
+                0x0000148c                FlashSecurityBypass
+ .text          0x0000150c       0x4c obj/FlashSetInterruptEnable.o
+                0x0000150c                FlashSetInterruptEnable
+ .text          0x00001558       0x3c obj/FlashVerifyAllBlock.o
+                0x00001558                FlashVerifyAllBlock
+ .text          0x00001594       0xc0 obj/FlashVerifyBlock.o
+                0x00001594                FlashVerifyBlock
+ .text          0x00001654      0x144 obj/FlashVerifySection.o
+                0x00001654                FlashVerifySection
+ .text          0x00001798       0x70 obj/PFlashGetProtection.o
+                0x00001798                PFlashGetProtection
+ .text          0x00001808      0x10c obj/PFlashGetSwapStatus.o
+                0x00001808                PFlashGetSwapStatus
+ .text          0x00001914      0x1dc obj/PFlashSetProtection.o
+                0x00001914                PFlashSetProtection
+ .text          0x00001af0      0x240 obj/PFlashSwap.o
+                0x00001af0                PFlashSwap
+ .text          0x00001d30       0x3c obj/SetEEEEnable.o
+                0x00001d30                SetEEEEnable
+
+.glue_7         0x00001d6c        0x0
+ .glue_7        0x00000000        0x0 linker stubs
+
+.glue_7t        0x00001d6c        0x0
+ .glue_7t       0x00000000        0x0 linker stubs
+
+.vfp11_veneer   0x00001d6c        0x0
+ .vfp11_veneer  0x00000000        0x0 linker stubs
+
+.v4_bx          0x00001d6c        0x0
+ .v4_bx         0x00000000        0x0 linker stubs
+
+.iplt           0x00001d6c        0x0
+ .iplt          0x00000000        0x0 obj/FlashExecFnc.o
+
+.rodata         0x00001d70       0x10
+ *(.rodata .rodata*)
+ .rodata        0x00001d70       0x10 obj/FlashAlgoFncs.o
+                0x00001d70                unsecureword
+                0x00001d78                unsecurewordLL
+
+.data           0x00001d80        0x0
+ *(.data .data.*)
+ .data          0x00001d80        0x0 obj/FlashExecFnc.o
+ .data          0x00001d80        0x0 obj/DEFlashPartition.o
+ .data          0x00001d80        0x0 obj/DFlashGetProtection.o
+ .data          0x00001d80        0x0 obj/DFlashSetProtection.o
+ .data          0x00001d80        0x0 obj/EEEWrite.o
+ .data          0x00001d80        0x0 obj/EERAMGetProtection.o
+ .data          0x00001d80        0x0 obj/EERAMSetProtection.o
+ .data          0x00001d80        0x0 obj/FlashAlgoFncs.o
+ .data          0x00001d80        0x0 obj/FlashAlgoInfo.o
+ .data          0x00001d80        0x0 obj/FlashCheckSum.o
+ .data          0x00001d80        0x0 obj/FlashCommandSequence.o
+ .data          0x00001d80        0x0 obj/FlashEraseAllBlock.o
+ .data          0x00001d80        0x0 obj/FlashEraseBlock.o
+ .data          0x00001d80        0x0 obj/FlashEraseResume.o
+ .data          0x00001d80        0x0 obj/FlashEraseSector_Keil.o
+ .data          0x00001d80        0x0 obj/FlashEraseSuspend.o
+ .data          0x00001d80        0x0 obj/FlashGetInterruptEnable.o
+ .data          0x00001d80        0x0 obj/FlashGetSecurityState.o
+ .data          0x00001d80        0x0 obj/FlashInit.o
+ .data          0x00001d80        0x0 obj/FlashProgramCheck.o
+ .data          0x00001d80        0x0 obj/FlashProgramLongword_Keil.o
+ .data          0x00001d80        0x0 obj/FlashProgramOnce.o
+ .data          0x00001d80        0x0 obj/FlashProgramSection.o
+ .data          0x00001d80        0x0 obj/FlashReadOnce.o
+ .data          0x00001d80        0x0 obj/FlashReadResource.o
+ .data          0x00001d80        0x0 obj/FlashSecurityBypass.o
+ .data          0x00001d80        0x0 obj/FlashSetInterruptEnable.o
+ .data          0x00001d80        0x0 obj/FlashVerifyAllBlock.o
+ .data          0x00001d80        0x0 obj/FlashVerifyBlock.o
+ .data          0x00001d80        0x0 obj/FlashVerifySection.o
+ .data          0x00001d80        0x0 obj/PFlashGetProtection.o
+ .data          0x00001d80        0x0 obj/PFlashGetSwapStatus.o
+ .data          0x00001d80        0x0 obj/PFlashSetProtection.o
+ .data          0x00001d80        0x0 obj/PFlashSwap.o
+ .data          0x00001d80        0x0 obj/SetEEEEnable.o
+
+.igot.plt       0x00001d80        0x0
+ .igot.plt      0x00000000        0x0 obj/FlashExecFnc.o
+
+.got            0x00001d80       0x18
+ *(.got .got.*)
+ .got           0x00001d80        0xc obj/FlashExecFnc.o
+ .got.plt       0x00001d8c        0xc obj/FlashExecFnc.o
+                0x00001d8c                _GLOBAL_OFFSET_TABLE_
+
+.bss            0x00001d98       0x2c
+ *(.bss .bss.*)
+ .bss           0x00001d98        0x0 obj/FlashExecFnc.o
+ .bss           0x00001d98        0x0 obj/DEFlashPartition.o
+ .bss           0x00001d98        0x0 obj/DFlashGetProtection.o
+ .bss           0x00001d98        0x0 obj/DFlashSetProtection.o
+ .bss           0x00001d98        0x0 obj/EEEWrite.o
+ .bss           0x00001d98        0x0 obj/EERAMGetProtection.o
+ .bss           0x00001d98        0x0 obj/EERAMSetProtection.o
+ .bss           0x00001d98        0x0 obj/FlashAlgoFncs.o
+ .bss           0x00001d98        0x0 obj/FlashAlgoInfo.o
+ .bss           0x00001d98        0x0 obj/FlashCheckSum.o
+ .bss           0x00001d98        0x0 obj/FlashCommandSequence.o
+ .bss           0x00001d98        0x0 obj/FlashEraseAllBlock.o
+ .bss           0x00001d98        0x0 obj/FlashEraseBlock.o
+ .bss           0x00001d98        0x0 obj/FlashEraseResume.o
+ .bss           0x00001d98        0x0 obj/FlashEraseSector_Keil.o
+ .bss           0x00001d98        0x0 obj/FlashEraseSuspend.o
+ .bss           0x00001d98        0x0 obj/FlashGetInterruptEnable.o
+ .bss           0x00001d98        0x0 obj/FlashGetSecurityState.o
+ .bss           0x00001d98        0x0 obj/FlashInit.o
+ .bss           0x00001d98        0x0 obj/FlashProgramCheck.o
+ .bss           0x00001d98        0x0 obj/FlashProgramLongword_Keil.o
+ .bss           0x00001d98        0x0 obj/FlashProgramOnce.o
+ .bss           0x00001d98        0x0 obj/FlashProgramSection.o
+ .bss           0x00001d98        0x0 obj/FlashReadOnce.o
+ .bss           0x00001d98        0x0 obj/FlashReadResource.o
+ .bss           0x00001d98        0x0 obj/FlashSecurityBypass.o
+ .bss           0x00001d98        0x0 obj/FlashSetInterruptEnable.o
+ .bss           0x00001d98        0x0 obj/FlashVerifyAllBlock.o
+ .bss           0x00001d98        0x0 obj/FlashVerifyBlock.o
+ .bss           0x00001d98        0x0 obj/FlashVerifySection.o
+ .bss           0x00001d98        0x0 obj/PFlashGetProtection.o
+ .bss           0x00001d98        0x0 obj/PFlashGetSwapStatus.o
+ .bss           0x00001d98        0x0 obj/PFlashSetProtection.o
+ .bss           0x00001d98        0x0 obj/PFlashSwap.o
+ .bss           0x00001d98        0x0 obj/SetEEEEnable.o
+ *(COMMON)
+ COMMON         0x00001d98       0x2c obj/FlashAlgoFncs.o
+                0x00001d98                flashSSDConfig
+                0x00001dc0                base_adr
+
+.driver_info    0x00001dc4     0x10a8
+ *(.driver_info .driver_info.*)
+ .driver_info   0x00001dc4     0x10a8 obj/FlashAlgoInfo.o
+                0x00001dc4                FlashDriver
+OUTPUT(bin/MKXX_1024.elf elf32-littlearm)
+
+.rel.dyn        0x00002e6c        0x0
+ .rel.iplt      0x00000000        0x0 obj/FlashExecFnc.o
+ .rel.got       0x00000000        0x0 obj/FlashExecFnc.o
+
+.debug_info     0x00000000     0x40f0
+ .debug_info    0x00000000       0xfc obj/FlashExecFnc.o
+ .debug_info    0x000000fc      0x1ea obj/DEFlashPartition.o
+ .debug_info    0x000002e6      0x194 obj/DFlashGetProtection.o
+ .debug_info    0x0000047a      0x1aa obj/DFlashSetProtection.o
+ .debug_info    0x00000624      0x1aa obj/EEEWrite.o
+ .debug_info    0x000007ce      0x194 obj/EERAMGetProtection.o
+ .debug_info    0x00000962      0x1aa obj/EERAMSetProtection.o
+ .debug_info    0x00000b0c      0x3a6 obj/FlashAlgoFncs.o
+ .debug_info    0x00000eb2      0x172 obj/FlashAlgoInfo.o
+ .debug_info    0x00001024      0x1da obj/FlashCheckSum.o
+ .debug_info    0x000011fe      0x1b3 obj/FlashCommandSequence.o
+ .debug_info    0x000013b1      0x1ce obj/FlashEraseAllBlock.o
+ .debug_info    0x0000157f      0x1e7 obj/FlashEraseBlock.o
+ .debug_info    0x00001766      0x16a obj/FlashEraseResume.o
+ .debug_info    0x000018d0      0x1f8 obj/FlashEraseSector_Keil.o
+ .debug_info    0x00001ac8      0x16a obj/FlashEraseSuspend.o
+ .debug_info    0x00001c32      0x189 obj/FlashGetInterruptEnable.o
+ .debug_info    0x00001dbb      0x189 obj/FlashGetSecurityState.o
+ .debug_info    0x00001f44      0x191 obj/FlashInit.o
+ .debug_info    0x000020d5      0x243 obj/FlashProgramCheck.o
+ .debug_info    0x00002318      0x208 obj/FlashProgramLongword_Keil.o
+ .debug_info    0x00002520      0x1f6 obj/FlashProgramOnce.o
+ .debug_info    0x00002716      0x22c obj/FlashProgramSection.o
+ .debug_info    0x00002942      0x206 obj/FlashReadOnce.o
+ .debug_info    0x00002b48      0x205 obj/FlashReadResource.o
+ .debug_info    0x00002d4d      0x1fa obj/FlashSecurityBypass.o
+ .debug_info    0x00002f47      0x183 obj/FlashSetInterruptEnable.o
+ .debug_info    0x000030ca      0x1dc obj/FlashVerifyAllBlock.o
+ .debug_info    0x000032a6      0x1f5 obj/FlashVerifyBlock.o
+ .debug_info    0x0000349b      0x22a obj/FlashVerifySection.o
+ .debug_info    0x000036c5      0x1b3 obj/PFlashGetProtection.o
+ .debug_info    0x00003878      0x221 obj/PFlashGetSwapStatus.o
+ .debug_info    0x00003a99      0x1e2 obj/PFlashSetProtection.o
+ .debug_info    0x00003c7b      0x2d9 obj/PFlashSwap.o
+ .debug_info    0x00003f54      0x19c obj/SetEEEEnable.o
+
+.debug_abbrev   0x00000000     0x19c1
+ .debug_abbrev  0x00000000       0xa4 obj/FlashExecFnc.o
+ .debug_abbrev  0x000000a4       0xc5 obj/DEFlashPartition.o
+ .debug_abbrev  0x00000169       0xa6 obj/DFlashGetProtection.o
+ .debug_abbrev  0x0000020f       0xa6 obj/DFlashSetProtection.o
+ .debug_abbrev  0x000002b5       0xa6 obj/EEEWrite.o
+ .debug_abbrev  0x0000035b       0xa6 obj/EERAMGetProtection.o
+ .debug_abbrev  0x00000401       0xa6 obj/EERAMSetProtection.o
+ .debug_abbrev  0x000004a7      0x17b obj/FlashAlgoFncs.o
+ .debug_abbrev  0x00000622       0x7b obj/FlashAlgoInfo.o
+ .debug_abbrev  0x0000069d       0xa6 obj/FlashCheckSum.o
+ .debug_abbrev  0x00000743       0x99 obj/FlashCommandSequence.o
+ .debug_abbrev  0x000007dc       0xc5 obj/FlashEraseAllBlock.o
+ .debug_abbrev  0x000008a1       0xd2 obj/FlashEraseBlock.o
+ .debug_abbrev  0x00000973       0x99 obj/FlashEraseResume.o
+ .debug_abbrev  0x00000a0c       0xc5 obj/FlashEraseSector_Keil.o
+ .debug_abbrev  0x00000ad1       0x99 obj/FlashEraseSuspend.o
+ .debug_abbrev  0x00000b6a       0x99 obj/FlashGetInterruptEnable.o
+ .debug_abbrev  0x00000c03       0x99 obj/FlashGetSecurityState.o
+ .debug_abbrev  0x00000c9c       0x99 obj/FlashInit.o
+ .debug_abbrev  0x00000d35       0xd9 obj/FlashProgramCheck.o
+ .debug_abbrev  0x00000e0e       0xcc obj/FlashProgramLongword_Keil.o
+ .debug_abbrev  0x00000eda       0xd4 obj/FlashProgramOnce.o
+ .debug_abbrev  0x00000fae       0xd9 obj/FlashProgramSection.o
+ .debug_abbrev  0x00001087       0xdb obj/FlashReadOnce.o
+ .debug_abbrev  0x00001162       0xd9 obj/FlashReadResource.o
+ .debug_abbrev  0x0000123b       0xcc obj/FlashSecurityBypass.o
+ .debug_abbrev  0x00001307       0x99 obj/FlashSetInterruptEnable.o
+ .debug_abbrev  0x000013a0       0xc5 obj/FlashVerifyAllBlock.o
+ .debug_abbrev  0x00001465       0xd2 obj/FlashVerifyBlock.o
+ .debug_abbrev  0x00001537       0xd2 obj/FlashVerifySection.o
+ .debug_abbrev  0x00001609       0x99 obj/PFlashGetProtection.o
+ .debug_abbrev  0x000016a2       0xd9 obj/PFlashGetSwapStatus.o
+ .debug_abbrev  0x0000177b       0xa6 obj/PFlashSetProtection.o
+ .debug_abbrev  0x00001821       0xfa obj/PFlashSwap.o
+ .debug_abbrev  0x0000191b       0xa6 obj/SetEEEEnable.o
+
+.debug_loc      0x00000000      0x8f8
+ .debug_loc     0x00000000       0x38 obj/FlashExecFnc.o
+ .debug_loc     0x00000038       0x38 obj/DEFlashPartition.o
+ .debug_loc     0x00000070       0x38 obj/DFlashGetProtection.o
+ .debug_loc     0x000000a8       0x38 obj/DFlashSetProtection.o
+ .debug_loc     0x000000e0       0x38 obj/EEEWrite.o
+ .debug_loc     0x00000118       0x38 obj/EERAMGetProtection.o
+ .debug_loc     0x00000150       0x38 obj/EERAMSetProtection.o
+ .debug_loc     0x00000188      0x150 obj/FlashAlgoFncs.o
+ .debug_loc     0x000002d8       0x38 obj/FlashCheckSum.o
+ .debug_loc     0x00000310       0x38 obj/FlashCommandSequence.o
+ .debug_loc     0x00000348       0x38 obj/FlashEraseAllBlock.o
+ .debug_loc     0x00000380       0x38 obj/FlashEraseBlock.o
+ .debug_loc     0x000003b8       0x38 obj/FlashEraseResume.o
+ .debug_loc     0x000003f0       0x38 obj/FlashEraseSector_Keil.o
+ .debug_loc     0x00000428       0x38 obj/FlashEraseSuspend.o
+ .debug_loc     0x00000460       0x38 obj/FlashGetInterruptEnable.o
+ .debug_loc     0x00000498       0x38 obj/FlashGetSecurityState.o
+ .debug_loc     0x000004d0       0x38 obj/FlashInit.o
+ .debug_loc     0x00000508       0x38 obj/FlashProgramCheck.o
+ .debug_loc     0x00000540       0x38 obj/FlashProgramLongword_Keil.o
+ .debug_loc     0x00000578       0x38 obj/FlashProgramOnce.o
+ .debug_loc     0x000005b0       0x38 obj/FlashProgramSection.o
+ .debug_loc     0x000005e8       0x38 obj/FlashReadOnce.o
+ .debug_loc     0x00000620       0x38 obj/FlashReadResource.o
+ .debug_loc     0x00000658       0x38 obj/FlashSecurityBypass.o
+ .debug_loc     0x00000690       0x38 obj/FlashSetInterruptEnable.o
+ .debug_loc     0x000006c8       0x38 obj/FlashVerifyAllBlock.o
+ .debug_loc     0x00000700       0x38 obj/FlashVerifyBlock.o
+ .debug_loc     0x00000738       0x38 obj/FlashVerifySection.o
+ .debug_loc     0x00000770       0x38 obj/PFlashGetProtection.o
+ .debug_loc     0x000007a8       0x38 obj/PFlashGetSwapStatus.o
+ .debug_loc     0x000007e0       0x38 obj/PFlashSetProtection.o
+ .debug_loc     0x00000818       0xa8 obj/PFlashSwap.o
+ .debug_loc     0x000008c0       0x38 obj/SetEEEEnable.o
+
+.debug_aranges  0x00000000      0x458
+ .debug_aranges
+                0x00000000       0x20 obj/FlashExecFnc.o
+ .debug_aranges
+                0x00000020       0x20 obj/DEFlashPartition.o
+ .debug_aranges
+                0x00000040       0x20 obj/DFlashGetProtection.o
+ .debug_aranges
+                0x00000060       0x20 obj/DFlashSetProtection.o
+ .debug_aranges
+                0x00000080       0x20 obj/EEEWrite.o
+ .debug_aranges
+                0x000000a0       0x20 obj/EERAMGetProtection.o
+ .debug_aranges
+                0x000000c0       0x20 obj/EERAMSetProtection.o
+ .debug_aranges
+                0x000000e0       0x20 obj/FlashAlgoFncs.o
+ .debug_aranges
+                0x00000100       0x18 obj/FlashAlgoInfo.o
+ .debug_aranges
+                0x00000118       0x20 obj/FlashCheckSum.o
+ .debug_aranges
+                0x00000138       0x20 obj/FlashCommandSequence.o
+ .debug_aranges
+                0x00000158       0x20 obj/FlashEraseAllBlock.o
+ .debug_aranges
+                0x00000178       0x20 obj/FlashEraseBlock.o
+ .debug_aranges
+                0x00000198       0x20 obj/FlashEraseResume.o
+ .debug_aranges
+                0x000001b8       0x20 obj/FlashEraseSector_Keil.o
+ .debug_aranges
+                0x000001d8       0x20 obj/FlashEraseSuspend.o
+ .debug_aranges
+                0x000001f8       0x20 obj/FlashGetInterruptEnable.o
+ .debug_aranges
+                0x00000218       0x20 obj/FlashGetSecurityState.o
+ .debug_aranges
+                0x00000238       0x20 obj/FlashInit.o
+ .debug_aranges
+                0x00000258       0x20 obj/FlashProgramCheck.o
+ .debug_aranges
+                0x00000278       0x20 obj/FlashProgramLongword_Keil.o
+ .debug_aranges
+                0x00000298       0x20 obj/FlashProgramOnce.o
+ .debug_aranges
+                0x000002b8       0x20 obj/FlashProgramSection.o
+ .debug_aranges
+                0x000002d8       0x20 obj/FlashReadOnce.o
+ .debug_aranges
+                0x000002f8       0x20 obj/FlashReadResource.o
+ .debug_aranges
+                0x00000318       0x20 obj/FlashSecurityBypass.o
+ .debug_aranges
+                0x00000338       0x20 obj/FlashSetInterruptEnable.o
+ .debug_aranges
+                0x00000358       0x20 obj/FlashVerifyAllBlock.o
+ .debug_aranges
+                0x00000378       0x20 obj/FlashVerifyBlock.o
+ .debug_aranges
+                0x00000398       0x20 obj/FlashVerifySection.o
+ .debug_aranges
+                0x000003b8       0x20 obj/PFlashGetProtection.o
+ .debug_aranges
+                0x000003d8       0x20 obj/PFlashGetSwapStatus.o
+ .debug_aranges
+                0x000003f8       0x20 obj/PFlashSetProtection.o
+ .debug_aranges
+                0x00000418       0x20 obj/PFlashSwap.o
+ .debug_aranges
+                0x00000438       0x20 obj/SetEEEEnable.o
+
+.debug_line     0x00000000     0x130b
+ .debug_line    0x00000000       0x57 obj/FlashExecFnc.o
+ .debug_line    0x00000057       0x6f obj/DEFlashPartition.o
+ .debug_line    0x000000c6       0x72 obj/DFlashGetProtection.o
+ .debug_line    0x00000138       0x7e obj/DFlashSetProtection.o
+ .debug_line    0x000001b6       0x8e obj/EEEWrite.o
+ .debug_line    0x00000244       0x71 obj/EERAMGetProtection.o
+ .debug_line    0x000002b5       0x7d obj/EERAMSetProtection.o
+ .debug_line    0x00000332      0x103 obj/FlashAlgoFncs.o
+ .debug_line    0x00000435       0x57 obj/FlashAlgoInfo.o
+ .debug_line    0x0000048c       0x96 obj/FlashCheckSum.o
+ .debug_line    0x00000522       0xb3 obj/FlashCommandSequence.o
+ .debug_line    0x000005d5       0x6f obj/FlashEraseAllBlock.o
+ .debug_line    0x00000644       0x99 obj/FlashEraseBlock.o
+ .debug_line    0x000006dd       0x6c obj/FlashEraseResume.o
+ .debug_line    0x00000749       0x85 obj/FlashEraseSector_Keil.o
+ .debug_line    0x000007ce       0x6e obj/FlashEraseSuspend.o
+ .debug_line    0x0000083c       0x74 obj/FlashGetInterruptEnable.o
+ .debug_line    0x000008b0       0x75 obj/FlashGetSecurityState.o
+ .debug_line    0x00000925       0xa7 obj/FlashInit.o
+ .debug_line    0x000009cc       0xbe obj/FlashProgramCheck.o
+ .debug_line    0x00000a8a       0x8f obj/FlashProgramLongword_Keil.o
+ .debug_line    0x00000b19       0x89 obj/FlashProgramOnce.o
+ .debug_line    0x00000ba2       0xb3 obj/FlashProgramSection.o
+ .debug_line    0x00000c55       0x80 obj/FlashReadOnce.o
+ .debug_line    0x00000cd5       0xa6 obj/FlashReadResource.o
+ .debug_line    0x00000d7b       0x7a obj/FlashSecurityBypass.o
+ .debug_line    0x00000df5       0x76 obj/FlashSetInterruptEnable.o
+ .debug_line    0x00000e6b       0x71 obj/FlashVerifyAllBlock.o
+ .debug_line    0x00000edc       0x9b obj/FlashVerifyBlock.o
+ .debug_line    0x00000f77       0xae obj/FlashVerifySection.o
+ .debug_line    0x00001025       0x78 obj/PFlashGetProtection.o
+ .debug_line    0x0000109d       0x97 obj/PFlashGetSwapStatus.o
+ .debug_line    0x00001134       0x97 obj/PFlashSetProtection.o
+ .debug_line    0x000011cb       0xd6 obj/PFlashSwap.o
+ .debug_line    0x000012a1       0x6a obj/SetEEEEnable.o
+
+.debug_str      0x00000000      0xa9e
+ .debug_str     0x00000000       0xd7 obj/FlashExecFnc.o
+                                 0xee (size before relaxing)
+ .debug_str     0x000000d7      0x17c obj/DEFlashPartition.o
+                                0x1fd (size before relaxing)
+ .debug_str     0x00000253       0x47 obj/DFlashGetProtection.o
+                                0x1bb (size before relaxing)
+ .debug_str     0x0000029a       0x40 obj/DFlashSetProtection.o
+                                0x1ce (size before relaxing)
+ .debug_str     0x000002da       0x28 obj/EEEWrite.o
+                                0x1af (size before relaxing)
+ .debug_str     0x00000302       0x2b obj/EERAMGetProtection.o
+                                0x1b9 (size before relaxing)
+ .debug_str     0x0000032d       0x2b obj/EERAMSetProtection.o
+                                0x1cc (size before relaxing)
+ .debug_str     0x00000358       0xda obj/FlashAlgoFncs.o
+                                0x2db (size before relaxing)
+ .debug_str     0x00000432       0xcc obj/FlashAlgoInfo.o
+                                0x153 (size before relaxing)
+ .debug_str     0x000004fe       0x33 obj/FlashCheckSum.o
+                                0x1cf (size before relaxing)
+ .debug_str     0x00000531       0x20 obj/FlashCommandSequence.o
+                                0x1d4 (size before relaxing)
+ .debug_str     0x00000551       0x38 obj/FlashEraseAllBlock.o
+                                0x1e0 (size before relaxing)
+ .debug_str     0x00000589       0x25 obj/FlashEraseBlock.o
+                                0x1ec (size before relaxing)
+ .debug_str     0x000005ae       0x27 obj/FlashEraseResume.o
+                                0x19c (size before relaxing)
+ .debug_str     0x000005d5       0x38 obj/FlashEraseSector_Keil.o
+                                0x1ff (size before relaxing)
+ .debug_str     0x0000060d       0x29 obj/FlashEraseSuspend.o
+                                0x19e (size before relaxing)
+ .debug_str     0x00000636       0x44 obj/FlashGetInterruptEnable.o
+                                0x1c2 (size before relaxing)
+ .debug_str     0x0000067a       0x3f obj/FlashGetSecurityState.o
+                                0x1bd (size before relaxing)
+ .debug_str     0x000006b9       0x29 obj/FlashInit.o
+                                0x1b4 (size before relaxing)
+ .debug_str     0x000006e2       0x57 obj/FlashProgramCheck.o
+                                0x22a (size before relaxing)
+ .debug_str     0x00000739       0x34 obj/FlashProgramLongword_Keil.o
+                                0x209 (size before relaxing)
+ .debug_str     0x0000076d       0x32 obj/FlashProgramOnce.o
+                                0x1f0 (size before relaxing)
+ .debug_str     0x0000079f       0x48 obj/FlashProgramSection.o
+                                0x221 (size before relaxing)
+ .debug_str     0x000007e7       0x21 obj/FlashReadOnce.o
+                                0x1f1 (size before relaxing)
+ .debug_str     0x00000808       0x29 obj/FlashReadResource.o
+                                0x202 (size before relaxing)
+ .debug_str     0x00000831       0x37 obj/FlashSecurityBypass.o
+                                0x202 (size before relaxing)
+ .debug_str     0x00000868       0x35 obj/FlashSetInterruptEnable.o
+                                0x1c2 (size before relaxing)
+ .debug_str     0x0000089d       0x2d obj/FlashVerifyAllBlock.o
+                                0x1ef (size before relaxing)
+ .debug_str     0x000008ca       0x27 obj/FlashVerifyBlock.o
+                                0x1fa (size before relaxing)
+ .debug_str     0x000008f1       0x2b obj/FlashVerifySection.o
+                                0x224 (size before relaxing)
+ .debug_str     0x0000091c       0x69 obj/PFlashGetProtection.o
+                                0x1e7 (size before relaxing)
+ .debug_str     0x00000985       0x78 obj/PFlashGetSwapStatus.o
+                                0x23a (size before relaxing)
+ .debug_str     0x000009fd       0x2d obj/PFlashSetProtection.o
+                                0x20a (size before relaxing)
+ .debug_str     0x00000a2a       0x55 obj/PFlashSwap.o
+                                0x235 (size before relaxing)
+ .debug_str     0x00000a7f       0x1f obj/SetEEEEnable.o
+                                0x1b4 (size before relaxing)
+
+.comment        0x00000000       0x30
+ .comment       0x00000000       0x30 obj/FlashExecFnc.o
+                                 0x31 (size before relaxing)
+ .comment       0x00000000       0x31 obj/DEFlashPartition.o
+ .comment       0x00000000       0x31 obj/DFlashGetProtection.o
+ .comment       0x00000000       0x31 obj/DFlashSetProtection.o
+ .comment       0x00000000       0x31 obj/EEEWrite.o
+ .comment       0x00000000       0x31 obj/EERAMGetProtection.o
+ .comment       0x00000000       0x31 obj/EERAMSetProtection.o
+ .comment       0x00000000       0x31 obj/FlashAlgoFncs.o
+ .comment       0x00000000       0x31 obj/FlashAlgoInfo.o
+ .comment       0x00000000       0x31 obj/FlashCheckSum.o
+ .comment       0x00000000       0x31 obj/FlashCommandSequence.o
+ .comment       0x00000000       0x31 obj/FlashEraseAllBlock.o
+ .comment       0x00000000       0x31 obj/FlashEraseBlock.o
+ .comment       0x00000000       0x31 obj/FlashEraseResume.o
+ .comment       0x00000000       0x31 obj/FlashEraseSector_Keil.o
+ .comment       0x00000000       0x31 obj/FlashEraseSuspend.o
+ .comment       0x00000000       0x31 obj/FlashGetInterruptEnable.o
+ .comment       0x00000000       0x31 obj/FlashGetSecurityState.o
+ .comment       0x00000000       0x31 obj/FlashInit.o
+ .comment       0x00000000       0x31 obj/FlashProgramCheck.o
+ .comment       0x00000000       0x31 obj/FlashProgramLongword_Keil.o
+ .comment       0x00000000       0x31 obj/FlashProgramOnce.o
+ .comment       0x00000000       0x31 obj/FlashProgramSection.o
+ .comment       0x00000000       0x31 obj/FlashReadOnce.o
+ .comment       0x00000000       0x31 obj/FlashReadResource.o
+ .comment       0x00000000       0x31 obj/FlashSecurityBypass.o
+ .comment       0x00000000       0x31 obj/FlashSetInterruptEnable.o
+ .comment       0x00000000       0x31 obj/FlashVerifyAllBlock.o
+ .comment       0x00000000       0x31 obj/FlashVerifyBlock.o
+ .comment       0x00000000       0x31 obj/FlashVerifySection.o
+ .comment       0x00000000       0x31 obj/PFlashGetProtection.o
+ .comment       0x00000000       0x31 obj/PFlashGetSwapStatus.o
+ .comment       0x00000000       0x31 obj/PFlashSetProtection.o
+ .comment       0x00000000       0x31 obj/PFlashSwap.o
+ .comment       0x00000000       0x31 obj/SetEEEEnable.o
+
+.ARM.attributes
+                0x00000000       0x33
+ .ARM.attributes
+                0x00000000       0x33 obj/FlashExecFnc.o
+ .ARM.attributes
+                0x00000033       0x33 obj/DEFlashPartition.o
+ .ARM.attributes
+                0x00000066       0x33 obj/DFlashGetProtection.o
+ .ARM.attributes
+                0x00000099       0x33 obj/DFlashSetProtection.o
+ .ARM.attributes
+                0x000000cc       0x33 obj/EEEWrite.o
+ .ARM.attributes
+                0x000000ff       0x33 obj/EERAMGetProtection.o
+ .ARM.attributes
+                0x00000132       0x33 obj/EERAMSetProtection.o
+ .ARM.attributes
+                0x00000165       0x33 obj/FlashAlgoFncs.o
+ .ARM.attributes
+                0x00000198       0x33 obj/FlashAlgoInfo.o
+ .ARM.attributes
+                0x000001cb       0x33 obj/FlashCheckSum.o
+ .ARM.attributes
+                0x000001fe       0x33 obj/FlashCommandSequence.o
+ .ARM.attributes
+                0x00000231       0x33 obj/FlashEraseAllBlock.o
+ .ARM.attributes
+                0x00000264       0x33 obj/FlashEraseBlock.o
+ .ARM.attributes
+                0x00000297       0x33 obj/FlashEraseResume.o
+ .ARM.attributes
+                0x000002ca       0x33 obj/FlashEraseSector_Keil.o
+ .ARM.attributes
+                0x000002fd       0x33 obj/FlashEraseSuspend.o
+ .ARM.attributes
+                0x00000330       0x33 obj/FlashGetInterruptEnable.o
+ .ARM.attributes
+                0x00000363       0x33 obj/FlashGetSecurityState.o
+ .ARM.attributes
+                0x00000396       0x33 obj/FlashInit.o
+ .ARM.attributes
+                0x000003c9       0x33 obj/FlashProgramCheck.o
+ .ARM.attributes
+                0x000003fc       0x33 obj/FlashProgramLongword_Keil.o
+ .ARM.attributes
+                0x0000042f       0x33 obj/FlashProgramOnce.o
+ .ARM.attributes
+                0x00000462       0x33 obj/FlashProgramSection.o
+ .ARM.attributes
+                0x00000495       0x33 obj/FlashReadOnce.o
+ .ARM.attributes
+                0x000004c8       0x33 obj/FlashReadResource.o
+ .ARM.attributes
+                0x000004fb       0x33 obj/FlashSecurityBypass.o
+ .ARM.attributes
+                0x0000052e       0x33 obj/FlashSetInterruptEnable.o
+ .ARM.attributes
+                0x00000561       0x33 obj/FlashVerifyAllBlock.o
+ .ARM.attributes
+                0x00000594       0x33 obj/FlashVerifyBlock.o
+ .ARM.attributes
+                0x000005c7       0x33 obj/FlashVerifySection.o
+ .ARM.attributes
+                0x000005fa       0x33 obj/PFlashGetProtection.o
+ .ARM.attributes
+                0x0000062d       0x33 obj/PFlashGetSwapStatus.o
+ .ARM.attributes
+                0x00000660       0x33 obj/PFlashSetProtection.o
+ .ARM.attributes
+                0x00000693       0x33 obj/PFlashSwap.o
+ .ARM.attributes
+                0x000006c6       0x33 obj/SetEEEEnable.o
+
+.debug_frame    0x00000000      0x718
+ .debug_frame   0x00000000       0x40 obj/FlashExecFnc.o
+ .debug_frame   0x00000040       0x30 obj/DEFlashPartition.o
+ .debug_frame   0x00000070       0x2c obj/DFlashGetProtection.o
+ .debug_frame   0x0000009c       0x2c obj/DFlashSetProtection.o
+ .debug_frame   0x000000c8       0x2c obj/EEEWrite.o
+ .debug_frame   0x000000f4       0x2c obj/EERAMGetProtection.o
+ .debug_frame   0x00000120       0x2c obj/EERAMSetProtection.o
+ .debug_frame   0x0000014c       0xcc obj/FlashAlgoFncs.o
+ .debug_frame   0x00000218       0x30 obj/FlashCheckSum.o
+ .debug_frame   0x00000248       0x30 obj/FlashCommandSequence.o
+ .debug_frame   0x00000278       0x30 obj/FlashEraseAllBlock.o
+ .debug_frame   0x000002a8       0x30 obj/FlashEraseBlock.o
+ .debug_frame   0x000002d8       0x2c obj/FlashEraseResume.o
+ .debug_frame   0x00000304       0x30 obj/FlashEraseSector_Keil.o
+ .debug_frame   0x00000334       0x2c obj/FlashEraseSuspend.o
+ .debug_frame   0x00000360       0x2c obj/FlashGetInterruptEnable.o
+ .debug_frame   0x0000038c       0x2c obj/FlashGetSecurityState.o
+ .debug_frame   0x000003b8       0x2c obj/FlashInit.o
+ .debug_frame   0x000003e4       0x30 obj/FlashProgramCheck.o
+ .debug_frame   0x00000414       0x30 obj/FlashProgramLongword_Keil.o
+ .debug_frame   0x00000444       0x30 obj/FlashProgramOnce.o
+ .debug_frame   0x00000474       0x30 obj/FlashProgramSection.o
+ .debug_frame   0x000004a4       0x30 obj/FlashReadOnce.o
+ .debug_frame   0x000004d4       0x30 obj/FlashReadResource.o
+ .debug_frame   0x00000504       0x30 obj/FlashSecurityBypass.o
+ .debug_frame   0x00000534       0x2c obj/FlashSetInterruptEnable.o
+ .debug_frame   0x00000560       0x30 obj/FlashVerifyAllBlock.o
+ .debug_frame   0x00000590       0x30 obj/FlashVerifyBlock.o
+ .debug_frame   0x000005c0       0x30 obj/FlashVerifySection.o
+ .debug_frame   0x000005f0       0x2c obj/PFlashGetProtection.o
+ .debug_frame   0x0000061c       0x30 obj/PFlashGetSwapStatus.o
+ .debug_frame   0x0000064c       0x2c obj/PFlashSetProtection.o
+ .debug_frame   0x00000678       0x70 obj/PFlashSwap.o
+ .debug_frame   0x000006e8       0x30 obj/SetEEEEnable.o
+
+Cross Reference Table
+
+Symbol                                            File
+BreakHere                                         obj/FlashExecFnc.o
+DEFlashPartition                                  obj/DEFlashPartition.o
+DFlashGetProtection                               obj/DFlashGetProtection.o
+DFlashSetProtection                               obj/DFlashSetProtection.o
+EEEWrite                                          obj/EEEWrite.o
+EERAMGetProtection                                obj/EERAMGetProtection.o
+EERAMSetProtection                                obj/EERAMSetProtection.o
+ExecFunction                                      obj/FlashExecFnc.o
+FlashCheckSum                                     obj/FlashCheckSum.o
+FlashCommandSequence                              obj/FlashCommandSequence.o
+                                                  obj/SetEEEEnable.o
+                                                  obj/FlashAlgoFncs.o
+FlashDriver                                       obj/FlashAlgoInfo.o
+FlashEraseAllBlock                                obj/FlashEraseAllBlock.o
+                                                  obj/FlashAlgoFncs.o
+FlashEraseBlock                                   obj/FlashEraseBlock.o
+FlashEraseChip                                    obj/FlashAlgoFncs.o
+FlashEraseResume                                  obj/FlashEraseResume.o
+FlashEraseSector                                  obj/FlashAlgoFncs.o
+FlashEraseSector0                                 obj/FlashEraseSector_Keil.o
+                                                  obj/FlashAlgoFncs.o
+FlashEraseSuspend                                 obj/FlashEraseSuspend.o
+FlashGetInterruptEnable                           obj/FlashGetInterruptEnable.o
+FlashGetSecurityState                             obj/FlashGetSecurityState.o
+FlashInit                                         obj/FlashAlgoFncs.o
+FlashInit0                                        obj/FlashInit.o
+                                                  obj/FlashAlgoFncs.o
+FlashProgramCheck                                 obj/FlashProgramCheck.o
+FlashProgramLongword                              obj/FlashProgramLongword_Keil.o
+FlashProgramOnce                                  obj/FlashProgramOnce.o
+FlashProgramPage                                  obj/FlashAlgoFncs.o
+FlashProgramPhrase                                obj/FlashAlgoFncs.o
+FlashProgramSection                               obj/FlashProgramSection.o
+FlashReadOnce                                     obj/FlashReadOnce.o
+FlashReadResource                                 obj/FlashReadResource.o
+FlashSecurityBypass                               obj/FlashSecurityBypass.o
+FlashSetInterruptEnable                           obj/FlashSetInterruptEnable.o
+FlashUnInit                                       obj/FlashAlgoFncs.o
+FlashVerifyAllBlock                               obj/FlashVerifyAllBlock.o
+FlashVerifyBlock                                  obj/FlashVerifyBlock.o
+FlashVerifySection                                obj/FlashVerifySection.o
+PFlashGetProtection                               obj/PFlashGetProtection.o
+PFlashGetSwapStatus                               obj/PFlashGetSwapStatus.o
+PFlashSetProtection                               obj/PFlashSetProtection.o
+PFlashSwap                                        obj/PFlashSwap.o
+SetEEEEnable                                      obj/SetEEEEnable.o
+_GLOBAL_OFFSET_TABLE_                             obj/FlashExecFnc.o
+base_adr                                          obj/FlashAlgoFncs.o
+flashSSDConfig                                    obj/FlashAlgoFncs.o
+unsecureword                                      obj/FlashAlgoFncs.o
+unsecurewordLL                                    obj/FlashAlgoFncs.o

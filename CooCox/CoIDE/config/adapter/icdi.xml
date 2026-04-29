@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<!-- Copyright 2011 coocox.org    This file is part of CooCox Softwares.-->
+<adapter>
+	<Name>Stellaris-ICDI</Name>
+	<Vendor>Stellaris</Vendor>
+	<Debugger>
+		<Set>FTDI</Set>
+		<Driver>IFTD2xx.dll</Driver>
+		<JTAG support="true">
+			<transaction name="open"  mask="0x00EB" value="0x00A8" /> 
+			<transaction name="close" mask="0x00E0" value="0x0060" />
+			<transaction name="reset" mask="0x00EB" value="0x0088" /> 
+			<transaction name="busy"  mask="0x0000" value="0x0000" />
+		</JTAG>
+
+		<SWD support="false">
+		</SWD>
+	</Debugger>
+</adapter>

@@ -1,0 +1,43 @@
+@charset "utf-8";
+body,td{ font-family:Arial; font-size:13px; color:#000; line-height:20px;}
+h2 {
+	
+	text-decoration: none;
+	color:#00B050;
+	font-size:105%;
+	margin-bottom:0px;
+	font-weight:bold;
+	margin-top:20px;
+	margin-left:15px;}
+
+p{ font-size:12px;}
+h2 a{ color:#00B050;}
+h2 img{  border:0;margin-left:0px; margin-right:10px;}
+.bold{font-weight:bold;}
+.Arialbold{font-weight:bold; font-size:90%;}
+.title{font-weight:bold; font-size:25px; margin-bottom:5PX; }
+.redtitle{font-weight:bold; font-size:25px; color:#FF0000;margin-bottom:5PX;}
+.undernone{ text-decoration:none;}
+.red{ color:#FF0000}
+.boldred{font-weight:bold; color:#FF0000}
+ol{margin-left:20px;}
+ol li{  font-size:13px; line-height:25px;margin-left:10px;}
+ul{  margin-top:10px; }
+ul li{ list-style:none;line-height:25px;background:url(../images/CoDebugger_Controlling_executing_clip_image003.gif)  no-repeat 0px 5px; text-indent:20px;margin-left:18px;  color:#000;font-size:13px; font-weight:bold;}
+ul li a{ color:#0070C0;}
+ul li img{ border:0;margin-left:0px; margin-right:10px;}
+.g-doc{ width:830px; margin:0px auto; border: #6b90da 3px solid;  }
+.top{width:100%;  margin:0px; padding:0px; text-align:left; margin-left:0px;  height:75PX;}
+.top img{ margin-bottom:0PX;}
+.blueline{width:100%; height:1px;background-color:#6b90da; overflow:hidden; margin-top:5px;border-bottom:solid #fff 1px;}
+.main{ width:100%; margin:0px; padding:0px;}
+
+h1 { 
+  font-size: 130%;
+  color: #333333; 
+  float: left; 
+  padding: 0px;
+  }
+.table{ margin-left:5px;}
+.toptile{ font-family:Arial; font-size:18px; font-weight:bold; color:#000000; line-height:25px; text-indent:15px;}
+.toplink{font-family:Arial; font-size:110%;  color:#00c; line-height:15px; text-indent:15px;}

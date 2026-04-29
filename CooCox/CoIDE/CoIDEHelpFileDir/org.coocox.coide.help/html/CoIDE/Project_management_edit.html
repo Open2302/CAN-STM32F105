@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><!-- InstanceBegin template="/Templates/CoIDEguide.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<!-- InstanceBeginEditable name="top" -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> <link href="../css/page.css" rel="stylesheet" type="text/css" /><!-- InstanceEndEditable -->
+</head> 
+<body >
+<div class="main">
+     <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        
+      <td  valign="top">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+                <tr>
+                    <td width="76%" valign="top" style="padding-left:0.5em; padding-top:0.5em;">
+					  <!-- InstanceBeginEditable name="pagecenter" -->
+					  <h2 class="fontsize140"><span > Editing code </span></h2>
+                      <div>
+                        <p style="margin-top:10px;">CoIDE integrates CDT Editor which is a part of <a href="http://www.eclipse.org/cdt" target="_blank">CDT project</a> of Eclipse. This section describes how to edit code in CoIDE, if you want to get more help, you can visit eclipse <a href="http://www.eclipse.org/cdt" target="_blank">cdt project home</a>.</p>
+                      </div>
+                      <div>
+                        <p>To edit code using CoIDE, you could perform as follows:</p>
+                        <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+                          <tr>
+                            <td align="center"><img src="../images/builder/Edit_Code_1.jpg" name="picBuild" id="picBuild" /></td>
+                          </tr>
+                          <tr>
+                            <td align="center">&nbsp;</td>
+                          </tr>
+                          <tr>
+                            <td><ol style="LINE-HEIGHT: 25px; list-style:none;" class="blue6" id="step">
+                              <li id="step1">1. Select<strong> File &gt; New File</strong>. </li>
+                              <li  id="step2" style=" display:none;" >2. Type <strong>file name</strong> for the new file and then click <strong>Finish</strong> button. </li>
+                              <li  id="step3" style=" display:none;" >3. Edit your own application code. </li>
+                              <li  id="step4" style=" display:none;" >4. If necessary, right click at the left edge of editor, select <strong>Show Line Numbers</strong> to enable the function or disable. </li>
+                              <li  id="step5" style=" display:none;" >5. If necessary, right click at the left edge of  editor, select <strong>Folding &gt; Enable Folding </strong>to enable the function or disable. </li>
+                              <li  id="step6" style=" display:none;" >6. If necessary, move cursor to a code field then right click, select <strong>Open Declaration</strong> to open a declaration file. </li>
+                            </ol></td>
+                          </tr>
+                          <tr>
+                            <td align="center"><input type="button" id="buildNext" class="input" onclick="lastBuildPic()" value=" &lt;&lt;  Previous " />
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                              <input type="button" id="buildLast" class="input"  value=" Next  &gt;&gt; " onclick="nextBuildPic()" /></td>
+                          </tr>
+                        </table>
+                        <script language="JavaScript" type="text/javascript">
+var b=1;
+function nextBuildPic()
+{
+	b=b+1;	
+	if(b>=7)
+    {	
+		alert('This is last photo.');
+	    b=6;
+	}
+	var picBuild=document.getElementById("picBuild").src="../images/builder/Edit_Code_"+b+".jpg";	
+	var k=b-1;
+document.getElementById("step"+k).style.display="None";
+document.getElementById("step"+b).style.display="block";
+
+}
+function lastBuildPic()
+{
+	b=b-1;	
+	if(b<=0)
+	{	
+		alert('This is first photo.');
+		b=1;
+	}
+	var picBuild=document.getElementById("picBuild").src="../images/builder/Edit_Code_"+b+".jpg";	
+	var k=b+1;
+document.getElementById("step"+k).style.display="None";
+document.getElementById("step"+b).style.display="block";
+}
+                      
+</script>
+                      </div>
+                    <!-- InstanceEndEditable -->        </td>
+                    
+              </tr>
+          </table>
+        </td>
+      </tr>
+     </table>
+ 
+</div></body>
+<!-- InstanceEnd --></html>

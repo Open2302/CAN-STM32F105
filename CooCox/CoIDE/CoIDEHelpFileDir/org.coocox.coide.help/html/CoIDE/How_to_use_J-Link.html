@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><!-- InstanceBegin template="/Templates/CoIDEguide.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<!-- InstanceBeginEditable name="top" -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> <link href="../css/page.css" rel="stylesheet" type="text/css" /><!-- InstanceEndEditable -->
+</head> 
+<body >
+<div class="main">
+     <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        
+      <td  valign="top">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+                <tr>
+                    <td width="76%" valign="top" style="padding-left:0.5em; padding-top:0.5em;">
+					  <!-- InstanceBeginEditable name="pagecenter" -->
+					  <h2 class="fontsize140">How to Use J-Link</h2>
+                      <p style="margin-top:10px;">When you use J-Link in CoIDE, the debug configuration and operation is different from other adapters'.</p>
+                      <p style="color:#F00"><strong>Note:</strong></p><ol style="font-size:10pt;margin:0px 0 0px 35px;padding:0px;">
+                        <li style="padding:2px 0 2px 0;margin:0; font-family:Verdana, sans-serif;">CoIDE doesn't contain the software of J-Link, you may need to download from <a href="http://www.segger.com">segger</a> or get it through other ways.</li>
+                        <li>If you want to use J-Link in CoIDE, make sure that your J-Link has the license for GDB, Flash Breakpoint, Flash Download. If your J-Link only has the license for GDB, you can only use it to debug in RAM.</li>
+                        <li>When you select J-Link as the adapter, the download button and erase button cannot use. J-Link doesn't use the CooCox Flash algorithm, but when you click the debug button, it will execute the download operation then enter debug.</li>
+                        <li>Some chips, such as Nuvoton NuMicro series was not supported by the newest version of J-Link software, that means you cannot load the code to Flash. But you can select <strong>Debug in RAM</strong> in the Project Configuration then debug the project in RAM.</li>
+                      </ol>
+                      <p style="margin-top:10px;">You need to set the debug configuration as follows: </p>
+                      <p><span class="title1"><strong>1. Preparation: </strong></span><br />
+  &nbsp;Visit the website of J-Link, <a href="http://www.segger.com/cms/jlink-software.html">download the latest J-Link software</a>, and install it on your PC. Then connect the J-Link to your computer and install the driver for it.</p>
+                      <p><span class="title1"><strong>2. Click &quot;Debug Configuration&quot;, to enter the configuration page:</strong></span></p>
+                      <p><span class="title1"><strong>3. Configure the Debugger page:</strong></span></p>
+                      <ol style="font-size:10pt;margin:0px 0 0px 35px;padding:0px;">
+                        <li style="padding:2px 0 2px 0;margin:0; font-family:Verdana, sans-serif;">Hardware:
+                          <ul>
+                            <li>Adapter: Select J-Link</li>
+                            <li>Port: J-Link supports SWD and JTAG debug mode.</li>
+                          </ul>
+                        </li>
+                        <li style="padding:2px 0 2px 0;margin:0; font-family:Verdana, sans-serif;">Advance:
+                          <ul>
+                            <li>Reset Mode: There are 10 reset modes could be selected:
+                              <ul>
+                                <li>Type 0: Normal</li>
+                                <li>Type 1: Core</li>
+                                <li>Type 2: ResetPin</li>
+                                <li>Type 3: Connect under reset</li>
+                                <li>Type 4: Reset Core &amp; Peripherals, halt after bootloader </li>
+                                <li>Type 5: Reset Core &amp; Peripherals, halt before bootloader </li>
+                                <li>Type 6: Reset for Freescale Kinetis devices</li>
+                                <li>Type 7: Reset for Analog Devices CPUs (ADI Halt after kernel)</li>
+                                <li>Type 8: Reset core and peripherals</li>
+                                <li>Type 9: Reset for LPC1200 devices</li>
+                                <li>Type 10: Reset for Samsung S3FN60D devices</li>
+                              </ul>
+                            </li>
+                            <li>You can refer to J-Link ARM User Guide, 5.8.2: Strategies for Cortex-M devices to get the detail information for how to select reset mode.</li>
+                          </ul>
+                        </li>
+                        <li>JLink Info</li>
+                        <ul>
+                          <li>GDBServer cmdline tool: Select the path of JLinkGDBServerCL.exe(provided in the J-Link software)</li>
+                          <li>Endianess of the target: The current version of CoIDE only support Cortex-M0&amp;M3 series. So we only need to use Little endian.</li>
+                        </ul>
+                      </ol>
+                      <table width="90%" border="0" align="center" cellpadding="0" cellspacing="0">
+                        <tr>
+                          <td ><img src="../images/Debug/J-Link_settings.gif" /></td>
+                        </tr>
+                      </table>
+                      <p><span class="title1"><strong>4. Advance Function: </strong></span>Click &quot;Edit script&quot; button to open scripts edit window, you can edit the gdb script which you want to execute after the target reset.</p>
+                    <!-- InstanceEndEditable -->        </td>
+                    
+              </tr>
+          </table>
+        </td>
+      </tr>
+     </table>
+ 
+</div></body>
+<!-- InstanceEnd --></html>

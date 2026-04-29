@@ -1,0 +1,392 @@
+
+bin/KLxx_8.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00000000 <BreakHere>:
+ */
+#if (defined (__GNUC__)) /*------------------ GNU Compiler ---------------------*/
+void BreakHere(int status) __attribute__( ( naked ) );
+void BreakHere(int status)
+{
+  __asm volatile ("BKPT #0 \n\t"  );
+   0:	be00      	bkpt	0x0000
+   2:	46c0      	nop			; (mov r8, r8)
+
+00000004 <ExecFunction>:
+ */
+int ExecFunction (FlashAlgoFnc algoFnc,
+				  unsigned long parameter0,
+				  unsigned long parameter1,
+				  unsigned long parameter2)
+{
+   4:	b580      	push	{r7, lr}
+   6:	b086      	sub	sp, #24
+   8:	af00      	add	r7, sp, #0
+   a:	60f8      	str	r0, [r7, #12]
+   c:	60b9      	str	r1, [r7, #8]
+   e:	607a      	str	r2, [r7, #4]
+  10:	603b      	str	r3, [r7, #0]
+	 int retval;
+	 retval = algoFnc(parameter0,parameter1,parameter2);
+  12:	68b8      	ldr	r0, [r7, #8]
+  14:	6879      	ldr	r1, [r7, #4]
+  16:	683a      	ldr	r2, [r7, #0]
+  18:	68fb      	ldr	r3, [r7, #12]
+  1a:	4798      	blx	r3
+  1c:	1c03      	adds	r3, r0, #0
+  1e:	617b      	str	r3, [r7, #20]
+	 BreakHere(retval);
+  20:	697b      	ldr	r3, [r7, #20]
+  22:	1c18      	adds	r0, r3, #0
+  24:	f7ff ffec 	bl	0 <BreakHere>
+	 
+	 return (retval);
+  28:	697b      	ldr	r3, [r7, #20]
+}
+  2a:	1c18      	adds	r0, r3, #0
+  2c:	46bd      	mov	sp, r7
+  2e:	b006      	add	sp, #24
+  30:	bd80      	pop	{r7, pc}
+  32:	46c0      	nop			; (mov r8, r8)
+
+00000034 <FlashInit>:
+ *******************************************************************************
+ */
+int FlashInit (unsigned long baseAddr,
+               unsigned long clk,
+               unsigned long operateFuc)
+{
+  34:	b580      	push	{r7, lr}
+  36:	b084      	sub	sp, #16
+  38:	af00      	add	r7, sp, #0
+  3a:	60f8      	str	r0, [r7, #12]
+  3c:	60b9      	str	r1, [r7, #8]
+  3e:	607a      	str	r2, [r7, #4]
+  
+  (*((volatile unsigned long *)(0x40048100))) = 0x00;
+  40:	4b07      	ldr	r3, [pc, #28]	; (60 <FlashInit+0x2c>)
+  42:	2200      	movs	r2, #0
+  44:	601a      	str	r2, [r3, #0]
+
+  FTFA->FTFA_FSTAT |= FTFA_CLEAR;                      // clear error flag
+  46:	4b07      	ldr	r3, [pc, #28]	; (64 <FlashInit+0x30>)
+  48:	4a06      	ldr	r2, [pc, #24]	; (64 <FlashInit+0x30>)
+  4a:	7812      	ldrb	r2, [r2, #0]
+  4c:	b2d2      	uxtb	r2, r2
+  4e:	2170      	movs	r1, #112	; 0x70
+  50:	430a      	orrs	r2, r1
+  52:	b2d2      	uxtb	r2, r2
+  54:	701a      	strb	r2, [r3, #0]
+
+  return 0;
+  56:	2300      	movs	r3, #0
+}
+  58:	1c18      	adds	r0, r3, #0
+  5a:	46bd      	mov	sp, r7
+  5c:	b004      	add	sp, #16
+  5e:	bd80      	pop	{r7, pc}
+  60:	40048100 	.word	0x40048100
+  64:	40020000 	.word	0x40020000
+
+00000068 <FlashUnInit>:
+ * @details    This function is called after flash programming/erase. 
+ * @note 
+ *******************************************************************************
+ */
+int FlashUnInit (unsigned long operateFuc)
+{
+  68:	b580      	push	{r7, lr}
+  6a:	b082      	sub	sp, #8
+  6c:	af00      	add	r7, sp, #0
+  6e:	6078      	str	r0, [r7, #4]
+	return 0;
+  70:	2300      	movs	r3, #0
+}
+  72:	1c18      	adds	r0, r3, #0
+  74:	46bd      	mov	sp, r7
+  76:	b002      	add	sp, #8
+  78:	bd80      	pop	{r7, pc}
+  7a:	46c0      	nop			; (mov r8, r8)
+
+0000007c <FlashEraseSector>:
+ * @details     
+ * @note 
+ *******************************************************************************
+ */
+int FlashEraseSector (unsigned long sectorAddr)
+{
+  7c:	b580      	push	{r7, lr}
+  7e:	b084      	sub	sp, #16
+  80:	af00      	add	r7, sp, #0
+  82:	6078      	str	r0, [r7, #4]
+        
+      }
+	}
+#endif
+	
+	offs = 0x00000000;
+  84:	2300      	movs	r3, #0
+  86:	60fb      	str	r3, [r7, #12]
+	
+	FTFA->FTFA_FSTAT = FTFA_CLEAR;                       // Reset Error Flags
+  88:	4b1d      	ldr	r3, [pc, #116]	; (100 <FlashEraseSector+0x84>)
+  8a:	2270      	movs	r2, #112	; 0x70
+  8c:	701a      	strb	r2, [r3, #0]
+	
+	FTFA->FTFA_FCCOB0 = FTFA_ERASE_SECTOR;                // Prepare Command
+  8e:	4b1c      	ldr	r3, [pc, #112]	; (100 <FlashEraseSector+0x84>)
+  90:	2209      	movs	r2, #9
+  92:	71da      	strb	r2, [r3, #7]
+	offs = ((sectorAddr) & ~0x00000003);           // Prepare Address
+  94:	687b      	ldr	r3, [r7, #4]
+  96:	2203      	movs	r2, #3
+  98:	4393      	bics	r3, r2
+  9a:	60fb      	str	r3, [r7, #12]
+	FTFA->FTFA_FCCOB1 = (unsigned char)(offs >> 16);
+  9c:	4b18      	ldr	r3, [pc, #96]	; (100 <FlashEraseSector+0x84>)
+  9e:	68fa      	ldr	r2, [r7, #12]
+  a0:	0c12      	lsrs	r2, r2, #16
+  a2:	b2d2      	uxtb	r2, r2
+  a4:	719a      	strb	r2, [r3, #6]
+	FTFA->FTFA_FCCOB2 = (unsigned char)(offs >> 8);
+  a6:	4b16      	ldr	r3, [pc, #88]	; (100 <FlashEraseSector+0x84>)
+  a8:	68fa      	ldr	r2, [r7, #12]
+  aa:	0a12      	lsrs	r2, r2, #8
+  ac:	b2d2      	uxtb	r2, r2
+  ae:	715a      	strb	r2, [r3, #5]
+	FTFA->FTFA_FCCOB3 = (unsigned char)(offs);
+  b0:	4b13      	ldr	r3, [pc, #76]	; (100 <FlashEraseSector+0x84>)
+  b2:	68fa      	ldr	r2, [r7, #12]
+  b4:	b2d2      	uxtb	r2, r2
+  b6:	711a      	strb	r2, [r3, #4]
+
+	FTFA->FTFA_FSTAT |= FTFA_CCIF;                        // Exacute Command
+  b8:	4b11      	ldr	r3, [pc, #68]	; (100 <FlashEraseSector+0x84>)
+  ba:	4a11      	ldr	r2, [pc, #68]	; (100 <FlashEraseSector+0x84>)
+  bc:	7812      	ldrb	r2, [r2, #0]
+  be:	b2d2      	uxtb	r2, r2
+  c0:	2180      	movs	r1, #128	; 0x80
+  c2:	4249      	negs	r1, r1
+  c4:	430a      	orrs	r2, r1
+  c6:	b2d2      	uxtb	r2, r2
+  c8:	701a      	strb	r2, [r3, #0]
+	
+	while(!(FTFA->FTFA_FSTAT & FTFA_CCIF))                // Wait until command is finished
+  ca:	46c0      	nop			; (mov r8, r8)
+  cc:	4b0c      	ldr	r3, [pc, #48]	; (100 <FlashEraseSector+0x84>)
+  ce:	781b      	ldrb	r3, [r3, #0]
+  d0:	b2db      	uxtb	r3, r3
+  d2:	b2db      	uxtb	r3, r3
+  d4:	b25b      	sxtb	r3, r3
+  d6:	2b00      	cmp	r3, #0
+  d8:	daf8      	bge.n	cc <FlashEraseSector+0x50>
+	{
+	  /* reload Watdchdog */                              // Reload IWDG
+	}
+	
+	if(FTFA->FTFA_FSTAT & 0x70)                           // Check for Error
+  da:	4b09      	ldr	r3, [pc, #36]	; (100 <FlashEraseSector+0x84>)
+  dc:	781b      	ldrb	r3, [r3, #0]
+  de:	b2db      	uxtb	r3, r3
+  e0:	1c1a      	adds	r2, r3, #0
+  e2:	2370      	movs	r3, #112	; 0x70
+  e4:	4013      	ands	r3, r2
+  e6:	d004      	beq.n	f2 <FlashEraseSector+0x76>
+	{    
+      FTFA->FTFA_FSTAT = FTFA_CLEAR;                     // Reset Error Flags
+  e8:	4b05      	ldr	r3, [pc, #20]	; (100 <FlashEraseSector+0x84>)
+  ea:	2270      	movs	r2, #112	; 0x70
+  ec:	701a      	strb	r2, [r3, #0]
+      iErrCode = 1;                                           // Failed
+  ee:	2301      	movs	r3, #1
+  f0:	60bb      	str	r3, [r7, #8]
+	}
+	
+    iErrCode = 0;
+  f2:	2300      	movs	r3, #0
+  f4:	60bb      	str	r3, [r7, #8]
+    
+	  return iErrCode;
+	}
+#endif
+
+  return iErrCode;
+  f6:	68bb      	ldr	r3, [r7, #8]
+}
+  f8:	1c18      	adds	r0, r3, #0
+  fa:	46bd      	mov	sp, r7
+  fc:	b004      	add	sp, #16
+  fe:	bd80      	pop	{r7, pc}
+ 100:	40020000 	.word	0x40020000
+
+00000104 <FlashProgramPage>:
+ *******************************************************************************
+ */ 
+int FlashProgramPage (unsigned long pageAddr,     
+                      unsigned long size,
+                      unsigned char *buf)
+{
+ 104:	b580      	push	{r7, lr}
+ 106:	b088      	sub	sp, #32
+ 108:	af00      	add	r7, sp, #0
+ 10a:	60f8      	str	r0, [r7, #12]
+ 10c:	60b9      	str	r1, [r7, #8]
+ 10e:	607a      	str	r2, [r7, #4]
+	unsigned long offs;                                 	// Flash Offset
+	unsigned long adr = pageAddr;
+ 110:	68fb      	ldr	r3, [r7, #12]
+ 112:	61fb      	str	r3, [r7, #28]
+	unsigned long sz = size;
+ 114:	68bb      	ldr	r3, [r7, #8]
+ 116:	61bb      	str	r3, [r7, #24]
+
+	
+	offs = 0x00000000;
+ 118:	2300      	movs	r3, #0
+ 11a:	617b      	str	r3, [r7, #20]
+	
+	sz = (sz + 3) & ~3;                                 	// Adjust size for Words
+ 11c:	69bb      	ldr	r3, [r7, #24]
+ 11e:	3303      	adds	r3, #3
+ 120:	2203      	movs	r2, #3
+ 122:	4393      	bics	r3, r2
+ 124:	61bb      	str	r3, [r7, #24]
+        }        
+    }
+
+#endif
+	
+	FTFA->FTFA_FSTAT = FTFA_CLEAR;                        	// Reset Error Flags
+ 126:	4b2b      	ldr	r3, [pc, #172]	; (1d4 <FlashProgramPage+0xd0>)
+ 128:	2270      	movs	r2, #112	; 0x70
+ 12a:	701a      	strb	r2, [r3, #0]
+	
+	while (sz) 
+ 12c:	e04a      	b.n	1c4 <FlashProgramPage+0xc0>
+	{
+		FTFA->FTFA_FCCOB0 = FTFA_PROGRAM;                   // Prepare Command
+ 12e:	4b29      	ldr	r3, [pc, #164]	; (1d4 <FlashProgramPage+0xd0>)
+ 130:	2206      	movs	r2, #6
+ 132:	71da      	strb	r2, [r3, #7]
+		offs = ((adr) & ~0x00000003);                       // Prepare Address
+ 134:	69fb      	ldr	r3, [r7, #28]
+ 136:	2203      	movs	r2, #3
+ 138:	4393      	bics	r3, r2
+ 13a:	617b      	str	r3, [r7, #20]
+		FTFA->FTFA_FCCOB1 = (unsigned char)(offs >> 16);
+ 13c:	4b25      	ldr	r3, [pc, #148]	; (1d4 <FlashProgramPage+0xd0>)
+ 13e:	697a      	ldr	r2, [r7, #20]
+ 140:	0c12      	lsrs	r2, r2, #16
+ 142:	b2d2      	uxtb	r2, r2
+ 144:	719a      	strb	r2, [r3, #6]
+		FTFA->FTFA_FCCOB2 = (unsigned char)(offs >> 8);
+ 146:	4b23      	ldr	r3, [pc, #140]	; (1d4 <FlashProgramPage+0xd0>)
+ 148:	697a      	ldr	r2, [r7, #20]
+ 14a:	0a12      	lsrs	r2, r2, #8
+ 14c:	b2d2      	uxtb	r2, r2
+ 14e:	715a      	strb	r2, [r3, #5]
+		FTFA->FTFA_FCCOB3 = (unsigned char)(offs);
+ 150:	4b20      	ldr	r3, [pc, #128]	; (1d4 <FlashProgramPage+0xd0>)
+ 152:	697a      	ldr	r2, [r7, #20]
+ 154:	b2d2      	uxtb	r2, r2
+ 156:	711a      	strb	r2, [r3, #4]
+
+		FTFA->FTFA_FCCOB7 = buf[0];
+ 158:	4b1e      	ldr	r3, [pc, #120]	; (1d4 <FlashProgramPage+0xd0>)
+ 15a:	687a      	ldr	r2, [r7, #4]
+ 15c:	7812      	ldrb	r2, [r2, #0]
+ 15e:	721a      	strb	r2, [r3, #8]
+		FTFA->FTFA_FCCOB6 = buf[1];
+ 160:	4b1c      	ldr	r3, [pc, #112]	; (1d4 <FlashProgramPage+0xd0>)
+ 162:	687a      	ldr	r2, [r7, #4]
+ 164:	7852      	ldrb	r2, [r2, #1]
+ 166:	725a      	strb	r2, [r3, #9]
+		FTFA->FTFA_FCCOB5 = buf[2];
+ 168:	4b1a      	ldr	r3, [pc, #104]	; (1d4 <FlashProgramPage+0xd0>)
+ 16a:	687a      	ldr	r2, [r7, #4]
+ 16c:	7892      	ldrb	r2, [r2, #2]
+ 16e:	729a      	strb	r2, [r3, #10]
+		FTFA->FTFA_FCCOB4 = buf[3];                         // Prepare Data
+ 170:	4b18      	ldr	r3, [pc, #96]	; (1d4 <FlashProgramPage+0xd0>)
+ 172:	687a      	ldr	r2, [r7, #4]
+ 174:	78d2      	ldrb	r2, [r2, #3]
+ 176:	72da      	strb	r2, [r3, #11]
+		
+		FTFA->FTFA_FSTAT |= FTFA_CCIF;                      // Exacute Command
+ 178:	4b16      	ldr	r3, [pc, #88]	; (1d4 <FlashProgramPage+0xd0>)
+ 17a:	4a16      	ldr	r2, [pc, #88]	; (1d4 <FlashProgramPage+0xd0>)
+ 17c:	7812      	ldrb	r2, [r2, #0]
+ 17e:	b2d2      	uxtb	r2, r2
+ 180:	2180      	movs	r1, #128	; 0x80
+ 182:	4249      	negs	r1, r1
+ 184:	430a      	orrs	r2, r1
+ 186:	b2d2      	uxtb	r2, r2
+ 188:	701a      	strb	r2, [r3, #0]
+
+		while(!(FTFA->FTFA_FSTAT & FTFA_CCIF))              // Wait until command is finished
+ 18a:	46c0      	nop			; (mov r8, r8)
+ 18c:	4b11      	ldr	r3, [pc, #68]	; (1d4 <FlashProgramPage+0xd0>)
+ 18e:	781b      	ldrb	r3, [r3, #0]
+ 190:	b2db      	uxtb	r3, r3
+ 192:	b2db      	uxtb	r3, r3
+ 194:	b25b      	sxtb	r3, r3
+ 196:	2b00      	cmp	r3, #0
+ 198:	daf8      	bge.n	18c <FlashProgramPage+0x88>
+		{
+		  /* reload Watdchdog */                            // Reload IWDG
+		}
+		
+		if(FTFA->FTFA_FSTAT & 0x70)                         // Check for Error
+ 19a:	4b0e      	ldr	r3, [pc, #56]	; (1d4 <FlashProgramPage+0xd0>)
+ 19c:	781b      	ldrb	r3, [r3, #0]
+ 19e:	b2db      	uxtb	r3, r3
+ 1a0:	1c1a      	adds	r2, r3, #0
+ 1a2:	2370      	movs	r3, #112	; 0x70
+ 1a4:	4013      	ands	r3, r2
+ 1a6:	d004      	beq.n	1b2 <FlashProgramPage+0xae>
+		{
+		  FTFA->FTFA_FSTAT = FTFA_CLEAR;                   // Reset Error Flags
+ 1a8:	4b0a      	ldr	r3, [pc, #40]	; (1d4 <FlashProgramPage+0xd0>)
+ 1aa:	2270      	movs	r2, #112	; 0x70
+ 1ac:	701a      	strb	r2, [r3, #0]
+		  return 1;                                         // Failed
+ 1ae:	2301      	movs	r3, #1
+ 1b0:	e00c      	b.n	1cc <FlashProgramPage+0xc8>
+		}
+		
+		adr += 4;                                           // Go to next Word
+ 1b2:	69fb      	ldr	r3, [r7, #28]
+ 1b4:	3304      	adds	r3, #4
+ 1b6:	61fb      	str	r3, [r7, #28]
+		buf += 4;
+ 1b8:	687b      	ldr	r3, [r7, #4]
+ 1ba:	3304      	adds	r3, #4
+ 1bc:	607b      	str	r3, [r7, #4]
+		sz  -= 4;
+ 1be:	69bb      	ldr	r3, [r7, #24]
+ 1c0:	3b04      	subs	r3, #4
+ 1c2:	61bb      	str	r3, [r7, #24]
+
+#endif
+	
+	FTFA->FTFA_FSTAT = FTFA_CLEAR;                        	// Reset Error Flags
+	
+	while (sz) 
+ 1c4:	69bb      	ldr	r3, [r7, #24]
+ 1c6:	2b00      	cmp	r3, #0
+ 1c8:	d1b1      	bne.n	12e <FlashProgramPage+0x2a>
+		buf += 4;
+		sz  -= 4;
+	}
+
+  
+  return 0;
+ 1ca:	2300      	movs	r3, #0
+}
+ 1cc:	1c18      	adds	r0, r3, #0
+ 1ce:	46bd      	mov	sp, r7
+ 1d0:	b008      	add	sp, #32
+ 1d2:	bd80      	pop	{r7, pc}
+ 1d4:	40020000 	.word	0x40020000

@@ -1,0 +1,87 @@
+<?xml version="1.0" ?>
+<!--
+    Copyright 2010 coocox.org
+	
+    This file is part of CooCox Softwares.
+-->
+<Debugger>
+	<Debug>
+		<Arch>Cortex-M4</Arch>
+		
+		<SWD support="true">
+			<ExpectedID>0x2BA01477</ExpectedID>
+		</SWD>
+		
+		<JTAG support="true">
+			<TAP name="ARM CoreSight JTAG-DP"    irLen="4" ircapture="0x1" irmask="0xF" irIDCode="0xE" select="true">
+				<ExpectedID>0x4BA00477</ExpectedID>
+			</TAP>	
+		</JTAG>
+		
+		<Reset>
+			<HwReset       support="true" />
+			<SoftSysReset  support="true" select="true" />
+			<SoftVectReset support="true" />
+		</Reset>
+		
+		<SystemResetClkFreq>22000000</SystemResetClkFreq> <!-- OSC22M 22MHZ -->
+	</Debug>
+
+	<!-- 
+		Memory Blocks that can be read/written/executed
+		exclude ram,rom blocks
+		read(true,false)
+		write(true,false)
+		execute(true,false)	
+	 -->
+	<MemMap>
+		<!-- <Block addr="" size="" read="true"   write="true"   execute="false" name="" /> -->
+		
+		<!-- AHB -->
+		<Block addr="0x40000000" size="0x1000"   read="true"   write="true"   execute="false" name="MainFlash I/F" />
+		<Block addr="0x40040000 " size="0x10000"   read="true"   write="true"   execute="false" name="USB ch.0" />
+		<Block addr="0x40060000" size="0x1000"   read="true"   write="true"   execute="false" name="DMAC" />
+		<Block addr="0x4006F000" size="0x1000"  read="true"   write="true"   execute="false" name="GPIO" />
+		<Block addr="0x40061000 " size="0x1000"  read="true"   write="true"   execute="false" name="DSTC" />
+		<Block addr="0x40062000 " size="0x1000"  read="true"   write="true"   execute="false" name="CAN ch.0" />
+		<Block addr="0x40063000 " size="0x1000"   read="true"   write="true"   execute="false" name="CAN ch.1 " />
+		<Block addr="0x4006E000 " size="0x1000"   read="true"   write="true"   execute="false" name="SD-Card I/F " />
+		<Block addr="0x200E0000  " size="0x10000"   read="true"   write="true"   execute="false" name="WorkFlash I/F " />
+		
+		
+		<!-- APB0 -->
+		<Block addr="0x4001_0000  " size="0x1000"   read="true"   write="true"   execute="false" name="Clock/Reset" /> 
+		<Block addr="0x4001_1000  " size="0x1000"   read="true"   write="true"   execute="false" name="HW WDT" />
+		<Block addr="0x4001_2000  " size="0x1000"   read="true"   write="true"   execute="false" name="SW WDT" />
+		<Block addr="0x4001_5000 " size="0x1000"   read="true"   write="true"   execute="false" name="Dual Timer" />
+		
+		
+		<!-- APB1 -->
+		<Block addr="0x40020000 " size="0x1000"   read="true"   write="true"   execute="false" name="MFT Unit0" /> 
+		<Block addr="0x40021000 " size="0x1000"   read="true"   write="true"   execute="false" name="MFT Unit1" />
+		<Block addr="0x40024000 " size="0x1000"   read="true"   write="true"   execute="false" name="PPG" />
+		<Block addr="0x40025000" size="0x1000"   read="true"   write="true"   execute="false" name="Base Timer" />
+		<Block addr="0x40026000" size="0x1000"   read="true"   write="true"   execute="false" name="QPRC" />
+		<Block addr="0x40027000" size="0x1000"   read="true"   write="true"   execute="false" name="A/DC" />
+		<Block addr="0x4002E000" size="0x1000"   read="true"   write="true"   execute="false" name="CR Trim" />
+		
+		
+		<!-- APB2 -->
+		<Block addr="0x40030000" size="0x1000"   read="true"   write="true"   execute="false" name="EXTI" />
+		<Block addr="0x40031000" size="0x1000"   read="true"   write="true"   execute="false" name="Int-Req.Read" />
+		<Block addr="0x40033000 " size="0x1000"   read="true"   write="true"   execute="false" name="D/AC" />
+		<Block addr="0x40035000 " size="0x0800"   read="true"   write="true"   execute="false" name="LVD/DS mode" />
+		<Block addr="0x40035800 " size="0x0800"   read="true"   write="true"   execute="false" name="Deep standby mode Controller " />
+		<Block addr="0x40036000 " size="0x1000"   read="true"   write="true"   execute="false" name="USB Clock ctrl" />
+		<Block addr="0x40037000 " size="0x1000"   read="true"   write="true"   execute="false" name="CAN prescaler" />
+		<Block addr="0x40038000 " size="0x1000"   read="true"   write="true"   execute="false" name="MFS" />
+		<Block addr="0x40039000 " size="0x1000"   read="true"   write="true"   execute="false" name="CRC" />
+		<Block addr="0x4003A000" size="0x1000"   read="true"   write="true"   execute="false" name="Watch Counter" />
+		<Block addr="0x4003B000 " size="0x1000"   read="true"   write="true"   execute="false" name="RTC/Port Ctrl" />
+		<Block addr="0x4003C000" size="0x100"   read="true"   write="true"   execute="false" name="Low Speed CR Prescaler" />
+		<Block addr="0x4003C100" size="0x700"   read="true"   write="true"   execute="false" name="Peripheral Clock Gating" />
+		<Block addr="0x4003F000" size="0x1000"   read="true"   write="true"   execute="false" name="EXT-bus I/F" />
+	
+		
+	</MemMap>
+</Debugger>

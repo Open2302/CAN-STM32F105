@@ -1,0 +1,79 @@
+<?xml version="1.0" ?>
+<!--
+    Copyright 2010 coocox.org
+	
+    This file is part of CooCox Softwares.
+-->
+<Debugger>
+	<Debug>
+		<Arch>Cortex-M0</Arch>
+		
+		<SWD support="true">
+			<ExpectedID>0x0BB11477</ExpectedID>
+		</SWD>
+		<JTAG support="false">	
+		</JTAG>
+		
+		<Reset>
+			<HwReset       support="true" />
+			<SoftSysReset  support="true" select="true" />
+			<SoftVectReset support="true" />
+		</Reset>
+		
+		<SystemResetClkFreq>16000000</SystemResetClkFreq> <!-- OSC22M 16MHZ -->
+	</Debug>
+
+	<!-- 
+		Memory Blocks that can be read/written/executed
+		exclude ram,rom blocks
+		read(true,false)
+		write(true,false)
+		execute(true,false)	
+	 -->
+	<MemMap>
+		<!-- <Block addr="" size="" read="true"   write="true"   execute="false" name="" /> -->
+		
+		<!-- Private peripheral bus - External -->
+		<Block addr="0xE00FF000" size="0x1000"   read="true"   write="true"   execute="false" name="ROM Table" />
+		<Block addr="0xE0042000" size="0xD000"   read="true"   write="true"   execute="false" name="External PPB" />
+		<Block addr="0xE0041000" size="0x1000"   read="true"   write="true"   execute="false" name="ETM" />
+		<Block addr="0xE0040000" size="0x1000"   read="true"   write="true"   execute="false" name="TPIU" />
+		
+		<!-- Private peripheral bus - Internal-->
+		<Block addr="0xE000E000" size="0x1000"   read="true"   write="true"   execute="false" name="System Control Space" />
+		<Block addr="0xE0002000" size="0x1000"   read="true"   write="true"   execute="false" name="FPB" />
+		<Block addr="0xE0001000" size="0x1000"   read="true"   write="true"   execute="false" name="DWT" />
+		<Block addr="0xE0000000" size="0x1000"   read="true"   write="true"   execute="false" name="ITM" />
+		
+		<!-- AHB -->
+		<Block addr="0x50000000" size="0x200"   read="true"   write="true"   execute="false" name="GCR_BA" />
+		<Block addr="0x50000200" size="0x100"   read="true"   write="true"   execute="false" name="CLK_BA" />
+		<Block addr="0x50000300" size="0x100"   read="true"   write="true"   execute="false" name="INT_BA" />
+		<Block addr="0x50004000" size="0x4000"  read="true"   write="true"   execute="false" name="GPIO_BA" />
+		<Block addr="0x50008000" size="0x4000"  read="true"   write="true"   execute="false" name="DMA_BA" />
+		<Block addr="0x5000c000" size="0x4000"  read="true"   write="true"   execute="false" name="FMC_BA" />
+		
+		
+		<!-- APB1 -->
+		<Block addr="0x40004000" size="0x4000"   read="true"   write="true"   execute="false" name="WDT_BA" /> 
+		<Block addr="0x40008000" size="0x4000"   read="true"   write="true"   execute="false" name="RTC_BA" />
+		<Block addr="0x40010000" size="0x4000"   read="true"   write="true"   execute="false" name="TMR01_BA" />
+		<Block addr="0x40020000" size="0x4000"   read="true"   write="true"   execute="false" name="I2C0_BA" />
+		<Block addr="0x40030000" size="0x4000"   read="true"   write="true"   execute="false" name="SPI0_BA" />
+		<Block addr="0x40040000" size="0x4000"   read="true"   write="true"   execute="false" name="PWMA0_BA" />
+		<Block addr="0x40050000" size="0x4000"   read="true"   write="true"   execute="false" name="UART0_BA" /> 
+		<Block addr="0x400B0000" size="0x4000"   read="true"   write="true"   execute="false" name="LCD_BA" />
+		<Block addr="0x400E0000" size="0x4000"   read="true"   write="true"   execute="false" name="ADC_BA" />
+		
+		<!-- APB2 -->
+		<Block addr="0x40110000" size="0x4000"   read="true"   write="true"   execute="false" name="TMR23_BA" />
+		<Block addr="0x40120000" size="0x4000"   read="true"   write="true"   execute="false" name="I2C1_BA" />
+		<Block addr="0x40130000" size="0x4000"   read="true"   write="true"   execute="false" name="SPI1_BA" />
+		<Block addr="0x40140000" size="0x4000"   read="true"   write="true"   execute="false" name="PWM1_BA" />
+		<Block addr="0x40150000" size="0x4000"   read="true"   write="true"   execute="false" name="UART1_BA" />
+		<Block addr="0x40190000" size="0x4000"   read="true"   write="true"   execute="false" name="SC0_BA" />
+		<Block addr="0x401B0000" size="0x4000"   read="true"   write="true"   execute="false" name="SC1_BA" />
+		<Block addr="0x401D0000" size="0x4000"   read="true"   write="true"   execute="false" name="ACMP_BA" />
+		
+	</MemMap>
+</Debugger>

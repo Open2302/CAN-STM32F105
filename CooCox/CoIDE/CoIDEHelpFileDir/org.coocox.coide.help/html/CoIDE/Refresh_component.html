@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><!-- InstanceBegin template="/Templates/CoIDEguide.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<!-- InstanceBeginEditable name="top" -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> <link href="../css/page.css" rel="stylesheet" type="text/css" /><!-- InstanceEndEditable -->
+</head> 
+<body >
+<div class="main">
+     <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        
+      <td  valign="top">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+                <tr>
+                    <td width="76%" valign="top" style="padding-left:0.5em; padding-top:0.5em;">
+					  <!-- InstanceBeginEditable name="pagecenter" -->
+					  <h2 class="fontsize140">Update and Download Components</h2>
+                      <p style="margin-top:10px;">Users can refresh the component page to download and update the latest components:</p>
+                      <table width="90%" border="0" align="center" cellpadding="0" cellspacing="0">
+                        <tr>
+                          <td align="center"><img src="../images/builder/component/RefreshComp/Component_Update_1.jpg" name="pic" id="pic" /></td>
+                        </tr>
+                        <tr>
+                          <td align="center">&nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td><ol style="LINE-HEIGHT: 25px; list-style:none;" id="step">
+                            <li class="blue6" id="step1">1. Click the &quot;Refresh Component List&quot; button at the right-high corner of the repository view.</li>
+                            <li class="blue6"  id="step2" style=" display:none;" >2. Then CoIDE will update the component list, you can click &quot;Run in Background&quot; to wait for update or &quot;Cancle&quot; to stop update or &quot;Details&quot; to view the update progress. </li>
+                            <li class="blue6" id="step3" style=" display:none;">3. When the update completed, you can find the update link behind the component which have been modified on the CooCox’s server, and the download link behind the new components. </li>
+                            <li class="blue6" id="step4" style=" display:none;">4. You can click these links to update the old components or download the new components. </li>
+                          </ol></td>
+                        </tr>
+                        <tr>
+                          <td align="center"><input type="button" id="la" class="input" onclick="lastPic()" value="&lt;&lt;  Prev" />
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="button" id="ne" class="input"  value="Next  &gt;&gt;" onclick="nextPic()" /></td>
+                        </tr>
+                      </table>
+                      <script language="JavaScript" type="text/javascript">
+
+var i=1;
+function nextPic()
+{
+i=i+1;	
+if(i>=5)
+{	alert('This is last photo.');
+	i=4;
+}
+var pic=document.getElementById("pic").src="../images/builder/component/RefreshComp/Component_Update_"+i+".jpg";	
+if(i>1&&i<5)
+{
+var k=i-1;
+document.getElementById("step"+k).style.display="None";
+document.getElementById("step"+i).style.display="block";
+}
+
+}
+function lastPic()
+{
+i=i-1;	
+if(i<=0)
+{	
+alert('This is first photo.');	
+i=1;
+}
+var pic=document.getElementById("pic").src="../images/builder/component/RefreshComp/Component_Update_"+i+".jpg";	
+if(i>0&&i<4)
+{
+var k=i+1;
+document.getElementById("step"+k).style.display="None";
+document.getElementById("step"+i).style.display="block";
+}
+
+}
+                      
+</script>
+                      <br />
+                      <br />
+                    <!-- InstanceEndEditable -->        </td>
+                    
+              </tr>
+          </table>
+        </td>
+      </tr>
+     </table>
+ 
+</div></body>
+<!-- InstanceEnd --></html>

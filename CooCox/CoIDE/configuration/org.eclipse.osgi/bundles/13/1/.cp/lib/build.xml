@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="postbuild" name="test">
+	<property name="project.name" value="projectName" />
+	<property name="project.path" value="." />
+	<property name="output.name" value="${project.name}" />
+	<property name="output.path" value="${project.path}/target" />
+	<property name="project.debug" value="${output.path}/Debug" />
+	<property name="project.obj" value="${output.path}/Debug/obj" />
+	<property name="project.bin" value="${output.path}/Debug/bin" />
+	<property name="target.name" value="Target" />
+	<property name="chip.name" value="LPC1123" />
+
+	<!-- associate current path to the link file path-->
+	<dirname file="$${basedir}" property="linkdir" />
+
+	<target depends="compile" name="postbuild">
+	   <exec executable="${gcc.home}\arm-none-eabi-objcopy.exe">
+	      <arg value="-O"/>
+	      <arg value="binary"/>
+	      <arg value="${project.bin}\${output.name}.elf"/>
+	      <arg value="${project.bin}\${output.name}.bin"/>
+	   </exec>
+	   <exec executable="${gcc.home}\arm-none-eabi-objcopy.exe">
+		  <arg value="-O"/>
+		  <arg value="ihex"/>
+		  <arg value="${project.bin}\${output.name}.elf"/>
+		  <arg value="${project.bin}\${output.name}.hex"/>
+	   </exec>
+	   <exec dir="${project.bin}" executable="${gcc.home}\arm-none-eabi-size.exe">
+		   <arg value="${output.name}.elf"/>
+	   </exec>
+	</target>
+
+	<taskdef resource="cpptasks.tasks" />
+	<target name="compile">
+		<mkdir dir="${project.bin}" />
+		<mkdir dir="${project.obj}" />
+		<cc debug="true" incremental="0" objdir="${project.obj}" outfile="${project.bin}/${output.name}.elf" outtype="executable" subsystem="console">
+			<!-- compile all the c source file in the project -->
+			<project outfile="${output.path}/${output.name}.elf" overwrite="true" type="xcode" />
+			<defineset>
+			</defineset>
+		</cc>
+	</target>
+
+	<target name="clean">
+		<delete dir="${project.bin}" />
+		<delete dir="${project.obj}" />
+		<delete dir="${project.debug}" />
+		<delete dir="${output.path}/${output.name}.elf.xcodeproj" />
+	</target>
+
+	<target depends="clean" name="rebuild">
+		<antcall target="postbuild" />
+	</target>
+
+</project>

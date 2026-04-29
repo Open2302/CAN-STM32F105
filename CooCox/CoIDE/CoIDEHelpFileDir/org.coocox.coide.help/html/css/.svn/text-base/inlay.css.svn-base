@@ -1,0 +1,23 @@
+/* Copyright 2009 Google, Inc. All Rights Reserved */
+.g-doc{width:100%;text-align:left}
+.g-doc-1024{width:73.074em;*width:71.313em;min-width:950px;margin:0 auto;text-align:left}
+.g-doc-800{width:57.69em;*width:56.3em;min-width:750px;margin:0 auto;text-align:left}
+.g-section:after{content:".";display:block;height:0;clear:both;visibility:hidden}
+.g-unit .g-section:after{clear:none}
+.g-unit .g-section{
+	width:70%;
+	overflow:hidden
+}
+.g-section,.g-unit{zoom:1}
+.g-split .g-unit{text-align:right}
+.g-split .g-first{text-align:left}
+
+.g-tpl-180 .g-unit,.g-unit .g-tpl-180 .g-unit,.g-unit .g-unit .g-tpl-180 .g-unit,.g-unit .g-unit .g-unit .g-tpl-180 .g-unit,.g-unit .g-unit .g-unit .g-unit .g-tpl-180 .g-unit,.g-unit .g-unit .g-unit .g-unit .g-unit .g-tpl-180 .g-unit{display:block;margin:0 0 0 180px;width:auto;float:none}
+.g-tpl-180 .g-first,.g-unit .g-tpl-180 .g-first,.g-unit .g-unit .g-tpl-180 .g-first,.g-unit .g-unit .g-unit .g-tpl-180 .g-first,.g-unit .g-unit .g-unit .g-unit .g-tpl-180 .g-first,.g-unit .g-unit .g-unit .g-unit .g-unit .g-tpl-180 .g-first{display:block;margin:0;width:180px;float:left}
+.g-tpl-180-alt .g-unit,.g-unit .g-tpl-180-alt .g-unit,.g-unit .g-unit .g-tpl-180-alt .g-unit,.g-unit .g-unit .g-unit .g-tpl-180-alt .g-unit,.g-unit .g-unit .g-unit .g-unit .g-tpl-180-alt .g-unit,.g-unit .g-unit .g-unit .g-unit .g-unit .g-tpl-180-alt .g-unit{display:block;margin:0 180px 0 0;width:auto;float:none}
+.g-tpl-180-alt .g-first,.g-unit .g-tpl-180-alt .g-first,.g-unit .g-unit .g-tpl-180-alt .g-first,.g-unit .g-unit .g-unit .g-tpl-180-alt .g-first,.g-unit .g-unit .g-unit .g-unit .g-tpl-180-alt .g-first,.g-unit .g-unit .g-unit .g-unit .g-unit .g-tpl-180-alt .g-first{display:block;margin:0;width:180px;float:right}
+.g-tpl-50-50 .g-unit,.g-unit .g-tpl-50-50 .g-unit,.g-unit .g-unit .g-tpl-50-50 .g-unit,.g-unit .g-unit .g-unit .g-tpl-50-50 .g-unit,.g-unit .g-unit .g-unit .g-unit .g-tpl-50-50 .g-unit,.g-unit .g-unit .g-unit .g-unit .g-unit .g-tpl-50-50 .g-unit{width:49.999%;float:right;display:inline;margin: 0;}
+.g-tpl-50-50 .g-first,.g-unit .g-tpl-50-50 .g-first,.g-unit .g-unit .g-tpl-50-50 .g-first,.g-unit .g-unit .g-unit .g-tpl-50-50 .g-first,.g-unit .g-unit .g-unit .g-unit .g-tpl-50-50 .g-first,.g-unit .g-unit .g-unit .g-unit .g-unit .g-tpl-50-50 .g-first{width:49.999%;float:left;display:inline;margin:0}
+.g-tpl-50-50-alt .g-unit,.g-unit .g-tpl-50-50-alt .g-unit,.g-unit .g-unit .g-tpl-50-50-alt .g-unit,.g-unit .g-unit .g-unit .g-tpl-50-50-alt .g-unit,.g-unit .g-unit .g-unit .g-unit .g-tpl-50-50-alt .g-unit,.g-unit .g-unit .g-unit .g-unit .g-unit .g-tpl-50-50-alt .g-unit{width:49.999%;float:left;display:inline;margin:0}
+.g-tpl-50-50-alt .g-first,.g-unit .g-tpl-50-50-alt .g-first,.g-unit .g-unit .g-tpl-50-50-alt .g-first,.g-unit .g-unit .g-unit .g-tpl-50-50-alt .g-first,.g-unit .g-unit .g-unit .g-unit .g-tpl-50-50-alt .g-first,.g-unit .g-unit .g-unit .g-unit .g-unit .g-tpl-50-50-alt .g-first{width:49.999%;float:right;display:inline;margin:0}
+.g-tpl-nest .g-unit,.g-unit .g-tpl-nest .g-unit,.g-unit .g-unit .g-tpl-nest .g-unit,.g-unit .g-unit .g-unit .g-tpl-nest .g-unit,.g-unit .g-unit .g-unit .g-unit .g-tpl-nest .g-unit,.g-unit .g-unit .g-unit .g-unit .g-unit .g-tpl-nest .g-unit{float:left;width:auto;display:inline;margin:0}

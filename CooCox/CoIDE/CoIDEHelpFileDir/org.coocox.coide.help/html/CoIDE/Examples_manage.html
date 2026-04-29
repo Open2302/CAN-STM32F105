@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><!-- InstanceBegin template="/Templates/CoIDEguide.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<!-- InstanceBeginEditable name="top" -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> <link href="../css/page.css" rel="stylesheet" type="text/css" /><!-- InstanceEndEditable -->
+</head> 
+<body >
+<div class="main">
+     <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        
+      <td  valign="top">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+                <tr>
+                    <td width="76%" valign="top" style="padding-left:0.5em; padding-top:0.5em;">
+					  <!-- InstanceBeginEditable name="pagecenter" -->
+					  <h2 class="fontsize140">Managing example</span></h2>
+                      <!-- Viewing example div -------------------------------------------------------------------------------------->
+                      <div>
+                        <p>To manage examples using CoIDE, you just need to perform the following steps:</p>
+                        <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+                          <tr>
+                            <td align="center"><img src="../images/builder/Example_4_Manage_1.jpg" name="pic" id="pic" /></td>
+                          </tr>
+                          <tr>
+                            <td align="center">&nbsp;</td>
+                          </tr>
+                          <tr>
+                            <td><ol style="LINE-HEIGHT: 25px; list-style:none;" class="blue6" id="step">
+                              <li id="step1">1. Login with your CooCox account.</li>
+                              <li  id="step2" style=" display:none;" >2. Find your example in the example view.</li>
+                              <li  id="step3" style=" display:none;" >3. Click <strong>modify</strong> link of the example you want to modify. </li>
+                              <li  id="step4" style=" display:none;" >4. you can modify the name, description, code of the example.</li>
+                              <li  id="step5" style=" display:none;" >5. Click <strong>Save</strong> to save your modification.</li>
+                              <li  id="step6" style=" display:none;" >6. View the modified content.</li>
+                              <li  id="step7" style=" display:none;" >7. You can click <strong>delete</strong> to delete the example.</li>
+                              <li  id="step8" style=" display:none;" >8. Click &quot;Yes&quot; to delete the example.</li>
+                              <li  id="step9" style=" display:none;" >9. The example was deleted.</li>
+                            </ol></td>
+                          </tr>
+                          <tr>
+                            <td align="center"><input type="button" id="la" class="input" onclick="lastPic()" value=" &lt;&lt;  Previous " />
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                              <input type="button" id="ne" class="input"  value=" Next  &gt;&gt; " onclick="nextPic()" /></td>
+                          </tr>
+                        </table>
+                        <script language="JavaScript" type="text/javascript">
+var a=1;
+function nextPic()
+{
+	a=a+1;	
+	if(a>=10)
+    {	
+		alert('This is last photo.');
+	    a=9;
+	}
+	var pic=document.getElementById("pic").src="../images/builder/Example_4_Manage_"+a+".jpg";	
+	if(a>1&&a<10)
+{
+var k=a-1;
+document.getElementById("step"+k).style.display="None";
+document.getElementById("step"+a).style.display="block";
+}
+}
+function lastPic()
+{
+	a=a-1;	
+	if(a<=0)
+	{	
+		alert('This is first photo.');
+		a=1;
+	}
+	var pic=document.getElementById("pic").src="../images/builder/Example_4_Manage_"+a+".jpg";
+	if(a>0&&a<9)
+{
+var k=a+1;
+document.getElementById("step"+k).style.display="None";
+document.getElementById("step"+a).style.display="block";
+}
+	
+}
+                      
+</script>
+                      </div>
+                    <!-- InstanceEndEditable -->        </td>
+                    
+              </tr>
+          </table>
+        </td>
+      </tr>
+     </table>
+ 
+</div></body>
+<!-- InstanceEnd --></html>

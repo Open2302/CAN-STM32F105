@@ -1,0 +1,1 @@
+"C:/CooCox/CoIDE/bin\coflash.exe" program STM32F105RC "C:/Users/simonov/Downloads/CAN-STM32F105-main (3)/CAN-STM32F105-main/DMA1/Debug/bin/DMA1.elf" --adapter-name=ST-Link --port=SWD --adapter-clk=1000000 --erase=affected --reset=SYSRESETREQ --driver="C:/CooCox/CoIDE/flash/STM32F10x_CL_256.elf" 

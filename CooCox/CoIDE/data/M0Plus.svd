@@ -1,0 +1,1074 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<device schemaVersion="1.1"
+xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
+  <name>M0Plus</name>
+  <version>1.0</version>
+  <description>M0Plus</description>
+  <!--Bus Interface Properties-->
+  <!--Cortex-M0Plus is byte addressable-->
+  <addressUnitBits>8</addressUnitBits>
+  <!--the maximum data bit width accessible within a single transfer-->
+  <width>32</width>
+  <!--Register Default Properties-->
+  <size>0x20</size>
+  <resetValue>0x0</resetValue>
+  <resetMask>0xFFFFFFFF</resetMask>
+  <peripherals>
+  <peripheral>
+      <name>NVIC</name>
+      <description>Registers group</description>
+      <groupName>NVIC</groupName>
+      <baseAddress>0xe000e000</baseAddress>
+      <!-- the first addressBlock is occupied by registers. The second block is reserved -> no access permission -->
+      <addressBlock>
+        <offset>0x00000010</offset>
+        <size>0x0000000F</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <addressBlock>
+        <offset>0x00000100</offset>
+        <size>0x00000004</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <addressBlock>
+        <offset>0x00000180</offset>
+        <size>0x00000004</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <addressBlock>
+        <offset>0x00000200</offset>
+        <size>0x00000004</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <addressBlock>
+        <offset>0x00000280</offset>
+        <size>0x00000004</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <addressBlock>
+        <offset>0x00000400</offset>
+        <size>0x00000020</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <addressBlock>
+        <offset>0x00000d00</offset>
+        <size>0x00000028</size>
+        <usage>registers</usage>
+      </addressBlock>
+      <registers>
+       <register>
+          <name>SYST_CSR</name>
+          <description>SysTick Control and Status</description>
+          <addressOffset>0x00000010</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000004</resetValue>
+          <resetMask>0xfffffffb</resetMask>
+          <fields>
+            <field>
+              <name>ENABLE</name>
+              <description>1 : the counter will operate in a multi-shot manner.
+0 : the counter is disabled</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+            <field>
+              <name>TICKINT</name>
+              <description>1 : counting down to 0 will cause the SysTick exception to be pended. Clearing the SysTick Current Value register by a register write in software will not cause SysTick to be pended.
+0 : counting down to 0 does not cause the SysTick exception to be pended. Software can use COUNTFLAG to determine if a count to zero has occurred.</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+            <field>
+              <name>CLKSRC</name>
+              <description>1 : core clock used for SysTick.
+0 : clock source is (optional) external reference clock</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+            <field>
+              <name>COUNTFLAG</name>
+              <description>Returns 1 if timer counted to 0 since last time this register was read.
+COUNTFLAG is set by a count transition from 1 to 0.
+COUNTFLAG is cleared on read or by a write to the Current Value register.</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-only</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <readAction>modify</readAction>
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+          </fields>
+       </register>
+       <register>
+          <name>SYST_RVR</name>
+          <description>SysTick Reload value</description>
+          <addressOffset>0x00000014</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <resetMask>0x00000000</resetMask>
+          <fields>
+            <field>
+              <name>RELOAD</name>
+              <description>Value to load into the Current Value register when the counter reaches 0.</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>24</bitWidth>
+              <access>read-write</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+          </fields>
+       </register>
+       <register>
+          <name>SYST_CVR</name>
+          <description>SysTick Current value</description>
+          <addressOffset>0x00000018</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <resetMask>0x00000000</resetMask>
+          <fields>
+            <field>
+              <name>CURRENT</name>
+              <description>Current counter value. This is the value of the counter at the time it is sampled. The counter does not provide read-modify-write protection. The register is write-clear. A software write of any value will clear the register to 0. Unsupported bits RAZ (see SysTick Reload Value register).</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>24</bitWidth>
+              <access>read-write</access>
+              <modifiedWriteValues>modify</modifiedWriteValues>
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+          </fields>
+       </register>
+       <register>
+          <name>SYST_CALIB</name>
+          <description>SysTick Calibration Value Register</description>
+          <addressOffset>0x0000001C</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <resetMask>0x00000000</resetMask>
+          <fields>
+            <field>
+              <name>NOREF</name>
+              <description>Indicates whether the IMPLEMENTATION DEFINED reference clock is provided: When this bit is 1, the CLKSOURCE bit of the SYST_CSR register is forced to 1 and cannot be cleared to 0.</description>
+              <bitOffset>31</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+              <modifiedWriteValues>modify</modifiedWriteValues>
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+            <field>
+              <name>SKEW</name>
+              <description>Indicates whether the 10ms calibration value is exact:
+0 10ms calibration value is exact.
+1 10ms calibration value is inexact, because of the clock frequency.</description>
+              <bitOffset>30</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+              <modifiedWriteValues>modify</modifiedWriteValues>
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+            <field>
+              <name>TENMS</name>
+              <description>Optionally, holds a reload value to be used for 10ms (100Hz) timing, subject to system clock
+skew errors. If this field is zero, the calibration value is not known.</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>24</bitWidth>
+              <access>read-write</access>
+              <modifiedWriteValues>modify</modifiedWriteValues>
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+          </fields>
+       </register>
+       <register>
+          <name>NVIC_ISER</name>
+          <description>IRQ0 ~ IRQ31 Set-Enable Control Register</description>
+          <addressOffset>0x00000100</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <resetMask>0xffffffff</resetMask>
+          <fields>
+            <field>
+              <name>SETENA</name>
+              <description>Enable one or more interrupts within a group of 32. Each bit represents an interrupt number from IRQ0 ~ IRQ31 (Vector number from 16 ~ 47). 
+Writing 1 will enable the associated interrupt.
+Writing 0 has no effect.
+The register reads back with the current enable state.</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+              <access>read-write</access>
+              <modifiedWriteValues>oneToSet</modifiedWriteValues>
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+          </fields>
+       </register>
+       <register>
+          <name>NVIC_ICER</name>
+          <description>IRQ0 ~ IRQ31 Clear-Enable Control Register</description>
+          <addressOffset>0x00000180</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <resetMask>0xffffffff</resetMask>
+          <fields>
+            <field>
+              <name>CLRENA</name>
+              <description>Disable one or more interrupts within a group of 32. Each bit represents an interrupt number from IRQ0 ~ IRQ31 (Vector number from 16 ~ 47). 
+Writing 1 will disable the associated interrupt.
+Writing 0 has no effect.
+The register reads back with the current enable state.</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+              <access>read-write</access>
+              <modifiedWriteValues>oneToClear</modifiedWriteValues>
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+          </fields>
+       </register>
+       <register>
+          <name>NVIC_ISPR</name>
+          <description>IRQ0 ~ IRQ31 Set-Pending Control Register</description>
+          <addressOffset>0x00000200</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <resetMask>0xffffffff</resetMask>
+          <fields>
+            <field>
+              <name>SETPEND</name>
+              <description>Writing 1 to a bit pends the associated interrupt under software control. Each bit represents an interrupt number from IRQ0 ~ IRQ31 (Vector number from 16 ~ 47).
+Writing 0 has no effect.
+The register reads back with the current pending state.</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+              <access>read-write</access>
+              <modifiedWriteValues>oneToSet</modifiedWriteValues>
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+          </fields>
+       </register>
+       <register>
+          <name>NVIC_ICPR</name>
+          <description>IRQ0 ~ IRQ31 Clear-Pending Control Register</description>
+          <addressOffset>0x00000280</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <resetMask>0xffffffff</resetMask>
+          <fields>
+            <field>
+              <name>CLRPEND</name>
+              <description>Writing 1 to a bit un-pends the associated interrupt under software control. Each bit represents an interrupt number from IRQ0 ~ IRQ31 (Vector number from 16 ~ 47).
+Writing 0 has no effect.
+The register reads back with the current pending state.</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>32</bitWidth>
+              <access>read-write</access>
+              <modifiedWriteValues>oneToClear</modifiedWriteValues>
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+          </fields>
+       </register>
+       <register>
+          <name>NVIC_IPR0</name>
+          <description>IRQ0 ~ IRQ3 Priority Control Register</description>
+          <addressOffset>0x00000400</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <resetMask>0xffffffff</resetMask>
+          <fields>
+            <field>
+              <name>PRI_0</name>
+              <description>Priority of IRQ0
+&quot;0&quot; denotes the highest priority and &quot;3&quot; denotes lowest priority</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>read-write</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+            <field>
+              <name>PRI_1</name>
+              <description>Priority of IRQ1
+&quot;0&quot; denotes the highest priority and &quot;3&quot; denotes lowest priority</description>
+              <bitOffset>14</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>read-write</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+            <field>
+              <name>PRI_2</name>
+              <description>Priority of IRQ2
+&quot;0&quot; denotes the highest priority and &quot;3&quot; denotes lowest priority</description>
+              <bitOffset>22</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>read-write</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+            <field>
+              <name>PRI_3</name>
+              <description>Priority of IRQ3
+&quot;0&quot; denotes the highest priority and &quot;3&quot; denotes lowest priority</description>
+              <bitOffset>30</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>read-write</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+          </fields>
+       </register>
+       <register>
+          <name>NVIC_IPR1</name>
+          <description>IRQ4 ~ IRQ7 Priority Control Register</description>
+          <addressOffset>0x00000404</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <resetMask>0xffffffff</resetMask>
+          <fields>
+            <field>
+              <name>PRI_4</name>
+              <description>Priority of IRQ4
+&quot;0&quot; denotes the highest priority and &quot;3&quot; denotes lowest priority</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>read-write</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+            <field>
+              <name>PRI_5</name>
+              <description>Priority of IRQ5
+&quot;0&quot; denotes the highest priority and &quot;3&quot; denotes lowest priority</description>
+              <bitOffset>14</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>read-write</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+            <field>
+              <name>PRI_6</name>
+              <description>Priority of IRQ6
+&quot;0&quot; denotes the highest priority and &quot;3&quot; denotes lowest priority</description>
+              <bitOffset>22</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>read-write</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+            <field>
+              <name>PRI_7</name>
+              <description>Priority of IRQ7
+&quot;0&quot; denotes the highest priority and &quot;3&quot; denotes lowest priority</description>
+              <bitOffset>30</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>read-write</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+          </fields>
+       </register>
+       <register>
+          <name>NVIC_IPR2</name>
+          <description>IRQ8 ~ IRQ11 Priority Control Register</description>
+          <addressOffset>0x00000408</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <resetMask>0xffffffff</resetMask>
+          <fields>
+            <field>
+              <name>PRI_8</name>
+              <description>Priority of IRQ8
+&quot;0&quot; denotes the highest priority and &quot;3&quot; denotes lowest priority</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>read-write</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+            <field>
+              <name>PRI_9</name>
+              <description>Priority of IRQ9
+&quot;0&quot; denotes the highest priority and &quot;3&quot; denotes lowest priority</description>
+              <bitOffset>14</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>read-write</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+            <field>
+              <name>PRI_10</name>
+              <description>Priority of IRQ10
+&quot;0&quot; denotes the highest priority and &quot;3&quot; denotes lowest priority</description>
+              <bitOffset>22</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>read-write</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+            <field>
+              <name>PRI_11</name>
+              <description>Priority of IRQ11
+&quot;0&quot; denotes the highest priority and &quot;3&quot; denotes lowest priority</description>
+              <bitOffset>30</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>read-write</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+          </fields>
+       </register>
+       <register>
+          <name>NVIC_IPR3</name>
+          <description>IRQ12 ~ IRQ15 Priority Control Register</description>
+          <addressOffset>0x0000040c</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <resetMask>0xffffffff</resetMask>
+          <fields>
+            <field>
+              <name>PRI_12</name>
+              <description>Priority of IRQ12
+&quot;0&quot; denotes the highest priority and &quot;3&quot; denotes lowest priority</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>read-write</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+            <field>
+              <name>PRI_13</name>
+              <description>Priority of IRQ13
+&quot;0&quot; denotes the highest priority and &quot;3&quot; denotes lowest priority</description>
+              <bitOffset>14</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>read-write</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+            <field>
+              <name>PRI_14</name>
+              <description>Priority of IRQ14
+&quot;0&quot; denotes the highest priority and &quot;3&quot; denotes lowest priority</description>
+              <bitOffset>22</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>read-write</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+            <field>
+              <name>PRI_15</name>
+              <description>Priority of IRQ15
+&quot;0&quot; denotes the highest priority and &quot;3&quot; denotes lowest priority</description>
+              <bitOffset>30</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>read-write</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+          </fields>
+       </register>
+       <register>
+          <name>NVIC_IPR4</name>
+          <description>IRQ16 ~ IRQ19 Priority Control Register</description>
+          <addressOffset>0x00000410</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <resetMask>0xffffffff</resetMask>
+          <fields>
+            <field>
+              <name>PRI_16</name>
+              <description>Priority of IRQ16
+&quot;0&quot; denotes the highest priority and &quot;3&quot; denotes lowest priority</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>read-write</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+            <field>
+              <name>PRI_17</name>
+              <description>Priority of IRQ17
+&quot;0&quot; denotes the highest priority and &quot;3&quot; denotes lowest priority</description>
+              <bitOffset>14</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>read-write</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+            <field>
+              <name>PRI_18</name>
+              <description>Priority of IRQ18
+&quot;0&quot; denotes the highest priority and &quot;3&quot; denotes lowest priority</description>
+              <bitOffset>22</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>read-write</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+            <field>
+              <name>PRI_19</name>
+              <description>Priority of IRQ19
+&quot;0&quot; denotes the highest priority and &quot;3&quot; denotes lowest priority</description>
+              <bitOffset>30</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>read-write</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+          </fields>
+       </register>
+       <register>
+          <name>NVIC_IPR5</name>
+          <description>IRQ20 ~ IRQ23 Priority Control Register</description>
+          <addressOffset>0x00000414</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <resetMask>0xffffffff</resetMask>
+          <fields>
+            <field>
+              <name>PRI_20</name>
+              <description>Priority of IRQ20
+&quot;0&quot; denotes the highest priority and &quot;3&quot; denotes lowest priority</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>read-write</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+            <field>
+              <name>PRI_21</name>
+              <description>Priority of IRQ21
+&quot;0&quot; denotes the highest priority and &quot;3&quot; denotes lowest priority</description>
+              <bitOffset>14</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>read-write</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+            <field>
+              <name>PRI_22</name>
+              <description>Priority of IRQ22
+&quot;0&quot; denotes the highest priority and &quot;3&quot; denotes lowest priority</description>
+              <bitOffset>22</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>read-write</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+            <field>
+              <name>PRI_23</name>
+              <description>Priority of IRQ23
+&quot;0&quot; denotes the highest priority and &quot;3&quot; denotes lowest priority</description>
+              <bitOffset>30</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>read-write</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+          </fields>
+       </register>
+       <register>
+          <name>NVIC_IPR6</name>
+          <description>IRQ24 ~ IRQ27 Priority Control Register</description>
+          <addressOffset>0x00000418</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <resetMask>0xffffffff</resetMask>
+          <fields>
+            <field>
+              <name>PRI_24</name>
+              <description>Priority of IRQ24
+&quot;0&quot; denotes the highest priority and &quot;3&quot; denotes lowest priority</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>read-write</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+            <field>
+              <name>PRI_25</name>
+              <description>Priority of IRQ25
+&quot;0&quot; denotes the highest priority and &quot;3&quot; denotes lowest priority</description>
+              <bitOffset>14</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>read-write</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+            <field>
+              <name>PRI_26</name>
+              <description>Priority of IRQ26
+&quot;0&quot; denotes the highest priority and &quot;3&quot; denotes lowest priority</description>
+              <bitOffset>22</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>read-write</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+            <field>
+              <name>PRI_27</name>
+              <description>Priority of IRQ27
+&quot;0&quot; denotes the highest priority and &quot;3&quot; denotes lowest priority</description>
+              <bitOffset>30</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>read-write</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+          </fields>
+       </register>
+       <register>
+          <name>NVIC_IPR7</name>
+          <description>IRQ28 ~ IRQ31 Priority Control Register</description>
+          <addressOffset>0x0000041c</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <resetMask>0xffffffff</resetMask>
+          <fields>
+            <field>
+              <name>PRI_28</name>
+              <description>Priority of IRQ28
+&quot;0&quot; denotes the highest priority and &quot;3&quot; denotes lowest priority</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>read-write</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+            <field>
+              <name>PRI_29</name>
+              <description>Priority of IRQ29
+&quot;0&quot; denotes the highest priority and &quot;3&quot; denotes lowest priority</description>
+              <bitOffset>14</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>read-write</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+            <field>
+              <name>PRI_30</name>
+              <description>Priority of IRQ30
+&quot;0&quot; denotes the highest priority and &quot;3&quot; denotes lowest priority</description>
+              <bitOffset>22</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>read-write</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+            <field>
+              <name>PRI_31</name>
+              <description>Priority of IRQ31
+&quot;0&quot; denotes the highest priority and &quot;3&quot; denotes lowest priority</description>
+              <bitOffset>30</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>read-write</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+          </fields>
+       </register>
+       <register>
+          <name>CPUID</name>
+          <description>CPUID Register</description>
+          <addressOffset>0x00000d00</addressOffset>
+          <access>read-only</access>
+          <resetValue>0x410cc200</resetValue>
+          <resetMask>0xffffffff</resetMask>
+          <fields>
+            <field>
+              <name>REVESION</name>
+              <description>Reads as 0x0</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>4</bitWidth>
+              <access>read-only</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+            <field>
+              <name>PARTNO</name>
+              <description>Reads as 0xC20</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>12</bitWidth>
+              <access>read-only</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+            <field>
+              <name>PART</name>
+              <description>Reads as 0xC for ARMv6-M parts</description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>4</bitWidth>
+              <access>read-only</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+            <field>
+              <name>IMPLEMENTER</name>
+              <description>Implementer code assigned by ARM. ( ARM = 0x41)</description>
+              <bitOffset>24</bitOffset>
+              <bitWidth>8</bitWidth>
+              <access>read-only</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+          </fields>
+       </register>
+       <register>
+          <name>ICSR</name>
+          <description>Interrupt Control State Register</description>
+          <addressOffset>0x00000d04</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <resetMask>0xffffffff</resetMask>
+          <fields>
+            <field>
+              <name>VECTACTIVE</name>
+              <description>0 = Thread mode
+Value &gt; 1 = the exception number for the current executing exception.This is a read only bit.</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>9</bitWidth>
+              <access>read-only</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+            <field>
+              <name>VECTPENDING</name>
+              <description>Indicates the exception number for the highest priority pending exception. The pending state includes the effect of memory-mapped enable and mask registers. It does not include the PRIMASK special-purpose register qualifier. A value of zero indicates no pending exceptions.
+This is a read only bit.</description>
+              <bitOffset>12</bitOffset>
+              <bitWidth>9</bitWidth>
+              <access>read-only</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+            <field>
+              <name>ISRPENDING</name>
+              <description>Indicates if an external configurable (NVIC generated) interrupt is pending.
+This is a read only bit.</description>
+              <bitOffset>22</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-only</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+            <field>
+              <name>ISRPREEMPT</name>
+              <description>If set, a pending exception will be serviced on exit from the debug halt state.
+This is a read only bit.</description>
+              <bitOffset>23</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-only</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+            <field>
+              <name>PENDSTCLR</name>
+              <description>Write 1 to clear a pending SysTick. This is a write only bit.</description>
+              <bitOffset>25</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>write-only</access>
+              <modifiedWriteValues>modify</modifiedWriteValues>
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+            <field>
+              <name>PENDSTSET</name>
+              <description>Set a pending SysTick. Reads back with current state (1 if Pending, 0 if not).</description>
+              <bitOffset>26</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+            <field>
+              <name>PENDSVCLR</name>
+              <description>Write 1 to clear a pending PendSV interrupt. This is a write only bit.</description>
+              <bitOffset>27</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>write-only</access>
+              <modifiedWriteValues>modify</modifiedWriteValues>
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+            <field>
+              <name>PENDSVSET</name>
+              <description>Set a pending PendSV interrupt. This is normally used to request a context switch. Reads back with current state (1 if Pending, 0 if not).</description>
+              <bitOffset>28</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+            <field>
+              <name>NMIPENDSET</name>
+              <description>Setting this bit will activate an NMI. Since NMI is the highest priority exception, it will activate as soon as it is registered. Reads back with current state (1 if Pending, 0 if not).</description>
+              <bitOffset>31</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+          </fields>
+       </register>
+       <register>
+          <name>VTOR</name>
+          <description>Vector Table Offset Register</description>
+          <addressOffset>0x00000d08</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <resetMask>0xffffffff</resetMask>
+          <fields>
+            <field>
+              <name>TBLOFF</name>
+              <description>Table offset address </description>
+              <bitOffset>7</bitOffset>
+              <bitWidth>24</bitWidth>
+              <access>read-write</access>
+            </field>
+          </fields>
+       </register>
+       <register>
+          <name>AIRCR</name>
+          <description>Application Interrupt and Reset Control Register</description>
+          <addressOffset>0x00000d0c</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <resetMask>0xffffffff</resetMask>
+          <fields>
+            <field>
+              <name>VECTCLRACTIVE</name>
+              <description>Set this bit to 1 will clears all active state information for fixed and configurable exceptions. The bit is a write only bit and can only be written when the core is halted. Note: It is the debugger's responsibility to re-initialize the stack. </description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>write-only</access>
+              <modifiedWriteValues>modify</modifiedWriteValues>
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+            <field>
+              <name>SYSRESETREQ</name>
+              <description>Writing this bit 1 will cause a reset signal to be asserted to the chip to indicate a reset is requested. The bit is a write only bit and self-clears as part of the reset sequence. </description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>write-only</access>
+              <modifiedWriteValues>modify</modifiedWriteValues>
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+            <field>
+              <name>VECTORKEY</name>
+              <description>When write this register, this field should be 0x05FA, otherwise the write action will be unpredictable. </description>
+              <bitOffset>16</bitOffset>
+              <bitWidth>16</bitWidth>
+              <access>read-write</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+          </fields>
+       </register>
+       <register>
+          <name>SCR</name>
+          <description>System Control Register</description>
+          <addressOffset>0x00000d10</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <resetMask>0xffffffff</resetMask>
+          <fields>
+            <field>
+              <name>SLEEPONEXIT</name>
+              <description>When set to 1, the core can enter a sleep state on an exception return to Thread mode. This is the mode and exception level entered at reset, the base level of execution.</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+            <field>
+              <name>SLEEPDEEP</name>
+              <description>A qualifying hint that indicates waking from sleep might take longer.</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+            <field>
+              <name>SEVONPEND</name>
+              <description>When enabled, interrupt transitions from Inactive to Pending are included in the list of wakeup events for the WFE instruction.</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+          </fields>
+       </register>
+       <register>
+          <name>CCR</name>
+          <description>Configuration and Control Register</description>
+          <addressOffset>0x00000d14</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <resetMask>0xffffffff</resetMask>
+          <fields>
+            <field>
+              <name>STKALIGN</name>
+              <description>On exception entry, the SP used prior to the exception is adjusted to
+be 8-byte aligned and the context to restore it is saved. The SP is
+restored on the associated exception return. </description>
+              <bitOffset>9</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+            <field>
+              <name>UNALIGN_TRP</name>
+              <description>unaligned word and halfword accesses generate a HardFault exception. </description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+            </field>
+          </fields>
+       </register>
+       <register>
+          <name>SHPR2</name>
+          <description>System Handler Priority Register 2</description>
+          <addressOffset>0x00000d1c</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <resetMask>0xffffffff</resetMask>
+          <fields>
+            <field>
+              <name>PRI_11</name>
+              <description>Priority of system handler 11 SVCall
+&quot;0&quot; denotes the highest priority and &quot;3&quot; denotes lowest priority</description>
+              <bitOffset>30</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>read-write</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+          </fields>
+       </register>
+       <register>
+          <name>SHPR3</name>
+          <description>System Handler Priority Register 3</description>
+          <addressOffset>0x00000d20</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <resetMask>0xffffffff</resetMask>
+          <fields>
+            <field>
+              <name>PRI_14</name>
+              <description>Priority of system handler 14 PendSV
+&quot;0&quot; denotes the highest priority and &quot;3&quot; denotes lowest priority</description>
+              <bitOffset>22</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>read-write</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+            <field>
+              <name>PRI_15</name>
+              <description>Priority of system handler 15 SysTick
+&quot;0&quot; denotes the highest priority and &quot;3&quot; denotes lowest priority</description>
+              <bitOffset>30</bitOffset>
+              <bitWidth>2</bitWidth>
+              <access>read-write</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+          </fields>
+       </register>
+       <register>
+          <name>SHCSR</name>
+          <description>System Handler Control and State Register</description>
+          <addressOffset>0x00000d24</addressOffset>
+          <access>read-write</access>
+          <resetValue>0x00000000</resetValue>
+          <resetMask>0xffffffff</resetMask>
+          <fields>
+            <field>
+              <name>SVCALLPENDED</name>
+              <description>This bit reflects the pending state on a read, and updates
+the pending state, to the value written, on a write</description>
+              <bitOffset>15</bitOffset>
+              <bitWidth>1</bitWidth>
+              <access>read-write</access>
+              <!-- there is no side effect on writes, therefore <modifiedWriteValues> is not set -->
+              <!-- there is no side effect on reads, therefore <readAction> is not set -->
+              <!-- oneBitEnable named enumeration that can be reused in other parts of the description -->
+            </field>
+          </fields>
+       </register>
+      </registers>
+    </peripheral>
+  </peripherals>
+</device>

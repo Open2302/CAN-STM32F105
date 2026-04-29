@@ -1,0 +1,130 @@
+<html>
+	<head>
+		<title>KindEditor</title>
+		<style>
+			textarea {
+				display: block;
+			}
+			.ke-icon-createAPIs {
+				background-image: url(api_list.gif);
+				background-position: 0px -0px;
+				width: 16px;
+				height: 16px;
+			}
+		</style>
+		<script type="text/javascript"  src="kindeditor.js"></script>
+		<script type="text/javascript">
+		function GetHtml(){
+			return KE.html('htmlEditor');
+		}
+		
+		function IsEmpty(){
+			return KE.isEmpty('htmlEditor');
+		}
+		
+		function GetText(){
+			return KE.text('htmlEditor');
+		}
+		
+		function GetPureText(){
+			return KE.util.getPureData('htmlEditor');
+		}
+		
+		function GetSelectedHtml(){
+			return KE.selectedHtml('htmlEditor');
+		}
+		
+		function SetHtml(html){
+			KE.html('htmlEditor', html.toString());
+		}
+		
+		function SetText(text){
+			KE.text('htmlEditor', text.toString());
+		}
+		
+		function InsertHtml(html){
+			KE.insertHtml('htmlEditor', html.toString());
+		}
+		
+		function AppendHtml(html){
+			KE.appendHtml('htmlEditor', html.toString());
+		}
+		
+		function ShowFullScreen(){
+			KE.plugin['fullscreen'].click('htmlEditor');
+		}
+		</script>
+		<script type="text/javascript">
+		function SetContents(initData){
+			SetHtml(initData);
+		}
+		
+		function GetInitContents(){
+   			var result;
+   			result = theJavaFunction(1);
+   			SetContents(result);
+		}
+		
+		function AfterEditorCreatedCompleted() {
+   			GetInitContents();
+		}
+		
+		function PostContent(){
+			var result;
+			var helpContent = GetHtml();
+			result = theJavaFunction(2,helpContent);
+		}
+		
+		function PostContents(){
+			var helpContent = GetHtml();
+			var createCommandStr = "<p>The editor is creating the API list Table, please waiting ......</p>";
+			try{
+			   if(helpContent.indexOf(createCommandStr) != -1){
+					var oldContent = helpContent.substr(createCommandStr.length + 1);
+					var result = theJavaFunction(3,oldContent,helpContent);
+					SetContents(result);
+			   }else{
+					var result = theJavaFunction(2,helpContent);
+			   }
+			}catch(e){
+			   alert('a java error occurred: ' + e.message);
+			   return ;
+			}
+		}
+		</script>
+		<script type="text/javascript">
+		KE.lang.createAPIs = 'Create APIs Document';
+		KE.plugin.createAPIs = {
+			click : function(id) {
+				SetHtml('<p>The editor is creating the API list Table, please waiting ......</p>'+ GetHtml());
+			}
+		};
+		</script>
+		<script type="text/javascript">
+			var editor_id = 'htmlEditor';
+			var initCompleted = false;
+			KE.init({
+				id : editor_id,
+				width : '700px',
+				height : '300px',
+				items : ['source', '|', 'createAPIs', '|',
+		'title', 'fontname', 'fontsize', '|', 'textcolor', 'bgcolor', 'bold',
+		'italic', 'underline', 'strikethrough', 'removeformat', '|',
+		'advtable', 'hr', 'link','|','about'],
+			afterCreate : function(id) {AfterEditorCreatedCompleted();initCompleted=true;},
+			afterChange : function(id) {if(initCompleted)PostContents();}
+			});
+			KE.event.ready(function(){
+				var textarea = document.createElement('textarea');
+				textarea.id = editor_id;
+				textarea.name = "content";
+				document.getElementById('editor_area').appendChild(textarea);
+				KE.create(editor_id);
+				ShowFullScreen();
+			});
+		</script>
+	</head>
+	<body>
+		<div id="editor_area"></div>
+	</body>
+</html>

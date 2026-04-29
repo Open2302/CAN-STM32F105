@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Project version="2G" name="">
+    <Target name="Target" isCurrent="1">
+	  <!--Device 信息-->
+      <Device manufacturerId="" manufacturerName="" chipId="" chipName="" boardId="" boardName="" coreId="" coreName=""/>
+      
+	  <BuildOption>	
+	   <Compile>
+	     <Option name="OptimizationLevel" value="0"/>
+         <Option name="UseFPU" value="0"/>
+         <Option name="UserEditCompiler" value=""/>
+         <Option name="SupportCPlusplus" value="0"/>
+	     <Includepaths>
+           <Includepath path="."/>
+         </Includepaths>
+         <DefinedSymbols>
+         </DefinedSymbols>
+	   </Compile>
+	   <Link useDefault="0">
+	     <Option name="DiscardUnusedSection" value="0"/>
+         <Option name="UserEditLinkder" value=""/>
+         <Option name="UseMemoryLayout" value="1"/>
+         <Option name="nostartfiles" value="1"/>
+	     <LinkedLibraries>
+         </LinkedLibraries>
+		 <MemoryAreas debugInFlashNotRAM="1">
+            <Memory name="IROM1" type="ReadOnly" startValue="0x00000000" size="0x00040000" />
+            <Memory name="IRAM1" type="ReadWrite" startValue="0x20000000" size="0x00010000" />
+         </MemoryAreas>
+         <LocateLinkFile path="link.ld" type="0"/>
+	   </Link>
+	   <Output>
+	     <Option name="OutputFileType" value="0"/>
+	     <Option name="Path" value=""/>
+		 <Option name="Name" value=""/>
+		 <Option name="HEX" value="1"/>
+		 <Option name="BIN" value="1"/>
+	   </Output>
+	   <User>
+	     <UserRun name="Run#1" type="Before" checked="0" value=""/>
+         <UserRun name="Run#1" type="After" checked="0" value=""/>
+	   </User>
+	  </BuildOption>
+	  
+	  <DebugOption>
+	  </DebugOption>
+	  
+	  <!-- 不参与编译文件的信息 ,这个信息独立出来，是方便对文件的管理-->
+	  <ExcludeFile>  
+	  </ExcludeFile>  
+    </Target>
+    <!--勾选组件 信息-->    
+    <Components path="./">
+    </Components>
+	<!--目录文件 信息-->    
+    <Files>
+    </Files>
+</Project>

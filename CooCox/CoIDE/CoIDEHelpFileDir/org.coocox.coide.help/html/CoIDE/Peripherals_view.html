@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><!-- InstanceBegin template="/Templates/CoIDEguide.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<!-- InstanceBeginEditable name="top" -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> <link href="../css/page.css" rel="stylesheet" type="text/css" /><!-- InstanceEndEditable -->
+</head> 
+<body >
+<div class="main">
+     <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        
+      <td  valign="top">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+                <tr>
+                    <td width="76%" valign="top" style="padding-left:0.5em; padding-top:0.5em;">
+					  <!-- InstanceBeginEditable name="pagecenter" -->
+					  <h2 class="fontsize140">Peripherals View（CoAssistant）</h2>
+                      <p style="margin-top:10px;">The Peripherals View can be used to view and Modify the vaule of Peripherals' registers.Values that have changed are highlighted in the Peripherals view when your program stops. </p>
+                      <div>
+                        <p>To use CoAssitant in CoIDE, you only need to perform the following steps:</p>
+                        <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+                          <tr>
+                            <td align="center"><img src="../images/Debug/Peripherals_view_1.gif" alt="" name="pic" id="pic" /></td>
+                          </tr>
+                          <tr>
+                            <td align="center">&nbsp;</td>
+                          </tr>
+                          <tr>
+                            <td><ol style="LINE-HEIGHT: 25px; list-style:none;" class="blue6" id="step">
+                              <li id="step1">1. Click <strong>Peripherals</strong> under the <strong>View</strong> menu.</li>
+                              <li  id="step2" style=" display:none;" >2. CoIDE will open the Peipherals View.</li>
+                              <li  id="step3" style=" display:none;" >3. Click the name of Peripheral to view the base address and description for this peripheral.</li>
+                              <li  id="step4" style=" display:none;" >4. Click &quot;+&quot; to show the register list and view the value of these registers.</li>
+                              <li  id="step5" style=" display:none;" >5. The Register that have changed are highlighted in in the Peripherals view.</li>
+                              <li  id="step6" style=" display:none;" >6. Click the name of Register to open the detail information view.</li>
+                              <li  id="step7" style=" display:none;" >7. In this view, you can get the description, RW access, address offset and the reset value of the register.</li>
+                              <li  id="step8" style=" display:none;" >8. You can modify the value of register when you debug a project.</li>
+                            </ol></td>
+                          </tr>
+                          <tr>
+                            <td align="center"><input type="button" id="la" class="input" onclick="lastPic()" value=" &lt;&lt;  Previous " />
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                              <input type="button" id="ne" class="input"  value=" Next  &gt;&gt; " onclick="nextPic()" /></td>
+                          </tr>
+                        </table>
+                        <script language="JavaScript" type="text/javascript">
+var a=1;
+function nextPic()
+{
+	a=a+1;	
+	if(a>=9)
+    {	
+		alert('This is last photo.');
+	    a=8;
+	}
+	var pic=document.getElementById("pic").src="../images/Debug/Peripherals_view_"+a+".gif";	
+	if(a>1&&a<9)
+{
+var k=a-1;
+document.getElementById("step"+k).style.display="None";
+document.getElementById("step"+a).style.display="block";
+}
+}
+function lastPic()
+{
+	a=a-1;	
+	if(a<=0)
+	{	
+		alert('This is first photo.');
+		a=1;
+	}
+	var pic=document.getElementById("pic").src="../images/Debug/Peripherals_view_"+a+".gif";
+	if(a>0&&a<8)
+{
+var k=a+1;
+document.getElementById("step"+k).style.display="None";
+document.getElementById("step"+a).style.display="block";
+}
+	
+}
+                      
+</script>
+                      </div>
+                    <!-- InstanceEndEditable -->        </td>
+                    
+              </tr>
+          </table>
+        </td>
+      </tr>
+     </table>
+ 
+</div></body>
+<!-- InstanceEnd --></html>

@@ -1,0 +1,75 @@
+<?xml version="1.0" ?>
+<!--
+    Copyright 2010 coocox.org
+	
+    This file is part of CooCox Softwares.
+-->
+<Debugger>
+	<Debug>
+		<Arch>Cortex-M0</Arch>
+		
+		<SWD support="true">
+			<ExpectedID>0x0BB11477</ExpectedID>
+		</SWD>
+		
+		<Reset>
+			<HwReset       support="true"  />
+			<SoftSysReset  support="true" select="true" />
+			<SoftVectReset support="true" />
+		</Reset>
+		
+		<SystemResetClkFreq>12000000</SystemResetClkFreq> <!-- IRC oscillator 12MHZ -->
+	</Debug>
+
+	<!-- 
+		Memory Blocks that can be read/written/executed
+		exclude ram,rom blocks
+		read(true,false)
+		write(true,false)
+		execute(true,false)	
+	 -->
+	<MemMap>
+		<!-- <Block addr="" size="" read="true"   write="true"   execute="false" name="" /> -->
+		
+		<!-- Private peripheral bus - External -->
+		<Block addr="0xE00FF000" size="0x1000"   read="true"   write="true"   execute="false" name="ROM Table" />
+		<Block addr="0xE0042000" size="0xD000"   read="true"   write="true"   execute="false" name="External PPB" />
+		<Block addr="0xE0041000" size="0x1000"   read="true"   write="true"   execute="false" name="ETM" />
+		<Block addr="0xE0040000" size="0x1000"   read="true"   write="true"   execute="false" name="TPIU" />
+		
+		<!-- Private peripheral bus - Internal-->
+		<Block addr="0xE000E000" size="0x1000"   read="true"   write="true"   execute="false" name="System Control Space" />
+		<Block addr="0xE0002000" size="0x1000"   read="true"   write="true"   execute="false" name="FPB" />
+		<Block addr="0xE0001000" size="0x1000"   read="true"   write="true"   execute="false" name="DWT" />
+		<Block addr="0xE0000000" size="0x1000"   read="true"   write="true"   execute="false" name="ITM" />
+		
+		<!-- AHB -->
+		<Block addr="0x50000000" size="0x10000"   read="true"   write="true"   execute="false" name="GPIO PIO0" />
+		<Block addr="0x50010000" size="0x10000"   read="true"   write="true"   execute="false" name="GPIO PIO1" />
+		<Block addr="0x50020000" size="0x10000"   read="true"   write="true"   execute="false" name="GPIO PIO2" />
+		<Block addr="0x50030000" size="0x10000"   read="true"   write="true"   execute="false" name="GPIO PIO3" />
+		
+		<!-- APB -->
+		<Block addr="0x40000000" size="0x4000"   read="true"   write="true"   execute="false" name="I2C" />
+		<Block addr="0x40004000" size="0x4000"   read="true"   write="true"   execute="false" name="WDT" /> 
+		<Block addr="0x40008000" size="0x4000"   read="true"   write="true"   execute="false" name="UART" />
+		<Block addr="0x4000C000" size="0x4000"   read="true"   write="true"   execute="false" name="CT16B0" />
+		<Block addr="0x40010000" size="0x4000"   read="true"   write="true"   execute="false" name="CT16B1" />
+		<Block addr="0x40014000" size="0x4000"   read="true"   write="true"   execute="false" name="CT32B0" />
+		<Block addr="0x40018000" size="0x4000"   read="true"   write="true"   execute="false" name="CT32B1" />
+		<Block addr="0x4001C000" size="0x4000"   read="true"   write="true"   execute="false" name="ADC" />
+		<Block addr="0x40038000" size="0x4000"   read="true"   write="true"   execute="false" name="PMU" />
+		<Block addr="0x4003C000" size="0x4000"   read="true"   write="true"   execute="false" name="FLASH Controller" />
+		<Block addr="0x40040000" size="0x4000"   read="true"   write="true"   execute="false" name="SPI0" />
+		<Block addr="0x40044000" size="0x4000"   read="true"   write="true"   execute="false" name="IOCONFIG" />
+		<Block addr="0x40048000" size="0x4000"   read="true"   write="true"   execute="false" name="system control" />
+		
+		<Block addr="0x40058000" size="0x4000"   read="true"   write="true"   execute="false" name="SPI1" />		<!-- lpc11xx_x30x -->
+
+		<Block addr="0x1FFF0000" size="0x4000"   read="true"   write="false"   execute="true" name="Boot Rom" />
+		
+		
+	</MemMap>
+
+</Debugger>
+

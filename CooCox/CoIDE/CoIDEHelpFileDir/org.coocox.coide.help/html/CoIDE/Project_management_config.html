@@ -1,0 +1,207 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><!-- InstanceBegin template="/Templates/CoIDEguide.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<!-- InstanceBeginEditable name="top" -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> <link href="../css/page.css" rel="stylesheet" type="text/css" /><!-- InstanceEndEditable -->
+</head> 
+<body >
+<div class="main">
+     <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        
+      <td  valign="top">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+                <tr>
+                    <td width="76%" valign="top" style="padding-left:0.5em; padding-top:0.5em;">
+					  <!-- InstanceBeginEditable name="pagecenter" -->
+					  <h2  class="fontsize140">Project Configuration </h2>
+                      <div>
+                        <p class="blue4bold fontsize80" style="margin-top:10px;">Quick Navigation for Project Configuration</p>
+                        <ul>
+                          <li> <a href="#OpenConfig">Opening Project Configuration</a></li>
+                          <li><a href="#AddSymbols">Adding Preprocessor Symbols</a></li>
+                          <li><a href="#AddPaths"> Adding Include Paths</a></li>
+                          <li><a href="#SetType">Selecting a Project Type</a></li>
+                          <li><a href="#SetOptimization">Setting Optimization Options</a></li>
+                          <li><a href="#AddLib">Adding Library</a></li>
+                          <li><a href="#MemoryAreas">Customizing Memory Areas</a></li>
+                          <li><a href="#LocateLink">Customizing Link Script</a></li>
+                          <li><a href="#CustomizeOption">Customizing Compiler and Linker options </a></li>
+                          <li><a href="#CustomizeProgram">Customizing Programs to Run Before/After Build/Rebuild </a></li>
+                        </ul>
+                      </div>
+                      <div>
+                        <h4 class="blue4bold">Opening Project Configuration<a name="OpenConfig" id="OpenConfig"></a></h4>
+                        <p>After creating a project, CoIDE will automatically generate a <strong>build.xml</strong> file for the project. It contains the project configuration. By editing the file to configure the project. There is an interface in CoIDE to help us to edit <strong>build.xml</strong> file.</p>
+                        <p>There are several ways to open the project configuration interface: double-click <strong>build.xml</strong> in the project view or click <strong>Project-&gt;Configuration</strong> in CoIDE menubar.</p>
+                        <table width="100%" height="22" border="0">
+                          <tr>
+                            <td><img src="../images/builder/ProjectConfig1_OverView.jpg" border="0" usemap="#Map2" />
+<map name="Map2" id="Map2">
+  <area shape="rect" coords="7,68,353,177" href="#AddPaths" />
+  <area shape="rect" coords="360,68,703,177" href="#AddSymbols" />
+<area shape="rect" coords="7,188,353,286" href="#SetType" />
+<area shape="rect" coords="360,188,703,286" href="#AddLib" />
+<area shape="rect" coords="7,477,703,544" href="#LocateLink" />
+<area shape="rect" coords="7,547,703,612" href="#CustomizeOption" />
+<area shape="rect" coords="7,307,703,459" href="#MemoryAreas">
+<area shape="rect" coords="7,618,703,738" href="#CustomizeProgram" />
+</map></td>
+                          </tr>
+                        </table>
+                      </div>
+                      <div>
+                        <h4 class="blue4bold">Adding Preprocessor Symbols <a name="AddSymbols" id="AddSymbols"></a></h4>
+                        <p>For CoIDE projects, you can define preprocessor symbols for   the parser. This makes the parser understand the contents of the C/C++ source   code so that you can more effectively use the search and code completion   features. </p>
+                        <table width="100%" border="0">
+                          <tr>
+                            <td width="49%"><img src="../images/builder/ProjectConfig2_AddSymbols.jpg" /></td>
+                            <td width="51%"><p>Add symbols in &quot;<span class="blue6">Defined symbols</span>&quot; section:</p>
+                              <ul>
+                                <li>Click <strong>Add</strong> to define new symbol</li>
+                                <li>Click <strong>Remove</strong> to remove selected element</li>
+                              </ul></td>
+                          </tr>
+                        </table>
+                      </div>
+                      <div>
+                        <h4 class="blue4bold">Adding Include Paths <a name="AddPaths" id="AddPaths"></a></h4>
+                        <p>For CoIDE projects, you can add include paths for the parser. This makes the parser find the header included in the C source code so that you can more effectively use the search and code completion features. </p>
+                        <table width="100%" border="0">
+                          <tr>
+                            <td width="49%"><img src="../images/builder/ProjectConfig3_AddPath.jpg" /></td>
+                            <td width="51%"><p>Add symbols in &quot;<span class="blue6">Include paths</span>&quot; section:</p>
+                              <ul>
+                                <li>Click <strong>Add</strong> to add new path</li>
+                                <li>Click <strong>Remove</strong> to remove selected element</li>
+                              </ul></td>
+                          </tr>
+                        </table>
+                      </div>
+                      <div>
+                        <h4 class="blue4bold">Selecting a Project Type <a name="SetType" id="SetType"></a></h4>
+                        <p>When you create a new project, you can specify the output file type. This output file type will determine the toolchain and data, and tabs that CoIDE uses. In CooCox CoIDE, you can choose from the following output file types:</p>
+                        <ul>
+                          <li>Executable&nbsp;-The target file is a binary file (*.bin) that can be downloaded into the chip and run, it is selected by default.</li>
+                          <li>Library - The target file is a library file (libxx.a). It is a collection of object files which you can link into another application. CoIDE combines object files  (i.e. *.o) into an archive (*.a) that is directly linked into an executable.</li>
+                        </ul>
+                        <table width="100%" border="0">
+                          <tr>
+                            <td width="49%"><img src="../images/builder/ProjectConfig4_SetType.jpg" /></td>
+                            <td width="51%"><p >Select output file type in &quot;<span class="blue6">Custom Options</span>&quot; section.</p>
+                              <ul>
+                                <li>Select<strong> Executable</strong> to generate binary file</li>
+                                <li> Select<strong> Library</strong> to generate library file </li>
+                              </ul></td>
+                          </tr>
+                        </table>
+                      </div>
+                      <div>
+                        <h4 class="blue4bold">Setting Optimization Options <a name="SetOptimization" id="SetOptimization"></a></h4>
+                        <p>Setting optimization options makes the compiler attempt to improve the performance and/or code size at the expense of compilation time and possibly the ability to debug the program.</p>
+                        <ul>
+                          <li>Optimization - Set optimization levels,  about more optimization levels, please refer to gcc documentation .</li>
+                          <li>Discard unused sections - Enable garbage collection of unused input sections.  The section containing the entry symbol and all sections containing symbols undefined on the command-line will be kept, as will sections
+                            containing symbols referenced by dynamic objects. Check this option will reduce code size.</li>
+                        </ul>
+                        <table width="100%" border="0">
+                          <tr>
+                            <td width="49%"><img src="../images/builder/ProjectConfig9_Optimization.jpg" /></td>
+                            <td width="51%"><p>Set optimization options in &quot;<span class="blue6">Custom Options</span>&quot; section.</p>
+                              <ul>
+                                <li>Select <strong>Optimization</strong> to set optimization level</li>
+                                <li>Check <strong>Discard unused sections</strong> to discard  unused input sections</li>
+                              </ul></td>
+                          </tr>
+                        </table>
+                        <div>
+                          <h4 class=" blue4bold">Adding Library <a name="AddLib" id="AddLib"></a></h4>
+                          <p > Library is a set of routines, external functions and variables which are resolved in a caller at compile-time and copied into a target application by a compiler, linker, or binder, producing an object file and a stand-alone executable. CoIDE library is a gcc library.</p>
+                          <table width="100%" border="0">
+                            <tr>
+                              <td width="49%"><img src="../images/builder/ProjectConfig6_LinkLib.PNG" /></td>
+                              <td width="51%"><p>Add libraries file in &quot;<span class="blue6">Linked Libraries</span>&quot; section.</p>
+                                <ul>
+                                  <li>Click <strong>Add</strong> to add new library</li>
+                                  <li>Click <strong>Remove</strong> to remove selected library</li>
+                                </ul></td>
+                            </tr>
+                          </table>
+                        </div>
+                        <div>
+                          <h4 class="blue4bold">Customizing Memory Areas<a name="MemoryAreas" id="MemoryAreas"></a></h4>
+                          <p>Customize the start address and size for IROM and IRAM  in &quot;<span class="blue6" >Memory Areas</span>&quot; <span >section</span>.<br />
+                            You can select:</p>
+                          <ul>
+                            <li><strong>Debug in Flash</strong> (Default)</li>
+                            <li><strong>Debug in RAM</strong></li>
+                          </ul>
+                          <p>The start address and size for IROM and IRAM will change automatically in accordance with your selection.<br />
+                            You can also set the values by yourself.</p>
+                          <ul>
+                            <li>Customize the start address of IROM and IRAM in <strong>Start</strong> line</li>
+                            <li>Customize the size of IROM and IRAM in <strong>Size</strong> line</li>
+                          </ul>
+                          <table width="100%" border="0">
+                            <tr>
+                              <td><img src="../images/builder/ProjectConfig5_memory.jpg" /></td>
+                            </tr>
+                          </table>
+                        </div>
+                        <div>
+                          <h4 class="blue4bold">Customizing Linker Script<a name="LocateLink" id="LocateLink"></a></h4>
+                          <p>Customize the linker script file for current project in &quot;<span class="blue6">Locate Link File</span>&quot; section.</p>
+                          <ul>
+                            <li>Click <strong>Locate</strong> to locate an existing linker script file.</li>
+                            <li>Click <strong>Edit</strong> to edit current linker script file in CoIDE editor.</li>
+                          </ul>
+                          <table width="100%" border="0">
+                            <tr>
+                              <td height="63"><img src="../images/builder/ProjectConfig7_LocateLink.jpg" /></td>
+                            </tr>
+                          </table>
+                        </div>
+                        <div>
+                          <h4 class="blue4bold">Customizing Compiler and Linker Options <a name="CustomizeOption" id="CustomizeOption"></a></h4>
+                          <p>You can add, delete and  modify the Compiler and Linker options.</p>
+                          <p>Customize compiler and linker options in &quot;<span class="blue6" >Command</span>&quot; <span >section</span>.</p>
+                          <ul>
+                            <li>Customize compile options in <strong>Compiler</strong> line</li>
+                            <li>Customize link options in <strong>Linker</strong> line</li>
+                            <li>Select MCU types: Not use FPU, FPU soft and FPU hard&nbsp;<strong><em>(Note: If you select FPU hard, you need to enable FPU in your code)</em></strong><em></em></li>
+                            <li>Select linked Library: Not use C Library, Use base C Library, Semihosting, Retarget</li>
+                          </ul>
+                          <table width="100%" border="0">
+                            <tr>
+                              <td><p><img src="../images/builder/ProjectConfig8_AddArg.jpg" /></p>
+                              <p><img src="../images/builder/ProjectConfig8_CLibrary.jpg" /></p></td>
+                            </tr>
+                          </table>
+                        </div>
+                        <div>
+                          <h4 class="blue4bold">Customizing Programs to Run Before/After Build/Rebuild <a name="CustomizeProgram" id="CustomizeProgram"></a></h4>
+                          <p>Customize programs to run before/after build/rebuild in &quot;<span class="blue6" >Run User Programs</span>&quot; <span >section</span>.</p>
+                          <ul>
+                            <li>Customize programs to run before build/rebuild under the <strong>Before Build/Rebuild</strong> tag</li>
+                            <li>Customize programs to run after build/rebuild under the <strong>After Build/Rebuild</strong> tag</li>
+                          </ul>
+                          <p>You can input a command directly or import a .bat / .exe file.<br />
+                            After configuration, Build/Rebuild the project.</p>
+                          <table width="100%" border="0">
+                            <tr>
+                              <td><img src="../images/builder/ProjectConfig9_AddProg.jpg" /></td>
+                            </tr>
+                          </table>
+                        </div>
+                      </div>
+                    <!-- InstanceEndEditable -->        </td>
+                    
+              </tr>
+          </table>
+        </td>
+      </tr>
+     </table>
+ 
+</div></body>
+<!-- InstanceEnd --></html>

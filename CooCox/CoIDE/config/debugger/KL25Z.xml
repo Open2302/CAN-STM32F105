@@ -1,0 +1,110 @@
+<?xml version="1.0" ?>
+<!--
+    Copyright 2012 coocox.org
+	
+    This file is part of CooCox Softwares.
+-->
+<Debugger>
+	<Debug>
+		<Arch>Cortex-M0Plus</Arch>
+		
+		<SWD support="true">
+			<ExpectedID>0x0BC11477</ExpectedID>
+		</SWD>
+		
+		<JTAG support="false">		
+		</JTAG>
+		
+		<Reset>
+			<HwReset       support="true" />
+			<SoftSysReset  support="true" select="true"/>
+			<SoftVectReset support="true" />
+		</Reset>
+		
+		<SystemResetClkFreq>4000000</SystemResetClkFreq>
+	</Debug>
+	
+	<!-- 
+		Memory Blocks that can be read/written/executed
+		exclude ram,rom blocks
+		read(true,false)
+		write(true,false)
+		execute(true,false)	
+	 -->
+	 
+    <MemMap>
+        <!-- <Block addr="" size="" read="true"   write="true"   execute="false" name="" /> -->	
+		
+		<!-- AIPS peripherals bus -->
+		<Block addr="0x40008000" size="0x1000"   read="true"   write="true"   execute="false" name="DMA Controller" />
+		<Block addr="0x4000F000" size="0x1000"   read="true"   write="true"   execute="false" name="GPIO Controller" />
+		<Block addr="0x40020000" size="0x1000"   read="true"   write="true"   execute="false" name="Flash Memory" />
+		<Block addr="0x40021000" size="0x1000"   read="true"   write="true"   execute="false" name="DMA Channel mutiplexer0" />
+		<Block addr="0x40037000" size="0x1000"   read="true"   write="true"   execute="false" name="PIT" />
+		<Block addr="0x40038000" size="0x1000"   read="true"   write="true"   execute="false" name="TPM0" />
+		<Block addr="0x40039000" size="0x1000"   read="true"   write="true"   execute="false" name="TPM1" />
+		<Block addr="0x4003A000" size="0x1000"   read="true"   write="true"   execute="false" name="TPM2" />
+		<Block addr="0x4003B000" size="0x1000"   read="true"   write="true"   execute="false" name="ADC0" />
+		<Block addr="0x4003D000" size="0x1000"   read="true"   write="true"   execute="false" name="RTC" />
+		<Block addr="0x4003F000" size="0x1000"   read="true"   write="true"   execute="false" name="DAC0" />
+		<Block addr="0x40040000" size="0x1000"   read="true"   write="true"   execute="false" name="LPTMR" />
+		<Block addr="0x40045000" size="0x1000"   read="true"   write="true"   execute="false" name="TSI" />
+		<Block addr="0x40047000" size="0x1000"   read="true"   write="true"   execute="false" name="SIM Low-power Logic " />
+		<Block addr="0x40048000" size="0x1000"   read="true"   write="true"   execute="false" name="SIM" />
+		<Block addr="0x40049000" size="0x1000"   read="true"   write="true"   execute="false" name="Port A Multiplexing Control" />
+		<Block addr="0x4004A000" size="0x1000"   read="true"   write="true"   execute="false" name="Port B Multiplexing Control" />
+		<Block addr="0x4004B000" size="0x1000"   read="true"   write="true"   execute="false" name="Port C Multiplexing Control" />
+		<Block addr="0x4004C000" size="0x1000"   read="true"   write="true"   execute="false" name="Port D Multiplexing Control" />
+		<Block addr="0x4004D000" size="0x1000"   read="true"   write="true"   execute="false" name="Port E Multiplexing Control" />
+		<Block addr="0x40064000" size="0x1000"   read="true"   write="true"   execute="false" name="MCG" />
+		<Block addr="0x40065000" size="0x1000"   read="true"   write="true"   execute="false" name="OSC" />
+		<Block addr="0x40066000" size="0x1000"   read="true"   write="true"   execute="false" name="I2C0" />
+		<Block addr="0x40067000" size="0x1000"   read="true"   write="true"   execute="false" name="I2C1" />
+		<Block addr="0x4006A000" size="0x1000"   read="true"   write="true"   execute="false" name="UART0" />
+		<Block addr="0x4006B000" size="0x1000"   read="true"   write="true"   execute="false" name="UART1" />
+		<Block addr="0x4006C000" size="0x1000"   read="true"   write="true"   execute="false" name="UART2" />
+		<Block addr="0x40072000" size="0x1000"   read="true"   write="true"   execute="false" name="USB OTG FS/LS" />
+		<Block addr="0x40073000" size="0x1000"   read="true"   write="true"   execute="false" name="CMP/6-bit DAC" />
+		<Block addr="0x40076000" size="0x1000"   read="true"   write="true"   execute="false" name="SPI0" />
+		<Block addr="0x40077000" size="0x1000"   read="true"   write="true"   execute="false" name="SPI1" />
+		<Block addr="0x4007C000" size="0x1000"   read="true"   write="true"   execute="false" name="LLWU" />
+		<Block addr="0x4007D000" size="0x1000"   read="true"   write="true"   execute="false" name="PMC" />
+		<Block addr="0x4007E000" size="0x1000"   read="true"   write="true"   execute="false" name="SMC" />
+		<Block addr="0x4007F000" size="0x1000"   read="true"   write="true"   execute="false" name="RCM" />
+		<Block addr="0x400FF000" size="0x1000"   read="true"   write="true"   execute="false" name="GPIO Controller" />
+				
+		<!-- BME access to AIPS Peripherals for slots 0-127 -->
+		<Block addr="0x44000000" size="0x1C000000"   read="true"   write="true"   execute="false" name="BME Access To AIPS" />
+		
+		<!-- PPB System Control Space-->
+		<Block addr="0xE000E010" size="0xF0"    read="true"   write="true"   execute="false" name="SysTick" />
+		<Block addr="0xE000E100" size="0xC00"   read="true"   write="true"   execute="false" name="NVIC" />
+		<Block addr="0xE000ED00" size="0x90"    read="true"   write="true"   execute="false" name="System Control Block" />
+		<Block addr="0xE000EDF0" size="0x110"   read="true"   write="true"   execute="false" name="Debug" />
+				
+		<!-- Micro Trace Buffer(MTB)registers -->
+		<Block addr="0xF0000000" size="0x1000"   read="true"   write="true"   execute="false" name="MTB Registers" />		
+		
+		<!-- MTB Data Watchpoint and Trace registers -->
+		<Block addr="0xF0001000" size="0x1000"   read="true"   write="true"   execute="false" name="MTBDWT Registers" />
+			
+		<!--ROM table-->
+        <Block addr="0xF0002000" size="0x1000"   read="true"   write="true"   execute="false" name="ROM table" />		
+		
+		<!--Miscellaneous Control Module -->
+		<Block addr="0xF0003000" size="0x1000"   read="true"   write="true"   execute="false" name="MCM" />
+				
+		<!-- GPIO(single cycle) -->
+		<Block addr="0xF8000000" size="0x8000000"   read="true"   write="true"   execute="false" name="IOPORT" />
+	</MemMap>
+</Debugger>		
+		
+				
+		
+		
+		
+		
+	
+		
+		
+		

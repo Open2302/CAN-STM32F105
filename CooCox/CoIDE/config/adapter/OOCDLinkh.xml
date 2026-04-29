@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<!-- Copyright 2011 coocox.org    This file is part of CooCox Softwares.-->
+<adapter>
+	<Name>OOCDLinkh</Name>
+	<Vendor>OCDLink</Vendor>
+	<Debugger>
+		<Set>FTDI</Set>
+		<Driver>IFTD2xx.dll</Driver>
+		<JTAG support="true">
+			<transaction value="0x0A08" mask="0x0F8B" name="open"/> 
+			<transaction value="0x0500" mask="0x0F80" name="close"/>
+			<transaction value="0x0A08" mask="0x0F8B" name="reset"/> 
+			<transaction value="0x0000" mask="0x0000" name="busy"/>
+		</JTAG>
+		<SWD support="false">
+		</SWD>
+	</Debugger>
+</adapter>
+

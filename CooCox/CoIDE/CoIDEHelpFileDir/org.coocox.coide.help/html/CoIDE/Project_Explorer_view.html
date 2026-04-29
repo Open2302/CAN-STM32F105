@@ -1,0 +1,167 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><!-- InstanceBegin template="/Templates/CoIDEguide.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<!-- InstanceBeginEditable name="top" -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> <link href="../css/page.css" rel="stylesheet" type="text/css" /><!-- InstanceEndEditable -->
+</head> 
+<body >
+<div class="main">
+     <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        
+      <td  valign="top">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+                <tr>
+                    <td width="76%" valign="top" style="padding-left:0.5em; padding-top:0.5em;">
+					  <!-- InstanceBeginEditable name="pagecenter" -->
+				    <h2 class="fontsize140">Project Explorer View</h2>
+                    <P style="margin-top:10px;">The Project Explorer view displays in a tree structure similar to the C/C++ Projects view, but it is not limited to C and C++ projects. In this view you can do the following things: </p>
+     
+      <ul class="ulsquare10">
+      <li class="lipadding1">Browse the elements of C/C++ source files </li>
+      <li class="lipadding1">Open files in the editor view </li>
+      <li class="lipadding1">Manage existing files (copy, paste, delete, refresh)</li>
+      <li class="lipadding1">Restore deleted files from local history</li>
+</ul>
+
+<P><br/>
+Files that you selected in the Project Explorer view affect the information which display in other views. <br />
+        </p>
+		<img src="../images/Debug/ProjectExplorer_View.gif" name="pic" border="0" style="border:solid 1px silver;" id="pic" />
+       
+     <P> <br/>
+       <span class="blue4bold">       Toolbar:</span></p>
+     <table width="93%" border="0" cellpadding="0" cellspacing="1" bgcolor="#dddddd">
+       <tr>
+         <td width="13%" height="30" align="center" valign="middle" bgcolor="#f7f7f7"><strong>Icon</strong></td>
+         <td width="31%" height="30" align="center" valign="middle" bgcolor="#f7f7f7"><strong>Name</strong></td>
+         <td width="56%" height="30" align="center" valign="middle" bgcolor="#f7f7f7"><strong>Description</strong></td>
+       </tr>
+       <tr>
+         <td height="38" align="center" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">&nbsp;</td>
+         <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Top Level Elements</td>
+         <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;"> Choose whether to show  working sets or projects as top level elements. Choosing working sets allows easy grouping of projects in large workspaces. </td>
+       </tr>
+       <tr>
+         <td height="38" align="center" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">&nbsp;</td>
+         <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Select Working Set<br /></td>
+         <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Opens the <strong>Select    Working Set</strong> dialog to allow selecting a working set for the view. </td>
+       </tr>
+       <tr>
+         <td height="38" align="center" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">&nbsp;</td>
+         <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Deselect Working Set<br /></td>
+         <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Deselects the current    working set. </td>
+       </tr>
+       <tr>
+         <td height="38" align="center" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">&nbsp;</td>
+         <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Edit Active Working Set<br /></td>
+         <td width="56%" height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Opens the <strong>Edit    Working Set</strong> dialog to allow changing the current working set. </td>
+       </tr>
+       <tr>
+         <td height="38" align="center" valign="middle" bgcolor="#FFFFFF" style="padding:3px;"><img src="../images/Debug/CoDebugger_Project_Explorer_view_clip_image000.gif" width="18" height="17"></td>
+         <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Customize View</td>
+         <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">
+This command allows    customization of view filters and content modules. The previous will allow    you to supress the display of certain types of files while the later will    allow entirely new types of content to be shown in the view. </td>
+       </tr>
+       <tr>
+         <td height="38" align="center" valign="middle" bgcolor="#FFFFFF" style="padding:3px;"><img width="22" height="22" src="../images/Debug/CoDebugger_Project_Explorer_view_clip_image007.jpg" alt="Link with Editor Icon" /></td>
+         <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Link with Editor</td>
+         <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">This command toggles whether the view selection is linked to the active editor. When this option is selected, changing the active editor will automatically update the selection to the resource being edited.</td>
+       </tr>
+     </table>
+	 
+	  <P> <br/>
+	    <span class="blue4bold">	    Project Explorer view icons:</span></p>
+      <table width="41%" border="0" cellpadding="0" cellspacing="1" bgcolor="#dddddd">
+        <tr>
+          <td width="30%" height="30" align="center" valign="middle" bgcolor="#f7f7f7"><strong>Icon</strong> </td>
+          <td width="70%" height="30" align="center" valign="middle" bgcolor="#f7f7f7"><strong>Description</strong> </td>
+        </tr>
+        <tr>
+          <td width="30%" height="38" align="center" valign="middle" bgcolor="#FFFFFF"><img width="16" height="16" src="../images/Debug/CoDebugger_Project_Explorer_view_clip_image001.gif" alt="C or C++ file icon" /></td>
+          <td width="70%" height="38" valign="middle" bgcolor="#FFFFFF">&nbsp;C or C++ file</td>
+        </tr>
+        <tr>
+          <td width="30%" height="38" align="center" valign="middle" bgcolor="#FFFFFF"><img width="16" height="16" src="../images/Debug/CoDebugger_Project_Explorer_view_clip_image002.gif" alt="Class icon" /></td>
+          <td width="70%" height="38" valign="middle" bgcolor="#FFFFFF">&nbsp;Class</td>
+        </tr>
+        <tr>
+          <td width="30%" height="38" align="center" valign="middle" bgcolor="#FFFFFF"><img width="16" height="16" src="../images/Debug/CoDebugger_Project_Explorer_view_clip_image003.gif" alt="Macro Definition icon" /></td>
+          <td width="70%" height="38" valign="middle" bgcolor="#FFFFFF">&nbsp;Macro Definition</td>
+        </tr>
+        <tr>
+          <td width="30%" height="38" align="center" valign="middle" bgcolor="#FFFFFF"><img width="16" height="16" src="../images/Debug/CoDebugger_Project_Explorer_view_clip_image004.gif" alt="Enum icon" /></td>
+          <td width="70%" height="38" valign="middle" bgcolor="#FFFFFF">&nbsp;Enum</td>
+        </tr>
+        <tr>
+          <td width="30%" height="38" align="center" valign="middle" bgcolor="#FFFFFF"><img width="16" height="16" src="../images/Debug/CoDebugger_Project_Explorer_view_clip_image005_0000.gif" alt="Enumerator icon" /></td>
+          <td width="70%" height="38" valign="middle" bgcolor="#FFFFFF">&nbsp;Enumerator</td>
+        </tr>
+        <tr>
+          <td width="30%" height="38" align="center" valign="middle" bgcolor="#FFFFFF"><img width="16" height="16" src="../images/Debug/CoDebugger_Project_Explorer_view_clip_image006.gif" alt="Variable icon" /></td>
+          <td width="70%" height="38" valign="middle" bgcolor="#FFFFFF">&nbsp;Variable</td>
+        </tr>
+        <tr>
+          <td width="30%" height="38" align="center" valign="middle" bgcolor="#FFFFFF"><img width="16" height="16" src="../images/Debug/CoDebugger_Project_Explorer_view_clip_image007.gif" alt="Field private icon" /></td>
+          <td width="70%" height="38" valign="middle" bgcolor="#FFFFFF">&nbsp;Field private</td>
+        </tr>
+        <tr>
+          <td width="30%" height="38" align="center" valign="middle" bgcolor="#FFFFFF"><img width="16" height="16" src="../images/Debug/CoDebugger_Project_Explorer_view_clip_image008.gif" alt="Field protected icon" /></td>
+          <td width="70%" height="38" valign="middle" bgcolor="#FFFFFF">&nbsp;Field protected</td>
+        </tr>
+        <tr>
+          <td width="30%" height="38" align="center" valign="middle" bgcolor="#FFFFFF"><img width="16" height="16" src="../images/Debug/CoDebugger_Project_Explorer_view_clip_image009.gif" alt="Field public icon" /></td>
+          <td width="70%" height="38" valign="middle" bgcolor="#FFFFFF">&nbsp;Field public</td>
+        </tr>
+        <tr>
+          <td width="30%" height="38" align="center" valign="middle" bgcolor="#FFFFFF"><img width="16" height="16" src="../images/Debug/CoDebugger_Project_Explorer_view_clip_image010.gif" alt="Include icon" /></td>
+          <td width="70%" height="38" valign="middle" bgcolor="#FFFFFF">&nbsp;Include</td>
+        </tr>
+        <tr>
+          <td width="30%" height="38" align="center" valign="middle" bgcolor="#FFFFFF"><img width="16" height="16" src="../images/Debug/CoDebugger_Project_Explorer_view_clip_image011.gif" alt="Makefile icon" /></td>
+          <td width="70%" height="38" valign="middle" bgcolor="#FFFFFF">&nbsp;Makefile</td>
+        </tr>
+        <tr>
+          <td width="30%" height="38" align="center" valign="middle" bgcolor="#FFFFFF"><img width="16" height="16" src="../images/Debug/CoDebugger_Project_Explorer_view_clip_image012.gif" alt="Method private icon" /></td>
+          <td width="70%" height="38" valign="middle" bgcolor="#FFFFFF">&nbsp;Method private</td>
+        </tr>
+        <tr>
+          <td width="30%" height="38" align="center" valign="middle" bgcolor="#FFFFFF"><img width="16" height="16" src="../images/Debug/CoDebugger_Project_Explorer_view_clip_image013.gif" alt="Method protected icon" /></td>
+          <td width="70%" height="38" valign="middle" bgcolor="#FFFFFF">&nbsp;Method protected</td>
+        </tr>
+        <tr>
+          <td width="30%" height="38" align="center" valign="middle" bgcolor="#FFFFFF"><img width="16" height="16" src="../images/Debug/CoDebugger_Project_Explorer_view_clip_image014.gif" alt="Method public icon" /></td>
+          <td width="70%" height="38" valign="middle" bgcolor="#FFFFFF">&nbsp;Method public</td>
+        </tr>
+        <tr>
+          <td width="30%" height="38" align="center" valign="middle" bgcolor="#FFFFFF"><img width="16" height="16" src="../images/Debug/CoDebugger_Project_Explorer_view_clip_image015.gif" alt="Namespace icon" /></td>
+          <td width="70%" height="38" valign="middle" bgcolor="#FFFFFF">&nbsp;Namespace</td>
+        </tr>
+        <tr>
+          <td width="30%" height="38" align="center" valign="middle" bgcolor="#FFFFFF"><img width="16" height="16" src="../images/Debug/CoDebugger_Project_Explorer_view_clip_image016.gif" alt="Struct icon" /></td>
+          <td width="70%" height="38" valign="middle" bgcolor="#FFFFFF">&nbsp;Struct</td>
+        </tr>
+        <tr>
+          <td width="30%" height="38" align="center" valign="middle" bgcolor="#FFFFFF"><img width="16" height="16" src="../images/Debug/CoDebugger_Project_Explorer_view_clip_image017.gif" alt="Type Definition icon" /></td>
+          <td width="70%" height="38" valign="middle" bgcolor="#FFFFFF">&nbsp;Type definition</td>
+        </tr>
+        <tr>
+          <td width="30%" height="38" align="center" valign="middle" bgcolor="#FFFFFF"><img width="16" height="16" src="../images/Debug/CoDebugger_Project_Explorer_view_clip_image018.gif" alt="Union icon" /></td>
+          <td width="70%" height="38" valign="middle" bgcolor="#FFFFFF">&nbsp;Union</td>
+        </tr>
+        <tr>
+          <td width="30%" height="38" align="center" valign="middle" bgcolor="#FFFFFF"><img width="16" height="16" src="../images/Debug/CoDebugger_Project_Explorer_view_clip_image019.gif" alt="Function icon" /></td>
+          <td width="70%" height="38" valign="middle" bgcolor="#FFFFFF">&nbsp;Function</td>
+        </tr>
+      </table>
+				  <!-- InstanceEndEditable -->        </td>
+                    
+              </tr>
+          </table>
+        </td>
+      </tr>
+     </table>
+ 
+</div></body>
+<!-- InstanceEnd --></html>

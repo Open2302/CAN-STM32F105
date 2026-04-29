@@ -1,0 +1,66 @@
+<?xml version="1.0" ?>
+<!--
+    Copyright 2010 coocox.org
+	
+    This file is part of CooCox Softwares.
+-->
+<Debugger>
+	<Debug>
+		<Arch>Cortex-M0</Arch>
+		
+		<SWD support="true">
+			<ExpectedID>0x0BB11477</ExpectedID>
+		</SWD>
+		<JTAG support="false">	
+		</JTAG>
+		
+		<Reset>
+			<HwReset       support="true" />
+			<SoftSysReset  support="true" select="true" />
+			<SoftVectReset support="true" />
+		</Reset>
+		
+		<SystemResetClkFreq>48000000</SystemResetClkFreq> <!-- OSC48M 48MHZ -->
+	</Debug>
+
+	<!-- 
+		Memory Blocks that can be read/written/executed
+		exclude ram,rom blocks
+		read(true,false)
+		write(true,false)
+		execute(true,false)	
+	 -->
+	<MemMap>
+		<!-- <Block addr="" size="" read="true"   write="true"   execute="false" name="" /> -->
+				
+		<!-- Private peripheral bus - Internal-->
+		<Block addr="0xE000E010" size="0xD80"   read="true"   write="true"   execute="false" name="System Control Space" />
+		
+		<!-- AHB -->
+		<Block addr="0x50000000" size="0x200"   read="true"   write="true"   execute="false" name="GCR" />
+		<Block addr="0x50000200" size="0x100"   read="true"   write="true"   execute="false" name="CLK" />
+		<Block addr="0x50000300" size="0x100"   read="true"   write="true"   execute="false" name="INT" />
+		<Block addr="0x50004000" size="0x4000"  read="true"   write="true"   execute="false" name="GPIO" />
+		<Block addr="0x50008000" size="0x4000"  read="true"   write="true"   execute="false" name="PDMA" />
+		<Block addr="0x5000c000" size="0x4000"  read="true"   write="true"   execute="false" name="FMC" />
+		
+		<!-- APB1 -->
+		<Block addr="0x40004000" size="0x4000"   read="true"   write="true"   execute="false" name="WDT" /> 
+		<Block addr="0x40008000" size="0x4000"   read="true"   write="true"   execute="false" name="RTC" />
+		<Block addr="0x40010000" size="0x4000"   read="true"   write="true"   execute="false" name="TMR0" />
+		<Block addr="0x40020000" size="0x4000"   read="true"   write="true"   execute="false" name="I2C0" />
+		<Block addr="0x40030000" size="0x4000"   read="true"   write="true"   execute="false" name="SPI0" />
+		<Block addr="0x40040000" size="0x4000"   read="true"   write="true"   execute="false" name="PWMA" />
+		<Block addr="0x40050000" size="0x4000"   read="true"   write="true"   execute="false" name="UART0" />
+		<Block addr="0x40070000" size="0x4000"   read="true"   write="true"   execute="false" name="DPWM" />
+		<Block addr="0x40080000" size="0x4000"   read="true"   write="true"   execute="false" name="Analog Block Control" />
+		<Block addr="0x40084000" size="0x4000"   read="true"   write="true"   execute="false" name="Brown Out Detect" />
+		<Block addr="0x40090000" size="0x8000"   read="true"   write="true"   execute="false" name="CRC" />
+		<Block addr="0x400A0000" size="0x10000"  read="true"   write="true"   execute="false" name="I2S" />
+		<Block addr="0x400B0000" size="0x10000"  read="true"   write="true"   execute="false" name="Biquad Filter Control" />
+		<Block addr="0x400D0000" size="0x4000"   read="true"   write="true"   execute="false" name="ACMP" />
+		<Block addr="0x400E0000" size="0x10000"  read="true"   write="true"   execute="false" name="ADC" />
+		<Block addr="0x400F0000" size="0x8000"   read="true"   write="true"   execute="false" name="Standby RAM" />
+			
+	</MemMap>
+</Debugger>

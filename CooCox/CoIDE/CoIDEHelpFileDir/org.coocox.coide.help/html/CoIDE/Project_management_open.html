@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><!-- InstanceBegin template="/Templates/CoIDEguide.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<!-- InstanceBeginEditable name="top" -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> <link href="../css/page.css" rel="stylesheet" type="text/css" /><!-- InstanceEndEditable -->
+</head> 
+<body >
+<div class="main">
+     <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        
+      <td  valign="top">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+                <tr>
+                    <td width="76%" valign="top" style="padding-left:0.5em; padding-top:0.5em;">
+					  <!-- InstanceBeginEditable name="pagecenter" -->
+					  <h2 class="fontsize140">Opening an existing project </span></h2>
+                      <!-- Opening project div --------------------------------------------------------------------------------------->
+                      <div>
+                        <p style="margin-top:10px;">To open an existing project using CoIDE, you only need to perform the following steps:</p>
+                        <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+                          <tr>
+                            <td align="center"><img src="../images/builder/ProjectMrg_4_Open_1.jpg" name="picOpen" id="picOpen" /></td>
+                          </tr>
+                          <tr>
+                            <td align="center">&nbsp;</td>
+                          </tr>
+                          <tr>
+                            <td><ol class="blue6" id="step" style="LINE-HEIGHT: 25px; list-style:none;">
+                              <li id="step1">1. If necessary, you can select<strong> Project &gt; Close Project</strong> to close the current project. </li>
+                              <li id="step2" style=" display:none;">2. After closing the project, all the windows are clean. </li>
+                              <li id="step3" style=" display:none;">3. Select<strong> Project &gt; Open Project...</strong>. </li>
+                              <li id="step4" style=" display:none;">4. To open a CoIDE project, locate the directory of the project file with suffix of '.cob'.</li>
+                              <li id="step5" style=" display:none;">5. Check your project. </li>
+                              <li id="step6" style="display:none;">6. To open a MDK project, locate the directory of the project file with suffix of '. uvproj'.</li>
+                              <li id="step7" style="display:none;">7. You can specify the directory of CoIDE project converted from the MDK project.</li>
+                              <li id="step8" style="display:none;">8. View folders and specify the directory.</li>
+                              <li id="step9" style="display:none;">9. Click OK.</li>
+                              <li id="step10" style="display:none;">10. Check your project.</li>
+                            </ol></td>
+                          </tr>
+                          <tr>
+                            <td align="center"><input type="button" id="openNext" class="input" onclick="lastOpenPic()" value=" &lt;&lt;  Previous " />
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                              <input type="button" id="openLast" class="input"  value=" Next  &gt;&gt; " onclick="nextOpenPic()" /></td>
+                          </tr>
+                        </table>
+                        <script language="JavaScript" type="text/javascript">
+var d=1;
+function nextOpenPic()
+{
+	d=d+1;	
+	if(d>=11)
+    {	
+		alert('This is last photo.');
+	    d=10;
+	}
+	var picOpen=document.getElementById("picOpen").src="../images/builder/ProjectMrg_4_open_"+d+".jpg";	
+	if(d>1&&d<11)
+{
+var k=d-1;
+document.getElementById("step"+k).style.display="None";
+document.getElementById("step"+d).style.display="block";
+}
+}
+function lastOpenPic()
+{
+	d=d-1;	
+	if(d<=0)
+	{	
+		alert('This is first photo.');
+		d=1;
+	}
+	var picOpen=document.getElementById("picOpen").src="../images/builder/ProjectMrg_4_open_"+d+".jpg";	
+	if(d>0&&d<10)
+{
+var k=d+1;
+document.getElementById("step"+k).style.display="None";
+document.getElementById("step"+d).style.display="block";
+}
+
+}
+                      
+</script>
+                      </div>
+                    <!-- InstanceEndEditable -->        </td>
+                    
+              </tr>
+          </table>
+        </td>
+      </tr>
+     </table>
+ 
+</div></body>
+<!-- InstanceEnd --></html>

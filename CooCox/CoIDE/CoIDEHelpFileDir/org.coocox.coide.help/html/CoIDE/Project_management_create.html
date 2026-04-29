@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><!-- InstanceBegin template="/Templates/CoIDEguide.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<!-- InstanceBeginEditable name="top" -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> <link href="../css/page.css" rel="stylesheet" type="text/css" /><!-- InstanceEndEditable -->
+</head> 
+<body >
+<div class="main">
+     <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        
+      <td  valign="top">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+                <tr>
+                    <td width="76%" valign="top" style="padding-left:0.5em; padding-top:0.5em;">
+					  <!-- InstanceBeginEditable name="pagecenter" -->
+					  <h2 class="fontsize140">Creating project</h2>
+                      <div>
+                        <p style="margin-top:10px;">To create an embedded project using CoIDE, you only need to perform the following steps:</p>
+                        <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+                          <tr>
+                            <td align="center"><img src="../images/builder/ProjectMrg_1_create_1.jpg" name="pic" id="pic" /></td>
+                          </tr>
+                          <tr>
+                            <td align="center">&nbsp;</td>
+                          </tr>
+                          <tr>
+                            <td><ol style="LINE-HEIGHT: 25px; list-style:none;" class="blue6" id="step">
+                              <li id="step1">1. Select<strong> Project &gt; New Project</strong>. </li>
+                              <li  id="step2" style=" display:none;" >2. Type a name for your project. For example, in the <strong>Project name</strong> field, type &quot;MyFirstProject&quot;. </li>
+                              <li  id="step3" style=" display:none;">3. Select a <strong>manufacturer</strong>. For example, choose 'Nuvoton'. </li>
+                              <li  id="step4" style=" display:none;">4. Select a <strong>chip</strong>. For example, choose 'NUC140VE3CN'. </li>
+                              <li  id="step5" style=" display:none;">5. Check a <strong>component</strong>. For example, select 'GPIO'. CoIDE will automatically check the components which the checked component depends on. </li>
+                              <li  id="step6" style=" display:none;">6. You can review the result in Component View. </li>
+                              <li  id="step7" style=" display:none;">7. Click <strong>Drivers</strong> to view the driver pages.</li>
+                              <li  id="step8" style=" display:none;">8. Check a <strong>component</strong>. For example, select 'HD44780'. CoIDE will automatically check the components which the checked component depends on. </li>
+                              <li  id="step9" style=" display:none;">9. Finish creating project and you can review the result.</li>
+                            </ol></td>
+                          </tr>
+                          <tr>
+                            <td align="center"><input type="button" id="la" class="input" onclick="lastPic()" value=" &lt;&lt;  Previous " />
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                              <input type="button" id="ne" class="input"  value=" Next  &gt;&gt; " onclick="nextPic()" /></td>
+                          </tr>
+                        </table>
+                        <script language="JavaScript" type="text/javascript">
+
+var i=1;
+function nextPic()
+{
+i=i+1;	
+if(i>=10)
+{	alert('This is last photo.');
+	i=9;
+}
+var pic=document.getElementById("pic").src="../images/builder/ProjectMrg_1_create_"+i+".jpg";	
+if(i>1&&i<10)
+{
+var k=i-1;
+document.getElementById("step"+k).style.display="None";
+document.getElementById("step"+i).style.display="block";
+}
+
+}
+function lastPic()
+{
+i=i-1;	
+if(i<=0)
+{	
+alert('This is first photo.');	
+i=1;
+}
+var pic=document.getElementById("pic").src="../images/builder/ProjectMrg_1_create_"+i+".jpg";	
+if(i>0&&i<9)
+{
+var k=i+1;
+document.getElementById("step"+k).style.display="None";
+document.getElementById("step"+i).style.display="block";
+}
+
+}
+                      
+</script>
+                      </div>
+                    <!-- InstanceEndEditable -->        </td>
+                    
+              </tr>
+          </table>
+        </td>
+      </tr>
+     </table>
+ 
+</div></body>
+<!-- InstanceEnd --></html>

@@ -1,0 +1,245 @@
+@charset "utf-8";
+*{ 
+    padding:0; 
+    margin:0; 
+} 
+/********Frame Style**********/
+.g-doc{  min-width:980px; width:94%;text-align:left;width:expression((documentElement.clientWidth < 980) ? "980px" : "94%" ); }
+.top{width:100%; margin:0px; padding:0px; text-align:left; margin-left:0px; }
+.logo{ width:15%;margin-top:10px; }
+.indextitle{
+	color:#666;
+	float:right;
+	font-size:110%;
+	font-weight:bold;
+	margin:0px;
+	padding:0px;
+	position:absolute;
+	left: 192px;
+	top: 34px;
+	
+}
+.pagetitle{ color:#6b90da;font-family:Arial;float:right; font-size:110%; font-weight:bold; margin:0px; padding:0px; position:absolute; right:15%; top: 40px; display:none;}
+
+.pagetitle a{color:#6b90da; font-size:14px; text-decoration:none; }
+.pagetitle a:visited{color:#6b90da; font-size:14px; text-decoration:none;}
+.topmenu{display:block; height:25px;float:left; width:100%;padding:5px 0px 3px 0px;}
+
+.blueline{width:99%; height:1px;background-color:#6b90da; overflow:hidden; margin-top:5px;border-bottom:solid #fff 1px;}
+.main{margin:0;width:100%;}
+.conleft{
+	float:left;
+	padding-left:5px;
+	width:15%;
+	FILTER: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#ebeff9,endColorStr=#FFFFFF);
+	height:650px;
+	border-right:1px solid #FAFBFD;
+	margin:0px 0px 0px -3px; 
+	background-image:url(../images/leftbg.gif); background-repeat:repeat-x;
+}
+
+.conright{float:left;margin-right:-3px; width:84%;}
+.rleft{float:left;padding-left:0.9em; width:74%;}
+.rright{float:left;margin-right:-3px;padding-top:20px; width:24%;}
+.homemenu{text-indent:5px;height:20px; padding:6px 0px 2px 0px;FILTER: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#ebeff9,endColorStr=#FFFFFF);border-bottom:#ebeff9 solid 1px; border-right:#ebeff9 solid 1px;border-left:#ebeff9 solid 1px; background-image:url(../images/menubg.gif);}
+
+
+
+.foot{ margin-top:2em;margin-bottom:2em; float:left; width:100%;}
+.foot_content{ 
+  padding: 0.8em 0 0 15%;
+  margin-bottom:0px; 
+  border-top: 1px solid #999; 
+  color: #666; }
+
+.gd{width:2%; height:20px; float:left;padding:6px 0px 2px 0px;margin-right:-3px; FILTER: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#ebeff9,endColorStr=#FFFFFF);border-left:#ebeff9 solid 1px;border-bottom:#ebeff9 solid 1px; }
+
+
+  
+a{color:#00c}
+a:visited{color:#551a8b}
+table{border-collapse:collapse;border-width:0;empty-cells:show}
+ul{padding:0 0 1em 1em}
+ol{padding:0 0 1em 1.3em; }
+li{line-height:1.5em;padding:0 0 .5em 0}
+p{padding:0 0 1em 0;width:100%; line-height:18px;}
+sup,sub{font-size:.7em}
+.g-doc{font-size:110%}
+/********************************/
+
+
+
+
+/**********************Font Style*********/
+html,body,div,h1,h2,h3,h4,h5,h6,p,img,dl,dt,dd,,caption,form,fieldset,embed,object,applet{margin:0;padding:0;}
+body{
+	height:100%;
+	font-family: Verdana, sans-serif;
+	font-size: 12px;
+	color: #000000;
+
+}
+.STYLE3 {color: #FF6600}
+.STYLE4 {color: #0033CC}
+.STYLE5 {color: #003399}
+.STYLE6 {
+	color: #006699;
+	font-weight: bold;
+}
+.STYLE8 {color: #006699}
+.STYLE9 {
+	color: #339900;
+	font-weight: bold;
+}
+table {
+  margin-bottom: 1em; 
+}
+td {
+  padding: 5px 5px 5px 5px; 
+}
+ul, ol {
+  margin-left: 5px; 
+}
+li {
+  padding-bottom: 2px; 
+}
+a img {
+  text-decoration: none;
+}
+h2, h3, h4, h5, h6 {
+  font-size: 130%;
+  color:#3A9457;
+  padding: 4px 0 4px 0; 
+  margin: 4px 0 4px 0; 
+}
+h1 { 
+  font-size: 130%;
+  color: #333333; 
+  float: left; 
+  padding: 0px;
+  font-family:Arial;}
+h2 {
+  width:100%;
+  font-size: 140%; 
+  border-bottom: 1px solid #ccc; 
+    font-family:Arial;
+	font-weight:bold;}
+.sunmenu{
+font-weight:bold;
+  color: #3A9457; 
+  padding: 4px 0 4px 0; 
+  margin: 4px 0 4px 0; 
+  width:95%;
+  font-size: 120%; 
+    font-family:Arial;
+}
+.greenfont{
+ font-weight:bold;
+  color: #3A9457; 
+  font-size: 120%; 
+ font-family:Arial;
+}
+
+h4 {
+  border-bottom: 1px solid #ccc; 
+  font-weight: normal; 
+    font-family:Arial;
+}
+h5 {
+  font-weight: normal;
+  font-family:Arial; 
+}
+h6 {
+  font-weight: bold; 
+  color: #000; 
+  font-family:Arial;
+}
+.grayheader {
+  font-size: 100%; 
+  font-weight: normal; 
+  color:#bbbbbb;
+}
+.grayheader2 {
+  font-size: 100%; 
+  font-weight: normal; 
+  color:#333;
+}
+.grayheader3 {
+  font-size: 100%; 
+  font-weight: normal; 
+  color:#C0C0C0;
+}
+
+/*****************************************/
+
+
+/**********************layer Style*********/
+/*************************************/
+/******************leftmenu************************/
+#navigation
+{
+	width:100%;
+	font-family:Arial, Helvetica;   
+	margin:27px auto 1em 0px;
+}
+
+#navigation ul
+{
+list-style-type:none; /*不显示项目符号如ul里的点号*/
+margin:0px;
+padding:0px;
+}
+
+#navigation li
+{margin:0px;
+padding:0px;
+
+    border-bottom:1px solid #fff;/*添加下划线*/
+}
+
+#navigation li a
+{
+    display:block; /*区块显示,超链接被设置成了块元素,当鼠标进入该块的任何部分时都被激活,而不是仅仅在文字上方时才被激活.*/
+padding:4px 5px 4px 1em;
+text-decoration:none;/*去掉文字的下划线*/
+border-left:12px solid #6b90da;/*左边的粗红边*/
+border-right:1px solid #FAFBFD;/*右侧的阴影*/
+}
+
+/*超链接的三个属性,实现动态效果*/
+#navigation li a:link,#navigation li a:visited
+{
+background-color:#ebeff9;
+color:#000;
+font-size:12px;
+font-weight:bold;
+}
+
+#navigation li a:hover /*鼠标指针经过时*//**/
+{
+    background-color:#ebeff9; /*改变背景色*/
+color:#6b90da;/*改变文字颜色*/
+}
+
+/********************************/
+
+/**********************submenu*************/
+
+#vm{color:#000; background-color:#ebeff9;padding:2px;border: solid #aaa 1px; width:95%;margin:0 auto;max-width:162px;}
+#vm p{padding:0;height:20px;color:#036; font:bold 10pt verdana, sans-serif;white-space:nowrap ; }
+#vm ul{margin:0;padding:0 1px;list-style-type:none;}
+#vm li{font:normal 8pt verdana, sans-serif;margin:0}
+#vm li ul{padding:0px;list-style-type:none;}
+#vm a{display:block;color:#000;background:#ebeff9;padding:1px 0px 1px 0px;text-decoration:none;border:1px solid #eee;width:100%;}
+#vm a:hover{color:#3a75a6;background:#fff;border:1px solid #aaa; }
+
+#vm ul li ul li a{padding:1px 5px 1px 20px;font-size:8pt;}
+#vm ul li ul li ul li a{padding:1px 5px 1px 30px;font-size:8pt;}
+#vm a#va{font-weight:bold}
+#vm a#va:hover{font-weight:bold}
+
+ul{padding:0 0 1em 1em}
+li{line-height:1.2em;}
+p{padding:0 0 1em 0;width:95%; line-height:18px;}
+
+/******************************/

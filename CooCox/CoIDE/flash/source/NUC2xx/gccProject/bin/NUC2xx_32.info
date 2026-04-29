@@ -1,0 +1,118 @@
+ELF Header:
+  Magic:   7f 45 4c 46 01 01 01 00 00 00 00 00 00 00 00 00 
+  Class:                             ELF32
+  Data:                              2's complement, little endian
+  Version:                           1 (current)
+  OS/ABI:                            UNIX - System V
+  ABI Version:                       0
+  Type:                              EXEC (Executable file)
+  Machine:                           ARM
+  Version:                           0x1
+  Entry point address:               0x0
+  Start of program headers:          52 (bytes into file)
+  Start of section headers:          42716 (bytes into file)
+  Flags:                             0x5000200, Version5 EABI, soft-float ABI
+  Size of this header:               52 (bytes)
+  Size of program headers:           32 (bytes)
+  Number of program headers:         1
+  Size of section headers:           40 (bytes)
+  Number of section headers:         15
+  Section header string table index: 12
+
+Section Headers:
+  [Nr] Name              Type            Addr     Off    Size   ES Flg Lk Inf Al
+  [ 0]                   NULL            00000000 000000 000000 00      0   0  0
+  [ 1] .text             PROGBITS        00000000 008000 000370 00  AX  0   0  4
+  [ 2] .driver_info      PROGBITS        00000370 008370 0010a8 00   A  0   0  4
+  [ 3] .debug_info       PROGBITS        00000000 009418 000720 00      0   0  1
+  [ 4] .debug_abbrev     PROGBITS        00000000 009b38 000278 00      0   0  1
+  [ 5] .debug_loc        PROGBITS        00000000 009db0 000188 00      0   0  1
+  [ 6] .debug_aranges    PROGBITS        00000000 009f38 000058 00      0   0  1
+  [ 7] .debug_line       PROGBITS        00000000 009f90 0001b1 00      0   0  1
+  [ 8] .debug_str        PROGBITS        00000000 00a141 000387 01  MS  0   0  1
+  [ 9] .comment          PROGBITS        00000000 00a4c8 000030 01  MS  0   0  1
+  [10] .ARM.attributes   ARM_ATTRIBUTES  00000000 00a4f8 000031 00      0   0  1
+  [11] .debug_frame      PROGBITS        00000000 00a52c 000110 00      0   0  4
+  [12] .shstrtab         STRTAB          00000000 00a63c 00009f 00      0   0  1
+  [13] .symtab           SYMTAB          00000000 00a934 000290 10     14  32  4
+  [14] .strtab           STRTAB          00000000 00abc4 0000ac 00      0   0  1
+Key to Flags:
+  W (write), A (alloc), X (execute), M (merge), S (strings)
+  I (info), L (link order), G (group), T (TLS), E (exclude), x (unknown)
+  O (extra OS processing required) o (OS specific), p (processor specific)
+
+There are no section groups in this file.
+
+Program Headers:
+  Type           Offset   VirtAddr   PhysAddr   FileSiz MemSiz  Flg Align
+  LOAD           0x008000 0x00000000 0x00000000 0x01418 0x01418 R E 0x8000
+
+ Section to Segment mapping:
+  Segment Sections...
+   00     .text .driver_info 
+
+There is no dynamic section in this file.
+
+There are no relocations in this file.
+
+There are no unwind sections in this file.
+
+Symbol table '.symtab' contains 41 entries:
+   Num:    Value  Size Type    Bind   Vis      Ndx Name
+     0: 00000000     0 NOTYPE  LOCAL  DEFAULT  UND 
+     1: 00000000     0 SECTION LOCAL  DEFAULT    1 
+     2: 00000370     0 SECTION LOCAL  DEFAULT    2 
+     3: 00000000     0 SECTION LOCAL  DEFAULT    3 
+     4: 00000000     0 SECTION LOCAL  DEFAULT    4 
+     5: 00000000     0 SECTION LOCAL  DEFAULT    5 
+     6: 00000000     0 SECTION LOCAL  DEFAULT    6 
+     7: 00000000     0 SECTION LOCAL  DEFAULT    7 
+     8: 00000000     0 SECTION LOCAL  DEFAULT    8 
+     9: 00000000     0 SECTION LOCAL  DEFAULT    9 
+    10: 00000000     0 SECTION LOCAL  DEFAULT   10 
+    11: 00000000     0 SECTION LOCAL  DEFAULT   11 
+    12: 00000000     0 FILE    LOCAL  DEFAULT  ABS FlashExecFnc.c
+    13: 00000000     0 NOTYPE  LOCAL  DEFAULT    1 $t
+    14: 00000010     0 NOTYPE  LOCAL  DEFAULT   11 $d
+    15: 00000000     0 FILE    LOCAL  DEFAULT  ABS FlashAlgoFncs.c
+    16: 00000034     0 NOTYPE  LOCAL  DEFAULT    1 $t
+    17: 000000e8     0 NOTYPE  LOCAL  DEFAULT    1 $d
+    18: 000000f4     0 NOTYPE  LOCAL  DEFAULT    1 $t
+    19: 00000134     0 NOTYPE  LOCAL  DEFAULT    1 $d
+    20: 0000013c     0 NOTYPE  LOCAL  DEFAULT    1 $t
+    21: 000001a4     0 NOTYPE  LOCAL  DEFAULT    1 $d
+    22: 000001a8     0 NOTYPE  LOCAL  DEFAULT    1 $t
+    23: 00000228     0 NOTYPE  LOCAL  DEFAULT    1 $d
+    24: 0000022c     0 NOTYPE  LOCAL  DEFAULT    1 $t
+    25: 000002c4     0 NOTYPE  LOCAL  DEFAULT    1 $d
+    26: 000002c8     0 NOTYPE  LOCAL  DEFAULT    1 $t
+    27: 0000036c     0 NOTYPE  LOCAL  DEFAULT    1 $d
+    28: 00000050     0 NOTYPE  LOCAL  DEFAULT   11 $d
+    29: 00000000     0 FILE    LOCAL  DEFAULT  ABS FlashAlgoInfo.c
+    30: 00000370     0 NOTYPE  LOCAL  DEFAULT    2 $d
+    31: 00000000     0 FILE    LOCAL  DEFAULT  ABS 
+    32: 0000013d   108 FUNC    GLOBAL DEFAULT    1 FlashEraseSector
+    33: 00000005    46 FUNC    GLOBAL DEFAULT    1 ExecFunction
+    34: 000000f5    72 FUNC    GLOBAL DEFAULT    1 FlashUnInit
+    35: 000002c9   168 FUNC    GLOBAL DEFAULT    1 FlashVerify
+    36: 000001a9   132 FUNC    GLOBAL DEFAULT    1 FlashEraseChip
+    37: 00000035   192 FUNC    GLOBAL DEFAULT    1 FlashInit
+    38: 00000001     2 FUNC    GLOBAL DEFAULT    1 BreakHere
+    39: 00000370  4264 OBJECT  GLOBAL DEFAULT    2 FlashDriver
+    40: 0000022d   156 FUNC    GLOBAL DEFAULT    1 FlashProgramPage
+
+No version information found in this file.
+Attribute Section: aeabi
+File Attributes
+  Tag_CPU_name: "Cortex-M0"
+  Tag_CPU_arch: v6S-M
+  Tag_CPU_arch_profile: Microcontroller
+  Tag_THUMB_ISA_use: Thumb-1
+  Tag_ABI_PCS_wchar_t: 4
+  Tag_ABI_FP_denormal: Needed
+  Tag_ABI_FP_exceptions: Needed
+  Tag_ABI_FP_number_model: IEEE 754
+  Tag_ABI_align_needed: 8-byte
+  Tag_ABI_align_preserved: 8-byte, except leaf SP
+  Tag_ABI_enum_size: small
+  Tag_ABI_optimization_goals: Aggressive Debug

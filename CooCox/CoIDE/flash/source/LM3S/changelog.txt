@@ -1,0 +1,8 @@
+
+TI LM3S Flash Algorithmn Change Log:
+
+Version 0040:
+------------------------------------
+1. Disable interrupt in the FlashInit function, solve:
+   - Program failed when an interrupt occurs when programing
+   - First time program/erase failed after power-on when the flash is blank

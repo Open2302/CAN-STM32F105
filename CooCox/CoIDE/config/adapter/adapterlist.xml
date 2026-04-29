@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<!-- Copyright 2011 coocox.org    This file is part of CooCox Softwares.-->
+<list>
+	<adapter name="Colink"          config="colink.xml"/>
+	<adapter name="Stellaris-ICDI"  config="icdi.xml"/>
+	<adapter name="Amontec-JTAGkey" config="JTAGkey.xml"/>
+	<adapter name="KT-Link"         config="KT-Link.xml"/>
+	<adapter name="NGX-USB-JTAG"    config="ngx.xml"/>
+	<adapter name="Olimex-OpenOCD"  config="Olimex.xml"/>
+	<adapter name="openJTAG"        config="openJTAG.xml"/>
+	<adapter name="picoJTAG"        config="picoJTAG.xml"/>
+	<adapter name="CoiNel-USB-JTAG" config="coinel.xml"/>
+	
+	
+</list>

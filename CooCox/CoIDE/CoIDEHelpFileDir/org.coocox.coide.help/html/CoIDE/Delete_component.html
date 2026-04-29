@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><!-- InstanceBegin template="/Templates/CoIDEguide.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<!-- InstanceBeginEditable name="top" -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> <link href="../css/page.css" rel="stylesheet" type="text/css" /><!-- InstanceEndEditable -->
+</head> 
+<body >
+<div class="main">
+     <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        
+      <td  valign="top">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+                <tr>
+                    <td width="76%" valign="top" style="padding-left:0.5em; padding-top:0.5em;">
+					  <!-- InstanceBeginEditable name="pagecenter" -->
+					  <h2 class="fontsize140"> Delete a component</h2>
+                      <p style="margin-top:10px;">To delete a component, you only need to perform the following steps:</p>
+                      <table width="90%" border="0" align="center" cellpadding="0" cellspacing="0">
+                        <tr>
+                          <td align="center"><img src="../images/builder/component/DeleteComp/Component_Delete_1.jpg" name="pic" id="pic" /></td>
+                        </tr>
+                        <tr>
+                          <td align="center">&nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td><ol style="LINE-HEIGHT: 25px; list-style:none;" id="step">
+                            <li class="blue6" id="step1">1.Login with your CooCox account.</li>
+                            <li class="blue6"  id="step2" style=" display:none;" >2. Right Click the component you uploaded in the Repository View, and select &quot;Delete&quot;.</li>
+                            <li class="blue6" id="step3" style=" display:none;">3. Click &quot;Yes&quot; to delete the component.</li>
+                            <li class="blue6" id="step4" style=" display:none;">4. Delete successfully.</li>
+                          </ol></td>
+                        </tr>
+                        <tr>
+                          <td align="center"><input type="button" id="la" class="input" onclick="lastPic()" value="&lt;&lt;  Prev" />
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="button" id="ne" class="input"  value="Next  &gt;&gt;" onclick="nextPic()" /></td>
+                        </tr>
+                      </table>
+                      <script language="JavaScript" type="text/javascript">
+
+var i=1;
+function nextPic()
+{
+i=i+1;	
+if(i>=5)
+{	alert('This is last photo.');
+	i=4;
+}
+var pic=document.getElementById("pic").src="../images/builder/component/DeleteComp/Component_Delete_"+i+".jpg";	
+if(i>1&&i<5)
+{
+var k=i-1;
+document.getElementById("step"+k).style.display="None";
+document.getElementById("step"+i).style.display="block";
+}
+
+}
+function lastPic()
+{
+i=i-1;	
+if(i<=0)
+{	
+alert('This is first photo.');	
+i=1;
+}
+var pic=document.getElementById("pic").src="../images/builder/component/DeleteComp/Component_Delete_"+i+".jpg";	
+if(i>0&&i<4)
+{
+var k=i+1;
+document.getElementById("step"+k).style.display="None";
+document.getElementById("step"+i).style.display="block";
+}
+
+}
+                      
+</script>
+                      <br />
+                      <br />
+                    <!-- InstanceEndEditable -->        </td>
+                    
+              </tr>
+          </table>
+        </td>
+      </tr>
+     </table>
+ 
+</div></body>
+<!-- InstanceEnd --></html>

@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<!--
+    Copyright 2010 coocox.org
+	
+    This file is part of CooCox Softwares.
+-->
+<Debugger>
+	<Debug>
+		<Arch>Cortex-M0</Arch>
+		<SWD support="true">
+			<ExpectedID>0x0BB11477</ExpectedID>
+		</SWD>
+		
+		<JTAG support="false">		
+		</JTAG>
+		
+		<Reset>
+			<HwReset       support="true" />
+			<SoftSysReset  support="true" select="true"/>
+			<SoftVectReset support="true" />
+		</Reset>
+		
+		<SystemResetClkFreq>12000000</SystemResetClkFreq> 
+	</Debug>
+	
+	
+	<!-- 
+		Memory Blocks that can be read/written/executed
+		exclude ram,rom blocks
+		read(true,false)
+		write(true,false)
+		execute(true,false)	
+	 -->
+	<MemMap>
+		<Block addr="0xE0000000" size="0x1FFFFFFF"   read="true"   write="true"   execute="false" name="Private peripheral bus" />
+		<Block addr="0x40000000" size="0x1FFFFFFF"   read="true"   write="true"   execute="false" name="Peipheral" />
+	</MemMap>
+</Debugger>

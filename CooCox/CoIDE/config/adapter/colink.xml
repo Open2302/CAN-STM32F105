@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<!-- Copyright 2011 coocox.org    This file is part of CooCox Softwares.-->
+<adapter>
+	<Name>Colink</Name>
+	<Vendor>CooCox</Vendor>
+	
+	<Debugger>
+		<Set>FTDI</Set>
+		<Driver>IFTD2xx.dll</Driver>
+		<JTAG support="true">
+			<transaction name="open"  mask="0x032B" value="0x0008" deinit="0x0000"/> 
+			<transaction name="close" mask="0x0120" value="0x0120" />
+			<transaction name="reset" mask="0x0300" value="0x0200" deinit="0x0000"/> 
+			<transaction name="busy"  mask="0x0000" value="0x0000" deinit="0x0000"/>
+		</JTAG>
+
+		<SWD support="false">
+		</SWD>
+	</Debugger>
+</adapter>

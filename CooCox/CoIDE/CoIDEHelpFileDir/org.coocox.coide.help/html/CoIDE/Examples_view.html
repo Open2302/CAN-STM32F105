@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><!-- InstanceBegin template="/Templates/CoIDEguide.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<!-- InstanceBeginEditable name="top" -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> <link href="../css/page.css" rel="stylesheet" type="text/css" /><!-- InstanceEndEditable -->
+</head> 
+<body >
+<div class="main">
+     <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        
+      <td  valign="top">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+                <tr>
+                    <td width="76%" valign="top" style="padding-left:0.5em; padding-top:0.5em;">
+					  <!-- InstanceBeginEditable name="pagecenter" -->
+					  <h2 class="fontsize140">Viewing example</span></h2>
+                      <!-- Viewing example div -------------------------------------------------------------------------------------->
+                      <div>
+                        <p>To view examples using CoIDE, you just need to perform the following steps:</p>
+                        <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+                          <tr>
+                            <td align="center"><img src="../images/builder/Example_1_View_1.jpg" name="pic" id="pic" /></td>
+                          </tr>
+                          <tr>
+                            <td align="center">&nbsp;</td>
+                          </tr>
+                          <tr>
+                            <td><ol style="LINE-HEIGHT: 25px; list-style:none;" class="blue6" id="step">
+                              <li id="step1">1. Click the component which shows &quot;with x example(s)&quot; in the Component View of CoIDE. </li>
+                              <li  id="step2" style=" display:none;" >2. The <strong>example view</strong> will appear and display all the code snippets of the selected component. </li>
+                              <li  id="step3" style=" display:none;" >3. Click <strong>view</strong> link of the example you are interested. </li>
+                              <li  id="step4" style=" display:none;" >4. The code snippet will display in the code editor viewer. </li>
+                              <li  id="step5" style=" display:none;" >5. You can click &quot;More Example for xxx&quot; to view more example for the selected chip.</li>
+                              <li  id="step6" style=" display:none;" >6. Other example will show in more example view based on the component classification.</li>
+                              <li  id="step7" style=" display:none;" >7. Click the example name can open the example in the edit view.</li>
+                            </ol></td>
+                          </tr>
+                          <tr>
+                            <td align="center"><input type="button" id="la" class="input" onclick="lastPic()" value=" &lt;&lt;  Previous " />
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                              <input type="button" id="ne" class="input"  value=" Next  &gt;&gt; " onclick="nextPic()" /></td>
+                          </tr>
+                        </table>
+                        <script language="JavaScript" type="text/javascript">
+var a=1;
+function nextPic()
+{
+	a=a+1;	
+	if(a>=8)
+    {	
+		alert('This is last photo.');
+	    a=7;
+	}
+	var pic=document.getElementById("pic").src="../images/builder/Example_1_View_"+a+".jpg";	
+	if(a>1&&a<8)
+{
+var k=a-1;
+document.getElementById("step"+k).style.display="None";
+document.getElementById("step"+a).style.display="block";
+}
+}
+function lastPic()
+{
+	a=a-1;	
+	if(a<=0)
+	{	
+		alert('This is first photo.');
+		a=1;
+	}
+	var pic=document.getElementById("pic").src="../images/builder/Example_1_View_"+a+".jpg";
+	if(a>0&&a<7)
+{
+var k=a+1;
+document.getElementById("step"+k).style.display="None";
+document.getElementById("step"+a).style.display="block";
+}
+	
+}
+                      
+</script>
+                      </div>
+                    <!-- InstanceEndEditable -->        </td>
+                    
+              </tr>
+          </table>
+        </td>
+      </tr>
+     </table>
+ 
+</div></body>
+<!-- InstanceEnd --></html>

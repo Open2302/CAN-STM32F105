@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><!-- InstanceBegin template="/Templates/CoIDEguide.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<!-- InstanceBeginEditable name="top" -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> <link href="../css/page.css" rel="stylesheet" type="text/css" /><!-- InstanceEndEditable -->
+</head> 
+<body >
+<div class="main">
+     <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        
+      <td  valign="top">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+                <tr>
+                    <td width="76%" valign="top" style="padding-left:0.5em; padding-top:0.5em;">
+					  <!-- InstanceBeginEditable name="pagecenter" -->
+				    <h2 class="fontsize140">Expressions view</h2>
+      <P style="margin-top:10px;">An expression is a snippet of code which can be evaluated to produce a result. The context for an expression depends on the particular debug model. Some expressions may need to be evaluated at a specific location in the program so that the variables can be referenced. You can view information about expressions in the Expressions view.<br />
+	  </p>
+	  <p>You can inspect expressions from a scrapbook page, a stack frame of a suspended thread, and other places. The Expressions View opens automatically when an item is added to the view. When debugging a C/C++ program, data that contains variables can be expanded to show the variables and the fields of the variables.<br />
+	  </p>
+                    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+          <td ><img src="../images/Debug/Expressions_View.gif" /></td>
+        </tr>
+       </table>
+
+	  <p class="blue4bold">There are many commands available in the Expressions View:</p>
+	  <table border="0" cellpadding="0" cellspacing="1" bgcolor="#dddddd">
+        <tr>
+          <td width="13%" height="30" align="center" valign="middle" bgcolor="#f7f7f7"><strong>Command</strong></td>
+           <td width="152" height="30" align="center" valign="middle" bgcolor="#f7f7f7"><strong>Name</strong></td>
+            <td width="429" height="30" align="center" valign="middle" bgcolor="#f7f7f7"><strong>Description</strong></td>
+             <td width="20%" height="30" align="center" valign="middle" bgcolor="#f7f7f7"><strong>Availability</strong></td>
+        </tr>
+        <tr>
+                  <td height="38" align="center" valign="middle" bgcolor="#FFFFFF"><img src="../images/Debug/CoDebugger_Registers_view_clip_image003.jpg" alt="" width="16" height="16"></td>
+                  <td height="38" align="left" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Show Type Name</td>
+                  <td height="38" valign="middle"  bgcolor="#FFFFFF" style="padding:3px;">Configure columns to dispaly type names.</td>
+        <td height="38" bgcolor="#FFFFFF" style="padding:3px;">view action </td>
+        </tr>
+         <tr valign="middle" bgcolor="#FFFFFF">
+           <td height="38" align="center" valign="middle"><img src="../images/Debug/CoDebugger_Registers_view_clip_image005.jpg" width="16" height="16"></td>
+           <td height="38" align="left" bgcolor="#FFFFFF" style="padding:3px;">Show logic structure</td>
+           <td height="38"  bgcolor="#FFFFFF" style="padding:3px;">Show logic structure of the Expressions.</td>
+           <td height="38" bgcolor="#FFFFFF" style="padding:3px;">view action </td>
+         </tr>
+         <tr valign="middle" bgcolor="#FFFFFF">
+           <td height="38" align="center" valign="middle"><img src="../images/Debug/CoDebugger_Registers_view_clip_image007.gif" width="16" height="16"></td>
+           <td height="38" align="left" bgcolor="#FFFFFF" style="padding:3px;">Collapse All</td>
+           <td height="38"  bgcolor="#FFFFFF" style="padding:3px;">Collapse all the Expressions.</td>
+           <td height="38" bgcolor="#FFFFFF" style="padding:3px;">view action </td></tr>
+         <tr>
+          <td height="38" align="center" valign="middle" bgcolor="#FFFFFF" style="padding:3px;"><img src="../images/Debug/CoDebugger_Expressions_view_clip_image006.gif" width="16" height="16"></td>
+          <td width="152" height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Add Watch Expression</td>
+          <td width="429" height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Allows you to add a watch expression.</td>
+          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Context menu and view action</td>
+        </tr>
+         <tr>
+          <td height="38" align="center" valign="middle" bgcolor="#FFFFFF" style="padding:3px;"><img border="0" width="16" height="16" src="../images/Debug/CoDebugger_Expressions_view_clip_image002_0000.gif" alt="Remove All" /></td>
+          <td width="152" height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Remove</td>
+          <td width="429" height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Removes the currently selected expression(s) from the view.</td>
+          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Context menu and view action</td>
+        </tr>
+        <tr>
+          <td height="38" align="center" valign="middle" bgcolor="#FFFFFF" style="padding:3px;"><img border="0" width="16" height="16" src="../images/Debug/CoDebugger_Expressions_view_clip_image003_0000.gif" alt="Remove All" /></td>
+          <td width="152" height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Remove All</td>
+          <td width="429" height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Removes all of the expressions from the view.</td>
+          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Context menu and view action</td>
+        </tr> 
+        <tr>
+          <td height="38" align="center" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">&nbsp;</td>
+          <td width="152" height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Select All</td>
+          <td width="429" height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Selects all of the variables in the view.</td>
+          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Context menu</td>
+        </tr>
+        <tr>
+          <td height="38" align="center" valign="middle" bgcolor="#FFFFFF" style="padding:3px;"><img border="0" width="16" height="16" src="../images/Debug/CoDebugger_Expressions_view_clip_image001_0000.gif" alt="Copy Expressions" /></td>
+          <td width="152" height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Copy Expressions</td>
+          <td width="429" height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Copies the selected expressions and variables to the system clipboard.</td>
+          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Context menu</td>
+        </tr>
+       
+        <tr>
+          <td height="38" align="center" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">&nbsp;</td>
+          <td width="152" height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Find...</td>
+          <td width="429" height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Opens the search dialog to find elements in the variables view.</td>
+          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Context menu</td>
+        </tr>
+        <tr>
+          <td height="38" align="center" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">&nbsp;</td>
+          <td width="152" height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Disable</td>
+          <td width="429" height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Disables a currently enabled expression.</td>
+          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Context menu</td>
+        </tr>
+        <tr>
+          <td height="38" align="center" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">&nbsp;</td>
+          <td width="152" height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Enable</td>
+          <td width="429" height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Enables a currently disabled expression.</td>
+          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Context menu</td>
+        </tr>
+        <tr>
+          <td height="38" align="center" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">&nbsp;</td>
+          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Edit Watch Expression</td>
+          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Allows you to edit exsiting watch expression.</td>
+          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Context menu</td>
+        </tr>
+        <tr>
+          <td height="38" align="center" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">&nbsp;</td>
+          <td width="152" height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Reevaluate Expression</td>
+          <td width="429" height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Reevaluates the currently selected expression.</td>
+          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Context menu </td>
+        </tr>
+        <tr>
+          <td height="38" align="center" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">&nbsp;</td>
+          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Format</td>
+          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Select a format type. Choices include: Binary, Decimal, Natural, and Hexadecimal.</td>
+          <td height="38" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Context menu </td>
+        </tr>
+      </table> 
+				  <!-- InstanceEndEditable -->        </td>
+                    
+              </tr>
+          </table>
+        </td>
+      </tr>
+     </table>
+ 
+</div></body>
+<!-- InstanceEnd --></html>

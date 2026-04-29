@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><!-- InstanceBegin template="/Templates/CoIDEguide.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<!-- InstanceBeginEditable name="top" -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> <link href="../css/page.css" rel="stylesheet" type="text/css" /><!-- InstanceEndEditable -->
+</head> 
+<body >
+<div class="main">
+     <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        
+      <td  valign="top">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+                <tr>
+                    <td width="76%" valign="top" style="padding-left:0.5em; padding-top:0.5em;">
+					  <!-- InstanceBeginEditable name="pagecenter" -->
+					  <h2 class="fontsize140">Sharing example</span></h2>
+                      <!-- sharing example div ---------------------------------------------------------------------------------------->
+                      <div>
+                        <p style="margin-top:10px;">To share examples using CoIDE, you just need to perform the following steps:</p>
+                        <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+                          <tr>
+                            <td align="center"><img src="../images/builder/Example_3_sharing_1.jpg" name="picSave"  id="picSave" /></td>
+                          </tr>
+                          <tr>
+                            <td align="center">&nbsp;</td>
+                          </tr>
+                          <tr>
+                            <td><ol style="LINE-HEIGHT: 25px; list-style:none;" class="blue6" id="step">
+                              <li id="step1">1. If you have not login, you must login first. </li>
+                              <li  id="step2" style=" display:none;" >2. If you don not have a account, click the link named <strong>&quot;Get new CooCox account?&quot;</strong> at the bottom of Login Dialog. </li>
+                              <li  id="step3" style=" display:none;" >3. Type the <strong>Title</strong> of your code snippet. </li>
+                              <li  id="step4" style=" display:none;" >4. Click <strong>Edit in the editor</strong>. </li>
+                              <li  id="step5" style=" display:none;" >5. Edit you example code and click the <strong>submit</strong> button. </li>
+                              <li  id="step6" style=" display:none;" >6. View your example code snippet. </li>
+                            </ol></td>
+                          </tr>
+                          <tr>
+                            <td align="center"><input type="button" id="saveNext" class="input" onclick="lastSavePic()" value=" &lt;&lt;  Previous " />
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                              <input type="button" id="saveLast" class="input"  value=" Next  &gt;&gt; " onclick="nextSavePic()" /></td>
+                          </tr>
+                        </table>
+                        <script language="JavaScript" type="text/javascript">
+var c=1;
+function nextSavePic()
+{
+	c=c+1;	
+	if(c>=7)
+    {	
+		alert('This is last photo.');
+	    c=6;
+	}
+	var picSave=document.getElementById("picSave").src="../images/builder/Example_3_sharing_"+c+".jpg";	
+	if(c>1&&c<7)
+{
+var k=c-1;
+document.getElementById("step"+k).style.display="None";
+document.getElementById("step"+c).style.display="block";
+}
+}
+function lastSavePic()
+{
+	c=c-1;	
+	if(c<=0)
+	{	
+		alert('This is first photo.');
+		c=1;
+	}
+	var picSave=document.getElementById("picSave").src="../images/builder/Example_3_sharing_"+c+".jpg";	
+	if(c>0&&c<6)
+{
+var k=c+1;
+document.getElementById("step"+k).style.display="None";
+document.getElementById("step"+c).style.display="block";
+}
+
+}
+                      
+</script>
+                      </div>
+                    <!-- InstanceEndEditable -->        </td>
+                    
+              </tr>
+          </table>
+        </td>
+      </tr>
+     </table>
+ 
+</div></body>
+<!-- InstanceEnd --></html>

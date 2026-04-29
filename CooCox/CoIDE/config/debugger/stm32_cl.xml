@@ -1,0 +1,124 @@
+<?xml version="1.0" ?>
+<!--
+    Copyright 2010 coocox.org
+	
+    This file is part of CooCox Softwares.
+-->
+<Debugger>
+	<Debug>
+		<Arch>Cortex-M3</Arch>
+		
+		<SWD support="true">
+			<ExpectedID>0x1BA01477</ExpectedID>
+		</SWD>
+		
+		<JTAG support="true">
+			<TAP name="ARM CoreSight JTAG-DP"    irLen="4" ircapture="0x1" irmask="0xF" irIDCode="0xE" select="true">
+				<ExpectedID>0x3BA00477</ExpectedID>
+			</TAP>
+			
+			<TAP name="ST Boundary scan JTAG-DP" irLen="5" ircapture="0x1" irmask="0x1" irIDCode="0x1E">
+				<ExpectedID>0x06412041</ExpectedID>		<!-- Low density devices, Rev A-->
+				<ExpectedID>0x06410041</ExpectedID>		<!-- Medium density devices, Rev A-->
+				<ExpectedID>0x16410041</ExpectedID>		<!-- Medium density devices, Rev B and Rev Z-->
+				<ExpectedID>0x06414041</ExpectedID>		<!-- High density devices, Rev A-->
+				<ExpectedID>0x06418041</ExpectedID>		<!-- Connectivity line devices, Rev A and Rev Z-->
+			</TAP>
+			
+		</JTAG>
+		
+		<Reset>
+			<HwReset       support="true" />
+			<SoftSysReset  support="true" select="true"/>
+			<SoftVectReset support="true" />
+		</Reset>
+		
+		<SystemResetClkFreq>8000000</SystemResetClkFreq> <!-- HSI 8MHZ -->
+	</Debug>
+
+	<!-- 
+		Memory Blocks that can be read/written/executed
+		exclude ram,rom blocks
+		read(true,false)
+		write(true,false)
+		execute(true,false)	
+	 -->
+	<MemMap>
+		<!-- <Block addr="" size="" read="true"   write="true"   execute="false" name="" /> -->
+		
+		<!-- Private peripheral bus - External -->
+		<Block addr="0xE00FF000" size="0x1000"   read="true"   write="true"   execute="false" name="ROM Table" />
+		<Block addr="0xE0042000" size="0xD000"   read="true"   write="true"   execute="false" name="External PPB" />
+		<Block addr="0xE0041000" size="0x1000"   read="true"   write="true"   execute="false" name="ETM" />
+		<Block addr="0xE0040000" size="0x1000"   read="true"   write="true"   execute="false" name="TPIU" />
+		
+		<!-- Private peripheral bus - Internal-->
+		<Block addr="0xE000E000" size="0x1000"   read="true"   write="true"   execute="false" name="System Control Space" />
+		<Block addr="0xE0002000" size="0x1000"   read="true"   write="true"   execute="false" name="FPB" />
+		<Block addr="0xE0001000" size="0x1000"   read="true"   write="true"   execute="false" name="DWT" />
+		<Block addr="0xE0000000" size="0x1000"   read="true"   write="true"   execute="false" name="ITM" />
+		
+		<!-- AHB -->
+		<Block addr="0x50000000" size="0x40000" read="true"   write="true"   execute="false" name="USB OTG FS" />
+		<Block addr="0x40028000" size="0x2000"  read="true"   write="true"   execute="false" name="Ethernet" />
+		<Block addr="0x40023000" size="0x400"   read="true"   write="true"   execute="false" name="CRC" />
+		<Block addr="0x40022000" size="0x400"   read="true"   write="true"   execute="false" name="Flash memory interface" />
+		<Block addr="0x40022000" size="0x400"   read="true"   write="true"   execute="false" name="Flash memory interface" />
+		<Block addr="0x40021000" size="0x400"   read="true"   write="true"   execute="false" name="Reset and clock control RCC" />
+		<Block addr="0x40020400" size="0x400"   read="true"   write="true"   execute="false" name="DMA2" />
+		<Block addr="0x40020000" size="0x400"   read="true"   write="true"   execute="false" name="DMA1" />
+		<Block addr="0x40018000" size="0x400"   read="true"   write="true"   execute="false" name="SDIO" />
+		<!-- APB2 -->
+		<Block addr="0x40015400" size="0x400"   read="true"   write="true"   execute="false" name="TIM11 timer" />
+		<Block addr="0x40015000" size="0x400"   read="true"   write="true"   execute="false" name="TIM10 timer" />
+		<Block addr="0x40014C00" size="0x400"   read="true"   write="true"   execute="false" name="TIM9 timer" />
+		<Block addr="0x40013C00" size="0x400"   read="true"   write="true"   execute="false" name="ADC3" />
+		<Block addr="0x40013800" size="0x400"   read="true"   write="true"   execute="false" name="USART1" />
+		<Block addr="0x40013400" size="0x400"   read="true"   write="true"   execute="false" name="TIM8 timer" />
+		<Block addr="0x40013000" size="0x400"   read="true"   write="true"   execute="false" name="SPI1" />
+		<Block addr="0x40012C00" size="0x400"   read="true"   write="true"   execute="false" name="TIM1 timer" />
+		<Block addr="0x40012800" size="0x400"   read="true"   write="true"   execute="false" name="ADC2" />
+		<Block addr="0x40012400" size="0x400"   read="true"   write="true"   execute="false" name="ADC1" />
+		<Block addr="0x40012000" size="0x400"   read="true"   write="true"   execute="false" name="GPIO Port G" />
+		<Block addr="0x40011C00" size="0x400"   read="true"   write="true"   execute="false" name="GPIO Port F" />
+		<Block addr="0x40011800" size="0x400"   read="true"   write="true"   execute="false" name="GPIO Port E" />
+		<Block addr="0x40011400" size="0x400"   read="true"   write="true"   execute="false" name="GPIO Port D" />
+		<Block addr="0x40011000" size="0x400"   read="true"   write="true"   execute="false" name="GPIO Port C" />
+		<Block addr="0x40010C00" size="0x400"   read="true"   write="true"   execute="false" name="GPIO Port B" />
+		<Block addr="0x40010800" size="0x400"   read="true"   write="true"   execute="false" name="GPIO Port A" />
+		<Block addr="0x40010400" size="0x400"   read="true"   write="true"   execute="false" name="EXTI" />
+		<Block addr="0x40010000" size="0x400"   read="true"   write="true"   execute="false" name="AFIO" />
+		<!-- APB1 -->
+		<Block addr="0x40007400" size="0x400"   read="true"   write="true"   execute="false" name="DAC" />
+		<Block addr="0x40007000" size="0x400"   read="true"   write="true"   execute="false" name="Power control PWR" />
+		<Block addr="0x40006C00" size="0x400"   read="true"   write="true"   execute="false" name="Backup registers (BKP)" />
+		<Block addr="0x40006400" size="0x400"   read="true"   write="true"   execute="false" name="bxCAN1" />
+		<Block addr="0x40006800" size="0x400"   read="true"   write="true"   execute="false" name="bxCAN2" />
+		<!-- <Block addr="0x40006000" size="0x400"   read="true"   write="true"   execute="false" name="Shared USB/CAN SRAM 512 bytes" /> -->
+		<Block addr="0x40005C00" size="0x400"   read="true"   write="true"   execute="false" name="USB device FS registers" />
+		<Block addr="0x40005800" size="0x400"   read="true"   write="true"   execute="false" name="I2C2" />
+		<Block addr="0x40005400" size="0x400"   read="true"   write="true"   execute="false" name="I2C1" />
+		<Block addr="0x40005000" size="0x400"   read="true"   write="true"   execute="false" name="UART5" />
+		<Block addr="0x40004C00" size="0x400"   read="true"   write="true"   execute="false" name="UART4" />
+		<Block addr="0x40004800" size="0x400"   read="true"   write="true"   execute="false" name="USART3" />
+		<Block addr="0x40004400" size="0x400"   read="true"   write="true"   execute="false" name="USART2" />
+		<Block addr="0x40003C00" size="0x400"   read="true"   write="true"   execute="false" name="SPI3/I2S" />
+		<Block addr="0x40003800" size="0x400"   read="true"   write="true"   execute="false" name="SPI2/I2S" />
+		<Block addr="0x40003000" size="0x400"   read="true"   write="true"   execute="false" name="Independent watchdog (IWDG)" />
+		<Block addr="0x40002C00" size="0x400"   read="true"   write="true"   execute="false" name="Window watchdog (WWDG)" />
+		<Block addr="0x40002800" size="0x400"   read="true"   write="true"   execute="false" name="RTC" />
+		<Block addr="0x40002000" size="0x400"   read="true"   write="true"   execute="false" name="TIM14 timer" />
+		<Block addr="0x40001C00" size="0x400"   read="true"   write="true"   execute="false" name="TIM13 timer" />
+		<Block addr="0x40001800" size="0x400"   read="true"   write="true"   execute="false" name="TIM12 timer" />
+		<Block addr="0x40001400" size="0x400"   read="true"   write="true"   execute="false" name="TIM7 timer" />
+		<Block addr="0x40001000" size="0x400"   read="true"   write="true"   execute="false" name="TIM6 timer" />
+		<Block addr="0x40000C00" size="0x400"   read="true"   write="true"   execute="false" name="TIM5 timer" />
+		<Block addr="0x40000800" size="0x400"   read="true"   write="true"   execute="false" name="TIM4 timer" />
+		<Block addr="0x40000400" size="0x400"   read="true"   write="true"   execute="false" name="TIM3 timer" />
+		<Block addr="0x40000000" size="0x400"   read="true"   write="true"   execute="false" name="TIM2 timer" />
+		
+		<Block addr="0x1FFFB000" size="0x4800"  read="true"   write="false"  execute="true"  name="System memory" />
+		<Block addr="0x00000000" size="0x40000" read="true"   write="false"  execute="true"  name="BOOT memory remap" />	<!-- Change the Size basic on the boot config-->
+		
+	</MemMap>
+</Debugger>

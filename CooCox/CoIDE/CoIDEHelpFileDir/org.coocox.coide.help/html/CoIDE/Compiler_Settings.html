@@ -1,0 +1,110 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><!-- InstanceBegin template="/Templates/CoIDEguide.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<!-- InstanceBeginEditable name="top" -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> <link href="../css/page.css" rel="stylesheet" type="text/css" /><!-- InstanceEndEditable -->
+</head> 
+<body >
+<div class="main">
+     <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        
+      <td  valign="top">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+                <tr>
+                    <td width="76%" valign="top" style="padding-left:0.5em; padding-top:0.5em;">
+					  <!-- InstanceBeginEditable name="pagecenter" -->
+					  <h2 class="fontsize140">Compiler Setting&nbsp;</h2>
+                      <p style="margin-top:10px;"> Before you use CoIDE to start your project, you need to config the GCC compiler and debugger at first.</p>
+                      <p style="margin-top:10px;">CooCox suggest you to choose ARM GCC as the compiler since it is from ARM official. In additional, you can also choose the other GCC compiler such as CodeSoucery GCC. </p>
+                      <p style="margin-top:10px;"><strong>ARM GCC Features:</strong></p>
+                      <ul>
+                      <li>All GCC 4.6 features, plus latest mainline features                        
+                      <li>Cortex-M0/M1/M3 support                        
+                      <li>Cortex-M4 with hard float multilib support                        
+                      <li>Cortex-R4/R5 with hard float multilib support                        
+                      <li>Fixed point fraction support</li></ul>
+                      <p style="margin-top:10px;"><strong>Download:&nbsp;&nbsp;</strong><a href="https://launchpad.net/gcc-arm-embedded/+download">GCC ARM Embedded</a></p>
+                      <p style="margin-top:10px;"><strong>Note:</strong></p>
+                      <p style="margin-top:10px;">&nbsp;&nbsp;&nbsp;&nbsp; As CoIDE support different GCC compiler, you need to pay attention to the following point when you switch between the compilers:
+                      <ul>
+                        <li>The different compilers have different C libraries, for example: ARM GCC have base C Library and Semihosting Library, Retarget Library. But Code Soucery GCC only have the base C Library. See: <a href="Project_management_config.html">Project Configuration</a></li>
+                        <li style="margin-top:10px">ARM GCC and Code Soucery GCC use different link.ld when they compile the same project. CoIDE will gernerate different link.ld when you create the project, so<strong> it is strongly recommended of you to set the GCC compiler before you start.</strong></li>
+                        <li style="margin-top:10px">If you want to use ARM GCC to compiler the project you created under Code Sourcery GCC, you need to <strong>delete the Build.xml, link.ld, memory.ld</strong>. Then<strong> check a component and reconfigure the project after set the GCC</strong>.</li>
+                      </ul>
+            <p style="margin-top:10px;">Then you need to do the following operations.</p>
+                        <div>
+                          <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+                            <tr>
+                              <td align="center"><img src="../images/CoIDE/SetGCC/CoIDE_Set_1.jpg" name="pic" id="pic" border="0"/></td>
+                            </tr>
+                            <tr>
+                              <td align="center">&nbsp;</td>
+                            </tr>
+                            <tr>
+                              <td><ol style="LINE-HEIGHT: 25px; list-style:none;"  class="blue6" id="step">
+                                <li id="step1">1. After launching CooCox CoIDE, Click &quot;<strong>Select Toolchain path</strong>&quot; under the Project menu.</li>
+                                <li class="blue6 " id="step2" style=" display:none;" >2. Click the browse button, select the folder which contains the arm-none-eabi-gcc.exe and the other gcc excute files.</li>
+                                <li  id="step3" style=" display:none;">3. For example, select the bin folder.</li>
+                                <li  id="step4" style=" display:none;">4. Click OK button to save the setting.</li>
+                                </ol></td>
+                            </tr>
+                            <tr>
+                              <td align="center"><input type="button" id="la" class="input" onclick="lastPic()" value=" &lt;&lt;  Previous " />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="button" id="ne" class="input"  value=" Next  &gt;&gt; " onclick="nextPic()" /></td>
+                            </tr>
+                          </table>
+                          <p>
+                            <script language="JavaScript" type="text/javascript">
+
+var i=1;
+function nextPic()
+{
+i=i+1;	
+if(i>=5)
+{	alert('This is the last photo.');
+	i=4;
+}
+var pic=document.getElementById("pic").src="../images/CoIDE/SetGCC/CoIDE_Set_"+i+".jpg";	
+if(i>1&&i<5)
+{
+var k=i-1;
+document.getElementById("step"+k).style.display="None";
+document.getElementById("step"+i).style.display="block";
+}
+
+}
+function lastPic()
+{
+i=i-1;	
+if(i<=0)
+{	
+alert('This is the first photo.');	
+i=1;
+}
+var pic=document.getElementById("pic").src="../images/CoIDE/SetGCC/CoIDE_Set_"+i+".jpg";	
+if(i>0&&i<4)
+{
+var k=i+1;
+document.getElementById("step"+k).style.display="None";
+document.getElementById("step"+i).style.display="block";
+}
+
+}
+                              
+</script>
+                            After set the GCC Toolchain, you can use the CoIDE to create a project and try the other function.<br /> 
+                            See: <a href="CoIDE_QuickStart.htm">CoIDE QuickStart.</a></p>
+                        </div>
+<!-- InstanceEndEditable -->        </td>
+                    
+              </tr>
+          </table>
+        </td>
+      </tr>
+     </table>
+ 
+</div></body>
+<!-- InstanceEnd --></html>

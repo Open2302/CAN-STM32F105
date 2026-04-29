@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><!-- InstanceBegin template="/Templates/CoIDEguide.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<!-- InstanceBeginEditable name="top" -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> <link href="../css/page.css" rel="stylesheet" type="text/css" /><!-- InstanceEndEditable -->
+</head> 
+<body >
+<div class="main">
+     <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        
+      <td  valign="top">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+                <tr>
+                    <td width="76%" valign="top" style="padding-left:0.5em; padding-top:0.5em;">
+					  <!-- InstanceBeginEditable name="pagecenter" -->
+				    <h2  class="fontsize130">Controlling debug execution</h2>
+      <P style="margin-top:10px;">The debug execution controls are superceded by breakpoints. For example, if you attempt to step over a function and the program hits a breakpoint, it pauses, regardless of whether the function is completed. You can control your debug execution in various ways, but they all rely on a core set of debug controls.
+       <h2 class=" blue4bold fontsize140" ><strong>To control a debug execution:</strong></h2>
+      <ol style="font-size:10pt;margin:0px 0 0px 35px;padding:0">
+      <li class="lipadding1">In the <strong>Debug</strong> view, select a thread</li>
+      <li class="lipadding1">To control the debug session, click menu items</li>
+      
+	  
+	  <table width="90%" border="0" align="center" cellpadding="0" cellspacing="0">
+ <tr>
+    <td ><img src="../images/Debug/Debug_MenuItems.gif" /></td>
+  </tr>
+</table>
+<li style="list-style:circle;padding:0px 0 2px 0;margin:0; margin-left:25px; font-family:Verdana, sans-serif;"> <strong>Debug > Reset</strong></li>
+<li style="list-style:circle;padding:0px 0 2px 0;margin:0; margin-left:25px; font-family:Verdana, sans-serif;"> <strong>Debug > Run</strong></li>
+      <li style="list-style:circle;padding:0px 0 2px 0;margin:0; margin-left:25px; font-family:Verdana, sans-serif;"> <strong>Debug > Suspend</strong></li>
+<li style="list-style:circle;padding:0px 0 2px 0;margin:0; margin-left:25px; font-family:Verdana, sans-serif;"> <strong>Debug > Terminate</strong></li>
+      <li style="list-style:circle;padding:0px 0 2px 0;margin:0; margin-left:25px; font-family:Verdana, sans-serif;"> <strong>Debug > Step Into</strong></li>
+<li style="list-style:circle;padding:0px 0 2px 0;margin:0; margin-left:25px; font-family:Verdana, sans-serif;"> <strong>Debug > Step Over</strong></li>
+      <li style="list-style:circle;padding:0px 0 2px 0;margin:0; margin-left:25px; font-family:Verdana, sans-serif;"> <strong>Debug > Step Out</strong></li>
+      <li style="list-style:circle;padding:0px 0 2px 0;margin:0; margin-left:25px; font-family:Verdana, sans-serif;"> <strong>Debug > Run to line</strong></li>
+      <br />
+<br />
+
+       <li style=" list-style:none;padding:5px 0 3px 0;margin:0; font-family:Verdana, sans-serif;">Or directly click the toolbar buttons</li><table width="90%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td ><img src="../images/Debug/Debug_ToolBarButtons.gif" /></td>
+  </tr>
+     
+</table>
+        <li style=" list-style:none;padding:5px 0 3px 0;margin:0; font-family:Verdana, sans-serif;">Or use the keyboard shortcuts<br />
+          <br />
+        </li>
+<table border="0" cellpadding="0" width="620" bgcolor="#dddddd" >
+        <tr align="center" bgcolor="#FFFFFF">
+          <td width="53" height="30" valign="middle" bgcolor="#F7F7F7"><strong>Icons </strong></td>
+          <td width="103" height="30" valign="middle" bgcolor="#F7F7F7"><strong>Action</strong></td>
+          <td width="339" height="30" valign="middle" bgcolor="#F7F7F7"><strong>Description</strong></td>
+          <td width="115" height="30" valign="middle" bgcolor="#F7F7F7"><strong>Keyboard shortcut</strong></td>
+        </tr>
+        <tr valign="middle" bgcolor="#FFFFFF">
+          <td height="48" align="center"><img width="16" height="16" src="../images/Debug/CoDebugger_Controlling_executing_clip_image007.gif" /></td>
+          <td height="48" align="center"><strong>Reset</strong></td>
+          <td height="48">Select the Reset command to reset the debugging.</td>
+          <td height="48" align="center">&nbsp;</td>
+        </tr>
+        <tr valign="middle" bgcolor="#FFFFFF">
+          <td height="48" align="center"><img width="16" height="16" src="../images/Debug/CoDebugger_Controlling_executing_clip_image001.gif" /></td>
+          <td height="48" align="center"><strong>Run</strong> </td>
+          <td height="48">Select the Run command to resume execution of the currently    suspended debug target.</td>
+          <td width="115" height="48" align="center"><strong>F5</strong></td>
+        </tr>
+        
+        <tr valign="middle" bgcolor="#FFFFFF">
+          <td height="48" align="center"><img width="16" height="16" src="../images/Debug/CoDebugger_Controlling_executing_clip_image002.gif" /></td>
+          <td height="48" align="center"><strong>Suspend</strong></td>
+          <td height="48">Select the Suspend command to halt execution of the currently    selected thread in a debug target.</td>
+          <td width="115" height="48" align="center"><strong>F9</strong></td>
+        </tr>
+        <tr valign="middle" bgcolor="#FFFFFF">
+          <td width="53" height="60" align="center"><img width="16" height="16" src="../images/Debug/CoDebugger_Controlling_executing_clip_image003.gif" alt="*" /></td>
+          <td width="103" height="60" align="center"><strong>Terminate </strong></td>
+          <td width="339" height="60">Ends the selected debug session and/or process. The impact of    this action depends on the type of the item selected in the Debug view.</td>
+          <td width="115" height="60" align="center"><strong>Ctrl + F5</strong></td>
+        </tr>
+        <tr valign="middle" bgcolor="#FFFFFF">
+          <td height="48" align="center"><img width="16" height="16" src="../images/Debug/CoDebugger_Controlling_executing_clip_image004.gif" /></td>
+          <td height="48" align="center"><strong>Step Into </strong> </td>
+          <td height="48">Select to execute the current line, including any routines, and    proceed to the next statement.</td>
+          <td width="115" height="48" align="center"><strong>F11</strong></td>
+        </tr>
+        <tr valign="middle" bgcolor="#FFFFFF">
+          <td height="48" align="center"><img width="16" height="16" src="../images/Debug/CoDebugger_Controlling_executing_clip_image005.gif" /></td>
+          <td height="48" align="center"><strong>Step Over </strong></td>
+          <td height="48">Select to execute the current line, following execution inside a    routine.</td>
+          <td width="115" height="48" align="center"><strong>F12</strong></td>
+        </tr>
+        <tr valign="middle" bgcolor="#FFFFFF">
+          <td height="48" align="center"><img width="16" height="16" src="../images/Debug/CoDebugger_Controlling_executing_clip_image006.gif" /></td>
+          <td height="48" align="center"><strong>Step Out </strong></td>
+          <td height="48">Select to continue execution to the end of the current routine,    then follow execution to the routine's caller.</td>
+          <td height="48" align="center"><strong>F7</strong></td>
+        </tr>
+        <tr valign="middle" bgcolor="#FFFFFF">
+          <td height="48" align="center"><img width="16" height="16" src="../images/Debug/CoDebugger_Controlling_executing_clip_image008.gif" /></td>
+          <td height="48" align="center"><strong>Run to Line</strong></td>
+          <td height="48">Select to continue execution to  current line.</td>
+          <td width="115" height="48" align="center"><strong>Ctrl + R</strong></td>
+        </tr>
+      </table>
+	
+      </ol> 
+				  <!-- InstanceEndEditable -->        </td>
+                    
+              </tr>
+          </table>
+        </td>
+      </tr>
+     </table>
+ 
+</div></body>
+<!-- InstanceEnd --></html>

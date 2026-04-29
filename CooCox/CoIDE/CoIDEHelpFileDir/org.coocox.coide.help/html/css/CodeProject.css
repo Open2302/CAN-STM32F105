@@ -1,0 +1,21 @@
+
+A {
+	TEXT-DECORATION: none
+}
+
+.small-text {
+	FONT-SIZE: 8pt!important
+}
+.small-text LI {
+	FONT-SIZE: 8pt!important
+}
+.small-text TD {
+	FONT-SIZE: 8pt!important
+}
+
+.SectionTOCRow {
+	PADDING-BOTTOM: 15px; BORDER-BOTTOM: #cccccc 1px solid; BACKGROUND-COLOR: #f1f4fb
+}
+.SectionTOCRow TD { padding:3px;
+	PADDING-BOTTOM: 15px; BORDER-BOTTOM: #cccccc 1px solid; BACKGROUND-COLOR: #ffffff
+}

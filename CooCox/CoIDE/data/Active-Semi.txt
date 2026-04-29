@@ -1,0 +1,1 @@
+PAC5210, PAC5220, PAC5250,pac52xx.svd

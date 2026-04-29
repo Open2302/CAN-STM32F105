@@ -1,0 +1,306 @@
+
+bin/TMPM037_128.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00000000 <BreakHere>:
+ */
+#if (defined (__GNUC__)) /*------------------ GNU Compiler ---------------------*/
+void BreakHere(int status) __attribute__( ( naked ) );
+void BreakHere(int status)
+{
+  __asm volatile ("BKPT #0 \n\t"  );
+   0:	be00      	bkpt	0x0000
+   2:	46c0      	nop			; (mov r8, r8)
+
+00000004 <ExecFunction>:
+ */
+int ExecFunction (FlashAlgoFnc algoFnc,
+				  unsigned long parameter0,
+				  unsigned long parameter1,
+				  unsigned long parameter2)
+{
+   4:	b580      	push	{r7, lr}
+   6:	b086      	sub	sp, #24
+   8:	af00      	add	r7, sp, #0
+   a:	60f8      	str	r0, [r7, #12]
+   c:	60b9      	str	r1, [r7, #8]
+   e:	607a      	str	r2, [r7, #4]
+  10:	603b      	str	r3, [r7, #0]
+	 int retval;
+	 retval = algoFnc(parameter0,parameter1,parameter2);
+  12:	68b8      	ldr	r0, [r7, #8]
+  14:	6879      	ldr	r1, [r7, #4]
+  16:	683a      	ldr	r2, [r7, #0]
+  18:	68fb      	ldr	r3, [r7, #12]
+  1a:	4798      	blx	r3
+  1c:	1c03      	adds	r3, r0, #0
+  1e:	617b      	str	r3, [r7, #20]
+	 BreakHere(retval);
+  20:	697b      	ldr	r3, [r7, #20]
+  22:	1c18      	adds	r0, r3, #0
+  24:	f7ff ffec 	bl	0 <BreakHere>
+	 
+	 return (retval);
+  28:	697b      	ldr	r3, [r7, #20]
+}
+  2a:	1c18      	adds	r0, r3, #0
+  2c:	46bd      	mov	sp, r7
+  2e:	b006      	add	sp, #24
+  30:	bd80      	pop	{r7, pc}
+  32:	46c0      	nop			; (mov r8, r8)
+
+00000034 <FlashInit>:
+
+
+int
+FlashInit(unsigned long basevcvAddr, unsigned long clk,
+		      unsigned long operateFuc)
+{
+  34:	b580      	push	{r7, lr}
+  36:	b084      	sub	sp, #16
+  38:	af00      	add	r7, sp, #0
+  3a:	60f8      	str	r0, [r7, #12]
+  3c:	60b9      	str	r1, [r7, #8]
+  3e:	607a      	str	r2, [r7, #4]
+	  // Disable Watchdog
+	  WDMOD = 0x00;
+  40:	4b05      	ldr	r3, [pc, #20]	; (58 <FlashInit+0x24>)
+  42:	2200      	movs	r2, #0
+  44:	701a      	strb	r2, [r3, #0]
+	  WDCR  = 0xB1;
+  46:	4b05      	ldr	r3, [pc, #20]	; (5c <FlashInit+0x28>)
+  48:	22b1      	movs	r2, #177	; 0xb1
+  4a:	701a      	strb	r2, [r3, #0]
+
+//	  0 = basevcvAddr;
+
+	  return (0);
+  4c:	2300      	movs	r3, #0
+}
+  4e:	1c18      	adds	r0, r3, #0
+  50:	46bd      	mov	sp, r7
+  52:	b004      	add	sp, #16
+  54:	bd80      	pop	{r7, pc}
+  56:	46c0      	nop			; (mov r8, r8)
+  58:	400f2000 	.word	0x400f2000
+  5c:	400f2004 	.word	0x400f2004
+
+00000060 <FlashUnInit>:
+
+
+int
+FlashUnInit(unsigned long operateFuc)
+{
+  60:	b580      	push	{r7, lr}
+  62:	b082      	sub	sp, #8
+  64:	af00      	add	r7, sp, #0
+  66:	6078      	str	r0, [r7, #4]
+	return (0);
+  68:	2300      	movs	r3, #0
+}
+  6a:	1c18      	adds	r0, r3, #0
+  6c:	46bd      	mov	sp, r7
+  6e:	b002      	add	sp, #8
+  70:	bd80      	pop	{r7, pc}
+  72:	46c0      	nop			; (mov r8, r8)
+
+00000074 <FlashEraseSector>:
+
+
+
+int
+FlashEraseSector(unsigned long sectorAddr)
+{
+  74:	b580      	push	{r7, lr}
+  76:	b082      	sub	sp, #8
+  78:	af00      	add	r7, sp, #0
+  7a:	6078      	str	r0, [r7, #4]
+	 // Start Block Erase Command
+	  M32(0 + MACRO_ADD1(sectorAddr)) = 0xAA;
+  7c:	23aa      	movs	r3, #170	; 0xaa
+  7e:	00db      	lsls	r3, r3, #3
+  80:	22aa      	movs	r2, #170	; 0xaa
+  82:	601a      	str	r2, [r3, #0]
+	  M32(0 + MACRO_ADD2(sectorAddr)) = 0x55;
+  84:	23aa      	movs	r3, #170	; 0xaa
+  86:	011b      	lsls	r3, r3, #4
+  88:	2255      	movs	r2, #85	; 0x55
+  8a:	601a      	str	r2, [r3, #0]
+	  M32(0 + MACRO_ADD1(sectorAddr)) = 0x80;
+  8c:	23aa      	movs	r3, #170	; 0xaa
+  8e:	00db      	lsls	r3, r3, #3
+  90:	2280      	movs	r2, #128	; 0x80
+  92:	601a      	str	r2, [r3, #0]
+	  M32(0 + MACRO_ADD1(sectorAddr)) = 0xAA;
+  94:	23aa      	movs	r3, #170	; 0xaa
+  96:	00db      	lsls	r3, r3, #3
+  98:	22aa      	movs	r2, #170	; 0xaa
+  9a:	601a      	str	r2, [r3, #0]
+	  M32(0 + MACRO_ADD2(sectorAddr)) = 0x55;
+  9c:	23aa      	movs	r3, #170	; 0xaa
+  9e:	011b      	lsls	r3, r3, #4
+  a0:	2255      	movs	r2, #85	; 0x55
+  a2:	601a      	str	r2, [r3, #0]
+
+	  M32(sectorAddr) = 0x30;
+  a4:	687b      	ldr	r3, [r7, #4]
+  a6:	2230      	movs	r2, #48	; 0x30
+  a8:	601a      	str	r2, [r3, #0]
+
+	  while ((FLCSF & FLCS_RDY) != FLCS_RDY);     // Wait until completed
+  aa:	46c0      	nop			; (mov r8, r8)
+  ac:	4b04      	ldr	r3, [pc, #16]	; (c0 <FlashEraseSector+0x4c>)
+  ae:	681a      	ldr	r2, [r3, #0]
+  b0:	2301      	movs	r3, #1
+  b2:	4013      	ands	r3, r2
+  b4:	d0fa      	beq.n	ac <FlashEraseSector+0x38>
+
+	  return (0);                                  // Finished without Errors
+  b6:	2300      	movs	r3, #0
+}
+  b8:	1c18      	adds	r0, r3, #0
+  ba:	46bd      	mov	sp, r7
+  bc:	b002      	add	sp, #8
+  be:	bd80      	pop	{r7, pc}
+  c0:	41fff020 	.word	0x41fff020
+
+000000c4 <FlashEraseChip>:
+
+
+
+
+int FlashEraseChip   (void)
+{
+  c4:	b580      	push	{r7, lr}
+  c6:	af00      	add	r7, sp, #0
+	 // Start Chip Erase Command
+	  M32(0 + 0x0550) = 0xAA;
+  c8:	23aa      	movs	r3, #170	; 0xaa
+  ca:	00db      	lsls	r3, r3, #3
+  cc:	22aa      	movs	r2, #170	; 0xaa
+  ce:	601a      	str	r2, [r3, #0]
+	  M32(0 + 0x0AA0) = 0x55;
+  d0:	23aa      	movs	r3, #170	; 0xaa
+  d2:	011b      	lsls	r3, r3, #4
+  d4:	2255      	movs	r2, #85	; 0x55
+  d6:	601a      	str	r2, [r3, #0]
+	  M32(0 + 0x0550) = 0x80;
+  d8:	23aa      	movs	r3, #170	; 0xaa
+  da:	00db      	lsls	r3, r3, #3
+  dc:	2280      	movs	r2, #128	; 0x80
+  de:	601a      	str	r2, [r3, #0]
+	  M32(0 + 0x0550) = 0xAA;
+  e0:	23aa      	movs	r3, #170	; 0xaa
+  e2:	00db      	lsls	r3, r3, #3
+  e4:	22aa      	movs	r2, #170	; 0xaa
+  e6:	601a      	str	r2, [r3, #0]
+	  M32(0 + 0x0AA0) = 0x55;
+  e8:	23aa      	movs	r3, #170	; 0xaa
+  ea:	011b      	lsls	r3, r3, #4
+  ec:	2255      	movs	r2, #85	; 0x55
+  ee:	601a      	str	r2, [r3, #0]
+	  M32(0 + 0x0550) = 0x10;
+  f0:	23aa      	movs	r3, #170	; 0xaa
+  f2:	00db      	lsls	r3, r3, #3
+  f4:	2210      	movs	r2, #16
+  f6:	601a      	str	r2, [r3, #0]
+
+	  while ((FLCSF & FLCS_RDY) != FLCS_RDY);     // Wait until completed
+  f8:	46c0      	nop			; (mov r8, r8)
+  fa:	4b04      	ldr	r3, [pc, #16]	; (10c <FlashEraseChip+0x48>)
+  fc:	681a      	ldr	r2, [r3, #0]
+  fe:	2301      	movs	r3, #1
+ 100:	4013      	ands	r3, r2
+ 102:	d0fa      	beq.n	fa <FlashEraseChip+0x36>
+
+	  return (0);                                  // Finished without Errors
+ 104:	2300      	movs	r3, #0
+}
+ 106:	1c18      	adds	r0, r3, #0
+ 108:	46bd      	mov	sp, r7
+ 10a:	bd80      	pop	{r7, pc}
+ 10c:	41fff020 	.word	0x41fff020
+
+00000110 <FlashProgramPage>:
+
+
+int
+FlashProgramPage(unsigned long pageAddr, unsigned long size, unsigned char *buf)
+{
+ 110:	b580      	push	{r7, lr}
+ 112:	b086      	sub	sp, #24
+ 114:	af00      	add	r7, sp, #0
+ 116:	60f8      	str	r0, [r7, #12]
+ 118:	60b9      	str	r1, [r7, #8]
+ 11a:	607a      	str	r2, [r7, #4]
+	int i;
+
+	  // Start Page Programming Command
+	  M32(0 + MACRO_ADD1(pageAddr)) = 0xAA;
+ 11c:	23aa      	movs	r3, #170	; 0xaa
+ 11e:	00db      	lsls	r3, r3, #3
+ 120:	22aa      	movs	r2, #170	; 0xaa
+ 122:	601a      	str	r2, [r3, #0]
+	  M32(0 + MACRO_ADD2(pageAddr)) = 0x55;
+ 124:	23aa      	movs	r3, #170	; 0xaa
+ 126:	011b      	lsls	r3, r3, #4
+ 128:	2255      	movs	r2, #85	; 0x55
+ 12a:	601a      	str	r2, [r3, #0]
+	  M32(0 + MACRO_ADD1(pageAddr)) = 0xA0;
+ 12c:	23aa      	movs	r3, #170	; 0xaa
+ 12e:	00db      	lsls	r3, r3, #3
+ 130:	22a0      	movs	r2, #160	; 0xa0
+ 132:	601a      	str	r2, [r3, #0]
+
+	  // Write Page Data
+	  for (i = 0; i < (PAGE_SIZE/4); i++) {
+ 134:	2300      	movs	r3, #0
+ 136:	617b      	str	r3, [r7, #20]
+ 138:	e009      	b.n	14e <FlashProgramPage+0x3e>
+
+	    M32(pageAddr) = *((unsigned long *)buf);
+ 13a:	68fb      	ldr	r3, [r7, #12]
+ 13c:	687a      	ldr	r2, [r7, #4]
+ 13e:	6812      	ldr	r2, [r2, #0]
+ 140:	601a      	str	r2, [r3, #0]
+
+	    buf += 4;
+ 142:	687b      	ldr	r3, [r7, #4]
+ 144:	3304      	adds	r3, #4
+ 146:	607b      	str	r3, [r7, #4]
+	  M32(0 + MACRO_ADD1(pageAddr)) = 0xAA;
+	  M32(0 + MACRO_ADD2(pageAddr)) = 0x55;
+	  M32(0 + MACRO_ADD1(pageAddr)) = 0xA0;
+
+	  // Write Page Data
+	  for (i = 0; i < (PAGE_SIZE/4); i++) {
+ 148:	697b      	ldr	r3, [r7, #20]
+ 14a:	3301      	adds	r3, #1
+ 14c:	617b      	str	r3, [r7, #20]
+ 14e:	697b      	ldr	r3, [r7, #20]
+ 150:	2b1f      	cmp	r3, #31
+ 152:	ddf2      	ble.n	13a <FlashProgramPage+0x2a>
+	    M32(pageAddr) = *((unsigned long *)buf);
+
+	    buf += 4;
+	  }
+
+	  while ((FLCSF & FLCS_RDY) != FLCS_RDY);     // Wait until completed
+ 154:	46c0      	nop			; (mov r8, r8)
+ 156:	4b05      	ldr	r3, [pc, #20]	; (16c <FlashProgramPage+0x5c>)
+ 158:	681a      	ldr	r2, [r3, #0]
+ 15a:	2301      	movs	r3, #1
+ 15c:	4013      	ands	r3, r2
+ 15e:	d0fa      	beq.n	156 <FlashProgramPage+0x46>
+
+	  return (0);                                  // Finished without Errors
+ 160:	2300      	movs	r3, #0
+}
+ 162:	1c18      	adds	r0, r3, #0
+ 164:	46bd      	mov	sp, r7
+ 166:	b006      	add	sp, #24
+ 168:	bd80      	pop	{r7, pc}
+ 16a:	46c0      	nop			; (mov r8, r8)
+ 16c:	41fff020 	.word	0x41fff020

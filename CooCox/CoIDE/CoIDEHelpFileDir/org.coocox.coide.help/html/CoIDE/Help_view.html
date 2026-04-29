@@ -1,0 +1,185 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><!-- InstanceBegin template="/Templates/CoIDEguide.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<!-- InstanceBeginEditable name="top" -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> <link href="../css/page.css" rel="stylesheet" type="text/css" /><!-- InstanceEndEditable -->
+</head> 
+<body >
+<div class="main">
+     <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        
+      <td  valign="top">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+                <tr>
+                    <td width="76%" valign="top" style="padding-left:0.5em; padding-top:0.5em;">
+					  <!-- InstanceBeginEditable name="pagecenter" -->
+					  <h2 class="fontsize140">Help Contents</h2>
+                      <p style="margin-top:10px;">You can get CoIDE's version information from the Help menu, also you can get its User guide from this menu.</p>
+                      <div>
+                        <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+                          <tr>
+                            <td align="center"><img src="../images/Debug/Help/Help_View1.gif" name="pic" id="pic" /></td>
+                          </tr>
+                          <tr>
+                            <td align="center">&nbsp;</td>
+                          </tr>
+                          <tr>
+                            <td><ol style="LINE-HEIGHT: 25px; list-style:none;"  class="blue6" id="step">
+                              <li id="step1">1. You can open the help contents by clicking Help Contents under the Help menu.</li>
+                              <li class="blue6 " id="step2" style=" display:none;" >2. You fill find help contents shown in a new window.</li>
+                              <li  id="step3" style=" display:none;">3. The Content view shows the topic of the Help Content.</li>
+                              <li id="step4" style="display:none">4. Open the Index view to search the topic.</li>
+                              <li id="step5" style="display:none">5. Open the Search Results view to search a string in the content.</li>
+                              <li id="step6" style="display:none">6. Open the Bookmarks view to manage your bookmark.</li>
+                            </ol></td>
+                          </tr>
+                          <tr>
+                            <td align="center"><input type="button" id="la" class="input" onclick="lastPic()" value=" &lt;&lt;  Previous " />
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                              <input type="button" id="ne" class="input"  value=" Next  &gt;&gt; " onclick="nextPic()" /></td>
+                          </tr>
+                        </table>
+                        <script language="JavaScript" type="text/javascript">
+
+var i=1;
+function nextPic()
+{
+i=i+1;	
+if(i>=7)
+{	alert('This is the last photo.');
+	i=6;
+}
+var pic=document.getElementById("pic").src="../images/Debug/Help/Help_View"+i+".gif";	
+if(i>1&&i<7)
+{
+var k=i-1;
+document.getElementById("step"+k).style.display="None";
+document.getElementById("step"+i).style.display="block";
+}
+
+}
+function lastPic()
+{
+i=i-1;	
+if(i<=0)
+{	
+alert('This is the first photo.');	
+i=1;
+}
+var pic=document.getElementById("pic").src="../images/Debug/Help/Help_View"+i+".gif";	
+if(i>0&&i<7)
+{
+var k=i+1;
+document.getElementById("step"+k).style.display="None";
+document.getElementById("step"+i).style.display="block";
+}
+
+}
+                      
+</script>
+                      </div>
+                      <h4 class="blue4bold fontsize130">Toolbar Actions</h4>
+                      <table width="100%" border="0" cellspacing="0" cellpadding="10">
+                        <tr bgcolor="#dddddd" height="30">
+                          <td width="15%" height="30" align="center"><strong>Icon</strong></td>
+                          <td width="25%" height="30" align="center"><strong>Name</strong></td>
+                          <td width="40%" height="30" align="center"><strong>Description</strong></td>
+                          <td width="20%" height="30" align="center"><strong>position</strong></td>
+                        </tr>
+                        <tr height="30">
+                          <td align="center" valign="middle" bgcolor="#FFFFFF"><img src="../images/Debug/Help/help_icon001.gif" width="16" height="16" /></td>
+                          <td height="30">Go Back</td>
+                          <td height="30">Go back to the previous position.</td>
+                          <td align="center" height="30">Toolbar</td>
+                        </tr>
+                        <tr height="30">
+                          <td align="center" valign="middle" bgcolor="#FFFFFF"><img src="../images/Debug/Help/help_icon002.gif" width="16" height="16" /></td>
+                          <td height="30">Go Forward to</td>
+                          <td>Forward to the next position.</td>
+                          <td align="center" height="30">Toolbar</td>
+                        </tr>
+                        <tr height="30">
+                          <td align="center" valign="middle" bgcolor="#FFFFFF"><img src="../images/Debug/Help/help_icon003.gif" width="15" height="17" /></td>
+                          <td height="30">Home</td>
+                          <td>Go to the home page of the Help content.</td>
+                          <td align="center" height="30">Toolbar</td>
+                        </tr>
+                        <tr height="30">
+                          <td align="center" valign="middle" bgcolor="#FFFFFF"><img src="../images/Debug/Help/help_icon004.gif" width="17" height="17" alt="" /></td>
+                          <td height="30">Show in table of content</td>
+                          <td>Show the page position in the table of content view.</td>
+                          <td align="center" height="30">Toolbar</td>
+                        </tr>
+                        <tr height="30">
+                          <td align="center" valign="middle" bgcolor="#FFFFFF"><img src="../images/Debug/Help/help_icon005.gif" width="16" height="17" /></td>
+                          <td height="30">Bookmark Document</td>
+                          <td>Add a bookmark.</td>
+                          <td align="center" height="30">Toolbar</td>
+                        </tr>
+                        <tr height="30">
+                          <td align="center" valign="middle" bgcolor="#FFFFFF"><img src="../images/Debug/Help/help_icon006.gif" width="17" height="17" /></td>
+                          <td height="30">Print Page</td>
+                          <td>Print the current page.</td>
+                          <td align="center" height="30">Toolbar</td>
+                        </tr>
+                        <tr height="30">
+                          <td align="center" valign="middle" bgcolor="#FFFFFF"><img src="../images/Debug/Help/help_icon006.gif" alt="" width="17" height="17" /></td>
+                          <td height="30">Print Topics</td>
+                          <td>Print the topics.</td>
+                          <td align="center" height="30">Contents View</td>
+                        </tr>
+                        <tr height="30">
+                          <td align="center" valign="middle" bgcolor="#FFFFFF"><img src="../images/Debug/Help/help_icon007.gif" width="18" height="17" /></td>
+                          <td height="30">Search Topics</td>
+                          <td>Search the topics.</td>
+                          <td align="center" height="30">Contents View</td>
+                        </tr>
+                        <tr height="30">
+                          <td align="center" valign="middle" bgcolor="#FFFFFF"><img src="../images/Debug/Help/help_icon008.gif" width="16" height="16" alt="" /></td>
+                          <td height="30">Collapse All</td>
+                          <td>Collapse all the topics.</td>
+                          <td align="center" height="30">Contents View</td>
+                        </tr>
+                        <tr height="30">
+                          <td align="center" valign="middle" bgcolor="#FFFFFF"><img src="../images/Debug/Help/help_icon009.gif" width="17" height="18" /></td>
+                          <td height="30">Link with contents</td>
+                          <td>Link with the contents.</td>
+                          <td align="center" height="30">Contents View</td>
+                        </tr>
+                        <tr height="30">
+                          <td align="center" valign="middle" bgcolor="#FFFFFF"><img src="../images/Debug/Help/help_icon010.gif" width="16" height="16" /></td>
+                          <td height="30">Show Rerult Categories</td>
+                          <td>Show the categories of the search rerults.</td>
+                          <td align="center" height="30">Search Results View</td>
+                        </tr>
+                        <tr height="30">
+                          <td align="center" valign="middle" bgcolor="#FFFFFF"><img src="../images/Debug/Help/help_icon011.gif" width="16" height="16" /></td>
+                          <td height="30">Show Rerult Description</td>
+                          <td>Show the description of the search rerults.</td>
+                          <td align="center" height="30">Search Results View</td>
+                        </tr>
+                        <tr height="30">
+                          <td align="center" valign="middle" bgcolor="#FFFFFF"><img src="../images/Debug/Help/help_icon012.gif" width="17" height="17" /></td>
+                          <td height="30">Delete Selected Bookmark</td>
+                          <td>Delete the selected bookmark.</td>
+                          <td align="center" height="30">Bookmark View</td>
+                        </tr>
+                        <tr height="30">
+                          <td align="center" valign="middle" bgcolor="#FFFFFF"><img src="../images/Debug/Help/help_icon013.gif" width="17" height="17" /></td>
+                          <td height="30">Delete All Bookmark</td>
+                          <td>Delete all the  bookmark.</td>
+                          <td align="center" height="30">Bookmark View</td>
+                        </tr>
+                      </table>
+                    <!-- InstanceEndEditable -->        </td>
+                    
+              </tr>
+          </table>
+        </td>
+      </tr>
+     </table>
+ 
+</div></body>
+<!-- InstanceEnd --></html>

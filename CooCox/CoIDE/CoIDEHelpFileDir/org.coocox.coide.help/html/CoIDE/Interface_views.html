@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><!-- InstanceBegin template="/Templates/CoIDEguide.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<!-- InstanceBeginEditable name="top" -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> <link href="../css/page.css" rel="stylesheet" type="text/css" /><!-- InstanceEndEditable -->
+</head> 
+<body >
+<div class="main">
+     <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        
+      <td  valign="top">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+                <tr>
+                    <td width="76%" valign="top" style="padding-left:0.5em; padding-top:0.5em;">
+					  <!-- InstanceBeginEditable name="pagecenter" -->
+					  <h2 class="fontsize140">User Interface &nbsp;&gt; Views</h2>
+                      <p><span class="blue4bold fontsize130">Views Navigation</span></p>
+                      <ul>
+                        <li><a href="#Component"> Component View </a></li>
+                        <li><a href="#Project">Project View </a></li>
+                        <li><a href="#Repository">Repository View </a></li>
+                        <li><a href="#Help">Help View </a></li>
+                        <li><a href="#CodeSnippet">Code Snippet View </a></li>
+                        <li><a href="#Other">Other Eclipse Views </a></li>
+                      </ul>
+                      <p><img src="../images/builder/Views_1_overview.jpg"  border="0" usemap="#Map" />
+                        <map name="Map" id="Map2">
+                          <area shape="rect" coords="4,-6,101,170" href="#Component" />
+                          <area shape="rect" coords="104,2,494,128" href="#CodeSnippet" />
+                          <area shape="rect" coords="496,3,636,336" href="#Help" />
+                          <area shape="rect" coords="106,137,265,338" href="#Repository" />
+                          <area shape="rect" coords="271,136,494,341" href="#Other" />
+                          <area shape="rect" coords="4,174,98,341" href="#Project" />
+                        </map>
+                      </p>
+                      <div>
+                        <h4><span class=" blue4bold">Component View</span><a name="Component" id="Component"></a></h4>
+                        <table width="100%" border="0" cellspacing="0" cellpadding="10">
+                          <tr>
+                            <td width="30%"><img src="../images/builder/Views_2_component.jpg" /></td>
+                            <td width="70%" valign="top"><p>This view displays  all the components of the current project selection. If you  click a component in this view:</p>
+                              <ul>
+                                <li> The<strong> Help view</strong> will display the properties of the clicked component, such as the component source files, source files documents, dependent components, usage and comments. </li>
+                                <li>The<strong> Code Snippet View</strong> will display all code snippets of the component. </li>
+                                <li>The <strong>Project View</strong> will highlight the component source files.</li>
+                              </ul></td>
+                          </tr>
+                        </table>
+                      </div>
+                      <div>
+                        <h4 class=" blue4bold">Project View<a name="Project" id="Project"></a></h4>
+                        <table width="100%" border="0" cellspacing="0" cellpadding="10">
+                          <tr>
+                            <td width="30%"><span ><img src="../images/builder/Views_3_project.jpg" /></span></td>
+                            <td width="70%" valign="top"><p>This view displays all files of the file system under your project directory, including C source files (*.c, *.h), assembly source files (*.s), project configuration files (build.xml), linker script files (*.ld), library files (*.a), etc. In this view you could do the following operations:</p>
+                              <ul>
+                                <li>Open files in the editor view </li>
+                                <li>Open project configuration interface</li>
+                                <li>Close the current project</li>
+                                <li>Create new projects, files, or folders </li>
+                                <li>Manage existing files (copy, paste, delete, move or rename) </li>
+                              </ul></td>
+                          </tr>
+                        </table>
+                      </div>
+                      <div>
+                        <h4 class=" blue4bold">Repository View<a name="Repository" id="Repository"></a></h4>
+                        <p>This view consists of <strong>Manufacturers page</strong>, <strong>Chip page</strong> and <strong>Component page</strong>. In this view, you can view chip components and manage your local or network components. When you check a component, the component and other components depended by the checked component will be automatically checked, and the source files will be automatically added to the project. This view can be opened by menu command View-&gt;Repository. In this view you could do the following operations:</p>
+                        <ul>
+                          <li>View component information.</li>
+                          <li>Add components to the current project.</li>
+                          <li>Uncheck components.</li>
+                          <li>View/Manage local components.</li>
+                          <li>Search components.</li>
+                          <li>Manage your components.</li>
+                          <li>Release components.</li>
+                        </ul>
+                        <table width="100%" border="0" cellspacing="0" cellpadding="10">
+                          <tr>
+                            <td><span class=" blue4bold"><img src="../images/builder/Views_4_repository.jpg" /></span></td>
+                          </tr>
+                        </table>
+                      </div>
+                      <div>
+                        <h4 class=" blue4bold">Help View<a name="Help" id="Help"></a></h4>
+                        <dl>
+                          <dd>This view displays all information about the selected component, including:</dd>
+                          <dt>&nbsp;</dt>
+                        </dl>
+                        <ul>
+                          <li>Overview: The component description.</li>
+                          <li>Usage: Component usage (can be edited).</li>
+                          <li>Source files: Source files of the component.</li>
+                          <li>Source files documents: Generated after building (It can generate detailed documentation if the code comment style is consistent with DOXYGEN specification.).</li>
+                          <li>Dependency: Other components depended by the component.</li>
+                        </ul>
+                        <table width="100%" border="0" cellspacing="0" cellpadding="10">
+                          <tr>
+                            <td><span class=" blue4bold"><img src="../images/builder/Views_6_help.jpg" alt="" /></span></td>
+                          </tr>
+                        </table>
+                      </div>
+                      <div>
+                        <h4 class=" blue4bold">Code Snippet View<a name="CodeSnippet" id="CodeSnippet"></a></h4>
+                        <p>In the <strong>Components View</strong>, click the component to open this view, this view will display all code snippets of the clicked component. In this view you can do the following things:</p>
+                        <ul>
+                          <li>Click <strong>view</strong> to view code snippet and the comments.</li>
+                          <li>Click <strong>add to </strong>insert the code snippet into the<strong> project</strong>.</li>
+                          <li>View more example for the chip you selected.</li>
+                          <li>Upload a code snippet.</li>
+                          <li>Manage your own code snippets.</li>
+                          <li>Add comments.</li>
+                        </ul>
+                        <table width="100%" border="0" cellspacing="0" cellpadding="10">
+                          <tr>
+                            <td><span class=" blue4bold"><img src="../images/builder/Views_5_CodeSnippet.jpg" /></span></td>
+                          </tr>
+                        </table>
+                      </div>
+                      <div>
+                        <h4 class=" blue4bold">Other Eclipse Views<a name="Other" id="Other"></a></h4>
+                        <dl>
+                          The following views are commonly used in CoIDE<strong> </strong>perspective:
+                        </dl>
+                        <ul>
+                          <li><strong>Project Explorer: </strong>Shows all of the file system's files under your project directory. </li>
+                          <li><strong>Editor</strong>: The C/C++ editor view provides specialized features for editing C/C++   related files. </li>
+                          <li><strong>Outline</strong>: Displays the structure of the file currently open in an editor. </li>
+                          <li><strong>Search</strong>: Shows the results of searches for files or text. </li>
+                          <li><strong>Console</strong>: Displays your program's output, as well as the output from your build tools. </li>
+                        </ul>
+                        <p>More about Eclipse Views, please refer to <a href="http://help.eclipse.org/galileo/index.jsp">Eclipse documentation.</a></p>
+                        <dl>
+                          <table width="100%" border="0" cellspacing="0" cellpadding="10">
+                            <tr>
+                              <td><img src="../images/builder/Views_7_otherViews.png" /></td>
+                            </tr>
+                          </table>
+                        </dl>
+                      </div>
+                    <!-- InstanceEndEditable -->        </td>
+                    
+              </tr>
+          </table>
+        </td>
+      </tr>
+     </table>
+ 
+</div></body>
+<!-- InstanceEnd --></html>

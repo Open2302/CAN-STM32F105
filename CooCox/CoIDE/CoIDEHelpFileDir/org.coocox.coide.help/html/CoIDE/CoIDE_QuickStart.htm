@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><!-- InstanceBegin template="/Templates/CoIDEguide.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<!-- InstanceBeginEditable name="top" -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> <link href="../css/page.css" rel="stylesheet" type="text/css" /><!-- InstanceEndEditable -->
+</head> 
+<body >
+<div class="main">
+     <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        
+      <td  valign="top">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+                <tr>
+                    <td width="76%" valign="top" style="padding-left:0.5em; padding-top:0.5em;">
+					  <!-- InstanceBeginEditable name="pagecenter" -->
+					  <h2 class="fontsize140">Quick Start&nbsp;</h2>
+                      <p style="margin-top:10px;"> To create a simple embedded application using CooCox CoIDE, you will perform the following steps: </p>
+                      <div>
+                        <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+                          <tr>
+                            <td align="center"><img src="../images/CoIDE/CoIDE1.jpg" name="pic" id="pic" border="0"/></td>
+                          </tr>
+                          <tr>
+                            <td align="center">&nbsp;</td>
+                          </tr>
+                          <tr>
+                            <td><ol style="LINE-HEIGHT: 25px; list-style:none;"  class="blue6" id="step">
+                              <li id="step1">1. After launching CooCox CoIDE, select manufacturer, for example: Nuvoton.</li>
+                              <li class="blue6 " id="step2" style=" display:none;" >2. Select chip, for example: NUC100LE3AN, the right side of CoIDE will display the corresponding information of the chip.</li>
+                              <li  id="step3" style=" display:none;">3. Check the components which you want to use, for example, check GPIO component. CoIDE will promote you to create a new project. </li>
+                              <li class="blue6" id="step4" style=" display:none;">4. Input the project's name, CoIDE will create a project contained startup code and main.c file for you. The components you selected in third step will be added to your project, too.</li>
+                              <li class="blue6" id="step5" style=" display:none;">5. Click GPIO in repository view, the detailed descriptions of GPIO component will show in help view.</li>
+                              <li class="blue6" id="step6" style=" display:none;">6. Click GPIO in component view, you can find there are some examples for this component.</li>
+                              <li class="blue6" id="step7" style=" display:none;">7. Click “add” to copy the existing example to your project. For example, add “BlinkExp”.</li>
+                              <li class="blue6" id="step8" style=" display:none;">8. Click &quot;Yes&quot; to add the example, and you can see the default path of the example.</li>
+                              <li class="blue6" id="step9" style=" display:none;">9. CoIDE will automatically add the BlinkExp.c example to the project.</li>
+                              <li class="blue6" id="step10" style=" display:none;">10. Click Build button to compile and link the program.</li>
+                              <li class="blue6" id="step11" style=" display:none;">11. Click Debug Configuration button to open the configuration dialog.</li>
+                              <li class="blue6" id="step12" style=" display:none;">12. Select Nu-Link or CoLinkEx as the adapter according to that you use. </li>
+                              <li class="blue6" id="step13" style=" display:none;">13. Click Download button to download code to flash.</li>
+                              <li class="blue6" id="step14" style=" display:none;">14. Click Debug button to start debug.</li>
+                              <li class="blue6" id="step15" style=" display:none;">15. After launching debug successfully, CoIDE will come into debug mode.</li>
+                              <li class="blue6" id="step16" style=" display:none;">16. The initial debug UI only shows a few debug windows, you can open the other debug windows through view menu.</li>
+                              <li class="blue6" id="step17" style=" display:none;">17. Setting breakpoints in c window or in the disassembly window.</li>
+                              <li class="blue6" id="step18" style=" display:none;">18. Using the debug functions.</li>
+                            </ol></td>
+                          </tr>
+                          <tr>
+                            <td align="center"><input type="button" id="la" class="input" onclick="lastPic()" value=" &lt;&lt;  Previous " />
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                              <input type="button" id="ne" class="input"  value=" Next  &gt;&gt; " onclick="nextPic()" /></td>
+                          </tr>
+                        </table>
+                        <script language="JavaScript" type="text/javascript">
+
+var i=1;
+function nextPic()
+{
+i=i+1;	
+if(i>=19)
+{	alert('This is the last photo.');
+	i=18;
+}
+var pic=document.getElementById("pic").src="../images/CoIDE/CoIDE"+i+".jpg";	
+if(i>1&&i<19)
+{
+var k=i-1;
+document.getElementById("step"+k).style.display="None";
+document.getElementById("step"+i).style.display="block";
+}
+
+}
+function lastPic()
+{
+i=i-1;	
+if(i<=0)
+{	
+alert('This is the first photo.');	
+i=1;
+}
+var pic=document.getElementById("pic").src="../images/CoIDE/CoIDE"+i+".jpg";	
+if(i>0&&i<18)
+{
+var k=i+1;
+document.getElementById("step"+k).style.display="None";
+document.getElementById("step"+i).style.display="block";
+}
+
+}
+                      
+</script>
+                      </div>
+                    <!-- InstanceEndEditable -->        </td>
+                    
+              </tr>
+          </table>
+        </td>
+      </tr>
+     </table>
+ 
+</div></body>
+<!-- InstanceEnd --></html>

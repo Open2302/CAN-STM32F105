@@ -1,0 +1,80 @@
+<?xml version="1.0" ?>
+<!--
+    Copyright 2010 coocox.org
+	
+    This file is part of CooCox Softwares.
+-->
+<Debugger>
+	<Debug>
+		<Arch>Cortex-M3</Arch>
+		
+		<SWD support="true">
+			<ExpectedID>0x1BA01477</ExpectedID>
+			<ExpectedID>0x2BA01477</ExpectedID>
+		</SWD>
+		
+		<JTAG support="true">
+			<TAP name="ARM CoreSight JTAG-DP"    irLen="4" ircapture="0x1" irmask="0xF" irIDCode="0xE" select="true">
+				<ExpectedID>0x1BA00477</ExpectedID>  <!-- datasheet -->
+				<ExpectedID>0x2bA00477</ExpectedID>
+				<ExpectedID>0x3BA00477</ExpectedID>
+				<ExpectedID>0x4BA00477</ExpectedID>	
+			</TAP>		
+		</JTAG>
+		
+		<Reset>
+			<HwReset       support="true" />
+			<SoftSysReset  support="true" select="true" />
+			<SoftVectReset support="true" />
+		</Reset>
+		
+		<SystemResetClkFreq>12000000</SystemResetClkFreq> <!-- IOSC 12MHZ -->
+	</Debug>
+
+	<!-- 
+		Memory Blocks that can be read/written/executed
+		exclude ram,rom blocks
+		read(true,false)
+		write(true,false)
+		execute(true,false)	
+	 -->
+	<MemMap>
+		<!-- <Block addr="" size="" read="true"   write="true"   execute="false" name="" /> -->
+		
+		<!-- Private peripheral bus - External -->
+		<Block addr="0xE00FF000" size="0x1000"   read="true"   write="true"   execute="false" name="ROM Table" />
+		<Block addr="0xE0042000" size="0xD000"   read="true"   write="true"   execute="false" name="External PPB" />
+		<Block addr="0xE0041000" size="0x1000"   read="true"   write="true"   execute="false" name="ETM" />
+		<Block addr="0xE0040000" size="0x1000"   read="true"   write="true"   execute="false" name="TPIU" />
+		
+		<!-- Private peripheral bus - Internal-->
+		<Block addr="0xE000E000" size="0x1000"   read="true"   write="true"   execute="false" name="System Control Space" />
+		<Block addr="0xE0002000" size="0x1000"   read="true"   write="true"   execute="false" name="FPB" />
+		<Block addr="0xE0001000" size="0x1000"   read="true"   write="true"   execute="false" name="DWT" />
+		<Block addr="0xE0000000" size="0x1000"   read="true"   write="true"   execute="false" name="ITM" />
+		
+		<!-- FiRM Peripherals -->
+		<Block addr="0x40000000" size="0x1000"   read="true"   write="true"   execute="false" name="Watchdog timer0" />
+		<Block addr="0x40004000" size="0x1000"   read="true"   write="true"   execute="false" name="GPIO Port A" />
+		<Block addr="0x40005000" size="0x1000"   read="true"   write="true"   execute="false" name="GPIO Port B" />
+		<Block addr="0x40006000" size="0x1000"   read="true"   write="true"   execute="false" name="GPIO Port C" />
+		<Block addr="0x40007000" size="0x1000"   read="true"   write="true"   execute="false" name="GPIO Port D" />
+		<Block addr="0x40008000" size="0x1000"   read="true"   write="true"   execute="false" name="SSI0" />
+		<Block addr="0x4000C000" size="0x1000"   read="true"   write="true"   execute="false" name="UART0" />
+		<Block addr="0x4000D000" size="0x1000"   read="true"   write="true"   execute="false" name="UART1" />
+		
+		<!-- Peripherals -->
+		<Block addr="0x40020000" size="0x800"   read="true"   write="true"   execute="false" name="I2C Master0" />
+		<Block addr="0x40020800" size="0x800"   read="true"   write="true"   execute="false" name="I2C Slave0" />
+		<Block addr="0x40024000" size="0x1000"   read="true"   write="true"   execute="false" name="GPIO Port E" />
+		<Block addr="0x40028000" size="0x1000"   read="true"   write="true"   execute="false" name="PWM" />
+		<Block addr="0x40030000" size="0x1000"   read="true"   write="true"   execute="false" name="TIMER0" />
+		<Block addr="0x40031000" size="0x1000"   read="true"   write="true"   execute="false" name="TIMER1" />
+		<Block addr="0x40032000" size="0x1000"   read="true"   write="true"   execute="false" name="TIMER2" />
+		<Block addr="0x40038000" size="0x1000"   read="true"   write="true"   execute="false" name="ADC0" />
+		<Block addr="0x4003C000" size="0x1000"   read="true"   write="true"   execute="false" name="Analog Comparators" />
+		<Block addr="0x400FD000" size="0x1000"   read="true"   write="true"   execute="false" name="Flash Memroy Control" />
+		<Block addr="0x400FE000" size="0x1000"   read="true"   write="true"   execute="false" name="System Control" />
+			
+	</MemMap>
+</Debugger>

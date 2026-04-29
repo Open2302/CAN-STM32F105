@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><!-- InstanceBegin template="/Templates/CoIDEguide.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<!-- InstanceBeginEditable name="top" -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> <link href="../css/page.css" rel="stylesheet" type="text/css" /><!-- InstanceEndEditable -->
+</head> 
+<body >
+<div class="main">
+     <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        
+      <td  valign="top">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+                <tr>
+                    <td width="76%" valign="top" style="padding-left:0.5em; padding-top:0.5em;">
+					  <!-- InstanceBeginEditable name="pagecenter" -->
+				    <h2 class="fontsize140">Variables View</h2>
+                    <P style="margin-top:10px;">The Variables View displays information about the variables associated with the stack frame selected in the <a href="Debug_view.html">Debug View</a>. When debugging a C/C++ program, data that contains variables can be expanded to show the variables and the fields the variables contain.</p>
+      <P>
+      You can view information about the variables in a selected stack frame in the Variables view. When execution stops, the changed values are by default highlighted . Like the other debug-related views, the Variables view does not refresh as you run your executable. A refresh occurs when execution stops.</p>
+	  
+	  <P class="title1">The Variables View, shown with columns: </p>
+      <img src="../images/Debug/Variables_View.gif" />
+	  <p class="title1"><br/>
+	    There are many commands available in the Variables View:</p>
+       <table width="93%" border="0" cellpadding="0" cellspacing="1" bgcolor="#dddddd">
+        <tr>
+          <td width="84" height="30" align="center" bgcolor="#f7f7f7"><strong>Command </strong></td>
+          <td width="188" height="30" align="center" bgcolor="#f7f7f7"><strong>Name </strong></td>
+          <td width="181" height="30" align="center" bgcolor="#f7f7f7"><strong>Description </strong></td>
+		  <td width="104" height="30" align="center" bgcolor="#f7f7f7"><strong>Availability</strong></td>
+        </tr>
+                <tr>
+                  <td height="38" align="center" valign="middle" bgcolor="#FFFFFF"><img src="../images/Debug/CoDebugger_Registers_view_clip_image003.jpg" alt="" width="16" height="16"></td>
+                  <td height="38" align="left" valign="middle" bgcolor="#FFFFFF" style="padding:3px;">Show Type Name</td>
+                  <td height="38" valign="middle"  bgcolor="#FFFFFF" style="padding:3px;">Configure columns to show type names.</td>
+        <td height="38" bgcolor="#FFFFFF" style="padding:3px;">view action </td>
+        </tr>
+         <tr valign="middle" bgcolor="#FFFFFF">
+           <td height="38" align="center" valign="middle"><img src="../images/Debug/CoDebugger_Registers_view_clip_image005.jpg" width="16" height="16"></td>
+           <td height="38" align="left" bgcolor="#FFFFFF" style="padding:3px;">Show logic structure</td>
+           <td height="38"  bgcolor="#FFFFFF" style="padding:3px;">Show logic structure of the Variables.</td>
+           <td height="38" bgcolor="#FFFFFF" style="padding:3px;">view action </td>
+         </tr>
+         <tr valign="middle" bgcolor="#FFFFFF">
+           <td height="38" align="center" valign="middle"><img src="../images/Debug/CoDebugger_Registers_view_clip_image007.gif" width="16" height="16"></td>
+           <td height="38" align="left" bgcolor="#FFFFFF" style="padding:3px;">Collapse All</td>
+           <td height="38"  bgcolor="#FFFFFF" style="padding:3px;">Collapse all the Variables.</td>
+           <td height="38" bgcolor="#FFFFFF" style="padding:3px;">view action </td></tr> 
+  <tr>
+    <td height="38" align="center" bgcolor="#FFFFFF"><img src="../images/Debug/CoDebugger_Variables_view_clip_image000.gif" width="16" height="16"></td>
+    <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Add Globle Variables</td>
+    <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Add Globle Variables.</td>
+    <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Context menu and view action </td>        </tr> 
+ <tr>
+          <td align="center" valign="middle" bgcolor="#FFFFFF"><img border="0" width="16" height="16" src="../images/Debug/CoDebugger_Breakpoints_view_clip_image012.gif" alt="Remove Selected Breakpoints" /></td>
+          <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Remove Globle Variables</td>
+          <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Remove Globle Variables.</td>
+ <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Context menu and view action </td>        </tr> <tr>
+          <td align="center" valign="middle" bgcolor="#FFFFFF"><img border="0" width="16" height="16" src="../images/Debug/CoDebugger_Breakpoints_view_clip_image011.gif" alt="Remove All Breakpoints" /></td>
+          <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Remove All Globle Variables </td>
+          <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Remove All Globle Variables. </td>
+ <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Context menu and view action </td>        </tr>
+        <tr>
+        <td height="38" align="center" bgcolor="#FFFFFF">&nbsp;</td>
+          <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Select All</td>
+          <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Selects all of the variables in the view.</td>
+		   <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Context menu</td>
+        </tr>
+        <tr>
+          <td height="38" align="center" bgcolor="#FFFFFF"><img width="16" height="16" src="../images/Debug/CoDebugger_Variables_view_clip_image001.gif" alt="Copy Expressions" /></td>
+          <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Copy Variables </td>
+          <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Copies the selected variables to the system clipboard. </td>
+ <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Context menu</td>        </tr> <tr>
+          <td align="center" valign="middle" bgcolor="#FFFFFF"><img border="0" width="16" height="16" src="../images/Debug/CoDebugger_Breakpoints_view_clip_image004.gif" alt="Enable" /></td>
+          <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Enable </td>
+          <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Enables a currently disabled variable. </td>
+ <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Context menu</td>        </tr> <tr>
+          <td align="center" valign="middle" bgcolor="#FFFFFF"><img border="0" width="16" height="16" src="../images/Debug/CoDebugger_Breakpoints_view_clip_image003.gif" alt="Disabled" /></td>
+          <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Disable </td>
+          <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Disables a currently enabled variable. </td>
+ <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Context menu</td>        </tr>
+   <tr>
+          <td height="38" align="center" bgcolor="#FFFFFF"><img src="../images/Debug/CoDebugger_Variables_view_clip_image002.gif" width="16" height="16"></td>
+          <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Cast To Type… </td>
+          <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Cast To Type… </td>
+ <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Context menu</td>        </tr>
+ <tr>
+          <td height="38" align="center" bgcolor="#FFFFFF"><img src="../images/Debug/CoDebugger_Variables_view_clip_image003.gif" width="16" height="16"></td>
+          <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Display As Array </td>
+          <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Display As Array. </td>
+ <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Context menu</td>        </tr>
+ <tr>
+          <td height="38" align="center" bgcolor="#FFFFFF">&nbsp;</td>
+          <td height="38" bgcolor="#FFFFFF" style="padding:3px;">View Memory </td>
+          <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Allows you to create a memory monitor for the selected variable.</td>
+ <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Context menu</td></tr>
+ <tr>
+          <td height="38" align="center" bgcolor="#FFFFFF">&nbsp;</td>
+          <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Format </td>
+          <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Select a format type. Choices include: BInary, Decimal, Natural, and hexadecimal. </td>
+ <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Context menu</td>        </tr> <tr>
+          <td height="38" align="center" bgcolor="#FFFFFF">&nbsp;</td>
+          <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Find...</td>
+          <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Opens the search dialog to find elements in the variables view. </td>
+ <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Context menu</td>        </tr>
+ <tr>
+          <td height="38" align="center" bgcolor="#FFFFFF"><img width="16" height="16" src="../images/Debug/CoDebugger_Variables_view_clip_image001_0000.gif" alt="Change Value" /></td>
+          <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Change Value...
+
+</td>
+          <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Allows you to change the value for the underlying selected variable.</td>
+ <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Context menu</td>        </tr>  <tr>
+   <td height="38" align="center" bgcolor="#FFFFFF"><img width="16" height="16" src="../images/Debug/CoDebugger_Variables_view_clip_image001_0001.gif" alt="Toggle Watchpoint" /></td>
+   <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Add Watchpoint(C/C++)</td>
+   <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Add Watchpoint(C/C++). </td>
+   <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Context menu</td>        </tr> <tr>
+          <td height="38" align="center" bgcolor="#FFFFFF"><img width="16" height="16" src="../images/Debug/CoDebugger_Variables_view_clip_image001_0002.gif" alt="Add Watch Expression" /></td>
+          <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Watch </td>
+          <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Allows you to create a watch expression for the selected variable. </td>
+ <td height="38" bgcolor="#FFFFFF" style="padding:3px;">Context menu</td>        </tr>
+      </table> 
+				  <!-- InstanceEndEditable -->        </td>
+                    
+              </tr>
+          </table>
+        </td>
+      </tr>
+     </table>
+ 
+</div></body>
+<!-- InstanceEnd --></html>

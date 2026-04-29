@@ -1,0 +1,798 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?artifactRepository version='1.1.0'?>
+<repository name='Bundle pool' type='org.eclipse.equinox.p2.artifact.repository.simpleRepository' version='1'>
+  <properties size='2'>
+    <property name='p2.system' value='true'/>
+    <property name='p2.timestamp' value='1413857829714'/>
+  </properties>
+  <mappings size='3'>
+    <rule filter='(&amp; (classifier=osgi.bundle))' output='${repoUrl}/plugins/${id}_${version}.jar'/>
+    <rule filter='(&amp; (classifier=binary))' output='${repoUrl}/binary/${id}_${version}'/>
+    <rule filter='(&amp; (classifier=org.eclipse.update.feature))' output='${repoUrl}/features/${id}_${version}.jar'/>
+  </mappings>
+  <artifacts size='153'>
+    <artifact classifier='osgi.bundle' id='org.coocox.codebugger.configuration' version='1.0.0.201410211009'>
+      <properties size='1'>
+        <property name='download.size' value='72068'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.coocox.coide.help' version='1.0.0.201410211009'>
+      <properties size='1'>
+        <property name='download.size' value='4794'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.core.runtime.compatibility.registry' version='3.5.0.v20110505'>
+      <properties size='1'>
+        <property name='download.size' value='16890'/>
+      </properties>
+      <repositoryProperties size='1'>
+        <property name='artifact.folder' value='true'/>
+      </repositoryProperties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.emf.ecore' version='2.7.0.v20120127-1122'>
+      <properties size='1'>
+        <property name='download.size' value='1108017'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.core.jobs' version='3.5.101.v20120113-1953'>
+      <properties size='1'>
+        <property name='download.size' value='91069'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.apache.lucene.analysis' version='2.9.1.v201101211721'>
+      <properties size='1'>
+        <property name='download.size' value='216089'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='com.ibm.icu' version='4.4.2.v20110823'>
+      <properties size='1'>
+        <property name='download.size' value='6701203'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.hamcrest.core' version='1.1.0.v20090501071000'>
+      <properties size='1'>
+        <property name='download.size' value='27827'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.equinox.p2.core' version='2.1.1.v20120113-1346'>
+      <properties size='1'>
+        <property name='download.size' value='71555'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.equinox.http.registry' version='1.1.100.v20110502'>
+      <properties size='1'>
+        <property name='download.size' value='43999'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.junit4' version='4.8.1.v20100525'>
+      <properties size='1'>
+        <property name='download.size' value='6015'/>
+      </properties>
+      <repositoryProperties size='1'>
+        <property name='artifact.folder' value='true'/>
+      </repositoryProperties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.coocox.example.manage.core' version='1.0.0.201410211009'>
+      <properties size='1'>
+        <property name='download.size' value='13000'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.ant.core' version='3.2.302.v20120110-1739'>
+      <properties size='1'>
+        <property name='download.size' value='97869'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='javax.servlet' version='2.5.0.v201103041518'>
+      <properties size='1'>
+        <property name='download.size' value='119303'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.draw2d' version='3.7.2.v20111017-2020'>
+      <properties size='1'>
+        <property name='download.size' value='561537'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.ui.navigator.resources' version='3.4.200.I20100601-0800'>
+      <properties size='1'>
+        <property name='download.size' value='114937'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.coocox.userspace.manage.ui' version='1.0.0.201410211009'>
+      <properties size='1'>
+        <property name='download.size' value='19098'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.coocox.example.manage.ui' version='1.0.0.201410211009'>
+      <properties size='1'>
+        <property name='download.size' value='303761'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.coocox.user.ui' version='1.0.0.201410211009'>
+      <properties size='1'>
+        <property name='download.size' value='76259'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.coocox.codebugger.gdbjtag.ui' version='5.0.100.201410211009'>
+      <properties size='1'>
+        <property name='download.size' value='49379'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.coocox.component.front.ui' version='1.0.0.201410211009'>
+      <properties size='1'>
+        <property name='download.size' value='385586'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.coocox.component.board.manage.ui' version='1.0.0.201410211009'>
+      <properties size='1'>
+        <property name='download.size' value='343280'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.update.configurator' version='3.3.100.v20100512'>
+      <properties size='1'>
+        <property name='download.size' value='99908'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.coocox.common.ui' version='1.0.0.201410211009'>
+      <properties size='1'>
+        <property name='download.size' value='385824'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.core.filebuffers' version='3.5.200.v20110928-1504'>
+      <properties size='1'>
+        <property name='download.size' value='113471'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.coocox.component.driver.manage.core' version='1.0.0.201410211009'>
+      <properties size='1'>
+        <property name='download.size' value='17046'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.cdt.debug.ui.memory.memorybrowser' version='1.2.100.201202111925'>
+      <properties size='1'>
+        <property name='download.size' value='65238'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.core.resources.win32.x86' version='3.5.100.v20110423-0524'>
+      <properties size='1'>
+        <property name='download.size' value='17002'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.debug.core' version='3.7.1.v20111129-2031'>
+      <properties size='1'>
+        <property name='download.size' value='344544'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.coocox.codoc.core' version='1.0.0.201410211009'>
+      <properties size='1'>
+        <property name='download.size' value='16991'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.cdt.dsf.ui' version='2.2.1.201202111925'>
+      <properties size='1'>
+        <property name='download.size' value='1270746'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.coocox.welcome.ui' version='1.0.0.201410211009'>
+      <properties size='1'>
+        <property name='download.size' value='70038'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.cdt.core' version='5.3.2.201202111925'>
+      <properties size='1'>
+        <property name='download.size' value='4533475'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.osgi' version='3.7.2.v20120110-1415'>
+      <properties size='1'>
+        <property name='download.size' value='1364409'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.coocox.extension.example' version='1.0.0.201410211009'>
+      <properties size='1'>
+        <property name='download.size' value='13747'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mortbay.jetty.util' version='6.1.23.v201012071420'>
+      <properties size='1'>
+        <property name='download.size' value='193298'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.apache.commons.logging' version='1.0.4.v201101211617'>
+      <properties size='1'>
+        <property name='download.size' value='45405'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.ui.workbench.texteditor' version='3.7.0.v20110928-1504'>
+      <properties size='1'>
+        <property name='download.size' value='581960'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.coocox.integrate.component' version='1.0.0.201410211009'>
+      <properties size='1'>
+        <property name='download.size' value='69615'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.equinox.jsp.jasper' version='1.0.300.v20110502'>
+      <properties size='1'>
+        <property name='download.size' value='25532'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.coocox.codebugger.gdbjtag.core' version='5.0.100.201410211009'>
+      <properties size='1'>
+        <property name='download.size' value='131093'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.coocox.repository.customize' version='1.0.0.201410211009'>
+      <properties size='1'>
+        <property name='download.size' value='39219'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.cdt.launch' version='7.0.0.201202111925'>
+      <properties size='1'>
+        <property name='download.size' value='224601'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.cdt.ui' version='5.3.2.201202111925'>
+      <properties size='1'>
+        <property name='download.size' value='5265891'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.coocox.converter.core' version='1.0.0.201410211009'>
+      <properties size='1'>
+        <property name='download.size' value='441984'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.emf.common' version='2.7.0.v20120127-1122'>
+      <properties size='1'>
+        <property name='download.size' value='213371'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.coocox.builder.ui' version='1.0.0.201410211009'>
+      <properties size='1'>
+        <property name='download.size' value='1088051'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.equinox.common' version='3.6.0.v20110523'>
+      <properties size='1'>
+        <property name='download.size' value='105624'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.ui.win32' version='3.2.200.v20110928-1505'>
+      <properties size='1'>
+        <property name='download.size' value='24653'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.equinox.p2.repository' version='2.1.1.v20120113-1346'>
+      <properties size='1'>
+        <property name='download.size' value='127900'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.help.webapp' version='3.6.1.r37_20110929'>
+      <properties size='1'>
+        <property name='download.size' value='586844'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.ui.console' version='3.5.100.v20111007_r372'>
+      <properties size='1'>
+        <property name='download.size' value='159986'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.ui.ide' version='3.7.0.v20110928-1505'>
+      <properties size='1'>
+        <property name='download.size' value='2339393'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.cdt.debug.core' version='7.1.0.201202111925'>
+      <properties size='1'>
+        <property name='download.size' value='507412'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.swt.win32.win32.x86' version='3.7.2.v3740f'>
+      <properties size='1'>
+        <property name='download.size' value='2617888'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.apache.commons.el' version='1.0.0.v201101211617'>
+      <properties size='1'>
+        <property name='download.size' value='128684'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.coocox.coide.rcp' version='1.0.0.201410211009'>
+      <properties size='1'>
+        <property name='download.size' value='244630'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.coocox.component.basic.manage.core' version='1.0.0.201410211009'>
+      <properties size='1'>
+        <property name='download.size' value='19307'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.ui.views' version='3.6.0.v20110928-1505'>
+      <properties size='1'>
+        <property name='download.size' value='90155'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.coocox.utils' version='1.0.0.201410211009'>
+      <properties size='1'>
+        <property name='download.size' value='67602'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.equinox.p2.metadata' version='2.1.0.v20110815-1419'>
+      <properties size='1'>
+        <property name='download.size' value='339099'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.equinox.launcher' version='1.2.0.v20110502'>
+      <properties size='1'>
+        <property name='download.size' value='47262'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.equinox.app' version='1.3.100.v20110321'>
+      <properties size='1'>
+        <property name='download.size' value='85218'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.cdt.debug.ui.memory.transport' version='2.1.0.201202111925'>
+      <properties size='1'>
+        <property name='download.size' value='111940'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.mortbay.jetty.server' version='6.1.23.v201012071420'>
+      <properties size='1'>
+        <property name='download.size' value='557887'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.ui' version='3.7.0.v20110928-1505'>
+      <properties size='1'>
+        <property name='download.size' value='153179'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.team.core' version='3.6.0.I20110525-0800'>
+      <properties size='1'>
+        <property name='download.size' value='393873'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.ui.views.properties.tabbed' version='3.5.200.v20110928-1505'>
+      <properties size='1'>
+        <property name='download.size' value='104196'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.ltk.core.refactoring' version='3.5.201.r372_v20111101-0700'>
+      <properties size='1'>
+        <property name='download.size' value='322524'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.search' version='3.7.0.v20110928-1504'>
+      <properties size='1'>
+        <property name='download.size' value='468641'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.core.runtime.compatibility' version='3.2.100.v20100505'>
+      <properties size='1'>
+        <property name='download.size' value='92809'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.apache.lucene' version='2.9.1.v201101211721'>
+      <properties size='1'>
+        <property name='download.size' value='71018'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.osgi.services' version='3.3.0.v20110513'>
+      <properties size='1'>
+        <property name='download.size' value='71157'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.help.base' version='3.6.2.v201202080800'>
+      <properties size='1'>
+        <property name='download.size' value='414162'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.equinox.jsp.jasper.registry' version='1.0.200.v20100503'>
+      <properties size='1'>
+        <property name='download.size' value='11131'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.compare.core' version='3.5.200.I20110208-0800'>
+      <properties size='1'>
+        <property name='download.size' value='61780'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.coocox.component.widget' version='1.0.0.201410211009'>
+      <properties size='1'>
+        <property name='download.size' value='9189'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.coocox.model' version='1.0.0'>
+      <properties size='1'>
+        <property name='download.size' value='89011'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.coocox.customize' version='1.0.0.201410211009'>
+      <properties size='1'>
+        <property name='download.size' value='10613'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.cdt.debug.ui' version='7.1.2.201202111925'>
+      <properties size='1'>
+        <property name='download.size' value='1057749'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.equinox.security' version='1.1.1.R37x_v20110822-1018'>
+      <properties size='1'>
+        <property name='download.size' value='106105'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.coocox.component.front.core' version='1.0.0.201410211009'>
+      <properties size='1'>
+        <property name='download.size' value='69025'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.compare' version='3.5.202.R37x_v20111109-0800'>
+      <properties size='1'>
+        <property name='download.size' value='735048'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.coocox.component.board.ui' version='1.0.0.201410211009'>
+      <properties size='1'>
+        <property name='download.size' value='325863'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.coocox.userspace' version='1.0.0.201410211009'>
+      <properties size='1'>
+        <property name='download.size' value='200997'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.core.resources' version='3.7.101.v20120125-1505'>
+      <properties size='1'>
+        <property name='download.size' value='807241'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.core.runtime' version='3.7.0.v20110110'>
+      <properties size='1'>
+        <property name='download.size' value='70526'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.core.databinding' version='1.4.0.I20110111-0800'>
+      <properties size='1'>
+        <property name='download.size' value='200967'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.core.filesystem' version='1.3.100.v20110423-0524'>
+      <properties size='1'>
+        <property name='download.size' value='53218'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.coocox.device.core' version='1.0.0.201410211009'>
+      <properties size='1'>
+        <property name='download.size' value='48522'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.coocox.model.control' version='1.0.0.201410211009'>
+      <properties size='1'>
+        <property name='download.size' value='432373'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.apache.lucene.core' version='2.9.1.v201101211721'>
+      <properties size='1'>
+        <property name='download.size' value='1168475'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.ui.forms' version='3.5.101.v20111011-1919'>
+      <properties size='1'>
+        <property name='download.size' value='300905'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.help.ui' version='3.5.101.r37_20110819'>
+      <properties size='1'>
+        <property name='download.size' value='509522'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.ui.workbench' version='3.7.1.v20120104-1859'>
+      <properties size='1'>
+        <property name='download.size' value='4166247'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.cdt.core.win32' version='5.2.0.201202111925'>
+      <properties size='1'>
+        <property name='download.size' value='11465'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.equinox.http.servlet' version='1.1.200.v20110502'>
+      <properties size='1'>
+        <property name='download.size' value='42552'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.equinox.launcher.win32.win32.x86' version='1.1.100.v20110502'>
+      <properties size='1'>
+        <property name='download.size' value='26085'/>
+      </properties>
+      <repositoryProperties size='1'>
+        <property name='artifact.folder' value='true'/>
+      </repositoryProperties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.ui.navigator' version='3.5.101.v20120106-1355'>
+      <properties size='1'>
+        <property name='download.size' value='404931'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.ui.editors' version='3.7.0.v20110928-1504'>
+      <properties size='1'>
+        <property name='download.size' value='575722'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.coocox.component.driver.manage.ui' version='1.0.0.201410211009'>
+      <properties size='1'>
+        <property name='download.size' value='367115'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.coocox.codebugger.trace.ui' version='1.0.0.201410211009'>
+      <properties size='1'>
+        <property name='download.size' value='15350'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.coocox.codb.common.protocol' version='1.0.0.201410211009'>
+      <properties size='1'>
+        <property name='download.size' value='2325'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.coocox.sqlite.rn' version='1.0.0.201410211009'>
+      <properties size='1'>
+        <property name='download.size' value='4290667'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.core.filesystem.win32.x86' version='1.1.300.v20110423-0524'>
+      <properties size='1'>
+        <property name='download.size' value='30065'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='coocox_model_bundle' version='1.0.0'>
+      <properties size='1'>
+        <property name='download.size' value='534449'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.coocox.device.manage' version='1.0.0.201410211009'>
+      <properties size='1'>
+        <property name='download.size' value='525824'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.equinox.preferences' version='3.4.2.v20120111-2020'>
+      <properties size='1'>
+        <property name='download.size' value='113791'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.coocox.codb.client.core' version='1.0.0.201410211009'>
+      <properties size='1'>
+        <property name='download.size' value='4032961'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.coocox.codb.common.util' version='1.0.0.201410211009'>
+      <properties size='1'>
+        <property name='download.size' value='2050788'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.equinox.security.win32.x86' version='1.0.200.v20100503'>
+      <properties size='1'>
+        <property name='download.size' value='22003'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.coocox.component.board.core' version='1.0.0.201410211009'>
+      <properties size='1'>
+        <property name='download.size' value='24120'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.ltk.ui.refactoring' version='3.6.0.v20110928-1453'>
+      <properties size='1'>
+        <property name='download.size' value='454434'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.equinox.p2.engine' version='2.1.1.R37x_v20111003'>
+      <properties size='1'>
+        <property name='download.size' value='184966'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.coocox.component.basic.manage.ui' version='1.0.0.201410211009'>
+      <properties size='1'>
+        <property name='download.size' value='342425'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.swt' version='3.7.2.v3740f'>
+      <properties size='1'>
+        <property name='download.size' value='17332'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.coocox.component.board.manage.core' version='1.0.0.201410211009'>
+      <properties size='1'>
+        <property name='download.size' value='13776'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.core.commands' version='3.6.0.I20110111-0800'>
+      <properties size='1'>
+        <property name='download.size' value='107303'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.debug.ui' version='3.7.102.v20111129-1423_r372'>
+      <properties size='1'>
+        <property name='download.size' value='2579784'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.apache.jasper' version='5.5.17.v201101211617'>
+      <properties size='1'>
+        <property name='download.size' value='1722563'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.cdt.debug.ui.memory.traditional' version='1.2.1.201202111925'>
+      <properties size='1'>
+        <property name='download.size' value='138912'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.coocox.builder.core' version='1.0.0.201410211009'>
+      <properties size='1'>
+        <property name='download.size' value='276681'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.jface.databinding' version='1.5.0.I20100907-0800'>
+      <properties size='1'>
+        <property name='download.size' value='275458'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.coocox.extension.build' version='1.0.0.201410211009'>
+      <properties size='1'>
+        <property name='download.size' value='15691'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.coocox.lib.cassandra' version='1.0.0'>
+      <properties size='1'>
+        <property name='download.size' value='10075980'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.cdt.debug.mi.core' version='7.1.1.201202111925'>
+      <properties size='1'>
+        <property name='download.size' value='532086'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.core.contenttype' version='3.4.100.v20110423-0524'>
+      <properties size='1'>
+        <property name='download.size' value='91961'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.core.variables' version='3.2.500.v20110928-1503'>
+      <properties size='1'>
+        <property name='download.size' value='33061'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.cdt.core.win32.x86' version='5.2.0.201202111925'>
+      <properties size='1'>
+        <property name='download.size' value='82936'/>
+      </properties>
+      <repositoryProperties size='1'>
+        <property name='artifact.folder' value='true'/>
+      </repositoryProperties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.cdt.gdb' version='7.0.0.201202111925'>
+      <properties size='1'>
+        <property name='download.size' value='15876'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.junit' version='4.8.2.v4_8_2_v20110321-1705'>
+      <properties size='1'>
+        <property name='download.size' value='202592'/>
+      </properties>
+      <repositoryProperties size='1'>
+        <property name='artifact.folder' value='true'/>
+      </repositoryProperties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.jface' version='3.7.0.v20110928-1505'>
+      <properties size='1'>
+        <property name='download.size' value='1077135'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='javax.servlet.jsp' version='2.0.0.v201101211617'>
+      <properties size='1'>
+        <property name='download.size' value='63887'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.core.expressions' version='3.4.300.v20110228'>
+      <properties size='1'>
+        <property name='download.size' value='86992'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.coocox.ceditor.patch' version='1.0.0.201410211009'>
+      <properties size='1'>
+        <property name='download.size' value='6706'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.cdt.debug.ui.memory.search' version='1.2.1.201202111925'>
+      <properties size='1'>
+        <property name='download.size' value='60957'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.jface.text' version='3.7.2.v20111213-1208'>
+      <properties size='1'>
+        <property name='download.size' value='976230'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.coocox.example.ui' version='1.0.0.201410211009'>
+      <properties size='1'>
+        <property name='download.size' value='101536'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.cdt.dsf' version='2.2.0.201202111925'>
+      <properties size='1'>
+        <property name='download.size' value='306687'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.equinox.http.jetty' version='2.0.100.v20110502'>
+      <properties size='1'>
+        <property name='download.size' value='24884'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.team.ui' version='3.6.101.R37x_v20111109-0800'>
+      <properties size='1'>
+        <property name='download.size' value='1440823'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.equinox.registry' version='3.5.101.R37x_v20110810-1611'>
+      <properties size='1'>
+        <property name='download.size' value='183035'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.help.appserver' version='3.1.400.v20110425'>
+      <properties size='1'>
+        <property name='download.size' value='18311'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.apache.ant' version='1.8.2.v20120109-1030'>
+      <properties size='1'>
+        <property name='download.size' value='2234025'/>
+      </properties>
+      <repositoryProperties size='1'>
+        <property name='artifact.folder' value='true'/>
+      </repositoryProperties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.coocox.example.core' version='1.0.0.201410211009'>
+      <properties size='1'>
+        <property name='download.size' value='881859'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.equinox.p2.metadata.repository' version='1.2.0.v20110815-1419'>
+      <properties size='1'>
+        <property name='download.size' value='115721'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.coocox.coassistant' version='1.0.0.201410211009'>
+      <properties size='1'>
+        <property name='download.size' value='79319'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.text' version='3.5.101.v20110928-1504'>
+      <properties size='1'>
+        <property name='download.size' value='248183'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.core.databinding.property' version='1.4.0.I20110222-0800'>
+      <properties size='1'>
+        <property name='download.size' value='167964'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.help' version='3.5.100.v20110426'>
+      <properties size='1'>
+        <property name='download.size' value='257403'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.coocox.gnugcc.help' version='1.0.0.201410211009'>
+      <properties size='1'>
+        <property name='download.size' value='17102'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.coocox.common.manage.ui' version='1.0.0.201410211009'>
+      <properties size='1'>
+        <property name='download.size' value='109212'/>
+      </properties>
+    </artifact>
+    <artifact classifier='osgi.bundle' id='org.eclipse.core.databinding.observable' version='1.4.0.I20110222-0800'>
+      <properties size='1'>
+        <property name='download.size' value='296139'/>
+      </properties>
+    </artifact>
+  </artifacts>
+</repository>

@@ -1,0 +1,432 @@
+
+bin/STM32F3xx_128.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00000000 <BreakHere>:
+ */
+#if (defined (__GNUC__)) /*------------------ GNU Compiler ---------------------*/
+void BreakHere(int status) __attribute__( ( naked ) );
+void BreakHere(int status)
+{
+  __asm volatile ("BKPT #0 \n\t"  );
+   0:	be00      	bkpt	0x0000
+   2:	bf00      	nop
+
+00000004 <ExecFunction>:
+ */
+int ExecFunction (FlashAlgoFnc algoFnc,
+				  unsigned long parameter0,
+				  unsigned long parameter1,
+				  unsigned long parameter2)
+{
+   4:	b580      	push	{r7, lr}
+   6:	b086      	sub	sp, #24
+   8:	af00      	add	r7, sp, #0
+   a:	60f8      	str	r0, [r7, #12]
+   c:	60b9      	str	r1, [r7, #8]
+   e:	607a      	str	r2, [r7, #4]
+  10:	603b      	str	r3, [r7, #0]
+	 int retval;
+	 retval = algoFnc(parameter0,parameter1,parameter2);
+  12:	68fb      	ldr	r3, [r7, #12]
+  14:	68b8      	ldr	r0, [r7, #8]
+  16:	6879      	ldr	r1, [r7, #4]
+  18:	683a      	ldr	r2, [r7, #0]
+  1a:	4798      	blx	r3
+  1c:	6178      	str	r0, [r7, #20]
+	 BreakHere(retval);
+  1e:	6978      	ldr	r0, [r7, #20]
+  20:	f7ff ffee 	bl	0 <BreakHere>
+	 
+	 return (retval);
+  24:	697b      	ldr	r3, [r7, #20]
+}
+  26:	4618      	mov	r0, r3
+  28:	f107 0718 	add.w	r7, r7, #24
+  2c:	46bd      	mov	sp, r7
+  2e:	bd80      	pop	{r7, pc}
+
+00000030 <GetSecNum>:
+ * @retval     Sector Number		 
+ *
+ *******************************************************************************
+ */
+unsigned long GetSecNum (unsigned long addr) 
+{
+  30:	b480      	push	{r7}
+  32:	b085      	sub	sp, #20
+  34:	af00      	add	r7, sp, #0
+  36:	6078      	str	r0, [r7, #4]
+  unsigned long n;
+
+  n = (addr >> 12) & 0x000FF;                            // only bits 12..19
+  38:	687b      	ldr	r3, [r7, #4]
+  3a:	ea4f 3313 	mov.w	r3, r3, lsr #12
+  3e:	b2db      	uxtb	r3, r3
+  40:	60fb      	str	r3, [r7, #12]
+
+  if (n >= 0x20) 
+  42:	68fb      	ldr	r3, [r7, #12]
+  44:	2b1f      	cmp	r3, #31
+  46:	d906      	bls.n	56 <GetSecNum+0x26>
+  {
+    n = 4 + (n >> 5);                                    // 128kB Sector
+  48:	68fb      	ldr	r3, [r7, #12]
+  4a:	ea4f 1353 	mov.w	r3, r3, lsr #5
+  4e:	f103 0304 	add.w	r3, r3, #4
+  52:	60fb      	str	r3, [r7, #12]
+  54:	e00d      	b.n	72 <GetSecNum+0x42>
+  }
+  else if (n >= 0x10) 
+  56:	68fb      	ldr	r3, [r7, #12]
+  58:	2b0f      	cmp	r3, #15
+  5a:	d906      	bls.n	6a <GetSecNum+0x3a>
+  {
+    n = 3 + (n >> 4);                                    //  64kB Sector
+  5c:	68fb      	ldr	r3, [r7, #12]
+  5e:	ea4f 1313 	mov.w	r3, r3, lsr #4
+  62:	f103 0303 	add.w	r3, r3, #3
+  66:	60fb      	str	r3, [r7, #12]
+  68:	e003      	b.n	72 <GetSecNum+0x42>
+  }
+  else                
+  {
+    n = 0 + (n >> 2);                                    //  16kB Sector
+  6a:	68fb      	ldr	r3, [r7, #12]
+  6c:	ea4f 0393 	mov.w	r3, r3, lsr #2
+  70:	60fb      	str	r3, [r7, #12]
+  }
+
+  return (n);                                            // Sector Number
+  72:	68fb      	ldr	r3, [r7, #12]
+}
+  74:	4618      	mov	r0, r3
+  76:	f107 0714 	add.w	r7, r7, #20
+  7a:	46bd      	mov	sp, r7
+  7c:	bc80      	pop	{r7}
+  7e:	4770      	bx	lr
+
+00000080 <FlashInit>:
+ *******************************************************************************
+ */
+int FlashInit (unsigned long baseAddr,
+               unsigned long clk,
+               unsigned long operateFuc)
+{
+  80:	b480      	push	{r7}
+  82:	b085      	sub	sp, #20
+  84:	af00      	add	r7, sp, #0
+  86:	60f8      	str	r0, [r7, #12]
+  88:	60b9      	str	r1, [r7, #8]
+  8a:	607a      	str	r2, [r7, #4]
+	FLASH->KEYR = FLASH_KEY1;                             // Unlock Flash
+  8c:	4b14      	ldr	r3, [pc, #80]	; (e0 <FlashInit+0x60>)
+  8e:	4a15      	ldr	r2, [pc, #84]	; (e4 <FlashInit+0x64>)
+  90:	605a      	str	r2, [r3, #4]
+	FLASH->KEYR = FLASH_KEY2;
+  92:	4b13      	ldr	r3, [pc, #76]	; (e0 <FlashInit+0x60>)
+  94:	4a14      	ldr	r2, [pc, #80]	; (e8 <FlashInit+0x68>)
+  96:	605a      	str	r2, [r3, #4]
+
+	FLASH->ACR  = 0x00000000;                             // Zero Wait State, no Cache, no Prefetch
+  98:	4b11      	ldr	r3, [pc, #68]	; (e0 <FlashInit+0x60>)
+  9a:	f04f 0200 	mov.w	r2, #0
+  9e:	601a      	str	r2, [r3, #0]
+	FLASH->SR  |= FLASH_ERR;                              // Reset Error Flags
+  a0:	4b0f      	ldr	r3, [pc, #60]	; (e0 <FlashInit+0x60>)
+  a2:	4a0f      	ldr	r2, [pc, #60]	; (e0 <FlashInit+0x60>)
+  a4:	68d2      	ldr	r2, [r2, #12]
+  a6:	f042 0214 	orr.w	r2, r2, #20
+  aa:	60da      	str	r2, [r3, #12]
+
+	if ((FLASH->OBR & (1ul << 8)) == 0) {                 // Test if IWDG is running (IWDG in HW mode)
+  ac:	4b0c      	ldr	r3, [pc, #48]	; (e0 <FlashInit+0x60>)
+  ae:	69db      	ldr	r3, [r3, #28]
+  b0:	f403 7380 	and.w	r3, r3, #256	; 0x100
+  b4:	2b00      	cmp	r3, #0
+  b6:	d10b      	bne.n	d0 <FlashInit+0x50>
+	// Set IWDG time out to ~32.768 second
+	IWDG->KR  = 0x5555;                                 // Enable write access to IWDG_PR and IWDG_RLR
+  b8:	4b0c      	ldr	r3, [pc, #48]	; (ec <FlashInit+0x6c>)
+  ba:	f245 5255 	movw	r2, #21845	; 0x5555
+  be:	601a      	str	r2, [r3, #0]
+	IWDG->PR  = 0x06;                                   // Set prescaler to 256
+  c0:	4b0a      	ldr	r3, [pc, #40]	; (ec <FlashInit+0x6c>)
+  c2:	f04f 0206 	mov.w	r2, #6
+  c6:	605a      	str	r2, [r3, #4]
+	IWDG->RLR = 4095;                                   // Set reload value to 4095
+  c8:	4b08      	ldr	r3, [pc, #32]	; (ec <FlashInit+0x6c>)
+  ca:	f640 72ff 	movw	r2, #4095	; 0xfff
+  ce:	609a      	str	r2, [r3, #8]
+	}
+
+	return (0);
+  d0:	f04f 0300 	mov.w	r3, #0
+}
+  d4:	4618      	mov	r0, r3
+  d6:	f107 0714 	add.w	r7, r7, #20
+  da:	46bd      	mov	sp, r7
+  dc:	bc80      	pop	{r7}
+  de:	4770      	bx	lr
+  e0:	40022000 	.word	0x40022000
+  e4:	45670123 	.word	0x45670123
+  e8:	cdef89ab 	.word	0xcdef89ab
+  ec:	40003000 	.word	0x40003000
+
+000000f0 <FlashUnInit>:
+ * @details    This function is called after flash programming/erase. 
+ * @note 
+ *******************************************************************************
+ */
+int FlashUnInit (unsigned long operateFuc)
+{
+  f0:	b480      	push	{r7}
+  f2:	b083      	sub	sp, #12
+  f4:	af00      	add	r7, sp, #0
+  f6:	6078      	str	r0, [r7, #4]
+  FLASH->CR |=  FLASH_LOCK;                             // Lock Flash
+  f8:	4b06      	ldr	r3, [pc, #24]	; (114 <FlashUnInit+0x24>)
+  fa:	4a06      	ldr	r2, [pc, #24]	; (114 <FlashUnInit+0x24>)
+  fc:	6912      	ldr	r2, [r2, #16]
+  fe:	f042 0280 	orr.w	r2, r2, #128	; 0x80
+ 102:	611a      	str	r2, [r3, #16]
+
+  return (0);
+ 104:	f04f 0300 	mov.w	r3, #0
+
+  return 0;
+}
+ 108:	4618      	mov	r0, r3
+ 10a:	f107 070c 	add.w	r7, r7, #12
+ 10e:	46bd      	mov	sp, r7
+ 110:	bc80      	pop	{r7}
+ 112:	4770      	bx	lr
+ 114:	40022000 	.word	0x40022000
+
+00000118 <FlashEraseChip>:
+
+int FlashEraseChip   (void)
+{
+ 118:	b480      	push	{r7}
+ 11a:	af00      	add	r7, sp, #0
+	  FLASH->CR |=  FLASH_MER;                              // Mass Erase Enabled
+ 11c:	4b11      	ldr	r3, [pc, #68]	; (164 <FlashEraseChip+0x4c>)
+ 11e:	4a11      	ldr	r2, [pc, #68]	; (164 <FlashEraseChip+0x4c>)
+ 120:	6912      	ldr	r2, [r2, #16]
+ 122:	f042 0204 	orr.w	r2, r2, #4
+ 126:	611a      	str	r2, [r3, #16]
+	  FLASH->CR |=  FLASH_STRT;                             // Start Erase
+ 128:	4b0e      	ldr	r3, [pc, #56]	; (164 <FlashEraseChip+0x4c>)
+ 12a:	4a0e      	ldr	r2, [pc, #56]	; (164 <FlashEraseChip+0x4c>)
+ 12c:	6912      	ldr	r2, [r2, #16]
+ 12e:	f042 0240 	orr.w	r2, r2, #64	; 0x40
+ 132:	611a      	str	r2, [r3, #16]
+
+	  while (FLASH->SR & FLASH_BSY) {
+ 134:	e003      	b.n	13e <FlashEraseChip+0x26>
+	    IWDG->KR = 0xAAAA;                                  // Reload IWDG
+ 136:	4b0c      	ldr	r3, [pc, #48]	; (168 <FlashEraseChip+0x50>)
+ 138:	f64a 22aa 	movw	r2, #43690	; 0xaaaa
+ 13c:	601a      	str	r2, [r3, #0]
+int FlashEraseChip   (void)
+{
+	  FLASH->CR |=  FLASH_MER;                              // Mass Erase Enabled
+	  FLASH->CR |=  FLASH_STRT;                             // Start Erase
+
+	  while (FLASH->SR & FLASH_BSY) {
+ 13e:	4b09      	ldr	r3, [pc, #36]	; (164 <FlashEraseChip+0x4c>)
+ 140:	68db      	ldr	r3, [r3, #12]
+ 142:	f003 0301 	and.w	r3, r3, #1
+ 146:	2b00      	cmp	r3, #0
+ 148:	d1f5      	bne.n	136 <FlashEraseChip+0x1e>
+	    IWDG->KR = 0xAAAA;                                  // Reload IWDG
+	  }
+
+	  FLASH->CR &= ~FLASH_MER;                              // Mass Erase Disabled
+ 14a:	4b06      	ldr	r3, [pc, #24]	; (164 <FlashEraseChip+0x4c>)
+ 14c:	4a05      	ldr	r2, [pc, #20]	; (164 <FlashEraseChip+0x4c>)
+ 14e:	6912      	ldr	r2, [r2, #16]
+ 150:	f022 0204 	bic.w	r2, r2, #4
+ 154:	611a      	str	r2, [r3, #16]
+
+	  return (0);                                           // Done
+ 156:	f04f 0300 	mov.w	r3, #0
+}
+ 15a:	4618      	mov	r0, r3
+ 15c:	46bd      	mov	sp, r7
+ 15e:	bc80      	pop	{r7}
+ 160:	4770      	bx	lr
+ 162:	bf00      	nop
+ 164:	40022000 	.word	0x40022000
+ 168:	40003000 	.word	0x40003000
+
+0000016c <FlashEraseSector>:
+ * @details     
+ * @note 
+ *******************************************************************************
+ */
+int FlashEraseSector (unsigned long sectorAddr)
+{
+ 16c:	b480      	push	{r7}
+ 16e:	b083      	sub	sp, #12
+ 170:	af00      	add	r7, sp, #0
+ 172:	6078      	str	r0, [r7, #4]
+    FLASH->CR  |=  FLASH_PER;                           // Page Erase Enabled
+ 174:	4b13      	ldr	r3, [pc, #76]	; (1c4 <FlashEraseSector+0x58>)
+ 176:	4a13      	ldr	r2, [pc, #76]	; (1c4 <FlashEraseSector+0x58>)
+ 178:	6912      	ldr	r2, [r2, #16]
+ 17a:	f042 0202 	orr.w	r2, r2, #2
+ 17e:	611a      	str	r2, [r3, #16]
+    FLASH->AR   =  sectorAddr;                                 // Page Address
+ 180:	4b10      	ldr	r3, [pc, #64]	; (1c4 <FlashEraseSector+0x58>)
+ 182:	687a      	ldr	r2, [r7, #4]
+ 184:	615a      	str	r2, [r3, #20]
+    FLASH->CR  |=  FLASH_STRT;                          // Start Erase
+ 186:	4b0f      	ldr	r3, [pc, #60]	; (1c4 <FlashEraseSector+0x58>)
+ 188:	4a0e      	ldr	r2, [pc, #56]	; (1c4 <FlashEraseSector+0x58>)
+ 18a:	6912      	ldr	r2, [r2, #16]
+ 18c:	f042 0240 	orr.w	r2, r2, #64	; 0x40
+ 190:	611a      	str	r2, [r3, #16]
+
+    while (FLASH->SR  & FLASH_BSY) {
+ 192:	e003      	b.n	19c <FlashEraseSector+0x30>
+      IWDG->KR = 0xAAAA;                                // Reload IWDG
+ 194:	4b0c      	ldr	r3, [pc, #48]	; (1c8 <FlashEraseSector+0x5c>)
+ 196:	f64a 22aa 	movw	r2, #43690	; 0xaaaa
+ 19a:	601a      	str	r2, [r3, #0]
+{
+    FLASH->CR  |=  FLASH_PER;                           // Page Erase Enabled
+    FLASH->AR   =  sectorAddr;                                 // Page Address
+    FLASH->CR  |=  FLASH_STRT;                          // Start Erase
+
+    while (FLASH->SR  & FLASH_BSY) {
+ 19c:	4b09      	ldr	r3, [pc, #36]	; (1c4 <FlashEraseSector+0x58>)
+ 19e:	68db      	ldr	r3, [r3, #12]
+ 1a0:	f003 0301 	and.w	r3, r3, #1
+ 1a4:	2b00      	cmp	r3, #0
+ 1a6:	d1f5      	bne.n	194 <FlashEraseSector+0x28>
+      IWDG->KR = 0xAAAA;                                // Reload IWDG
+    }
+
+    FLASH->CR  &= ~FLASH_PER;                           // Page Erase Disabled
+ 1a8:	4b06      	ldr	r3, [pc, #24]	; (1c4 <FlashEraseSector+0x58>)
+ 1aa:	4a06      	ldr	r2, [pc, #24]	; (1c4 <FlashEraseSector+0x58>)
+ 1ac:	6912      	ldr	r2, [r2, #16]
+ 1ae:	f022 0202 	bic.w	r2, r2, #2
+ 1b2:	611a      	str	r2, [r3, #16]
+
+  return (0);                                           // Done
+ 1b4:	f04f 0300 	mov.w	r3, #0
+}
+ 1b8:	4618      	mov	r0, r3
+ 1ba:	f107 070c 	add.w	r7, r7, #12
+ 1be:	46bd      	mov	sp, r7
+ 1c0:	bc80      	pop	{r7}
+ 1c2:	4770      	bx	lr
+ 1c4:	40022000 	.word	0x40022000
+ 1c8:	40003000 	.word	0x40003000
+
+000001cc <FlashProgramPage>:
+ *******************************************************************************
+ */ 
+int FlashProgramPage (unsigned long pageAddr,     
+                      unsigned long size,
+                      unsigned char *buf)
+{
+ 1cc:	b480      	push	{r7}
+ 1ce:	b085      	sub	sp, #20
+ 1d0:	af00      	add	r7, sp, #0
+ 1d2:	60f8      	str	r0, [r7, #12]
+ 1d4:	60b9      	str	r1, [r7, #8]
+ 1d6:	607a      	str	r2, [r7, #4]
+  
+	size = (size + 1) & ~1;                                   // Adjust size for Half Words
+ 1d8:	68bb      	ldr	r3, [r7, #8]
+ 1da:	f103 0301 	add.w	r3, r3, #1
+ 1de:	f023 0301 	bic.w	r3, r3, #1
+ 1e2:	60bb      	str	r3, [r7, #8]
+
+	  while (size) {
+ 1e4:	e031      	b.n	24a <FlashProgramPage+0x7e>
+
+	    FLASH->CR  |=  FLASH_PG;                            // Programming Enabled
+ 1e6:	4b1e      	ldr	r3, [pc, #120]	; (260 <FlashProgramPage+0x94>)
+ 1e8:	4a1d      	ldr	r2, [pc, #116]	; (260 <FlashProgramPage+0x94>)
+ 1ea:	6912      	ldr	r2, [r2, #16]
+ 1ec:	f042 0201 	orr.w	r2, r2, #1
+ 1f0:	611a      	str	r2, [r3, #16]
+
+	    M16(pageAddr) = *((u16 *)buf);                           // Program Half Word
+ 1f2:	68fb      	ldr	r3, [r7, #12]
+ 1f4:	687a      	ldr	r2, [r7, #4]
+ 1f6:	8812      	ldrh	r2, [r2, #0]
+ 1f8:	801a      	strh	r2, [r3, #0]
+	    while (FLASH->SR  & FLASH_BSY);
+ 1fa:	bf00      	nop
+ 1fc:	4b18      	ldr	r3, [pc, #96]	; (260 <FlashProgramPage+0x94>)
+ 1fe:	68db      	ldr	r3, [r3, #12]
+ 200:	f003 0301 	and.w	r3, r3, #1
+ 204:	2b00      	cmp	r3, #0
+ 206:	d1f9      	bne.n	1fc <FlashProgramPage+0x30>
+
+	    FLASH->CR  &= ~FLASH_PG;                            // Programming Disabled
+ 208:	4b15      	ldr	r3, [pc, #84]	; (260 <FlashProgramPage+0x94>)
+ 20a:	4a15      	ldr	r2, [pc, #84]	; (260 <FlashProgramPage+0x94>)
+ 20c:	6912      	ldr	r2, [r2, #16]
+ 20e:	f022 0201 	bic.w	r2, r2, #1
+ 212:	611a      	str	r2, [r3, #16]
+
+	    if (FLASH->SR & FLASH_ERR) {                        // Check for Error
+ 214:	4b12      	ldr	r3, [pc, #72]	; (260 <FlashProgramPage+0x94>)
+ 216:	68db      	ldr	r3, [r3, #12]
+ 218:	f003 0314 	and.w	r3, r3, #20
+ 21c:	2b00      	cmp	r3, #0
+ 21e:	d008      	beq.n	232 <FlashProgramPage+0x66>
+	      FLASH->SR |= FLASH_ERR;                           // Reset Error Flags
+ 220:	4b0f      	ldr	r3, [pc, #60]	; (260 <FlashProgramPage+0x94>)
+ 222:	4a0f      	ldr	r2, [pc, #60]	; (260 <FlashProgramPage+0x94>)
+ 224:	68d2      	ldr	r2, [r2, #12]
+ 226:	f042 0214 	orr.w	r2, r2, #20
+ 22a:	60da      	str	r2, [r3, #12]
+	      return (1);                                       // Failed
+ 22c:	f04f 0301 	mov.w	r3, #1
+ 230:	e010      	b.n	254 <FlashProgramPage+0x88>
+	    }
+
+	    pageAddr += 2;                                           // Go to next Half Word
+ 232:	68fb      	ldr	r3, [r7, #12]
+ 234:	f103 0302 	add.w	r3, r3, #2
+ 238:	60fb      	str	r3, [r7, #12]
+	    buf += 2;
+ 23a:	687b      	ldr	r3, [r7, #4]
+ 23c:	f103 0302 	add.w	r3, r3, #2
+ 240:	607b      	str	r3, [r7, #4]
+	    size  -= 2;
+ 242:	68bb      	ldr	r3, [r7, #8]
+ 244:	f1a3 0302 	sub.w	r3, r3, #2
+ 248:	60bb      	str	r3, [r7, #8]
+                      unsigned char *buf)
+{
+  
+	size = (size + 1) & ~1;                                   // Adjust size for Half Words
+
+	  while (size) {
+ 24a:	68bb      	ldr	r3, [r7, #8]
+ 24c:	2b00      	cmp	r3, #0
+ 24e:	d1ca      	bne.n	1e6 <FlashProgramPage+0x1a>
+	    pageAddr += 2;                                           // Go to next Half Word
+	    buf += 2;
+	    size  -= 2;
+	  }
+
+	  return (0);                                           // Done
+ 250:	f04f 0300 	mov.w	r3, #0
+}
+ 254:	4618      	mov	r0, r3
+ 256:	f107 0714 	add.w	r7, r7, #20
+ 25a:	46bd      	mov	sp, r7
+ 25c:	bc80      	pop	{r7}
+ 25e:	4770      	bx	lr
+ 260:	40022000 	.word	0x40022000

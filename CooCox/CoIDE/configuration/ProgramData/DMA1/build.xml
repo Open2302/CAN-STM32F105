@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="postbuild" name="test">
+	<property name="project.name" value="DMA1"/>
+	<property name="project.path" value="C:\Users\simonov\Downloads\CAN-STM32F105-main (3)\CAN-STM32F105-main"/>
+	<property name="output.name" value="DMA1"/>
+	<property name="output.path" value="C:\Users\simonov\Downloads\CAN-STM32F105-main (3)\CAN-STM32F105-main\dma1"/>
+	<property name="project.debug" value="${output.path}/Debug"/>
+	<property name="project.obj" value="${output.path}/Debug/obj"/>
+	<property name="project.bin" value="${output.path}/Debug/bin"/>
+	<property name="target.name" value="DMA1"/>
+	<property name="chip.name" value="STM32F105RC"/>
+
+	<!-- associate current path to the link file path-->
+	<dirname file="$${basedir}" property="linkdir"/>
+
+	<target depends="compile" name="postbuild">
+	   <exec executable="${gcc.home}\arm-none-eabi-objcopy.exe">
+	      <arg value="-O"/>
+	      <arg value="binary"/>
+	      <arg value="${project.bin}\${output.name}.elf"/>
+	      <arg value="${project.bin}\${output.name}.bin"/>
+	   </exec>
+	   <exec executable="${gcc.home}\arm-none-eabi-objcopy.exe">
+		  <arg value="-O"/>
+		  <arg value="ihex"/>
+		  <arg value="${project.bin}\${output.name}.elf"/>
+		  <arg value="${project.bin}\${output.name}.hex"/>
+	   </exec>
+	   <exec dir="${project.bin}" executable="${gcc.home}\arm-none-eabi-size.exe">
+		   <arg value="${output.name}.elf"/>
+	   </exec>
+	</target>
+
+	<taskdef resource="cpptasks.tasks"/>
+	<target name="compile">
+		<mkdir dir="${project.bin}"/>
+		<mkdir dir="${project.obj}"/>
+		<cc debug="true" incremental="0" objdir="${project.obj}" outfile="${project.bin}/${output.name}.elf" outtype="executable" subsystem="console">
+			<!-- compile all the c source file in the project -->
+			<fileset casesensitive="false" file="C:/Users/simonov/Downloads/CAN-STM32F105-main (3)/CAN-STM32F105-main/cmsis_boot/system_stm32f10x.c"/>
+      <fileset casesensitive="false" file="C:/Users/simonov/Downloads/CAN-STM32F105-main (3)/CAN-STM32F105-main/cmsis_boot/startup/startup_stm32f10x_cl.c"/>
+      <fileset casesensitive="false" file="C:/Users/simonov/Downloads/CAN-STM32F105-main (3)/CAN-STM32F105-main/stm_lib/src/stm32f10x_exti.c"/>
+      <fileset casesensitive="false" file="C:/Users/simonov/Downloads/CAN-STM32F105-main (3)/CAN-STM32F105-main/stm_lib/src/stm32f10x_rcc.c"/>
+      <fileset casesensitive="false" file="C:/Users/simonov/Downloads/CAN-STM32F105-main (3)/CAN-STM32F105-main/stm_lib/src/stm32f10x_tim.c"/>
+      <fileset casesensitive="false" file="C:/Users/simonov/Downloads/CAN-STM32F105-main (3)/CAN-STM32F105-main/stm_lib/src/misc.c"/>
+      <fileset casesensitive="false" file="C:/Users/simonov/Downloads/CAN-STM32F105-main (3)/CAN-STM32F105-main/stm_lib/src/stm32f10x_dma.c"/>
+      <fileset casesensitive="false" file="C:/Users/simonov/Downloads/CAN-STM32F105-main (3)/CAN-STM32F105-main/stm_lib/src/stm32f10x_flash.c"/>
+      <fileset casesensitive="false" file="C:/Users/simonov/Downloads/CAN-STM32F105-main (3)/CAN-STM32F105-main/can2.c"/>
+      <fileset casesensitive="false" file="C:/Users/simonov/Downloads/CAN-STM32F105-main (3)/CAN-STM32F105-main/can_packing.c"/>
+      <fileset casesensitive="false" file="C:/Users/simonov/Downloads/CAN-STM32F105-main (3)/CAN-STM32F105-main/stm_lib/src/stm32f10x_usart.c"/>
+      <fileset casesensitive="false" file="C:/Users/simonov/Downloads/CAN-STM32F105-main (3)/CAN-STM32F105-main/can1.c"/>
+      <fileset casesensitive="false" file="C:/Users/simonov/Downloads/CAN-STM32F105-main (3)/CAN-STM32F105-main/stdio/printf.c"/>
+      <fileset casesensitive="false" file="C:/Users/simonov/Downloads/CAN-STM32F105-main (3)/CAN-STM32F105-main/stm_lib/src/stm32f10x_gpio.c"/>
+      <fileset casesensitive="false" file="C:/Users/simonov/Downloads/CAN-STM32F105-main (3)/CAN-STM32F105-main/stm_lib/src/stm32f10x_can.c"/>
+      <fileset casesensitive="false" file="C:/Users/simonov/Downloads/CAN-STM32F105-main (3)/CAN-STM32F105-main/main.c"/>
+      <project outfile="${output.path}/${output.name}.elf" overwrite="true" type="xcode"/>
+			<defineset>
+			<define name="STM32F105RC"/>
+        <define name="STM32F10X_CL"/>
+        <define name="USE_STDPERIPH_DRIVER"/>
+        <define name="__ASSEMBLY__"/>
+      </defineset>
+      <includepath path="C:/Users/simonov/Downloads/CAN-STM32F105-main (3)/CAN-STM32F105-main/cmsis_boot"/>
+      <includepath path="C:/Users/simonov/Downloads/CAN-STM32F105-main (3)"/>
+      <includepath path="C:/Users/simonov/Downloads/CAN-STM32F105-main (3)/CAN-STM32F105-main/cmsis"/>
+      <includepath path="C:/Users/simonov/Downloads"/>
+      <includepath path="C:/Users/simonov/Downloads/CAN-STM32F105-main (3)/CAN-STM32F105-main/stm_lib/inc"/>
+      <includepath path="C:/Users/simonov/Downloads/CAN-STM32F105-main (3)/CAN-STM32F105-main/stm_lib"/>
+      <includepath path="C:/Users/simonov/Downloads/CAN-STM32F105-main (3)/CAN-STM32F105-main"/>
+      <compilerarg value="-mcpu=cortex-m3"/>
+      <compilerarg value="-mthumb"/>
+      <compilerarg value="-Wall"/>
+      <compilerarg value="-ffunction-sections"/>
+      <compilerarg value="-g"/>
+      <compilerarg value="-O0"/>
+      <linkerarg value="-mcpu=cortex-m3"/>
+      <linkerarg value="-mthumb"/>
+      <linkerarg value="-g"/>
+      <linkerarg value="-nostartfiles"/>
+      <linkerarg value="-Map=DMA1.map"/>
+      <linkerarg value="-O0"/>
+      <linkerarg value="--gc-sections"/>
+      <linkerarg value="-L${linkdir}"/>
+      <linkerarg value="-T${linkdir}/link.ld"/>
+		</cc>
+	</target>
+
+	<target name="clean">
+		<delete dir="${project.bin}"/>
+		<delete dir="${project.obj}"/>
+		<delete dir="${project.debug}"/>
+		<delete dir="${output.path}/${output.name}.elf.xcodeproj"/>
+	</target>
+
+	<target depends="clean" name="rebuild">
+		<antcall target="postbuild"/>
+	</target>
+
+</project>
